@@ -1,17 +1,3 @@
-html{
-    background:#eef5ef !important;
-    color:#000 !important;
-}
-
-body{
-    background:#eef5ef !important;
-    color:#000 !important;
-}
-
-:root{
-    color-scheme: light !important;
-}
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -19,17 +5,13 @@ body{
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
-
 <title>Microgreens ERP</title>
-
-<link rel="stylesheet" href="assets/css/style.css?v=300">
+<link rel="stylesheet" href="assets/css/style.css?v=301">
 </head>
 <body>
 
 <div class="sidebar">
-
 <h2>🌱 ERP</h2>
-
 <a href="dashboard.php">🏠 Dashboard</a>
 <a href="list_batches.php">🌱 Teelten</a>
 <a href="list_harvests.php">🌾 Oogsten</a>
@@ -39,7 +21,6 @@ body{
 <a href="list_suppliers.php">🚚 Leveranciers</a>
 <a href="list_sales.php">💰 Verkopen</a>
 <a href="report_profit_by_month.php">📊 Rapportages</a>
-
 </div>
 
 <div class="main">
