@@ -17,3 +17,4 @@ $data = [
 $data["profit"] = $data["revenue"] - $data["expenses"];
 
 echo json_encode($data);
+?>

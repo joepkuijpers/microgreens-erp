@@ -1,5 +1,4 @@
 async function loadDashboard() {
-
     const response = await fetch('api/dashboard.php');
     const data = await response.json();
 
@@ -13,11 +12,9 @@ async function loadDashboard() {
     document.getElementById("revenue").innerText = "€ " + data.revenue;
     document.getElementById("expenses").innerText = "€ " + data.expenses;
     document.getElementById("profit").innerText = "€ " + data.profit;
-
 }
 
 async function loadSensors() {
-
     const response = await fetch('api/sensors.php');
     const data = await response.json();
 
@@ -25,7 +22,6 @@ async function loadSensors() {
     document.getElementById("humidity").innerText = data.humidity + " %";
     document.getElementById("pressure").innerText = data.pressure + " hPa";
     document.getElementById("light").innerText = data.light + " lux";
-
 }
 
 loadDashboard();

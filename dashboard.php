@@ -1,4 +1,3 @@
-cat > dashboard.php <<'PHP'
 <?php
 include 'includes/header.php';
 include 'db_connect.php';
@@ -41,4 +40,3 @@ include 'includes/cards/finance.php';
 include 'includes/cards/quickactions.php';
 include 'includes/footer.php';
 ?>
-PHP
