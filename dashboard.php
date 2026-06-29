@@ -35,6 +35,7 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 
 <?php
 include 'includes/cards/sensors.php';
+include 'includes/cards/charts.php';
 include 'includes/cards/status.php';
 include 'includes/cards/finance.php';
 include 'includes/cards/quickactions.php';
