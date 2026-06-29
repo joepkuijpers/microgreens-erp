@@ -1,0 +1,34 @@
+MICROGREENS ERP STATUS
+
+[✓] SQLite
+[✓] Dashboard
+[✓] Suppliers
+[✓] Inventory
+[✓] Grow Batches
+[✓] Harvests
+[✓] Sales
+
+Formulieren:
+[✓] Nieuwe leverancier
+[✓] Nieuw voorraaditem
+
+Nog bouwen:
+[ ] Nieuwe teelt formulier
+[ ] Nieuwe oogst formulier
+[ ] Nieuwe verkoop formulier
+[ ] Klanten tabel
+[ ] Producten tabel
+[ ] Winstberekening
+[ ] Sensor logging
+[ ] PDF rapportages
+
+Workflow:
+Leverancier
+↓
+Voorraad
+↓
+Teelt
+↓
+Oogst
+↓
+Verkoop
