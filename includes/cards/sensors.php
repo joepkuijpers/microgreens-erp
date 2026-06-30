@@ -1,29 +1,51 @@
-<div class="card">
+<?php
 
-<h2>🌡 Live Sensoren</h2>
+header('Content-Type: application/json');
 
-<div class="grid">
+require_once '../db_connect.php';
 
-<div class="tile">
-<h3>🌡 Temperatuur</h3>
-<p id="temperature">-- °C</p>
-</div>
+try {
 
-<div class="tile">
-<h3>💧 Luchtvochtigheid</h3>
-<p id="humidity">-- %</p>
-</div>
+    $stmt = $db->query("
+        SELECT
+            timestamp,
+            temperature,
+            humidity,
+            pressure,
+            light
+        FROM sensor_log
+        ORDER BY id DESC
+        LIMIT 1
+    ");
 
-<div class="tile">
-<h3>🌬 Luchtdruk</h3>
-<p id="pressure">---- hPa</p>
-</div>
+    $sensor = $stmt->fetch(PDO::FETCH_ASSOC);
 
-<div class="tile">
-<h3>☀ Licht</h3>
-<p id="light">---- lux</p>
-</div>
+    if (!$sensor) {
 
-</div>
+        echo json_encode([
+            "success" => false,
+            "message" => "Geen sensorgegevens gevonden."
+        ]);
 
-</div>
+        exit;
+    }
+
+    echo json_encode([
+        "success"     => true,
+        "timestamp"   => $sensor["timestamp"],
+        "temperature" => (float)$sensor["temperature"],
+        "humidity"    => (float)$sensor["humidity"],
+        "pressure"    => (float)$sensor["pressure"],
+        "light"       => (float)$sensor["light"]
+    ]);
+
+} catch (Exception $e) {
+
+    http_response_code(500);
+
+    echo json_encode([
+        "success" => false,
+        "message" => $e->getMessage()
+    ]);
+
+}

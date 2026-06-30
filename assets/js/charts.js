@@ -22,7 +22,7 @@
 </div>
 
 <div class="tile">
-<h3>☀ Licht</h3>
+<h3>💡 Licht</h3>
 <p id="light">---- lux</p>
 </div>
 

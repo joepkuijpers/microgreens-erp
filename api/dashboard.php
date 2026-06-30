@@ -15,6 +15,7 @@ $kosten = $db->query("SELECT COALESCE(SUM(amount),0) FROM expenses")->fetchColum
 $winst = $omzet - $kosten;
 $lageVoorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity<=1")->fetchColumn();
 ?>
+<?php include 'includes/cards/alerts.php'; ?>
 
 <h1>🌱 Microgreens ERP Dashboard</h1>
 
