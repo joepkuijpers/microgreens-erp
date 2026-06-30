@@ -6,7 +6,9 @@ from datetime import datetime
 temperature = 22.6
 humidity = 58.0
 pressure = 1014.0
-light = 8450.0
+from bh1750 import read_lux
+
+light = read_lux()
 
 db = sqlite3.connect("/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite")
 
