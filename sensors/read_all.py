@@ -1,30 +1,27 @@
 #!/usr/bin/env python3
 
-import sqlite3
 from datetime import datetime
+from bh1750 import read_lux
+from logger import save_sensor_data
 
+# Tijdelijke waardes totdat de BME280 is aangesloten
 temperature = 22.6
 humidity = 58.0
 pressure = 1014.0
-from bh1750 import read_lux
 
+# BH1750 uitlezen
 light = read_lux()
 
-db = sqlite3.connect("/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite")
+# Tijdstempel
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-db.execute("""
-INSERT INTO sensor_log
-(timestamp, temperature, humidity, pressure, light)
-VALUES (?, ?, ?, ?, ?)
-""", (
-    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+# Opslaan in database
+save_sensor_data(
+    timestamp,
     temperature,
     humidity,
     pressure,
     light
-))
-
-db.commit()
-db.close()
+)
 
 print("✅ Sensorwaarden opgeslagen")
