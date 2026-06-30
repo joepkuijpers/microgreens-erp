@@ -1,31 +1,52 @@
-<div class="card">
+let sensorChart = null;
+let currentRange = '24h';
 
-<h2>🌡 Live Sensoren</h2>
+async function loadCharts(range = currentRange) {
+    currentRange = range;
 
-<p>Laatste update: <span id="sensorTimestamp">--</span></p>
+    const response = await fetch('api/history.php?range=' + range);
+    const data = await response.json();
 
-<div class="grid">
+    const labels = data.map(row => row.timestamp);
+    const temperatures = data.map(row => Number(row.temperature));
+    const humidity = data.map(row => Number(row.humidity));
+    const light = data.map(row => Number(row.light));
 
-<div class="tile">
-<h3>🌡 Temperatuur</h3>
-<p id="temperature">-- °C</p>
-</div>
+    const ctx = document.getElementById('temperatureChart');
+    if (!ctx) return;
 
-<div class="tile">
-<h3>💧 Luchtvochtigheid</h3>
-<p id="humidity">-- %</p>
-</div>
+    if (sensorChart) {
+        sensorChart.destroy();
+    }
 
-<div class="tile">
-<h3>🌬 Luchtdruk</h3>
-<p id="pressure">---- hPa</p>
-</div>
+    sensorChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Temperatuur °C',
+                    data: temperatures
+                },
+                {
+                    label: 'Luchtvochtigheid %',
+                    data: humidity
+                },
+                {
+                    label: 'Licht lux',
+                    data: light
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
 
-<div class="tile">
-<h3>💡 Licht</h3>
-<p id="light">---- lux</p>
-</div>
+loadCharts('24h');
 
-</div>
-
-</div>
+setInterval(() => {
+    loadCharts(currentRange);
+}, 60000);

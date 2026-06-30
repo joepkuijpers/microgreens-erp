@@ -161,3 +161,45 @@ body{
     background:#eef5ef !important;
     color:#000 !important;
 }
+.sensor-ok {
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.sensor-warning {
+    color: #ea580c;
+    font-weight: bold;
+}
+
+.sensor-danger {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+.dashboard-section {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.dashboard-section h2 {
+    border-left: 5px solid #16a34a;
+    padding-left: 10px;
+}
+
+.top-status-bar {
+    background: #16a34a;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 15px 0 25px 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-weight: bold;
+}
+
+.top-status-bar span {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 10px;
+    border-radius: 8px;
+}

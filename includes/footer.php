@@ -5,7 +5,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="assets/js/charts.js?v=10"></script>
+<script src="assets/js/charts.js?v=12"></script>
 <script src="assets/js/dashboard.js?v=10"></script>
 
 </body>
