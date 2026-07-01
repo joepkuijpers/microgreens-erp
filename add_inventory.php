@@ -21,13 +21,34 @@ $stmt = $db->prepare("
     VALUES (:item_name, :category, :quantity, :unit, :unit_cost)
 ");
 
-$stmt->bindValue(':item_name', $item_name, SQLITE3_TEXT);
-$stmt->bindValue(':category', $category, SQLITE3_TEXT);
-$stmt->bindValue(':quantity', $quantity, SQLITE3_FLOAT);
-$stmt->bindValue(':unit', $unit, SQLITE3_TEXT);
-$stmt->bindValue(':unit_cost', $unit_cost, SQLITE3_FLOAT);
+$stmt->execute([
+    ':item_name' => $item_name,
+    ':category' => $category,
+    ':quantity' => $quantity,
+    ':unit' => $unit,
+    ':unit_cost' => $unit_cost
+]);
 
-$stmt->execute();
+$inventory_id = $db->lastInsertId();
+
+$log = $db->prepare("
+    INSERT INTO inventory_transactions
+    (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
+    VALUES
+    (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
+");
+
+$log->execute([
+    ':inventory_id' => $inventory_id,
+    ':type' => 'TOEVOEGING',
+    ':quantity_change' => $quantity,
+    ':quantity_before' => 0,
+    ':quantity_after' => $quantity,
+    ':unit' => $unit,
+    ':note' => 'Nieuw voorraaditem aangemaakt',
+    ':reference_type' => 'inventory',
+    ':reference_id' => $inventory_id
+]);
 
 header('Location: list_inventory.php');
 exit;
