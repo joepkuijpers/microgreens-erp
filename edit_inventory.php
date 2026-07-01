@@ -7,6 +7,14 @@ if ($id <= 0) {
     die('Ongeldig voorraad-ID.');
 }
 
+$stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
+$stmt->execute([':id' => $id]);
+$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$item) {
+    die('Voorraaditem niet gevonden.');
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $item_name = trim($_POST['item_name'] ?? '');
     $category = trim($_POST['category'] ?? '');
@@ -18,6 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Ongeldige invoer.');
     }
 
+    $quantity_before = (float)$item['quantity'];
+    $quantity_after = $quantity;
+    $quantity_change = $quantity_after - $quantity_before;
+
     $stmt = $db->prepare("
         UPDATE inventory
         SET item_name = :item_name,
@@ -28,24 +40,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         WHERE id = :id
     ");
 
-    $stmt->bindValue(':item_name', $item_name, SQLITE3_TEXT);
-    $stmt->bindValue(':category', $category, SQLITE3_TEXT);
-    $stmt->bindValue(':quantity', $quantity, SQLITE3_FLOAT);
-    $stmt->bindValue(':unit', $unit, SQLITE3_TEXT);
-    $stmt->bindValue(':unit_cost', $unit_cost, SQLITE3_FLOAT);
-    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-    $stmt->execute();
+    $stmt->execute([
+        ':item_name' => $item_name,
+        ':category' => $category,
+        ':quantity' => $quantity,
+        ':unit' => $unit,
+        ':unit_cost' => $unit_cost,
+        ':id' => $id
+    ]);
+
+    $log = $db->prepare("
+        INSERT INTO inventory_transactions
+        (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
+        VALUES
+        (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
+    ");
+
+    $log->execute([
+        ':inventory_id' => $id,
+        ':type' => 'BEWERKING',
+        ':quantity_change' => $quantity_change,
+        ':quantity_before' => $quantity_before,
+        ':quantity_after' => $quantity_after,
+        ':unit' => $unit,
+        ':note' => 'Voorraaditem bewerkt',
+        ':reference_type' => 'inventory',
+        ':reference_id' => $id
+    ]);
 
     header('Location: list_inventory.php');
     exit;
-}
-
-$stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
-$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-$item = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
-
-if (!$item) {
-    die('Voorraaditem niet gevonden.');
 }
 
 include 'includes/header.php';
