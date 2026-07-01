@@ -46,6 +46,8 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 </div>
 
 <div class="dashboard-section"><h2>📈 Historische sensorgrafieken</h2></div>
+<?php include 'includes/cards/quickoverview.php'; ?>
+
 <?php include 'includes/cards/charts.php'; ?>
 
 <div class="dashboard-section"><h2>⚠️ Alarmen</h2></div>
