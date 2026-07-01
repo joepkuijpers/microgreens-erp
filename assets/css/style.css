@@ -345,4 +345,22 @@ body{
     background: #16a34a;
     font-weight: bold;
     box-shadow: inset 0 0 0 2px rgba(255,255,255,.25);
+}.status-gepland {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.status-groeiend {
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.status-oogstklaar {
+    color: #ea580c;
+    font-weight: bold;
+}
+
+.status-geoogst {
+    color: #6b7280;
+    font-weight: bold;
 }
