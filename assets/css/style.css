@@ -203,3 +203,30 @@ body{
     padding: 6px 10px;
     border-radius: 8px;
 }
+/* Professional KPI tiles */
+.grid .tile {
+    border: 1px solid #dbe7dd;
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.grid .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.18);
+}
+
+.grid .tile h2 {
+    font-size: 18px;
+    color: #14532d;
+    margin-bottom: 12px;
+}
+
+.grid .tile p {
+    font-size: 34px;
+    color: #16a34a;
+    margin: 0;
+}
+
+.dashboard-section h2 {
+    color: #14532d;
+}
