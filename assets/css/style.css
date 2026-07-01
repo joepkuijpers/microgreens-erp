@@ -341,4 +341,8 @@ body{
 .main {
     margin-left: 250px;
     padding: 25px;
-}'
+}'.sidebar a.active {
+    background: #16a34a;
+    font-weight: bold;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.25);
+}
