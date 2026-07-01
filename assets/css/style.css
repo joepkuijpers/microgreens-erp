@@ -303,4 +303,42 @@ body{
     background: rgba(255,255,255,0.16);
     padding: 7px 11px;
     border-radius: 10px;
+}'
+/* ERP sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: #14532d;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 1000;
 }
+
+.sidebar h2 {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.sidebar a:hover {
+    background: #16a34a;
+}
+
+.main {
+    margin-left: 250px;
+    padding: 25px;
+}'
