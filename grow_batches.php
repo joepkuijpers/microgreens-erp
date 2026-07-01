@@ -69,10 +69,11 @@ $batches = $db->query("
                                 <?= htmlspecialchars($status) ?>
                             </span>
                         </td>
-                        <td>
-                            <a href="edit_batch.php?id=<?= urlencode($batch['id']) ?>">✏️ Bewerken</a> |
-                            <a href="harvest_batch.php?id=<?= urlencode($batch['id']) ?>">🌾 Oogsten</a>
-                        </td>
+          <td>
+    <a href="batch_details.php?id=<?= urlencode($batch['id']) ?>">🔍 Details</a> |
+    <a href="edit_batch.php?id=<?= urlencode($batch['id']) ?>">✏️ Bewerken</a> |
+    <a href="harvest_batch.php?id=<?= urlencode($batch['id']) ?>">🌾 Oogsten</a>
+</td>           
                     </tr>
                 <?php endforeach; ?>
             </tbody>
