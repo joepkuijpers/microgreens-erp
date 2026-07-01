@@ -1,36 +1,32 @@
 <?php
-require 'config/database.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $item_name = $_POST['item_name'];
-    $category = $_POST['category'];
-    $quantity = $_POST['quantity'];
-    $unit = $_POST['unit'];
-
-    $stmt = $db->prepare("INSERT INTO inventory (item_name, category, quantity, unit) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$item_name, $category, $quantity, $unit]);
-
-    echo "<p>Voorraaditem opgeslagen!</p>";
-}
+include 'includes/header.php';
+include 'includes/sidebar.php';
 ?>
 
-<h1>Nieuw voorraaditem</h1>
+<div class="main">
+    <h1>Voorraad toevoegen</h1>
 
-<form method="post">
-Item naam:<br>
-<input type="text" name="item_name"><br><br>
+    <div class="card">
+        <form method="post" action="add_inventory.php">
+            <label>Artikelnaam</label><br>
+            <input type="text" name="item_name" required><br><br>
 
-Categorie:<br>
-<input type="text" name="category"><br><br>
+            <label>Categorie</label><br>
+            <input type="text" name="category" placeholder="Bijv. Zaden, Verpakking, Substraat"><br><br>
 
-Aantal:<br>
-<input type="number" step="0.01" name="quantity"><br><br>
+            <label>Hoeveelheid</label><br>
+            <input type="number" step="0.01" name="quantity" required><br><br>
 
-Eenheid:<br>
-<input type="text" name="unit"><br><br>
+            <label>Eenheid</label><br>
+            <input type="text" name="unit" placeholder="KG, gram, stuks" required><br><br>
 
-<input type="submit" value="Opslaan">
-</form>
+            <label>Kostprijs per eenheid (€)</label><br>
+            <input type="number" step="0.01" name="unit_cost" required><br><br>
 
-<br>
-<a href="index.php">Menu</a>
+            <button type="submit" class="btn">Opslaan</button>
+            <a href="list_inventory.php" class="btn">Terug</a>
+        </form>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>
