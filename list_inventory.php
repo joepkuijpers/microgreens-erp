@@ -22,7 +22,7 @@ $totalValue = $db->query("
 ")->fetchArray(SQLITE3_ASSOC);
 ?>
 
-<div class="content">
+<div class="main">
     <h1>Voorraadbeheer</h1>
 
     <div style="margin-bottom: 20px;">
@@ -32,7 +32,7 @@ $totalValue = $db->query("
     <div class="card">
         <h2>Voorraadwaarde</h2>
         <p style="font-size: 24px; font-weight: bold;">
-            € <?= number_format($totalValue['total'], 2, ',', '.') ?>
+            € <?= number_format((float)$totalValue['total'], 2, ',', '.') ?>
         </p>
     </div>
 
@@ -49,6 +49,7 @@ $totalValue = $db->query("
                     <th>Eenheid</th>
                     <th>Kostprijs</th>
                     <th>Totale waarde</th>
+                    <th>Acties</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,6 +62,9 @@ $totalValue = $db->query("
                         <td><?= htmlspecialchars($item['unit'] ?? '-') ?></td>
                         <td>€ <?= number_format((float)$item['unit_cost'], 2, ',', '.') ?></td>
                         <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
+                        <td>
+                            <a class="btn" href="edit_inventory.php?id=<?= urlencode($item['id']) ?>">Bewerken</a>
+                        </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
