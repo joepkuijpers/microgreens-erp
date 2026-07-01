@@ -1,4 +1,28 @@
+async function loadStatus() {
+
+    const response = await fetch("api/status.php");
+    const data = await response.json();
+
+    if (document.getElementById("topSensorStatus")) {
+        document.getElementById("topSensorStatus").textContent = data.status.toUpperCase();
+    }
+
+    if (document.getElementById("topDatabaseStatus")) {
+        document.getElementById("topDatabaseStatus").textContent = data.database.toUpperCase();
+    }
+
+    if (document.getElementById("topRefresh")) {
+        document.getElementById("topRefresh").textContent = data.refresh_seconds + " sec";
+    }
+
+    if (document.getElementById("topClock")) {
+        document.getElementById("topClock").textContent =
+            new Date().toLocaleTimeString('nl-NL');
+    }
+}
+
 async function updateSystemStatus() {
+
     const response = await fetch("api/system.php");
     const data = await response.json();
 
@@ -29,5 +53,8 @@ async function updateSystemStatus() {
     }
 }
 
+loadStatus();
 updateSystemStatus();
+
+setInterval(loadStatus, 1000);
 setInterval(updateSystemStatus, 10000);
