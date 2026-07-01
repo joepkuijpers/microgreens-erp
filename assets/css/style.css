@@ -230,3 +230,77 @@ body{
 .dashboard-section h2 {
     color: #14532d;
 }
+/* Dashboard V2 layout */
+.main {
+    background: #eef5ef;
+}
+
+.dashboard-section {
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.dashboard-section h2 {
+    font-size: 22px;
+    color: #14532d;
+    border-left: 6px solid #16a34a;
+    padding-left: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.tile {
+    background: #ffffff;
+    border: 1px solid #dce9df;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+}
+
+.tile h2 {
+    font-size: 18px;
+    color: #14532d;
+    margin-bottom: 12px;
+}
+
+.tile p {
+    font-size: 34px;
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.card {
+    border-radius: 16px;
+    border: 1px solid #dce9df;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+.top-status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #14532d;
+    color: white;
+    padding: 14px;
+    border-radius: 0 0 14px 14px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-weight: bold;
+}
+
+.top-status-bar span {
+    background: rgba(255,255,255,0.16);
+    padding: 7px 11px;
+    border-radius: 10px;
+}
