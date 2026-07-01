@@ -51,6 +51,23 @@ async function updateSystemStatus() {
     if (document.getElementById("uptime")) {
         document.getElementById("uptime").textContent = data.uptime;
     }
+    if (document.getElementById("topCpuTemp")) {
+    document.getElementById("topCpuTemp").textContent = data.cpu_temp;
+}
+
+if (document.getElementById("topCpuLoad")) {
+    document.getElementById("topCpuLoad").textContent = data.cpu_load_1m;
+}
+
+if (document.getElementById("topRam")) {
+    document.getElementById("topRam").textContent =
+        data.ram_used_mb + "/" + data.ram_total_mb + " MB";
+}
+
+if (document.getElementById("topDisk")) {
+    document.getElementById("topDisk").textContent =
+        data.disk_used_gb + "/" + data.disk_total_gb + " GB";
+}
 }
 
 loadStatus();
