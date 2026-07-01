@@ -1,0 +1,16 @@
+# Database
+database/*.sqlite
+
+# Sensor logs
+sensors/logs/*.log
+
+# Backups
+*.backup
+*.bak
+
+# Editor swap files
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
