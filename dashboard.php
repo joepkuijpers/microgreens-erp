@@ -1,7 +1,6 @@
 <?php
 include 'includes/header.php';
 include 'db_connect.php';
-include 'includes/cards/live_sensor_status.php';
 
 $producten = $db->query("SELECT COUNT(*) FROM products")->fetchColumn();
 $voorraad = $db->query("SELECT COUNT(*) FROM inventory")->fetchColumn();
@@ -21,7 +20,11 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 <p>Laatste paginalaad: <?= date('d-m-Y H:i') ?></p>
 
 <?php include 'includes/cards/topstatus.php'; ?>
-include 'includes/cards/climate_status.php';
+
+<?php include 'includes/cards/live_sensor_status.php'; ?>
+<?php include 'includes/cards/climate_status.php'; ?>
+<?php include 'includes/cards/lighting_status.php'; ?>
+
 <div class="dashboard-section">
     <h2>📊 KPI-overzicht</h2>
 </div>
@@ -35,9 +38,9 @@ include 'includes/cards/climate_status.php';
     <div class="tile"><h2>🚚 Leveranciers</h2><p id="suppliers"><?= $leveranciers ?></p></div>
     <div class="tile"><h2>🌾 Oogsten</h2><p id="harvests"><?= $oogsten ?></p></div>
     <div class="tile"><h2>⚠️ Lage voorraad</h2><p><?= $lage_voorraad ?></p></div>
-    <div class="tile"><h2>💶 Omzet</h2><p id="revenue">€<?= number_format($omzet, 2) ?></p></div>
-    <div class="tile"><h2>📉 Kosten</h2><p id="expenses">€<?= number_format($kosten_bedrag, 2) ?></p></div>
-    <div class="tile"><h2>📈 Winst</h2><p id="profit">€<?= number_format($winst, 2) ?></p></div>
+    <div class="tile"><h2>💶 Omzet</h2><p id="revenue">€<?= number_format($omzet, 2, ',', '.') ?></p></div>
+    <div class="tile"><h2>📉 Kosten</h2><p id="expenses">€<?= number_format($kosten_bedrag, 2, ',', '.') ?></p></div>
+    <div class="tile"><h2>📈 Winst</h2><p id="profit">€<?= number_format($winst, 2, ',', '.') ?></p></div>
 </div>
 
 <div class="dashboard-section"><h2>🌡 Live monitoring</h2></div>
@@ -48,7 +51,6 @@ include 'includes/cards/climate_status.php';
 
 <div class="dashboard-section"><h2>📈 Historische sensorgrafieken</h2></div>
 <?php include 'includes/cards/quickoverview.php'; ?>
-
 <?php include 'includes/cards/charts.php'; ?>
 
 <div class="dashboard-section"><h2>⚠️ Alarmen</h2></div>
