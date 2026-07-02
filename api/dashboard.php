@@ -1,6 +1,7 @@
 <?php
 include 'includes/header.php';
 include 'db_connect.php';
+include 'includes/sidebar.php';
 
 $producten = $db->query("SELECT COUNT(*) FROM products")->fetchColumn();
 $voorraad = $db->query("SELECT COUNT(*) FROM inventory")->fetchColumn();
