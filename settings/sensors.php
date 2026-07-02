@@ -19,6 +19,14 @@ function sensorStatus($value, $min, $max)
 
     return 'sensor-ok';
 }
+function sensorStatusText($value, $min, $max)
+{
+    if ($value < $min || $value > $max) {
+        return '🚨 ALARM';
+    }
+
+    return '✅ OK';
+}
 $pageIcon = '🌡';
 $pageTitle = 'Sensorinstellingen';
 $pageDescription = 'Configureer sensorgrenzen en monitoring.';
@@ -60,26 +68,44 @@ include '../includes/page_header.php';
 
 <div class="grid">
 
-    <div class="tile">
-        <h2>💡 Actuele lux</h2>
-     <p class="<?= sensorStatus($latestSensor['light'], $settings['light_min'], $settings['light_max']) ?>">
-    <?= htmlspecialchars($latestSensor['light']) ?> lux
-</p>   
-    </div>
+<div class="tile">
+    <h2>💡 Actuele lux</h2>
 
-    <div class="tile">
-        <h2>🌡 Actuele temperatuur</h2>
-       <p class="<?= sensorStatus($latestSensor['temperature'], $settings['temp_min'], $settings['temp_max']) ?>">
-    <?= htmlspecialchars($latestSensor['temperature']) ?> °C
-</p>
-    </div>
+    <p class="<?= sensorStatus($latestSensor['light'], $settings['light_min'], $settings['light_max']) ?>">
+        <?= htmlspecialchars($latestSensor['light']) ?> lux
+    </p>
 
-    <div class="tile">
-        <h2>💧 Actuele luchtvochtigheid</h2>
-        <p class="<?= sensorStatus($latestSensor['humidity'], $settings['humidity_min'], $settings['humidity_max']) ?>">
-    <?= htmlspecialchars($latestSensor['humidity']) ?> %
-</p>
-    </div>
+    <p>
+        <?= sensorStatusText($latestSensor['light'], $settings['light_min'], $settings['light_max']) ?>
+    </p>
+
+</div>
+
+<div class="tile">
+    <h2>🌡 Actuele temperatuur</h2>
+
+    <p class="<?= sensorStatus($latestSensor['temperature'], $settings['temp_min'], $settings['temp_max']) ?>">
+        <?= htmlspecialchars($latestSensor['temperature']) ?> °C
+    </p>
+
+    <p>
+        <?= sensorStatusText($latestSensor['temperature'], $settings['temp_min'], $settings['temp_max']) ?>
+    </p>
+
+</div>
+
+<div class="tile">
+    <h2>💧 Actuele luchtvochtigheid</h2>
+
+    <p class="<?= sensorStatus($latestSensor['humidity'], $settings['humidity_min'], $settings['humidity_max']) ?>">
+        <?= htmlspecialchars($latestSensor['humidity']) ?> %
+    </p>
+
+    <p>
+        <?= sensorStatusText($latestSensor['humidity'], $settings['humidity_min'], $settings['humidity_max']) ?>
+    </p>
+
+</div>
 
     <div class="tile">
         <h2>🕒 Laatste meting</h2>
