@@ -25,3 +25,7 @@ hardware/scheduler/scheduler.log
 
 # Scheduler cron runtime
 hardware/scheduler/cron.log
+
+# Safety runtime files
+hardware/safety/state.json
+hardware/safety/safety.log
