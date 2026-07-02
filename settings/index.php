@@ -2,8 +2,7 @@
 $assetPrefix = '../';
 $navPrefix = '../';
 
-include '../includes/header.php';
-include '../includes/sidebar.php';
+include '../includes/layout_start.php';
 ?>
 
 <style>
@@ -171,4 +170,4 @@ include '../includes/sidebar.php';
     </div>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include '../includes/layout_end.php'; ?>
