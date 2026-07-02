@@ -21,7 +21,7 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 <p>Laatste paginalaad: <?= date('d-m-Y H:i') ?></p>
 
 <?php include 'includes/cards/topstatus.php'; ?>
-
+include 'includes/cards/climate_status.php';
 <div class="dashboard-section">
     <h2>📊 KPI-overzicht</h2>
 </div>
