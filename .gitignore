@@ -18,3 +18,7 @@ Thumbs.db
 # GPIO runtime files
 hardware/gpio/gpio_actions.log
 hardware/gpio/simulation_state.json
+
+# Scheduler runtime files
+hardware/scheduler/schedules.json
+hardware/scheduler/scheduler.log
