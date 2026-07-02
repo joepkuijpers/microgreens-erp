@@ -41,3 +41,7 @@ hardware/watchdog/watchdog.log
 # Relay runtime
 hardware/relay/state.json
 hardware/relay/relay.log
+
+# Priority runtime
+hardware/priority/state.json
+hardware/priority/priority.log

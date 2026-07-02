@@ -25,6 +25,7 @@ function applyAutomation(PDO $db): array
     require_once __DIR__ . '/safety_engine.php';
     require_once __DIR__ . '/override_engine.php';
     require_once __DIR__ . '/relay_manager.php';
+    require_once __DIR__ . '/priority_manager.php';
 
     $climate = getClimateState($db);
     $lighting = getLightingState($db);
@@ -39,17 +40,45 @@ function applyAutomation(PDO $db): array
         'water_pump' => (bool)($water['relay_output'] ?? false),
     ];
 
-    $override = overrideApply($decisions);
-    $decisions = $override['decisions'];
+    $requestsByOutput = [];
 
-    $safety = safetyApplyRules($decisions, [
+    foreach ($decisions as $output => $state) {
+        $requestsByOutput[$output][] = [
+            'source' => 'automation_engine',
+            'state' => $state,
+            'reason' => 'Automation Engine decision'
+        ];
+    }
+
+    $override = overrideApply($decisions);
+
+    if (!empty($override['applied']) && !empty($override['override']['output'])) {
+        $requestsByOutput[$override['override']['output']][] = [
+            'source' => 'manual_override',
+            'state' => (bool)$override['override']['state'],
+            'reason' => 'Manual override active'
+        ];
+    }
+
+    $safety = safetyApplyRules($override['decisions'], [
         'climate' => $climate,
         'lighting' => $lighting,
         'water' => $water,
         'override' => $override,
     ]);
 
-    $decisions = $safety['decisions'];
+    foreach ($safety['decisions'] as $output => $state) {
+        if (($override['decisions'][$output] ?? null) !== $state) {
+            $requestsByOutput[$output][] = [
+                'source' => 'safety_engine',
+                'state' => $state,
+                'reason' => implode(' | ', $safety['rules_applied'] ?? [])
+            ];
+        }
+    }
+
+    $priority = priorityResolve($requestsByOutput);
+    $decisions = $priority['decisions'];
 
     $results = [];
 
@@ -71,6 +100,7 @@ function applyAutomation(PDO $db): array
         'results' => $results,
         'safety' => $safety,
         'override' => $override,
+        'priority' => $priority,
         'context' => [
             'climate' => $climate,
             'lighting' => $lighting,
