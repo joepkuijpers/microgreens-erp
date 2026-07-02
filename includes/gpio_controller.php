@@ -23,6 +23,7 @@ function applyAutomation(PDO $db): array
     require_once __DIR__ . '/lighting_engine.php';
     require_once __DIR__ . '/water_engine.php';
     require_once __DIR__ . '/safety_engine.php';
+    require_once __DIR__ . '/override_engine.php';
 
     $climate = getClimateState($db);
     $lighting = getLightingState($db);
@@ -37,10 +38,14 @@ function applyAutomation(PDO $db): array
         'water_pump' => (bool)($water['relay_output'] ?? false),
     ];
 
+    $override = overrideApply($decisions);
+    $decisions = $override['decisions'];
+
     $safety = safetyApplyRules($decisions, [
         'climate' => $climate,
         'lighting' => $lighting,
         'water' => $water,
+        'override' => $override,
     ]);
 
     $decisions = $safety['decisions'];
@@ -57,6 +62,7 @@ function applyAutomation(PDO $db): array
         'decisions' => $decisions,
         'results' => $results,
         'safety' => $safety,
+        'override' => $override,
         'context' => [
             'climate' => $climate,
             'lighting' => $lighting,

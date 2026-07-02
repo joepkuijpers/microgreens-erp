@@ -29,3 +29,7 @@ hardware/scheduler/cron.log
 # Safety runtime files
 hardware/safety/state.json
 hardware/safety/safety.log
+
+# Manual override runtime
+hardware/override/state.json
+hardware/override/override.log
