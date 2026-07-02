@@ -45,3 +45,7 @@ hardware/relay/relay.log
 # Priority runtime
 hardware/priority/state.json
 hardware/priority/priority.log
+
+# Hardware health runtime
+hardware/health/state.json
+hardware/health/health.log
