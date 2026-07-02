@@ -14,6 +14,8 @@ function activeClass($condition) {
 
     <a class="<?= activeClass($page == 'dashboard.php') ?>" href="<?= $navPrefix ?>dashboard.php">🏠 Dashboard</a>
 
+    <a class="<?= activeClass($page == 'operations_dashboard.php') ?>" href="<?= $navPrefix ?>operations_dashboard.php">🧭 Operations</a>
+
     <a class="<?= activeClass(in_array($page, ['grow_batches.php','add_batch.php','edit_batch.php','harvest_batch.php','batch_details.php'])) ?>" href="<?= $navPrefix ?>grow_batches.php">🌱 Teelten</a>
 
     <a class="<?= activeClass(in_array($page, ['list_inventory.php','add_inventory_form.php','edit_inventory.php','delete_inventory.php'])) ?>" href="<?= $navPrefix ?>list_inventory.php">📦 Grondstoffen</a>
