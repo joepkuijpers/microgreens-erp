@@ -1,72 +1,57 @@
-cat > hardware/gpio/driver.php <<'PHP'
 <?php
 
-require_once __DIR__ . '/simulation.php';
-require_once __DIR__ . '/raspberrypi.php';
+require_once __DIR__ . '/../hardware/gpio/driver.php';
 
-function gpioConfig(): array
+function getGpioControllerState(): array
 {
-    return include __DIR__ . '/config.php';
+    return [
+        'status' => 'ok',
+        'mode' => gpioConfig()['mode'] ?? 'simulation',
+        'outputs' => gpioReadOutputs(),
+        'timestamp' => date('Y-m-d H:i:s')
+    ];
 }
 
-function gpioSetOutput(string $outputName, bool $state): array
+function setGpioControllerOutput(string $output, bool $state): array
 {
-    $config = gpioConfig();
-
-    if (!isset($config['relays'][$outputName])) {
-        throw new InvalidArgumentException('Onbekende GPIO-output: ' . $outputName);
-    }
-
-    $relayConfig = $config['relays'][$outputName];
-    $mode = $config['mode'] ?? 'simulation';
-
-    if ($mode === 'simulation') {
-        return gpioSimulationWrite($outputName, $state, $relayConfig);
-    }
-
-    if ($mode === 'raspberrypi') {
-        $result = raspberryPiGpioWrite(
-            (int)$relayConfig['gpio_pin'],
-            $state,
-            (bool)$relayConfig['active_low']
-        );
-
-        return array_merge([
-            'label' => $relayConfig['label']
-        ], $result);
-    }
-
-    throw new RuntimeException('Onbekende GPIO-modus: ' . $mode);
+    return gpioSetOutput($output, $state);
 }
 
-function gpioReadOutputs(): array
+function applyAutomation(PDO $db): array
 {
-    $config = gpioConfig();
-    $mode = $config['mode'] ?? 'simulation';
+    require_once __DIR__ . '/climate_engine.php';
+    require_once __DIR__ . '/lighting_engine.php';
+    require_once __DIR__ . '/water_engine.php';
 
-    if ($mode === 'simulation') {
-        return gpioSimulationReadAll();
+    $climate = getClimateState($db);
+    $lighting = getLightingState($db);
+    $water = getWaterState($db);
+
+    $decisions = [
+        'heater' => (bool)($climate['temperature']['heater'] ?? false),
+        'cooler' => (bool)($climate['temperature']['cooler'] ?? false),
+        'fan' => (bool)($climate['humidity']['ventilation'] ?? false),
+        'humidifier' => (bool)($climate['humidity']['humidifier'] ?? false),
+        'grow_light' => (bool)($lighting['relay_output'] ?? false),
+        'water_pump' => (bool)($water['relay_output'] ?? false),
+    ];
+
+    $results = [];
+
+    foreach ($decisions as $output => $state) {
+        $results[$output] = gpioSetOutput($output, $state);
     }
 
-    if ($mode === 'raspberrypi') {
-        $outputs = [];
-
-        foreach ($config['relays'] as $name => $relayConfig) {
-            $outputs[$name] = [
-                'label' => $relayConfig['label'],
-                'gpio_pin' => $relayConfig['gpio_pin'],
-                'active_low' => $relayConfig['active_low'],
-                'gpio_value' => raspberryPiGpioRead((int)$relayConfig['gpio_pin'])
-            ];
-        }
-
-        return $outputs;
-    }
-
-    return [];
+    return [
+        'status' => 'ok',
+        'mode' => gpioConfig()['mode'] ?? 'simulation',
+        'decisions' => $decisions,
+        'results' => $results,
+        'context' => [
+            'climate' => $climate,
+            'lighting' => $lighting,
+            'water' => $water,
+        ],
+        'timestamp' => date('Y-m-d H:i:s')
+    ];
 }
-PHP
-
-php -l hardware/gpio/driver.php
-
-curl -s http://localhost/microgreens/PHP/api/gpio.php
