@@ -33,3 +33,7 @@ hardware/safety/safety.log
 # Manual override runtime
 hardware/override/state.json
 hardware/override/override.log
+
+# Watchdog runtime files
+hardware/watchdog/state.json
+hardware/watchdog/watchdog.log
