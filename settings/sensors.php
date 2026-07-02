@@ -11,7 +11,14 @@ $latestSensor = $db->query("
     ORDER BY id DESC
     LIMIT 1
 ")->fetch(PDO::FETCH_ASSOC);
+function sensorStatus($value, $min, $max)
+{
+    if ($value < $min || $value > $max) {
+        return 'sensor-danger';
+    }
 
+    return 'sensor-ok';
+}
 $pageIcon = '🌡';
 $pageTitle = 'Sensorinstellingen';
 $pageDescription = 'Configureer sensorgrenzen en monitoring.';
@@ -55,17 +62,23 @@ include '../includes/page_header.php';
 
     <div class="tile">
         <h2>💡 Actuele lux</h2>
-        <p><?= htmlspecialchars($latestSensor['light'] ?? '-') ?></p>
+     <p class="<?= sensorStatus($latestSensor['light'], $settings['light_min'], $settings['light_max']) ?>">
+    <?= htmlspecialchars($latestSensor['light']) ?> lux
+</p>   
     </div>
 
     <div class="tile">
         <h2>🌡 Actuele temperatuur</h2>
-        <p><?= htmlspecialchars($latestSensor['temperature'] ?? '-') ?> °C</p>
+       <p class="<?= sensorStatus($latestSensor['temperature'], $settings['temp_min'], $settings['temp_max']) ?>">
+    <?= htmlspecialchars($latestSensor['temperature']) ?> °C
+</p>
     </div>
 
     <div class="tile">
         <h2>💧 Actuele luchtvochtigheid</h2>
-        <p><?= htmlspecialchars($latestSensor['humidity'] ?? '-') ?> %</p>
+        <p class="<?= sensorStatus($latestSensor['humidity'], $settings['humidity_min'], $settings['humidity_max']) ?>">
+    <?= htmlspecialchars($latestSensor['humidity']) ?> %
+</p>
     </div>
 
     <div class="tile">
