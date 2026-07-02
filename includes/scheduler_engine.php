@@ -145,3 +145,64 @@ function schedulerLog(string $message, array $context = []): void
         FILE_APPEND
     );
 }
+
+function schedulerAllowedOutputs(): array
+{
+    return [
+        'grow_light',
+        'fan',
+        'water_pump',
+        'heater',
+        'cooler',
+        'humidifier',
+    ];
+}
+
+function schedulerNormalizeTime(string $time): string
+{
+    if (!preg_match('/^\d{2}:\d{2}$/', $time)) {
+        return '00:00';
+    }
+
+    [$hour, $minute] = explode(':', $time);
+
+    $hour = max(0, min(23, (int)$hour));
+    $minute = max(0, min(59, (int)$minute));
+
+    return sprintf('%02d:%02d', $hour, $minute);
+}
+
+function schedulerUpdateFromPost(array $post): array
+{
+    $existing = schedulerLoadSchedules();
+    $updated = [];
+    $allowedOutputs = schedulerAllowedOutputs();
+
+    foreach ($existing as $schedule) {
+        $id = $schedule['id'] ?? '';
+
+        if ($id === '') {
+            continue;
+        }
+
+        $output = $post['output'][$id] ?? ($schedule['output'] ?? '');
+
+        if (!in_array($output, $allowedOutputs, true)) {
+            $output = $schedule['output'] ?? 'grow_light';
+        }
+
+        $updated[] = [
+            'id' => $id,
+            'name' => trim($post['name'][$id] ?? ($schedule['name'] ?? $id)),
+            'output' => $output,
+            'enabled' => isset($post['enabled'][$id]),
+            'start_time' => schedulerNormalizeTime($post['start_time'][$id] ?? ($schedule['start_time'] ?? '00:00')),
+            'end_time' => schedulerNormalizeTime($post['end_time'][$id] ?? ($schedule['end_time'] ?? '00:00')),
+        ];
+    }
+
+    schedulerSaveSchedules($updated);
+    schedulerLog('Scheduler configuration updated', ['schedules' => $updated]);
+
+    return $updated;
+}
