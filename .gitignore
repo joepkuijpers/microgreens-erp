@@ -37,3 +37,7 @@ hardware/override/override.log
 # Watchdog runtime files
 hardware/watchdog/state.json
 hardware/watchdog/watchdog.log
+
+# Relay runtime
+hardware/relay/state.json
+hardware/relay/relay.log

@@ -24,6 +24,7 @@ function applyAutomation(PDO $db): array
     require_once __DIR__ . '/water_engine.php';
     require_once __DIR__ . '/safety_engine.php';
     require_once __DIR__ . '/override_engine.php';
+    require_once __DIR__ . '/relay_manager.php';
 
     $climate = getClimateState($db);
     $lighting = getLightingState($db);
@@ -53,7 +54,14 @@ function applyAutomation(PDO $db): array
     $results = [];
 
     foreach ($decisions as $output => $state) {
-        $results[$output] = gpioSetOutput($output, $state);
+        $results[$output] = relaySetOutputManaged(
+            $output,
+            $state,
+            function (string $outputName, bool $outputState): array {
+                return gpioSetOutput($outputName, $outputState);
+            },
+            5
+        );
     }
 
     return [
