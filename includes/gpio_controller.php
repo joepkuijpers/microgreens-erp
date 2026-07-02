@@ -22,6 +22,7 @@ function applyAutomation(PDO $db): array
     require_once __DIR__ . '/climate_engine.php';
     require_once __DIR__ . '/lighting_engine.php';
     require_once __DIR__ . '/water_engine.php';
+    require_once __DIR__ . '/safety_engine.php';
 
     $climate = getClimateState($db);
     $lighting = getLightingState($db);
@@ -36,6 +37,14 @@ function applyAutomation(PDO $db): array
         'water_pump' => (bool)($water['relay_output'] ?? false),
     ];
 
+    $safety = safetyApplyRules($decisions, [
+        'climate' => $climate,
+        'lighting' => $lighting,
+        'water' => $water,
+    ]);
+
+    $decisions = $safety['decisions'];
+
     $results = [];
 
     foreach ($decisions as $output => $state) {
@@ -47,6 +56,7 @@ function applyAutomation(PDO $db): array
         'mode' => gpioConfig()['mode'] ?? 'simulation',
         'decisions' => $decisions,
         'results' => $results,
+        'safety' => $safety,
         'context' => [
             'climate' => $climate,
             'lighting' => $lighting,

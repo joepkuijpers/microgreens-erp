@@ -22,3 +22,6 @@ hardware/gpio/simulation_state.json
 # Scheduler runtime files
 hardware/scheduler/schedules.json
 hardware/scheduler/scheduler.log
+
+# Scheduler cron runtime
+hardware/scheduler/cron.log
