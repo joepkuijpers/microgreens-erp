@@ -1,41 +1,28 @@
 <?php
 
+require_once __DIR__ . '/db_connect.php';
 require_once __DIR__ . '/includes/scheduler_engine.php';
-require_once __DIR__ . '/hardware/gpio/driver.php';
+require_once __DIR__ . '/includes/gpio_controller.php';
 
 try {
-    $evaluation = schedulerEvaluate();
-    $results = [];
+    $scheduleEvaluation = schedulerEvaluate();
+    $automationResult = applyAutomation($db);
 
-    foreach ($evaluation['schedules'] as $schedule) {
-        if (empty($schedule['output'])) {
-            continue;
-        }
-
-        $output = $schedule['output'];
-        $state = (bool)$schedule['should_be_on'];
-
-        $result = gpioSetOutput($output, $state);
-
-        $results[] = [
-            'schedule_id' => $schedule['id'],
-            'name' => $schedule['name'],
-            'output' => $output,
-            'state' => $state,
-            'state_text' => $state ? 'AAN' : 'UIT',
-            'result' => $result,
-        ];
-    }
-
-    schedulerLog('Scheduler runner executed', [
+    schedulerLog('Scheduler runner executed with automation controller', [
         'status' => 'ok',
-        'results' => $results,
+        'schedule_evaluation' => $scheduleEvaluation,
+        'automation_result' => [
+            'mode' => $automationResult['mode'] ?? null,
+            'decisions' => $automationResult['decisions'] ?? [],
+            'timestamp' => $automationResult['timestamp'] ?? null,
+        ],
     ]);
 
     echo json_encode([
         'status' => 'ok',
         'timestamp' => date('Y-m-d H:i:s'),
-        'results' => $results,
+        'schedule_evaluation' => $scheduleEvaluation,
+        'automation_result' => $automationResult,
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL;
 
 } catch (Throwable $e) {
