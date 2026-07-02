@@ -18,6 +18,8 @@ function activeClass($condition) {
 
     <a class="<?= activeClass(in_array($page, ['grow_batches.php','add_batch.php','edit_batch.php','harvest_batch.php','batch_details.php'])) ?>" href="<?= $navPrefix ?>grow_batches.php">🌱 Teelten</a>
 
+    <a class="<?= activeClass($page == 'crop_profiles.php') ?>" href="<?= $navPrefix ?>crop_profiles.php">🌿 Teeltprofielen</a>
+
     <a class="<?= activeClass(in_array($page, ['list_inventory.php','add_inventory_form.php','edit_inventory.php','delete_inventory.php'])) ?>" href="<?= $navPrefix ?>list_inventory.php">📦 Grondstoffen</a>
 
     <a class="<?= activeClass(in_array($page, ['inventory_transactions.php','add_inventory_transaction.php'])) ?>" href="<?= $navPrefix ?>inventory_transactions.php">🔄 Voorraadmutaties</a>
