@@ -25,6 +25,8 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 <?php include 'includes/cards/climate_status.php'; ?>
 <?php include 'includes/cards/lighting_status.php'; ?>
 <?php include 'includes/cards/water_status.php'; ?>
+<?php include 'includes/cards/automation_status.php'; ?>
+<?php include 'includes/cards/hardware_control_center.php'; ?>
 
 <div class="dashboard-section">
     <h2>📊 KPI-overzicht</h2>

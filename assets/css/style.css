@@ -1,24 +1,24 @@
 :root {
     color-scheme: light;
     --green-dark: #14532d;
-    --green-main: #16a34a;
+    --green: #16a34a;
     --green-hover: #15803d;
-    --green-soft: #eef5ef;
+    --bg: #eef5ef;
+    --card: #ffffff;
     --border: #dce9df;
-    --text: #111827;
-    --muted: #6b7280;
-    --white: #ffffff;
-}
-
-* {
-    box-sizing: border-box;
+    --text: #000000;
+    --muted: #64748b;
+    --danger: #dc2626;
+    --warning: #ea580c;
+    --blue: #2563eb;
+    --gray: #6b7280;
 }
 
 html,
 body {
     margin: 0;
-    background: var(--green-soft);
-    color: var(--text);
+    background: var(--bg) !important;
+    color: var(--text) !important;
     font-family: Verdana, Arial, sans-serif;
 }
 
@@ -29,80 +29,93 @@ body {
     width: 230px;
     height: 100vh;
     background: var(--green-dark);
-    color: var(--white);
+    color: white;
     padding: 20px;
+    box-sizing: border-box;
     overflow-y: auto;
     z-index: 1000;
 }
 
 .sidebar h2 {
-    color: var(--white);
+    color: white;
     font-size: 22px;
-    margin: 0 0 25px 0;
-    line-height: 1.2;
+    margin-bottom: 25px;
 }
 
 .sidebar a {
     display: block;
-    color: var(--white);
+    color: white;
     text-decoration: none;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 8px;
-    font-weight: 600;
 }
 
 .sidebar a:hover,
 .sidebar a.active {
-    background: var(--green-main);
+    background: var(--green);
+    font-weight: bold;
 }
 
 .main {
     margin-left: 250px;
     padding: 25px;
-    min-height: 100vh;
+    background: var(--bg);
 }
 
 .container {
-    width: 100%;
-    margin: 0 auto;
+    width: 95%;
+    margin: auto;
 }
 
 h1 {
     font-size: 36px;
     color: var(--green-dark);
-    margin-top: 0;
-}
-
-h2 {
-    color: var(--text);
 }
 
 .card,
-.tile,
-.settings-card {
-    background: var(--white);
+.live-sensor-card,
+.climate-card {
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
-.card {
-    margin: 20px 0;
-    padding: 20px;
+.button {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    padding: 12px 18px;
+    margin: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
 }
 
-.grid {
+.button:hover {
+    background: var(--green-hover);
+}
+
+.grid,
+.live-sensor-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 22px;
 }
 
-.tile {
+.tile,
+.live-sensor-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
     padding: 22px;
     text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
     transition: transform .2s ease, box-shadow .2s ease;
-    cursor: pointer;
 }
 
 .tile:hover {
@@ -110,117 +123,35 @@ h2 {
     box-shadow: 0 12px 28px rgba(0,0,0,0.16);
 }
 
-.tile h2 {
+.tile h2,
+.live-sensor-item strong {
     font-size: 18px;
     color: var(--green-dark);
-    margin: 0 0 12px 0;
+    margin-bottom: 12px;
+    display: block;
 }
 
-.tile p {
+.tile p,
+.live-sensor-item span {
     font-size: 34px;
     font-weight: bold;
-    color: var(--green-main);
+    color: var(--green);
     margin: 0;
+    display: block;
 }
 
-.button {
-    display: inline-block;
-    background: var(--green-main);
-    color: var(--white);
-    padding: 12px 18px;
-    margin: 8px 8px 8px 0;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
+.live-sensor-item small {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
 }
 
-.button:hover {
-    background: var(--green-hover);
+.live-sensor-item.ok {
+    border-left: 6px solid var(--green);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background: var(--white);
-}
-
-td,
-th {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-tr:hover {
-    background: #f5fff5;
-}
-
-.dashboard-section {
-    margin-top: 35px;
-    margin-bottom: 15px;
-}
-
-.dashboard-section h2 {
-    font-size: 22px;
-    color: var(--green-dark);
-    border-left: 6px solid var(--green-main);
-    padding-left: 12px;
-}
-
-.top-status-bar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background: var(--green-dark);
-    color: var(--white);
-    padding: 14px;
-    border-radius: 0 0 14px 14px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    font-weight: bold;
-}
-
-.top-status-bar span {
-    background: rgba(255,255,255,0.16);
-    padding: 7px 11px;
-    border-radius: 10px;
-}
-
-.sensor-ok,
-.status-groeiend {
-    color: #16a34a;
-    font-weight: bold;
-}
-
-.sensor-warning,
-.status-oogstklaar {
-    color: #ea580c;
-    font-weight: bold;
-}
-
-.sensor-danger {
-    color: #dc2626;
-    font-weight: bold;
-}
-
-.status-gepland {
-    color: #2563eb;
-    font-weight: bold;
-}
-
-.status-geoogst {
-    color: #6b7280;
-    font-weight: bold;
-}
-
-/* Live Sensor Status Card */
-.live-sensor-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 22px;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+.live-sensor-item.alarm {
+    border-left: 6px solid var(--danger);
 }
 
 .live-sensor-header {
@@ -233,12 +164,13 @@ tr:hover {
 
 .live-sensor-header h3 {
     margin: 0 0 6px 0;
-    font-size: 20px;
+    font-size: 22px;
+    color: var(--green-dark);
 }
 
 .live-sensor-header p {
     margin: 0;
-    color: #6b7280;
+    color: var(--muted);
     font-size: 14px;
 }
 
@@ -246,76 +178,123 @@ tr:hover {
     display: inline-block;
     padding: 8px 14px;
     border-radius: 999px;
-    color: #ffffff;
+    color: white;
     font-weight: 700;
     white-space: nowrap;
 }
 
 .sensor-status-badge.ok {
-    background: #16a34a;
+    background: var(--green);
 }
 
 .sensor-status-badge.alarm {
-    background: #dc2626;
+    background: var(--danger);
 }
 
-.live-sensor-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+.dashboard-section {
+    margin-top: 35px;
+    margin-bottom: 15px;
 }
 
-.live-sensor-item {
-    border-radius: 14px;
-    padding: 16px;
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
+.dashboard-section h2 {
+    font-size: 22px;
+    color: var(--green-dark);
+    border-left: 6px solid var(--green);
+    padding-left: 12px;
 }
 
-.live-sensor-item strong,
-.live-sensor-item span,
-.live-sensor-item small {
-    display: block;
+.top-status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: var(--green-dark);
+    color: white;
+    padding: 14px;
+    border-radius: 0 0 14px 14px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-weight: bold;
+    margin-bottom: 25px;
 }
 
-.live-sensor-item strong {
-    color: #334155;
-    margin-bottom: 8px;
+.top-status-bar span {
+    background: rgba(255,255,255,0.16);
+    padding: 7px 11px;
+    border-radius: 10px;
 }
 
-.live-sensor-item span {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 6px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 }
 
-.live-sensor-item small {
-    color: #64748b;
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
 }
 
-.live-sensor-item.ok {
-    border-left: 5px solid #16a34a;
+tr:hover {
+    background: #f5fff5;
 }
 
-.live-sensor-item.alarm {
-    border-left: 5px solid #dc2626;
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.sensor-ok,
+.status-groeiend {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.sensor-warning,
+.status-oogstklaar {
+    color: var(--warning);
+    font-weight: bold;
+}
+
+.sensor-danger {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.status-gepland {
+    color: var(--blue);
+    font-weight: bold;
+}
+
+.status-geoogst {
+    color: var(--gray);
+    font-weight: bold;
 }
 
 @media (max-width: 800px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
     .live-sensor-header {
         flex-direction: column;
     }
 
+    .grid,
     .live-sensor-grid {
         grid-template-columns: 1fr;
     }
-}
-
-/* Climate Engine Card */
-.climate-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 22px;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
