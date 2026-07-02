@@ -32,6 +32,10 @@ function activeClass($condition) {
 
     <a class="<?= activeClass($page == 'list_products.php') ?>" href="<?= $navPrefix ?>list_products.php">🌿 Producten</a>
 
+    <a class="<?= activeClass(in_array($page, ['hardware_control.php','gpio_logs.php'])) ?>" href="<?= $navPrefix ?>hardware_control.php">🔌 Hardware</a>
+
+    <a class="<?= activeClass($page == 'gpio_logs.php') ?>" href="<?= $navPrefix ?>gpio_logs.php">📜 GPIO Logs</a>
+
     <a class="<?= activeClass($page == 'settings.php' || strpos($currentPath, '/settings/') !== false) ?>" href="<?= $navPrefix ?>settings/">⚙ Instellingen</a>
 
 </div>

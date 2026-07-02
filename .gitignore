@@ -14,3 +14,7 @@ sensors/logs/*.log
 # OS files
 .DS_Store
 Thumbs.db
+
+# GPIO runtime files
+hardware/gpio/gpio_actions.log
+hardware/gpio/simulation_state.json
