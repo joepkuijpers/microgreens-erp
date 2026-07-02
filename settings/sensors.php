@@ -5,6 +5,12 @@ $navPrefix = '../';
 include '../db_connect.php';
 
 $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
+$latestSensor = $db->query("
+    SELECT *
+    FROM sensor_log
+    ORDER BY id DESC
+    LIMIT 1
+")->fetch(PDO::FETCH_ASSOC);
 
 $pageIcon = '🌡';
 $pageTitle = 'Sensorinstellingen';
@@ -44,6 +50,32 @@ include '../includes/page_header.php';
 </div>
 
 <?php endif; ?>
+
+<div class="grid">
+
+    <div class="tile">
+        <h2>💡 Actuele lux</h2>
+        <p><?= htmlspecialchars($latestSensor['light'] ?? '-') ?></p>
+    </div>
+
+    <div class="tile">
+        <h2>🌡 Actuele temperatuur</h2>
+        <p><?= htmlspecialchars($latestSensor['temperature'] ?? '-') ?> °C</p>
+    </div>
+
+    <div class="tile">
+        <h2>💧 Actuele luchtvochtigheid</h2>
+        <p><?= htmlspecialchars($latestSensor['humidity'] ?? '-') ?> %</p>
+    </div>
+
+    <div class="tile">
+        <h2>🕒 Laatste meting</h2>
+        <p style="font-size:18px;">
+            <?= htmlspecialchars($latestSensor['timestamp'] ?? 'Geen data') ?>
+        </p>
+    </div>
+
+</div>
 
 <form method="post" action="save_sensors.php">
 
