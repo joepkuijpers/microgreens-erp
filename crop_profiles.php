@@ -23,6 +23,7 @@ $profiles = $db->query("
     ORDER BY crop_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <style>
 .profile-page {
     padding: 24px;
@@ -96,11 +97,13 @@ $profiles = $db->query("
                         Temperatuur: <strong><?= htmlspecialchars((string)$profile['temp_min']) ?>–<?= htmlspecialchars((string)$profile['temp_max']) ?> °C</strong>
                     </div>
 
-                    <div class="profile-line">
-                        Luchtvochtigheid: <strong><?= htmlspecialchars((string)$profile['humidity_min']) ?>–<?= htmlspecialchars((string)$profile['humidity_max']) ?>%</strong>
-                    <div class="profile-line">
-                        Zaad: <strong><?= number_format((float)$profile['seed_grams_per_tray'], 1, ',', '.') ?> g/tray</strong>
-                    </div>
+                 <div class="profile-line">
+    Luchtvochtigheid: <strong><?= htmlspecialchars((string)$profile['humidity_min']) ?>–<?= htmlspecialchars((string)$profile['humidity_max']) ?>%</strong>
+</div>
+
+<div class="profile-line">
+    Zaad: <strong><?= number_format((float)$profile['seed_grams_per_tray'], 1, ',', '.') ?> g/tray</strong>
+</div>
 
                     <div class="profile-line">
                         Verwachte opbrengst: <strong><?= number_format((float)$profile['expected_yield_grams_per_tray'], 1, ',', '.') ?> g/tray</strong>
