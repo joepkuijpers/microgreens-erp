@@ -10,6 +10,7 @@ $profiles = $db->query("
         grow_days_min,
         grow_days_max,
         light_hours_per_day,
+        growth_light_hours,
         temp_min,
         temp_max,
         humidity_min,
