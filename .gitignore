@@ -4,6 +4,10 @@ database/MicrogreensERP_Live.sqlite
 # Template database
 !database/MicrogreensERP_Template.sqlite
 
+# Local development databases
+database/MicrogreensERP_Development.sqlite
+database/MicrogreensERP_Backup_*.sqlite
+
 # Sensor logs
 sensors/logs/*.log
 
