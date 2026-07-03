@@ -44,18 +44,6 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 <?php include 'includes/cards/harvest_forecast.php'; ?>
 <?php include 'includes/cards/seed_planning.php'; ?>
 <?php include 'includes/cards/rack_capacity.php'; ?>
-<div class="dashboard-section"><h2>⚠️ Alarmen</h2></div>
-<?php include 'includes/cards/alerts.php'; ?>
-
-<div class="dashboard-section"><h2>💰 Financieel</h2></div>
-<?php include 'includes/cards/finance.php'; ?>
-
-<?php include 'includes/cards/live_sensor_status.php'; ?>
-<?php include 'includes/cards/climate_status.php'; ?>
-<?php include 'includes/cards/lighting_status.php'; ?>
-<?php include 'includes/cards/water_status.php'; ?>
-<?php include 'includes/cards/automation_status.php'; ?>
-<?php include 'includes/cards/hardware_control_center.php'; ?>
 
 <div class="dashboard-section">
     <h2>📊 KPI-overzicht</h2>
@@ -63,13 +51,15 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 
 <div class="grid">
     <div class="tile"><h2>🌱 Teelten</h2><p id="batches"><?= $teelten ?></p></div>
+    <div class="tile"><h2>🌾 Oogsten</h2><p id="harvests"><?= $oogsten ?></p></div>
+    <div class="tile"><h2>⚠️ Lage voorraad</h2><p><?= $lage_voorraad ?></p></div>
+
     <div class="tile"><h2>📦 Voorraad</h2><p id="inventory"><?= $voorraad ?></p></div>
     <div class="tile"><h2>📋 Producten</h2><p id="products"><?= $producten ?></p></div>
     <div class="tile"><h2>💰 Verkopen</h2><p id="sales"><?= $verkopen ?></p></div>
     <div class="tile"><h2>👥 Klanten</h2><p id="customers"><?= $klanten ?></p></div>
     <div class="tile"><h2>🚚 Leveranciers</h2><p id="suppliers"><?= $leveranciers ?></p></div>
-    <div class="tile"><h2>🌾 Oogsten</h2><p id="harvests"><?= $oogsten ?></p></div>
-    <div class="tile"><h2>⚠️ Lage voorraad</h2><p><?= $lage_voorraad ?></p></div>
+
     <div class="tile"><h2>💶 Omzet</h2><p id="revenue">€<?= number_format($omzet, 2, ',', '.') ?></p></div>
     <div class="tile"><h2>📉 Kosten</h2><p id="expenses">€<?= number_format($kosten_bedrag, 2, ',', '.') ?></p></div>
     <div class="tile"><h2>📈 Winst</h2><p id="profit">€<?= number_format($winst, 2, ',', '.') ?></p></div>
@@ -81,11 +71,11 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
     <?php include 'includes/cards/status.php'; ?>
 </div>
 
+<div class="dashboard-section"><h2>💰 Financieel</h2></div>
+<?php include 'includes/cards/finance.php'; ?>
+
 <div class="dashboard-section"><h2>📈 Historische sensorgrafieken</h2></div>
 <?php include 'includes/cards/quickoverview.php'; ?>
 <?php include 'includes/cards/charts.php'; ?>
 
-<div class="dashboard-section"><h2>⚡ Snelle acties</h2></div>
-<?php include 'includes/cards/quickactions.php'; ?>
-
-<?php include 'includes/footer.php'; ?>cd /var/www/html/microgreens/PHP
+<?php include 'includes/footer.php'; ?>
