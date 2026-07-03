@@ -86,7 +86,17 @@ $profiles = $db->query("
                     <div class="profile-line">
                         Luchtvochtigheid: <strong><?= htmlspecialchars((string)$profile['humidity_min']) ?>–<?= htmlspecialchars((string)$profile['humidity_max']) ?>%</strong>
                     </div>
+<div class="profile-line">
+    Zaad: <strong><?= number_format((float)$profile['seed_grams_per_tray'], 1, ',', '.') ?> g/tray</strong>
+</div>
 
+<div class="profile-line">
+    Verwachte opbrengst: <strong><?= number_format((float)$profile['expected_yield_grams_per_tray'], 1, ',', '.') ?> g/tray</strong>
+</div>
+
+<div class="profile-line">
+    Watergift: <strong><?= htmlspecialchars((string)$profile['watering_per_day']) ?>x per dag</strong>
+</div>
                     <div class="profile-note">
                         <strong>Irrigatie:</strong><br>
                         <?= htmlspecialchars($profile['irrigation_notes']) ?>
