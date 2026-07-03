@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/sensor_service.php';
+require_once __DIR__ . '/growth_stage_engine.php';
 
 function getLightingState(PDO $db): array
 {
@@ -20,6 +21,8 @@ function getLightingState(PDO $db): array
         ];
     }
 
+    $stage = getGrowthStage($db);
+
     $light = (float)$reading['light'];
     $lightMin = (float)$settings['light_min'];
     $lightMax = (float)$settings['light_max'];
@@ -27,12 +30,20 @@ function getLightingState(PDO $db): array
     $lightLevelOk = $light >= $lightMin && $light <= $lightMax;
     $lightsShouldBeOn = $light < $lightMin;
 
-    if ($light < $lightMin) {
+    if (in_array($stage['stage'], ['planned', 'blackout'], true)) {
+        $lightsShouldBeOn = false;
+        $lightLevelOk = true;
+        $reason = $stage['label'] . ': lampen bewust uit';
+    } elseif ($light < $lightMin) {
         $reason = 'Lichtniveau te laag';
     } elseif ($light > $lightMax) {
         $reason = 'Lichtniveau te hoog';
     } else {
         $reason = 'Lichtniveau binnen ingestelde grenzen';
+    }
+
+    if ($stage['stage'] === 'overdue') {
+        $reason .= ' - oogst te laat';
     }
 
     return [
@@ -45,6 +56,7 @@ function getLightingState(PDO $db): array
         'current_lux' => $light,
         'min_lux' => $lightMin,
         'max_lux' => $lightMax,
+        'growth_stage' => $stage,
         'timestamp' => $reading['timestamp']
     ];
 }
