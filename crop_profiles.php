@@ -4,12 +4,25 @@ include 'includes/sidebar.php';
 include 'db_connect.php';
 
 $profiles = $db->query("
-    SELECT *
+    SELECT
+        crop_name,
+        blackout_days,
+        grow_days_min,
+        grow_days_max,
+        light_hours_per_day,
+        temp_min,
+        temp_max,
+        humidity_min,
+        humidity_max,
+        seed_grams_per_tray,
+        expected_yield_grams_per_tray,
+        watering_per_day,
+        irrigation_notes,
+        notes
     FROM crop_profiles
     ORDER BY crop_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <style>
 .profile-page {
     padding: 24px;
