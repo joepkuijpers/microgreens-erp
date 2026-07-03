@@ -1,6 +1,9 @@
 <?php
 include 'includes/header.php';
 include 'db_connect.php';
+require_once 'includes/batch_rotation_engine.php';
+
+$batchRotation = rotateActiveBatch($db);
 
 $producten = $db->query("SELECT COUNT(*) FROM products")->fetchColumn();
 $voorraad = $db->query("SELECT COUNT(*) FROM inventory")->fetchColumn();
