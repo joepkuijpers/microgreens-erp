@@ -24,11 +24,19 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 
 <?php include 'includes/cards/topstatus.php'; ?>
 
+<div class="dashboard-section"><h2>⚠️ Alarmen</h2></div>
+<?php include 'includes/cards/alerts.php'; ?>
+
+<div class="dashboard-section"><h2>⚡ Snelle acties</h2></div>
+<?php include 'includes/cards/quickactions.php'; ?>
+
 <?php include 'includes/cards/live_sensor_status.php'; ?>
 <?php include 'includes/cards/climate_status.php'; ?>
 <?php include 'includes/cards/lighting_status.php'; ?>
 <?php include 'includes/cards/water_status.php'; ?>
 <?php include 'includes/cards/automation_status.php'; ?>
+<?php include 'includes/cards/hardware_control_center.php'; ?>
+
 <?php include 'includes/cards/growth_command_center.php'; ?>
 <?php include 'includes/cards/growth_timeline.php'; ?>
 <?php include 'includes/cards/batch_queue.php'; ?>
@@ -36,6 +44,17 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 <?php include 'includes/cards/harvest_forecast.php'; ?>
 <?php include 'includes/cards/seed_planning.php'; ?>
 <?php include 'includes/cards/rack_capacity.php'; ?>
+<div class="dashboard-section"><h2>⚠️ Alarmen</h2></div>
+<?php include 'includes/cards/alerts.php'; ?>
+
+<div class="dashboard-section"><h2>💰 Financieel</h2></div>
+<?php include 'includes/cards/finance.php'; ?>
+
+<?php include 'includes/cards/live_sensor_status.php'; ?>
+<?php include 'includes/cards/climate_status.php'; ?>
+<?php include 'includes/cards/lighting_status.php'; ?>
+<?php include 'includes/cards/water_status.php'; ?>
+<?php include 'includes/cards/automation_status.php'; ?>
 <?php include 'includes/cards/hardware_control_center.php'; ?>
 
 <div class="dashboard-section">
@@ -66,13 +85,7 @@ $lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1"
 <?php include 'includes/cards/quickoverview.php'; ?>
 <?php include 'includes/cards/charts.php'; ?>
 
-<div class="dashboard-section"><h2>⚠️ Alarmen</h2></div>
-<?php include 'includes/cards/alerts.php'; ?>
-
-<div class="dashboard-section"><h2>💰 Financieel</h2></div>
-<?php include 'includes/cards/finance.php'; ?>
-
 <div class="dashboard-section"><h2>⚡ Snelle acties</h2></div>
 <?php include 'includes/cards/quickactions.php'; ?>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>cd /var/www/html/microgreens/PHP
