@@ -1,30 +1,23 @@
 <?php
 
+require_once __DIR__ . '/crop_profile_engine.php';
+
 function get_sensor_settings(PDO $db): array
 {
+    $profile = getActiveCropProfile($db);
+
     $stmt = $db->query("SELECT * FROM settings ORDER BY id ASC LIMIT 1");
     $settings = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$settings) {
-        return [
-            'light_min' => 500,
-            'light_max' => 30000,
-            'temp_min' => 18,
-            'temp_max' => 24,
-            'humidity_min' => 45,
-            'humidity_max' => 75,
-            'refresh_seconds' => 5
-        ];
-    }
 
     return [
         'light_min' => (float)($settings['light_min'] ?? 500),
         'light_max' => (float)($settings['light_max'] ?? 30000),
-        'temp_min' => (float)($settings['temp_min'] ?? 18),
-        'temp_max' => (float)($settings['temp_max'] ?? 24),
-        'humidity_min' => (float)($settings['humidity_min'] ?? 45),
-        'humidity_max' => (float)($settings['humidity_max'] ?? 75),
-        'refresh_seconds' => (int)($settings['refresh_seconds'] ?? 5)
+        'temp_min' => (float)$profile['temp_min'],
+        'temp_max' => (float)$profile['temp_max'],
+        'humidity_min' => (float)$profile['humidity_min'],
+        'humidity_max' => (float)$profile['humidity_max'],
+        'refresh_seconds' => (int)($settings['refresh_seconds'] ?? 5),
+        'crop_profile' => $profile
     ];
 }
 
