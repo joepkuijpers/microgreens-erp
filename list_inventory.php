@@ -25,11 +25,11 @@ $totalValue = $db->query("
 <div class="main">
     <h1>📦 Voorraadbeheer</h1>
 
-<p>
-    <a class="btn" href="add_inventory_form.php">➕ Voorraad toevoegen</a>
-    <a class="btn" href="inventory_transactions.php">📋 Mutaties</a>
-</p>
-
+    <p>
+        <a class="btn" href="add_inventory_form.php">➕ Voorraad toevoegen</a>
+        <a class="btn" href="inventory_transactions.php">📋 Mutaties</a>
+    </p>
+    
     <div class="card">
         <h2>Totale voorraadwaarde</h2>
         <h1>€ <?= number_format((float)$totalValue['total'], 2, ',', '.') ?></h1>
