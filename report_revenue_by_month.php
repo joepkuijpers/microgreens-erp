@@ -1,28 +1,39 @@
 <?php
-require 'config/database.php';
+include 'includes/header.php';
+include 'includes/sidebar.php';
+include 'db_connect.php';
 
-$result = $db->query("
-SELECT
-    substr(sale_date,1,7) AS maand,
-    SUM(amount) AS omzet
-FROM sales
-GROUP BY maand
-ORDER BY maand DESC
-");
-
-echo "<h1>Omzet per maand</h1>";
-
-echo "<table border='1' cellpadding='5'>";
-echo "<tr><th>Maand</th><th>Omzet</th></tr>";
-
-foreach ($result as $row) {
-    echo "<tr>";
-    echo "<td>" . $row['maand'] . "</td>";
-    echo "<td>EUR " . number_format($row['omzet'], 2, ',', '.') . "</td>";
-    echo "</tr>";
-}
-
-echo "</table>";
-
-echo "<br><br><a href='index.php'>Menu</a>";
+$rows = $db->query("
+    SELECT
+        substr(sale_date,1,7) AS maand,
+        SUM(amount) AS omzet
+    FROM sales
+    GROUP BY maand
+    ORDER BY maand DESC
+")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<h1>📅 Omzet per maand</h1>
+
+<?php if (empty($rows)): ?>
+    <p>Nog geen omzetgegevens gevonden.</p>
+<?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Maand</th>
+                <th>Omzet</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($rows as $row): ?>
+                <tr>
+                    <td><?= htmlspecialchars((string) $row['maand']) ?></td>
+                    <td>€ <?= htmlspecialchars(number_format((float) $row['omzet'], 2, ',', '.')) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+
+<?php include 'includes/footer.php'; ?>
