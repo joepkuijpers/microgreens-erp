@@ -3,6 +3,7 @@ include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 include 'includes/energy_engine.php';
+require_once 'includes/language.php';
 
 $rows = $db->query("
     SELECT
