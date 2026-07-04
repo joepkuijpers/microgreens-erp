@@ -38,6 +38,7 @@ $rows = $db->query("
             <th>Uren / dag</th>
             <th>kWh / dag</th>
             <th>Status</th>
+            <th>Acties</th>
         </tr>
     </thead>
     <tbody>
@@ -55,6 +56,11 @@ $rows = $db->query("
                 <td><?= htmlspecialchars((string) $row['hours_per_day']) ?></td>
                 <td><?= htmlspecialchars(number_format($dailyKwh, 3, ',', '.')) ?></td>
                 <td><?= $row['is_active'] ? 'Actief' : 'Inactief' ?></td>
+                <td>
+    <a href="edit_equipment.php?id=<?= htmlspecialchars((string) $row['id']) ?>">✏️ Bewerken</a>
+    |
+    <a href="delete_equipment.php?id=<?= htmlspecialchars((string) $row['id']) ?>">🗑️ Verwijderen</a>
+</td>
             </tr>
         <?php endforeach; ?>
     </tbody>
