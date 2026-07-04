@@ -21,7 +21,7 @@ function activeClass($condition) {
     <a class="<?= activeClass($page == 'crop_profiles.php') ?>" href="<?= $navPrefix ?>crop_profiles.php">🌿 Teeltprofielen</a>
 
     <a class="<?= activeClass(in_array($page, ['list_inventory.php','add_inventory_form.php','edit_inventory.php','delete_inventory.php'])) ?>" href="<?= $navPrefix ?>list_inventory.php">📦 Grondstoffen</a>
-
+<a class="<?= activeClass($page == 'equipment.php' || $page == 'add_equipment.php') ?>" href="<?= $navPrefix ?>equipment.php">⚡ Apparatuur</a>
     <a class="<?= activeClass(in_array($page, ['inventory_transactions.php','add_inventory_transaction.php'])) ?>" href="<?= $navPrefix ?>inventory_transactions.php">🔄 Voorraadmutaties</a>
 
     <a class="<?= activeClass($page == 'list_finished_inventory.php') ?>" href="<?= $navPrefix ?>list_finished_inventory.php">📦 Eindvoorraad</a>
