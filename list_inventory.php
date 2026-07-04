@@ -29,7 +29,7 @@ $totalValue = $db->query("
         <a class="btn" href="add_inventory_form.php">➕ Voorraad toevoegen</a>
         <a class="btn" href="inventory_transactions.php">📋 Mutaties</a>
     </p>
-    
+
     <div class="card">
         <h2>Totale voorraadwaarde</h2>
         <h1>€ <?= number_format((float)$totalValue['total'], 2, ',', '.') ?></h1>
@@ -52,7 +52,7 @@ $totalValue = $db->query("
             <tbody>
                 <?php foreach ($items as $item): ?>
                     <tr>
-                        <td><?= htmlspecialchars($item['id']) ?></td>
+                        <td><?= htmlspecialchars((string)$item['id']) ?></td>
                         <td><?= htmlspecialchars($item['item_name']) ?></td>
                         <td><?= htmlspecialchars($item['category'] ?? '-') ?></td>
                         <td><?= number_format((float)$item['quantity'], 2, ',', '.') ?></td>
