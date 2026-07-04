@@ -7,7 +7,15 @@ if ($id <= 0) {
     die('Ongeldig batch-ID.');
 }
 
-$stmt = $db->prepare("SELECT * FROM grow_batches WHERE id = :id");
+$stmt = $db->prepare("
+    SELECT
+        crop,
+        sow_date,
+        expected_harvest_date,
+        tray_count
+    FROM grow_batches
+    WHERE id = :id
+");
 $stmt->execute([':id' => $id]);
 $batch = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,7 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Ongeldige invoer. Controleer oogstdatum, gewicht, product en hoeveelheid.');
     }
 
-    $stmt = $db->prepare("SELECT * FROM products WHERE id = :id");
+    $stmt = $db->prepare("
+        SELECT id, name, unit
+        FROM products
+        WHERE id = :id
+    ");
     $stmt->execute([':id' => $product_id]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -58,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $stmt = $db->prepare("
-            SELECT *
+            SELECT id, product_id, quantity, unit
             FROM finished_inventory
             WHERE product_id = :product_id
         ");
@@ -125,10 +137,10 @@ include 'includes/sidebar.php';
     <h1>🌾 Batch oogsten</h1>
 
     <div class="card">
-        <p><strong>Gewas:</strong> <?= htmlspecialchars($batch['crop']) ?></p>
-        <p><strong>Zaaidatum:</strong> <?= htmlspecialchars($batch['sow_date']) ?></p>
-        <p><strong>Verwachte oogstdatum:</strong> <?= htmlspecialchars($batch['expected_harvest_date'] ?? '') ?></p>
-        <p><strong>Trays:</strong> <?= htmlspecialchars($batch['tray_count']) ?></p>
+        <p><strong>Gewas:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
+        <p><strong>Zaaidatum:</strong> <?= htmlspecialchars((string)$batch['sow_date']) ?></p>
+        <p><strong>Verwachte oogstdatum:</strong> <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></p>
+        <p><strong>Trays:</strong> <?= htmlspecialchars((string)$batch['tray_count']) ?></p>
     </div>
 
     <div class="card">
@@ -148,9 +160,9 @@ include 'includes/sidebar.php';
                 <select name="product_id" required>
                     <option value="">-- Kies product --</option>
                     <?php foreach ($products as $product): ?>
-                        <option value="<?= htmlspecialchars($product['id']) ?>">
-                            <?= htmlspecialchars($product['name']) ?>
-                            (<?= htmlspecialchars($product['unit']) ?>)
+                        <option value="<?= htmlspecialchars((string)$product['id']) ?>">
+                            <?= htmlspecialchars((string)$product['name']) ?>
+                            (<?= htmlspecialchars((string)($product['unit'] ?? '')) ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
