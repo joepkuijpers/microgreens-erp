@@ -53,13 +53,13 @@ $total = $db->query("
             <tbody>
                 <?php foreach ($sales as $sale): ?>
                     <tr>
-                        <td><?= htmlspecialchars($sale['id']) ?></td>
-                        <td><?= htmlspecialchars($sale['sale_date']) ?></td>
-                        <td><?= htmlspecialchars($sale['customer_name'] ?? '-') ?></td>
-                        <td><?= htmlspecialchars($sale['product_name'] ?? '-') ?></td>
+                         <td><?= htmlspecialchars((string)$sale['id']) ?></td>
+                        <td><?= htmlspecialchars((string)$sale['sale_date']) ?></td>
+                        <td><?= htmlspecialchars((string)($sale['customer_name'] ?? '-')) ?></td>
+                        <td><?= htmlspecialchars((string)($sale['product_name'] ?? '-')) ?></td>
                         <td><?= number_format((float)$sale['quantity'], 2, ',', '.') ?></td>
                         <td>€ <?= number_format((float)$sale['amount'], 2, ',', '.') ?></td>
-                        <td><?= htmlspecialchars($sale['status']) ?></td>
+                        <td><?= htmlspecialchars((string)$sale['status']) ?></td>                  
                     </tr>
                 <?php endforeach; ?>
             </tbody>
