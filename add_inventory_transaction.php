@@ -11,7 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Ongeldige invoer.');
     }
 
-    $stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
+    $stmt = $db->prepare("
+    SELECT
+        id,
+        item_name,
+        quantity,
+        unit
+    FROM inventory
+    WHERE id = :id
+");
     $stmt->execute([':id' => $inventory_id]);
     $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
