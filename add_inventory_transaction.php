@@ -12,14 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt = $db->prepare("
-    SELECT
-        id,
-        item_name,
-        quantity,
-        unit
-    FROM inventory
-    WHERE id = :id
-");
+        SELECT
+            id,
+            item_name,
+            quantity,
+            unit
+        FROM inventory
+        WHERE id = :id
+    ");
     $stmt->execute([':id' => $inventory_id]);
     $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity_before = (float)$item['quantity'];
 
     $positiveTypes = ['INKOOP', 'CORRECTIE_PLUS'];
-    $quantity_change = in_array($type, $positiveTypes) ? $amount : -$amount;
+    $quantity_change = in_array($type, $positiveTypes, true) ? $amount : -$amount;
 
     $quantity_after = $quantity_before + $quantity_change;
 
@@ -73,7 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $items = $db->query("
-    SELECT id, item_name, quantity, unit
+    SELECT
+        id,
+        item_name,
+        quantity,
+        unit
     FROM inventory
     ORDER BY item_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
@@ -96,10 +100,10 @@ include 'includes/sidebar.php';
             <select name="inventory_id" required>
                 <option value="">-- Kies voorraaditem --</option>
                 <?php foreach ($items as $item): ?>
-                    <option value="<?= htmlspecialchars($item['id']) ?>">
-                        <?= htmlspecialchars($item['item_name']) ?>
+                    <option value="<?= htmlspecialchars((string)$item['id']) ?>">
+                        <?= htmlspecialchars((string)$item['item_name']) ?>
                         (<?= number_format((float)$item['quantity'], 2, ',', '.') ?>
-                        <?= htmlspecialchars($item['unit']) ?>)
+                        <?= htmlspecialchars((string)($item['unit'] ?? '')) ?>)
                     </option>
                 <?php endforeach; ?>
             </select><br><br>
