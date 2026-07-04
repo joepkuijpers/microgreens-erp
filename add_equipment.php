@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
@@ -50,8 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-<h1>➕ Apparatuur toevoegen</h1>
+<h1>➕ <?= __('add_equipment') ?></h1>
 
 <?php if ($message !== ''): ?>
     <p><?= htmlspecialchars($message) ?></p>
