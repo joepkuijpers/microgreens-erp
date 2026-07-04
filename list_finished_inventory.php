@@ -53,11 +53,11 @@ $totalValue = $db->query("
             <tbody>
                 <?php foreach ($items as $item): ?>
                     <tr>
-                        <td><?= htmlspecialchars($item['id']) ?></td>
-                        <td><?= htmlspecialchars($item['product_name'] ?? 'Onbekend product') ?></td>
-                        <td><?= htmlspecialchars($item['category'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars((string)$item['id']) ?></td>
+                        <td><?= htmlspecialchars((string)($item['product_name'] ?? 'Onbekend product')) ?></td>
+                        <td><?= htmlspecialchars((string)($item['category'] ?? '-')) ?></td>
                         <td><?= number_format((float)$item['quantity'], 2, ',', '.') ?></td>
-                        <td><?= htmlspecialchars($item['unit'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars((string)($item['unit'] ?? '-')) ?></td>
                         <td>€ <?= number_format((float)$item['sale_price'], 2, ',', '.') ?></td>
                         <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
                     </tr>
