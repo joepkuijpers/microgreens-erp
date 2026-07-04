@@ -16,7 +16,11 @@ if ($customer_id <= 0 || $product_id <= 0 || $sale_date === '' || $quantity <= 0
     die('Ongeldige invoer.');
 }
 
-$stmt = $db->prepare("SELECT * FROM customers WHERE id = :id");
+$stmt = $db->prepare("
+    SELECT id, name
+    FROM customers
+    WHERE id = :id
+");
 $stmt->execute([':id' => $customer_id]);
 $customer = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -89,5 +93,5 @@ try {
     exit;
 } catch (Exception $e) {
     $db->rollBack();
-    die('Fout bij verkoop opslaan: ' . $e->getMessage());
+    die('Fout bij opslaan verkoop: ' . $e->getMessage());
 }
