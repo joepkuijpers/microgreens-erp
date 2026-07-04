@@ -24,7 +24,7 @@ $stmt->execute([
 $equipment = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$equipment) {
-    echo "<h1>✏️ Apparatuur bewerken</h1>";
+ echo "<h1>✏️ " . __('edit_equipment') . "</h1>";   
     echo "<p>Apparaat niet gevonden.</p>";
     include 'includes/footer.php';
     exit;
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h1>✏️ Apparatuur bewerken</h1>
+<h1>✏️ <?= __('edit_equipment') ?></h1>
 
 <?php if ($message !== ''): ?>
     <p><?= htmlspecialchars((string) $message) ?></p>
