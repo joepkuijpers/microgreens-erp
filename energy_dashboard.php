@@ -31,7 +31,21 @@ foreach ($rows as $row) {
 }
 
 $monthlyKwh = $totalDailyKwh * 30;
+$settings = $db->query("
+    SELECT electricity_price_per_kwh
+    FROM settings
+    WHERE id = 1
+")->fetch(PDO::FETCH_ASSOC);
+
+
+
+$electricityPrice = (float) ($settings['electricity_price_per_kwh'] ?? 0);
+$dailyCost = $totalDailyKwh * $electricityPrice;
+$monthlyCost = $monthlyKwh * $electricityPrice;
 ?>
+
+<td><?= htmlspecialchars(number_format($monthlyKwh, 1, ',', '.')) ?> kWh</td>
+</tr>
 
 <h1>⚡ Energie Dashboard</h1>
 
@@ -52,6 +66,16 @@ $monthlyKwh = $totalDailyKwh * 30;
         <th>Geschat verbruik per maand</th>
         <td><?= htmlspecialchars(number_format($monthlyKwh, 1, ',', '.')) ?> kWh</td>
     </tr>
+  <tr>
+    <th>Energiekosten per dag</th>
+    <td>€ <?= htmlspecialchars(number_format($dailyCost, 2, ',', '.')) ?></td>
+</tr>
+
+<tr>
+    <th>Geschatte energiekosten per maand</th>
+    <td>€ <?= htmlspecialchars(number_format($monthlyCost, 2, ',', '.')) ?></td>
+</tr>
+  
 </table>
 
 <?php include 'includes/footer.php'; ?>
