@@ -19,6 +19,12 @@ $rows = $db->query("
 
 <h1>⚡ Apparatuur</h1>
 
+<p>
+    <a href="add_equipment.php" class="btn">
+        ➕ Apparatuur toevoegen
+    </a>
+</p>
+
 <?php if (empty($rows)): ?>
     <p>Nog geen apparatuur geregistreerd.</p>
 <?php else: ?>
