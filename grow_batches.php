@@ -5,7 +5,14 @@ include 'db_connect.php';
 
 $batches = $db->query("
     SELECT
-        g.*,
+        g.id,
+        g.crop,
+        g.sow_date,
+        g.expected_harvest_date,
+        g.tray_count,
+        g.seed_amount,
+        g.seed_unit,
+        g.status,
         i.item_name AS inventory_item_name
     FROM grow_batches g
     LEFT JOIN inventory i ON i.id = g.inventory_id
@@ -54,26 +61,26 @@ $batches = $db->query("
                     }
                     ?>
                     <tr>
-                        <td><?= htmlspecialchars($batch['id']) ?></td>
-                        <td><?= htmlspecialchars($batch['crop']) ?></td>
-                        <td><?= htmlspecialchars($batch['sow_date'] ?? '') ?></td>
-                        <td><?= htmlspecialchars($batch['expected_harvest_date'] ?? '') ?></td>
-                        <td><?= htmlspecialchars($batch['tray_count'] ?? '') ?></td>
-                        <td><?= htmlspecialchars($batch['inventory_item_name'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars((string)$batch['id']) ?></td>
+                        <td><?= htmlspecialchars((string)$batch['crop']) ?></td>
+                        <td><?= htmlspecialchars((string)($batch['sow_date'] ?? '')) ?></td>
+                        <td><?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></td>
+                        <td><?= htmlspecialchars((string)($batch['tray_count'] ?? '')) ?></td>
+                        <td><?= htmlspecialchars((string)($batch['inventory_item_name'] ?? '-')) ?></td>
                         <td>
                             <?= number_format((float)($batch['seed_amount'] ?? 0), 2, ',', '.') ?>
-                            <?= htmlspecialchars($batch['seed_unit'] ?? '') ?>
+                            <?= htmlspecialchars((string)($batch['seed_unit'] ?? '')) ?>
                         </td>
                         <td>
-                            <span style="background:<?= $kleur ?>; color:white; padding:6px 12px; border-radius:20px; font-weight:bold; display:inline-block; min-width:100px; text-align:center;">
-                                <?= htmlspecialchars($status) ?>
+                            <span style="background:<?= htmlspecialchars((string)$kleur) ?>; color:white; padding:6px 12px; border-radius:20px; font-weight:bold; display:inline-block; min-width:100px; text-align:center;">
+                                <?= htmlspecialchars((string)$status) ?>
                             </span>
                         </td>
-          <td>
-    <a href="batch_details.php?id=<?= urlencode($batch['id']) ?>">🔍 Details</a> |
-    <a href="edit_batch.php?id=<?= urlencode($batch['id']) ?>">✏️ Bewerken</a> |
-    <a href="harvest_batch.php?id=<?= urlencode($batch['id']) ?>">🌾 Oogsten</a>
-</td>           
+                        <td>
+                            <a href="batch_details.php?id=<?= urlencode((string)$batch['id']) ?>">🔍 Details</a> |
+                            <a href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ Bewerken</a> |
+                            <a href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 Oogsten</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
