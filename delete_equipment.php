@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h1>🗑 Apparatuur verwijderen</h1>
+echo "<h1>🗑 " . __('delete_equipment') . "</h1>";
 
 <p>Weet je zeker dat je dit apparaat wilt verwijderen?</p>
 
