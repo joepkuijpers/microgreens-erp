@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
@@ -47,7 +48,7 @@ $monthlyCost = $monthlyKwh * $electricityPrice;
 <td><?= htmlspecialchars(number_format($monthlyKwh, 1, ',', '.')) ?> kWh</td>
 </tr>
 
-<h1>⚡ Energie Dashboard</h1>
+<h1><?= __('energy_dashboard') ?></h1>
 
 <table>
     <tr>
