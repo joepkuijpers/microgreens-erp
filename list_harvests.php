@@ -1,13 +1,47 @@
 <?php
-require 'config/database.php';
+include 'includes/header.php';
+include 'includes/sidebar.php';
+include 'db_connect.php';
 
-$result = $db->query("SELECT * FROM harvests ORDER BY id");
-
-echo "<h1>Oogsten</h1>";
-
-foreach ($result as $row) {
-    echo $row['id'] . " - " .
-         $row['weight_grams'] . " gram - " .
-         $row['quality_notes'] . "<br>";
-}
+$harvests = $db->query("
+    SELECT
+        id,
+        weight_grams,
+        quality_notes
+    FROM harvests
+    ORDER BY id DESC
+")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<div class="main">
+    <h1>🌾 Oogsten</h1>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Gewicht</th>
+                    <th>Kwaliteit / Notities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($harvests)): ?>
+                    <tr>
+                        <td colspan="3">Nog geen oogsten gevonden.</td>
+                    </tr>
+                <?php endif; ?>
+
+                <?php foreach ($harvests as $harvest): ?>
+                    <tr>
+                        <td><?= htmlspecialchars((string)$harvest['id']) ?></td>
+                        <td><?= number_format((float)$harvest['weight_grams'], 2, ',', '.') ?> gram</td>
+                        <td><?= htmlspecialchars((string)($harvest['quality_notes'] ?? '-')) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>
