@@ -1,23 +1,70 @@
 <?php
+include 'includes/header.php';
+include 'includes/sidebar.php';
 include 'db_connect.php';
 
-$columns = $db->query("PRAGMA table_info(grow_batches)")->fetchAll(PDO::FETCH_ASSOC);
-$existing = [];
+$transactions = $db->query("
+    SELECT
+        it.id,
+        it.transaction_date,
+        it.type,
+        it.quantity_change,
+        it.quantity_before,
+        it.quantity_after,
+        it.unit,
+        it.note,
+        i.item_name
+    FROM inventory_transactions it
+    LEFT JOIN inventory i ON i.id = it.inventory_id
+    ORDER BY it.transaction_date DESC, it.id DESC
+")->fetchAll(PDO::FETCH_ASSOC);
+?>
 
-foreach ($columns as $column) {
-    $existing[] = $column['name'];
-}
+<div class="main">
+    <h1>🔄 Voorraadmutaties</h1>
 
-if (!in_array('inventory_id', $existing)) {
-    $db->exec("ALTER TABLE grow_batches ADD COLUMN inventory_id INTEGER");
-}
+    <p>
+        <a class="btn" href="list_inventory.php">← Terug naar voorraad</a>
+        <a class="btn" href="add_inventory_transaction.php">➕ Mutatie toevoegen</a>
+    </p>
 
-if (!in_array('seed_amount', $existing)) {
-    $db->exec("ALTER TABLE grow_batches ADD COLUMN seed_amount REAL DEFAULT 0");
-}
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Wijziging</th>
+                    <th>Voor</th>
+                    <th>Na</th>
+                    <th>Opmerking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($transactions)): ?>
+                    <tr>
+                        <td colspan="7">Nog geen voorraadmutaties gevonden.</td>
+                    </tr>
+                <?php endif; ?>
 
-if (!in_array('seed_unit', $existing)) {
-    $db->exec("ALTER TABLE grow_batches ADD COLUMN seed_unit TEXT");
-}
+                <?php foreach ($transactions as $transaction): ?>
+                    <tr>
+                        <td><?= htmlspecialchars((string)$transaction['transaction_date']) ?></td>
+                        <td><?= htmlspecialchars((string)($transaction['item_name'] ?? 'Onbekend item')) ?></td>
+                        <td><?= htmlspecialchars((string)$transaction['type']) ?></td>
+                        <td>
+                            <?= number_format((float)$transaction['quantity_change'], 2, ',', '.') ?>
+                            <?= htmlspecialchars((string)($transaction['unit'] ?? '')) ?>
+                        </td>
+                        <td><?= number_format((float)$transaction['quantity_before'], 2, ',', '.') ?></td>
+                        <td><?= number_format((float)$transaction['quantity_after'], 2, ',', '.') ?></td>
+                        <td><?= htmlspecialchars((string)($transaction['note'] ?? '-')) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-echo "grow_batches voorraadkoppeling is aangemaakt of bestond al.";
+<?php include 'includes/footer.php'; ?>
