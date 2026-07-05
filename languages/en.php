@@ -189,4 +189,11 @@ return [
 'actions' => 'Actions',
 'details' => 'Details',
 'edit' => 'Edit',
+'production_schedule' => 'Production schedule',
+'no_production_planning_found' => 'No production planning found.',
+'sowing_date' => 'Sowing date',
+'product' => 'Product',
+'customer' => 'Customer',
+'quantity' => 'Quantity',
+'seed' => 'Seed',
 ];
