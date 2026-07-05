@@ -4,7 +4,7 @@ include 'db_connect.php';
 $id = (int)($_GET['id'] ?? 0);
 
 if ($id <= 0) {
-    die('Ongeldig batch-ID.');
+    die(t('invalid_batch_id'));
 }
 
 $stmt = $db->prepare("SELECT * FROM grow_batches WHERE id = :id");
@@ -12,7 +12,7 @@ $stmt->execute([':id' => $id]);
 $batch = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$batch) {
-    die('Batch niet gevonden.');
+    die(t('batch_not_found'));
 }
 
 $inventoryItems = $db->query("
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_seed_amount = (float)($_POST['seed_amount'] ?? 0);
 
     if ($crop === '' || $sow_date === '' || $tray_count <= 0 || $new_inventory_id <= 0 || $new_seed_amount < 0) {
-        die('Ongeldige invoer.');
+    die(t('invalid_batch_input'));
     }
 
     $old_inventory_id = (int)($batch['inventory_id'] ?? 0);
@@ -147,31 +147,31 @@ include 'includes/sidebar.php';
 ?>
 
 <div class="main">
-    <h1>✏️ Batch bewerken</h1>
+  <h1>✏️ <?= htmlspecialchars(t('edit_batch')) ?></h1>  
 
     <div class="card">
         <form method="post">
-            <p>Gewas<br>
+            <p><?= htmlspecialchars(t('crop')) ?><br>
                 <input type="text" name="crop" value="<?= htmlspecialchars($batch['crop']) ?>" required>
             </p>
 
-            <p>Zaaidatum<br>
+            <p><?= htmlspecialchars(t('sowing_date')) ?><br>
                 <input type="date" name="sow_date" value="<?= htmlspecialchars($batch['sow_date']) ?>" required>
             </p>
 
-            <p>Verwachte oogstdatum<br>
+            <p><?= htmlspecialchars(t('expected_harvest_date')) ?><br>
                 <input type="date" name="expected_harvest_date" value="<?= htmlspecialchars($batch['expected_harvest_date'] ?? '') ?>">
             </p>
 
-            <p>Aantal trays<br>
+            <p><?= htmlspecialchars(t('tray_count')) ?><br>
                 <input type="number" name="tray_count" value="<?= htmlspecialchars($batch['tray_count']) ?>" min="1" required>
             </p>
 
-            <p>Traytype<br>
+            <p><?= htmlspecialchars(t('tray_type')) ?><br>
                 <input type="text" name="tray_type" value="<?= htmlspecialchars($batch['tray_type']) ?>">
             </p>
 
-            <p>Zaadvoorraad<br>
+            <p><?= htmlspecialchars(t('seed_usage')) ?><br>
                 <select name="inventory_id" required>
                     <option value="">-- Kies zaadvoorraad --</option>
                     <?php foreach ($inventoryItems as $item): ?>
@@ -184,24 +184,29 @@ include 'includes/sidebar.php';
                 </select>
             </p>
 
-            <p>Zaadverbruik<br>
+            <p><?= htmlspecialchars(t('seed_amount')) ?><br>
                 <input type="number" step="0.01" name="seed_amount" value="<?= htmlspecialchars($batch['seed_amount'] ?? 0) ?>" required>
             </p>
 
-            <p>Status<br>
-                <select name="status">
-                    <?php foreach (['Gepland', 'Groeiend', 'Oogstklaar', 'Geoogst'] as $status): ?>
-                        <option value="<?= $status ?>" <?= ($batch['status'] === $status) ? 'selected' : '' ?>>
-                            <?= $status ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </p>
-
-            <p>
-                <button class="btn" type="submit">💾 Opslaan</button>
-                <a class="btn" href="grow_batches.php">Terug</a>
-            </p>
+       <p><?= htmlspecialchars(t('status')) ?><br>
+    <select name="status">
+        <?php foreach (['Gepland', 'Groeiend', 'Oogstklaar', 'Geoogst'] as $status): ?>
+            <option value="<?= htmlspecialchars($status) ?>" <?= ($batch['status'] === $status) ? 'selected' : '' ?>>
+                <?= htmlspecialchars(match ($status) {
+                    'Gepland' => t('status_planned'),
+                    'Groeiend' => t('status_growing'),
+                    'Oogstklaar' => t('status_ready_to_harvest'),
+                    'Geoogst' => t('status_harvested'),
+                    default => $status,
+                }) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</p>    
+  <p>
+    <button class="btn" type="submit">💾 <?= htmlspecialchars(t('save')) ?></button>
+    <a class="btn" href="grow_batches.php"><?= htmlspecialchars(t('back')) ?></a>
+</p>          
         </form>
     </div>
 </div>
