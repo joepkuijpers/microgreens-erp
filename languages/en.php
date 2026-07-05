@@ -105,4 +105,5 @@ return [
 'grow_light' => 'Grow light',
 'climate_hardware' => 'Climate hardware',
 'water_pump' => 'Water pump',
+'live_sensor_status' => 'Live sensor status',
 ];
