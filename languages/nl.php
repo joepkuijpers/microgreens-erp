@@ -142,4 +142,7 @@ return [
 'no_harvests_planned' => 'Geen oogsten gepland',
 'no_active_or_planned_batches_14_days' => 'Geen actieve of geplande batches binnen 14 dagen.',
 'harvest_date' => 'Oogstdatum',
+'hardware_control_center' => 'Hardware Control Center',
+'simulation' => 'simulatie',
+'gpio_monitor_active' => 'GPIO-monitor actief',
 ];

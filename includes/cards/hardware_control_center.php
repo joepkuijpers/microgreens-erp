@@ -9,12 +9,12 @@ $gpioOutputs = gpioReadOutputs();
 <div class="climate-card hardware-control-card">
     <div class="live-sensor-header">
         <div>
-            <h3>Hardware Control Center</h3>
-            <p>Modus: <?= htmlspecialchars($gpioConfig['mode'] ?? 'simulation') ?></p>
+            <h3><?= htmlspecialchars(t('hardware_control_center')) ?></h3>
+            <p><?= htmlspecialchars(t('mode')) ?>: <?= htmlspecialchars($gpioConfig['mode'] ?? t('simulation')) ?></p>
         </div>
 
         <span class="sensor-status-badge ok">
-            GPIO monitor actief
+            <?= htmlspecialchars(t('gpio_monitor_active')) ?>
         </span>
     </div>
 
@@ -26,7 +26,7 @@ $gpioOutputs = gpioReadOutputs();
             ?>
             <div class="live-sensor-item <?= $state ? 'alarm' : 'ok' ?>">
                 <strong><?= htmlspecialchars($relay['label']) ?></strong>
-                <span><?= $state ? 'AAN' : 'UIT' ?></span>
+                <span><?= $state ? htmlspecialchars(t('on')) : htmlspecialchars(t('off')) ?></span>
                 <small>GPIO <?= htmlspecialchars((string)$relay['gpio_pin']) ?> | <?= htmlspecialchars($name) ?></small>
             </div>
         <?php endforeach; ?>
@@ -51,7 +51,8 @@ async function updateHardwareControlCenter() {
             items[index].classList.remove('ok', 'alarm');
             items[index].classList.add(state ? 'alarm' : 'ok');
 
-            items[index].querySelector('span').textContent = state ? 'AAN' : 'UIT';
+            items[index].querySelector('span').textContent =
+                state ? '<?= addslashes(t('on')) ?>' : '<?= addslashes(t('off')) ?>';
         });
 
     } catch (error) {

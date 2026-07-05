@@ -141,4 +141,7 @@ return [
 'no_harvests_planned' => 'No harvests planned',
 'no_active_or_planned_batches_14_days' => 'No active or planned batches within 14 days.',
 'harvest_date' => 'Harvest date',
+'hardware_control_center' => 'Hardware Control Center',
+'simulation' => 'simulation',
+'gpio_monitor_active' => 'GPIO monitor active',
 ];
