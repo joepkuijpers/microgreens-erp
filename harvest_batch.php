@@ -4,7 +4,7 @@ include 'db_connect.php';
 $id = (int)($_GET['id'] ?? 0);
 
 if ($id <= 0) {
-    die('Ongeldig batch-ID.');
+    die(t('invalid_batch_id'));
 }
 
 $stmt = $db->prepare("
@@ -20,7 +20,7 @@ $stmt->execute([':id' => $id]);
 $batch = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$batch) {
-    die('Batch niet gevonden.');
+    die(t('batch_not_found'));
 }
 
 $products = $db->query("
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$product) {
-        die('Product niet gevonden.');
+   die(t('product_not_found'));     
     }
 
     $db->beginTransaction();
@@ -134,7 +134,7 @@ include 'includes/sidebar.php';
 ?>
 
 <div class="main">
-    <h1>🌾 Batch oogsten</h1>
+    <h1>🌾 <?= htmlspecialchars(t('harvest_batch')) ?></h1>
 
     <div class="card">
         <p><strong>Gewas:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
@@ -174,14 +174,14 @@ include 'includes/sidebar.php';
             </p>
 
             <p>
-                Kwaliteit / opmerkingen<br>
+                <?= htmlspecialchars(t('quality_notes')) ?><br>
                 <input type="text" name="quality_notes" placeholder="Bijv. mooi, kort, geel, test">
             </p>
 
             <p>
-                <button class="btn" type="submit">🌾 Oogst registreren</button>
-                <a class="btn" href="grow_batches.php">Terug</a>
-            </p>
+                <button class="btn" type="submit">🌾 <?= htmlspecialchars(t('register_harvest')) ?></button>
+                
+            </p><a class="btn" href="grow_batches.php"><?= htmlspecialchars(t('back')) ?></a>
         </form>
     </div>
 </div>

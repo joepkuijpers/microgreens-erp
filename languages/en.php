@@ -196,4 +196,5 @@ return [
 'customer' => 'Customer',
 'quantity' => 'Quantity',
 'seed' => 'Seed',
+'product_not_found' => 'Product not found.',
 ];

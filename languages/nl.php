@@ -216,4 +216,13 @@ return [
 'customer' => 'Klant',
 'quantity' => 'Hoeveelheid',
 'seed' => 'Zaad',
+'harvest_batch' => 'Batch oogsten',
+'invalid_batch_id' => 'Ongeldig batch-ID.',
+'batch_not_found' => 'Batch niet gevonden.',
+'product_not_found' => 'Product niet gevonden.',
+'invalid_harvest_input' => 'Ongeldige invoer. Controleer oogstdatum, gewicht, product en hoeveelheid.',
+'register_harvest' => 'Oogst registreren',
+'back' => 'Terug',
+'harvest_weight_grams' => 'Oogstgewicht in gram',
+'quality_notes' => 'Kwaliteit / opmerkingen',
 ];
