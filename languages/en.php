@@ -51,4 +51,12 @@ return [
 'new_inventory' => 'New inventory',
 'new_sale' => 'New sale',
 'new_customer' => 'New customer',
+'system_status' => 'System status',
+'online' => 'Online',
+'active' => 'Active',
+'sensors' => 'Sensors',
+'loading' => 'Loading...',
+'last_measurement' => 'Last measurement',
+'last_update' => 'Last update',
+'refresh' => 'Refresh',
 ];

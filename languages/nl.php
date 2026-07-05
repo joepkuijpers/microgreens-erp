@@ -50,4 +50,12 @@ return [
 'new_inventory' => 'Nieuwe voorraad',
 'new_sale' => 'Nieuwe verkoop',
 'new_customer' => 'Nieuwe klant', 
+'system_status' => 'Systeemstatus',
+'online' => 'Online',
+'active' => 'Actief',
+'sensors' => 'Sensoren',
+'loading' => 'Laden...',
+'last_measurement' => 'Laatste meting',
+'last_update' => 'Laatste update',
+'refresh' => 'Refresh',
 ];
