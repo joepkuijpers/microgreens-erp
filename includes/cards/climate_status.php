@@ -8,8 +8,8 @@ $climateState = getClimateState($db);
 <div class="climate-card">
     <div class="live-sensor-header">
         <div>
-            <h3>Klimaat Engine</h3>
-            <p>Laatste analyse: <?= htmlspecialchars($climateState['timestamp'] ?? 'Geen data') ?></p>
+            <h3><?= __('climate_engine') ?></h3>
+            <p><?= __('last_analysis') ?>: <?= htmlspecialchars($climateState['timestamp'] ?? __('no_data')) ?></p>
         </div>
 
         <span class="sensor-status-badge <?= $climateState['overall'] === 'ok' ? 'ok' : 'alarm' ?>">
@@ -19,20 +19,32 @@ $climateState = getClimateState($db);
 
     <div class="live-sensor-grid">
         <div class="live-sensor-item <?= $climateState['temperature']['status'] === 'ok' ? 'ok' : 'alarm' ?>">
-            <strong>Temperatuurregeling</strong>
-            <span><?= $climateState['temperature']['heater'] ? 'Verwarming AAN' : ($climateState['temperature']['cooler'] ? 'Koeling AAN' : 'Stabiel') ?></span>
+            <strong><?= __('temperature_control') ?></strong>
+            <span>
+                <?= $climateState['temperature']['heater']
+                    ? __('heater_on')
+                    : ($climateState['temperature']['cooler'] ? __('cooling_on') : __('stable')) ?>
+            </span>
             <small><?= htmlspecialchars($climateState['temperature']['label']) ?></small>
         </div>
 
         <div class="live-sensor-item <?= $climateState['humidity']['status'] === 'ok' ? 'ok' : 'alarm' ?>">
-            <strong>Luchtregeling</strong>
-            <span><?= $climateState['humidity']['humidifier'] ? 'Bevochtigen AAN' : ($climateState['humidity']['ventilation'] ? 'Ventilatie AAN' : 'Stabiel') ?></span>
+            <strong><?= __('air_control') ?></strong>
+            <span>
+                <?= $climateState['humidity']['humidifier']
+                    ? __('humidifier_on')
+                    : ($climateState['humidity']['ventilation'] ? __('ventilation_on') : __('stable')) ?>
+            </span>
             <small><?= htmlspecialchars($climateState['humidity']['label']) ?></small>
         </div>
 
         <div class="live-sensor-item <?= $climateState['light']['status'] === 'ok' ? 'ok' : 'alarm' ?>">
-            <strong>Lichtregeling</strong>
-            <span><?= $climateState['light']['grow_light'] ? 'Grow light AAN' : 'Stabiel' ?></span>
+            <strong><?= __('light_control') ?></strong>
+            <span>
+                <?= $climateState['light']['grow_light']
+                    ? __('grow_light_on')
+                    : __('stable') ?>
+            </span>
             <small><?= htmlspecialchars($climateState['light']['label']) ?></small>
         </div>
     </div>
