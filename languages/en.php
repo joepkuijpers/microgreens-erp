@@ -42,4 +42,5 @@ return [
 'live_monitoring' => 'Live monitoring',
 'financial' => 'Financial',
 'historical_sensor_charts' => 'Historical sensor charts',
+'all_systems_normal' => 'All systems operating normally',
 ];
