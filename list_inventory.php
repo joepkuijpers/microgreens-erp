@@ -23,15 +23,15 @@ $totalValue = $db->query("
 ?>
 
 <div class="main">
-    <h1>📦 Voorraadbeheer</h1>
+    <h1>📦 <?= htmlspecialchars(t('inventory_management')) ?></h1>
 
     <p>
-        <a class="btn" href="add_inventory_form.php">➕ Voorraad toevoegen</a>
-        <a class="btn" href="inventory_transactions.php">📋 Mutaties</a>
+        <a class="btn" href="add_inventory_form.php">➕ <?= htmlspecialchars(t('add_inventory')) ?></a>
+        <a class="btn" href="inventory_transactions.php">📋 <?= htmlspecialchars(t('transactions')) ?></a>
     </p>
 
     <div class="card">
-        <h2>Totale voorraadwaarde</h2>
+        <h2><?= htmlspecialchars(t('total_inventory_value')) ?></h2>
         <h1>€ <?= number_format((float)$totalValue['total'], 2, ',', '.') ?></h1>
     </div>
 
@@ -40,13 +40,13 @@ $totalValue = $db->query("
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Artikel</th>
-                    <th>Categorie</th>
-                    <th>Hoeveelheid</th>
-                    <th>Eenheid</th>
-                    <th>Kostprijs</th>
-                    <th>Waarde</th>
-                    <th>Acties</th>
+                    <th><?= htmlspecialchars(t('item')) ?></th>
+                    <th><?= htmlspecialchars(t('category')) ?></th>
+                    <th><?= htmlspecialchars(t('quantity')) ?></th>
+                    <th><?= htmlspecialchars(t('unit')) ?></th>
+                    <th><?= htmlspecialchars(t('unit_cost_short')) ?></th>
+                    <th><?= htmlspecialchars(t('value')) ?></th>
+                    <th><?= htmlspecialchars(t('actions')) ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -60,8 +60,8 @@ $totalValue = $db->query("
                         <td>€ <?= number_format((float)$item['unit_cost'], 2, ',', '.') ?></td>
                         <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
                         <td>
-                            <a class="btn" href="edit_inventory.php?id=<?= urlencode($item['id']) ?>">✏️ Bewerken</a>
-                            <a class="btn" href="delete_inventory.php?id=<?= urlencode($item['id']) ?>" onclick="return confirm('Weet je zeker dat je dit voorraaditem wilt verwijderen?');">🗑️ Verwijderen</a>
+                            <a class="btn" href="edit_inventory.php?id=<?= urlencode($item['id']) ?>">✏️ <?= htmlspecialchars(t('edit')) ?></a>
+                            <a class="btn" href="delete_inventory.php?id=<?= urlencode($item['id']) ?>" onclick="return confirm('<?= htmlspecialchars(t('confirm_delete_inventory_item')) ?>');">🗑️ <?= htmlspecialchars(t('delete')) ?></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

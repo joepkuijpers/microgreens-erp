@@ -204,4 +204,12 @@ return [
 'unit_cost' => 'Unit cost (€)',
 'invalid_inventory_input' => 'Invalid input. Check item name, quantity, unit and unit cost.',
 'new_inventory_item_created' => 'New inventory item created',
+'inventory_management' => 'Inventory management',
+'transactions' => 'Transactions',
+'total_inventory_value' => 'Total inventory value',
+'item' => 'Item',
+'unit_cost_short' => 'Unit cost',
+'value' => 'Value',
+'delete' => 'Delete',
+'confirm_delete_inventory_item' => 'Are you sure you want to delete this inventory item?',
 ];

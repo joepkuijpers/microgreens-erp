@@ -228,4 +228,12 @@ return [
 'unit_cost' => 'Kostprijs per eenheid (€)',
 'invalid_inventory_input' => 'Ongeldige invoer. Controleer artikelnaam, hoeveelheid, eenheid en kostprijs.',
 'new_inventory_item_created' => 'Nieuw voorraaditem aangemaakt',
+'inventory_management' => 'Voorraadbeheer',
+'transactions' => 'Mutaties',
+'total_inventory_value' => 'Totale voorraadwaarde',
+'item' => 'Artikel',
+'unit_cost_short' => 'Kostprijs',
+'value' => 'Waarde',
+'delete' => 'Verwijderen',
+'confirm_delete_inventory_item' => 'Weet je zeker dat je dit voorraaditem wilt verwijderen?',
 ];
