@@ -146,4 +146,12 @@ return [
 'gpio_monitor_active' => 'GPIO monitor active',
 'production_alerts' => 'Production alerts',
 'no_production_alerts' => 'No production alerts.',
+'production_planner' => 'Production planner',
+'production_planning' => 'Production planning',
+'action_needed' => 'action needed',
+'planned' => 'Planned',
+'cycle' => 'Cycle',
+'next_sowing' => 'Next sowing',
+'expected_harvest' => 'Expected harvest',
+'advice' => 'Advice',
 ];

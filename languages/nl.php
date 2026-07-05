@@ -147,4 +147,12 @@ return [
 'gpio_monitor_active' => 'GPIO-monitor actief',
 'production_alerts' => 'Productiewaarschuwingen',
 'no_production_alerts' => 'Geen productiewaarschuwingen.',
+'production_planner' => 'Productieplanner',
+'production_planning' => 'Productieplanning',
+'action_needed' => 'actie nodig',
+'planned' => 'Gepland',
+'cycle' => 'Cyclus',
+'next_sowing' => 'Volgende zaai',
+'expected_harvest' => 'Verwachte oogst',
+'advice' => 'Advies',
 ];
