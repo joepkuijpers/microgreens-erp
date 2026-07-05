@@ -5,7 +5,22 @@ include 'db_connect.php';
 
 $message = "";
 
+$allowedLanguages = [
+    'nl' => 'Nederlands',
+    'en' => 'English',
+    'de' => 'Deutsch',
+    'fr' => 'Français',
+    'es' => 'Español',
+    'it' => 'Italiano'
+];
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $languageCode = $_POST['language_code'] ?? 'nl';
+
+    if (!array_key_exists($languageCode, $allowedLanguages)) {
+        $languageCode = 'nl';
+    }
+
     $stmt = $db->prepare("
         UPDATE settings SET
             light_min = ?,
@@ -14,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             temp_max = ?,
             humidity_min = ?,
             humidity_max = ?,
-            refresh_seconds = ?
+            refresh_seconds = ?,
+            language_code = ?
         WHERE id = 1
     ");
 
@@ -25,7 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_POST['temp_max'],
         $_POST['humidity_min'],
         $_POST['humidity_max'],
-        $_POST['refresh_seconds']
+        $_POST['refresh_seconds'],
+        $languageCode
     ]);
 
     $message = "✅ Instellingen opgeslagen.";
@@ -50,7 +67,8 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
     max-width: 700px;
 }
 
-.settings-card input {
+.settings-card input,
+.settings-card select {
     width: 100%;
     max-width: 300px;
     padding: 10px;
@@ -122,6 +140,17 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
 
             <label>Verversinterval seconden</label><br>
             <input type="number" name="refresh_seconds" value="<?= htmlspecialchars($settings['refresh_seconds']) ?>"><br><br>
+
+            <h2>🌍 Taal</h2>
+
+            <label>ERP taal</label><br>
+            <select name="language_code">
+                <?php foreach ($allowedLanguages as $code => $label): ?>
+                    <option value="<?= htmlspecialchars($code) ?>" <?= ($settings['language_code'] ?? 'nl') === $code ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($label) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select><br><br>
 
             <button class="save-btn" type="submit">💾 Instellingen opslaan</button>
 
