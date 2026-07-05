@@ -5,14 +5,14 @@ $apiPrefix = $navPrefix ?? '';
 $lightingState = getLightingState($db);
 
 $lightingStatusClass = $lightingState['relay_output'] ? 'alarm' : 'ok';
-$lightingStatusText = $lightingState['relay_output'] ? 'Lampen AAN nodig' : 'Licht stabiel';
+$lightingStatusText = $lightingState['relay_output'] ? __('lights_on_needed') : __('light_stable');
 ?>
 
 <div class="climate-card lighting-card">
     <div class="live-sensor-header">
         <div>
             <h3>Lighting Engine</h3>
-            <p>Laatste analyse: <?= htmlspecialchars($lightingState['timestamp'] ?? 'Geen data') ?></p>
+            <p><?= __('last_analysis') ?>: <?= htmlspecialchars($lightingState['timestamp'] ?? __('no_data')) ?></p>
         </div>
 
         <span class="sensor-status-badge <?= $lightingStatusClass ?>">
@@ -22,21 +22,21 @@ $lightingStatusText = $lightingState['relay_output'] ? 'Lampen AAN nodig' : 'Lic
 
     <div class="live-sensor-grid">
         <div class="live-sensor-item <?= $lightingState['light_level_ok'] ? 'ok' : 'alarm' ?>">
-            <strong>Lichtniveau</strong>
+            <strong><?= __('light_level_label') ?></strong>
             <span><?= htmlspecialchars((string)$lightingState['current_lux']) ?> lux</span>
             <small><?= htmlspecialchars($lightingState['reason']) ?></small>
         </div>
 
         <div class="live-sensor-item <?= $lightingState['schedule_active'] ? 'ok' : 'alarm' ?>">
-            <strong>Fotoperiode</strong>
-            <span><?= $lightingState['schedule_active'] ? 'Actief' : 'Inactief' ?></span>
-            <small>Modus: <?= htmlspecialchars($lightingState['mode']) ?></small>
+            <strong><?= __('photoperiod') ?></strong>
+            <span><?= $lightingState['schedule_active'] ? __('active') : __('inactive') ?></span>
+            <small><?= __('mode') ?>: <?= htmlspecialchars($lightingState['mode']) ?></small>
         </div>
 
         <div class="live-sensor-item <?= $lightingState['relay_output'] ? 'alarm' : 'ok' ?>">
-            <strong>Relaisuitgang</strong>
-            <span><?= $lightingState['relay_output'] ? 'AAN' : 'UIT' ?></span>
-            <small>Voorbereid voor GPIO-aansturing</small>
+            <strong><?= __('relay_output') ?></strong>
+            <span><?= $lightingState['relay_output'] ? __('on') : __('off') ?></span>
+            <small><?= __('prepared_for_gpio_control') ?></small>
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@ async function updateLightingCard() {
         if (!card) return;
 
         const badge = card.querySelector('.sensor-status-badge');
-        badge.textContent = data.relay_output ? 'Lampen AAN nodig' : 'Licht stabiel';
+        badge.textContent = data.relay_output ? '<?= __('lights_on_needed') ?>' : '<?= __('light_stable') ?>';
         badge.className = 'sensor-status-badge ' + (data.relay_output ? 'alarm' : 'ok');
 
     } catch (error) {
