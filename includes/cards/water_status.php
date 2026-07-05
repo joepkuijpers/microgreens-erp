@@ -5,14 +5,14 @@ $apiPrefix = $navPrefix ?? '';
 $waterState = getWaterState($db);
 
 $statusClass = $waterState['relay_output'] ? 'alarm' : 'ok';
-$statusText = $waterState['relay_output'] ? 'Pomp AAN nodig' : 'Waterbeheer standby';
+$statusText = $waterState['relay_output'] ? __('pump_on_needed') : __('water_management_standby');
 ?>
 
 <div class="climate-card water-card">
     <div class="live-sensor-header">
         <div>
-            <h3>Waterbeheer Engine</h3>
-            <p>Laatste analyse: <?= htmlspecialchars($waterState['timestamp'] ?? 'Geen data') ?></p>
+            <h3><?= __('water_engine') ?></h3>
+            <p><?= __('last_analysis') ?>: <?= htmlspecialchars($waterState['timestamp'] ?? __('no_data')) ?></p>
         </div>
 
         <span class="sensor-status-badge <?= $statusClass ?>">
@@ -22,20 +22,20 @@ $statusText = $waterState['relay_output'] ? 'Pomp AAN nodig' : 'Waterbeheer stan
 
     <div class="live-sensor-grid">
         <div class="live-sensor-item ok">
-            <strong>Bodemvocht</strong>
-            <span>Niet gekoppeld</span>
-            <small>Sensor voorbereid</small>
+            <strong><?= __('soil_moisture') ?></strong>
+            <span><?= __('not_connected') ?></span>
+            <small><?= __('sensor_prepared') ?></small>
         </div>
 
         <div class="live-sensor-item ok">
-            <strong>Waterreservoir</strong>
-            <span>Niet gekoppeld</span>
-            <small>Niveausensor voorbereid</small>
+            <strong><?= __('water_reservoir') ?></strong>
+            <span><?= __('not_connected') ?></span>
+            <small><?= __('level_sensor_prepared') ?></small>
         </div>
 
         <div class="live-sensor-item <?= $waterState['relay_output'] ? 'alarm' : 'ok' ?>">
-            <strong>Pomprelais</strong>
-            <span><?= $waterState['relay_output'] ? 'AAN' : 'UIT' ?></span>
+            <strong><?= __('pump_relay') ?></strong>
+            <span><?= $waterState['relay_output'] ? __('on') : __('off') ?></span>
             <small><?= htmlspecialchars($waterState['reason']) ?></small>
         </div>
     </div>
@@ -51,7 +51,7 @@ async function updateWaterCard() {
         if (!card) return;
 
         const badge = card.querySelector('.sensor-status-badge');
-        badge.textContent = data.relay_output ? 'Pomp AAN nodig' : 'Waterbeheer standby';
+        badge.textContent = data.relay_output ? '<?= __('pump_on_needed') ?>' : '<?= __('water_management_standby') ?>';
         badge.className = 'sensor-status-badge ' + (data.relay_output ? 'alarm' : 'ok');
 
     } catch (error) {

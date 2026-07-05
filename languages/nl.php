@@ -84,4 +84,13 @@ return [
 'on' => 'AAN',
 'off' => 'UIT',
 'prepared_for_gpio_control' => 'Voorbereid voor GPIO-aansturing',
+'water_engine' => 'Waterbeheer Engine',
+'pump_on_needed' => 'Pomp AAN nodig',
+'water_management_standby' => 'Waterbeheer standby',
+'soil_moisture' => 'Bodemvocht',
+'not_connected' => 'Niet gekoppeld',
+'sensor_prepared' => 'Sensor voorbereid',
+'water_reservoir' => 'Waterreservoir',
+'level_sensor_prepared' => 'Niveausensor voorbereid',
+'pump_relay' => 'Pomprelais',
 ];

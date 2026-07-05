@@ -85,4 +85,13 @@ return [
 'on' => 'ON',
 'off' => 'OFF',
 'prepared_for_gpio_control' => 'Prepared for GPIO control',
+'water_engine' => 'Water Management Engine',
+'pump_on_needed' => 'Pump ON needed',
+'water_management_standby' => 'Water management standby',
+'soil_moisture' => 'Soil moisture',
+'not_connected' => 'Not connected',
+'sensor_prepared' => 'Sensor prepared',
+'water_reservoir' => 'Water reservoir',
+'level_sensor_prepared' => 'Level sensor prepared',
+'pump_relay' => 'Pump relay',
 ];
