@@ -3,22 +3,22 @@ $planning = $productionData['planning'] ?? [];
 ?>
 
 <div class="card">
-    <h2>📅 Productieplanning</h2>
+    <h2>📅 <?= htmlspecialchars(t('production_schedule')) ?></h2>
 
     <?php if (empty($planning)): ?>
-        <p>Geen geplande productie gevonden.</p>
+        <p><?= htmlspecialchars(t('no_production_planning_found')) ?></p>
     <?php else: ?>
         <table>
             <thead>
                 <tr>
-                    <th>Zaaidatum</th>
-                    <th>Oogstdatum</th>
-                    <th>Product</th>
-                    <th>Klant</th>
-                    <th>Hoeveelheid</th>
-                    <th>Trays</th>
-                    <th>Zaad</th>
-                    <th>Status</th>
+                    <th><?= htmlspecialchars(t('sowing_date')) ?></th>
+                    <th><?= htmlspecialchars(t('harvest_date')) ?></th>
+                    <th><?= htmlspecialchars(t('product')) ?></th>
+                    <th><?= htmlspecialchars(t('customer')) ?></th>
+                    <th><?= htmlspecialchars(t('quantity')) ?></th>
+                    <th><?= htmlspecialchars(t('trays')) ?></th>
+                    <th><?= htmlspecialchars(t('seed')) ?></th>
+                    <th><?= htmlspecialchars(t('status')) ?></th>
                 </tr>
             </thead>
             <tbody>

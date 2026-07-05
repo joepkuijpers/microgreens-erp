@@ -155,4 +155,11 @@ return [
 'next_sowing' => 'Volgende zaai',
 'expected_harvest' => 'Verwachte oogst',
 'advice' => 'Advies',
+'production_schedule' => 'Productieplanning',
+'no_production_planning_found' => 'Geen geplande productie gevonden.',
+'sowing_date' => 'Zaaidatum',
+'product' => 'Product',
+'customer' => 'Klant',
+'quantity' => 'Hoeveelheid',
+'seed' => 'Zaad',
 ];
