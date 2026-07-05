@@ -198,4 +198,9 @@ return [
 'new_batch_needed' => 'Nieuwe batch nodig',
 'must_be_harvested_or_updated' => 'Moet geoogst of bijgewerkt worden',
 'historical_batches' => 'Historische batches',
+'sensor_charts' => 'Sensorgrafieken',
+'one_hour' => '1 uur',
+'twenty_four_hours' => '24 uur',
+'seven_days' => '7 dagen',
+'thirty_days' => '30 dagen',
 ];

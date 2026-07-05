@@ -178,4 +178,9 @@ return [
 'active_planned' => 'Active/planned',
 'recommended_new_trays' => 'Recommended new trays',
 'seed_rate' => 'Seed rate',
+'sensor_charts' => 'Sensor charts',
+'one_hour' => '1 hour',
+'twenty_four_hours' => '24 hours',
+'seven_days' => '7 days',
+'thirty_days' => '30 days',
 ];
