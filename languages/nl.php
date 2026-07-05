@@ -105,4 +105,8 @@ return [
 'climate_hardware' => 'Klimaat hardware',
 'water_pump' => 'Waterpomp',
 'live_sensor_status' => 'Live sensorstatus',
+'quick_overview' => 'Snel overzicht',
+'active_batches' => 'Actieve teelten',
+'quick_overview' => 'Snel overzicht',
+'active_batches' => 'Actieve teelten',
 ];

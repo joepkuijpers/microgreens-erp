@@ -106,4 +106,8 @@ return [
 'climate_hardware' => 'Climate hardware',
 'water_pump' => 'Water pump',
 'live_sensor_status' => 'Live sensor status',
+'quick_overview' => 'Quick overview',
+'active_batches' => 'Active batches',
+'quick_overview' => 'Quick overview',
+'active_batches' => 'Active batches',
 ];
