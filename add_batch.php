@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $seed_amount = (float)($_POST['seed_amount'] ?? 0);
 
     if ($crop === '' || $sow_date === '' || $expected_harvest_date === '' || $tray_count <= 0 || $inventory_id <= 0 || $seed_amount <= 0) {
-        die('Ongeldige invoer. Controleer gewas, datums, trays en zaadverbruik.');
+        die(t('invalid_batch_input'));
     }
 
     $stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $seedItem = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$seedItem) {
-        die('Zaadvoorraad niet gevonden.');
+        die(t('seed_inventory_not_found'));
     }
 
     $quantity_before = (float)$seedItem['quantity'];
     $quantity_after = $quantity_before - $seed_amount;
 
     if ($quantity_after < 0) {
-        die('Fout: onvoldoende voorraad zaad.');
+        die(t('insufficient_seed_inventory'));
     }
 
     $insert = $db->prepare("
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':quantity_before' => $quantity_before,
         ':quantity_after' => $quantity_after,
         ':unit' => $seedItem['unit'],
-        ':note' => 'Zaad gebruikt voor batch: ' . $crop,
+        ':note' => t('seed_used_for_batch') . ': ' . $crop,
         ':reference_type' => 'grow_batch',
         ':reference_id' => $batch_id
     ]);
@@ -95,56 +95,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="main">
-    <h1>🌱 Nieuwe batch</h1>
+    <h1>🌱 <?= htmlspecialchars(t('new_batch')) ?></h1>
 
     <div class="card">
         <form method="post">
             <p>
-                Gewas<br>
+                <?= htmlspecialchars(t('crop')) ?><br>
                 <input type="text" name="crop" required>
             </p>
 
             <p>
-                Zaaidatum<br>
+                <?= htmlspecialchars(t('sowing_date')) ?><br>
                 <input type="date" name="sow_date" required>
             </p>
 
             <p>
-                Verwachte oogstdatum<br>
+                <?= htmlspecialchars(t('expected_harvest_date')) ?><br>
                 <input type="date" name="expected_harvest_date" required>
             </p>
 
             <p>
-                Aantal trays<br>
+                <?= htmlspecialchars(t('tray_count')) ?><br>
                 <input type="number" name="tray_count" value="1" min="1" required>
             </p>
 
             <p>
-                Traytype<br>
+                <?= htmlspecialchars(t('tray_type')) ?><br>
                 <input type="text" name="tray_type" value="1020">
             </p>
 
             <p>
-                Zaadvoorraad<br>
+                <?= htmlspecialchars(t('seed_inventory')) ?><br>
                 <select name="inventory_id" required>
-                    <option value="">-- Kies zaadvoorraad --</option>
+                    <option value=""><?= htmlspecialchars(t('choose_seed_inventory')) ?></option>
                     <?php foreach ($inventoryItems as $item): ?>
                         <option value="<?= htmlspecialchars($item['id']) ?>">
                             <?= htmlspecialchars($item['item_name']) ?>
                             (<?= number_format((float)$item['quantity'], 2, ',', '.') ?>
-                            <?= htmlspecialchars($item['unit']) ?> beschikbaar)
+                            <?= htmlspecialchars($item['unit']) ?> <?= htmlspecialchars(t('available')) ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
             </p>
 
             <p>
-                Zaadverbruik<br>
+                <?= htmlspecialchars(t('seed_usage')) ?><br>
                 <input type="number" step="0.01" name="seed_amount" required>
             </p>
 
             <p>
-                Status<br>
+                <?= htmlspecialchars(t('status')) ?><br>
                 <select name="status">
                     <option value="Gepland">Gepland</option>
                     <option value="Groeiend" selected>Groeiend</option>
@@ -154,8 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
 
             <p>
-                <button class="btn" type="submit">💾 Batch opslaan</button>
-                <a class="btn" href="grow_batches.php">Terug</a>
+                <button class="btn" type="submit">💾 <?= htmlspecialchars(t('save_batch')) ?></button>
+                <a class="btn" href="grow_batches.php"><?= htmlspecialchars(t('back')) ?></a>
             </p>
         </form>
     </div>
