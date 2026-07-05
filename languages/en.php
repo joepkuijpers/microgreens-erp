@@ -43,4 +43,8 @@ return [
 'financial' => 'Financial',
 'historical_sensor_charts' => 'Historical sensor charts',
 'all_systems_normal' => 'All systems operating normally',
+'database' => 'Database',
+'load' => 'Load',
+'ram' => 'RAM',
+'disk' => 'Disk',
 ];

@@ -42,4 +42,8 @@ return [
     'financial' => 'Financieel',
     'historical_sensor_charts' => 'Historische sensorgrafieken',
   'all_systems_normal' => 'Alle systemen werken normaal',  
-    ];
+  'database' => 'Database',
+'load' => 'Belasting',
+'ram' => 'RAM',
+'disk' => 'Schijf',
+  ];
