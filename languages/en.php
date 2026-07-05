@@ -59,4 +59,8 @@ return [
 'last_measurement' => 'Last measurement',
 'last_update' => 'Last update',
 'refresh' => 'Refresh',
+'temperature' => 'Temperature',
+'humidity' => 'Humidity',
+'pressure' => 'Pressure',
+'light_level' => 'Light',
 ];

@@ -58,4 +58,8 @@ return [
 'last_measurement' => 'Laatste meting',
 'last_update' => 'Laatste update',
 'refresh' => 'Refresh',
+'temperature' => 'Temperatuur',
+'humidity' => 'Luchtvochtigheid',
+'pressure' => 'Luchtdruk',
+'light_level' => 'Licht',
 ];
