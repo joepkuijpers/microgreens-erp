@@ -169,4 +169,13 @@ return [
 'positions' => 'positions',
 'total' => 'Total',
 'shelf' => 'Shelf',
+'seed_planning' => 'Seed planning',
+'available' => 'available',
+'seed_requirement_14_days' => 'Seed requirement 14 days',
+'required' => 'Required',
+'shortage' => 'Shortage',
+'crops_to_plan' => 'Crops to plan',
+'active_planned' => 'Active/planned',
+'recommended_new_trays' => 'Recommended new trays',
+'seed_rate' => 'Seed rate',
 ];
