@@ -4,6 +4,16 @@ require_once __DIR__ . '/../db_connect.php';
 
 $languageCode = 'nl';
 
+/*
+|--------------------------------------------------------------------------
+| Language debug mode
+|--------------------------------------------------------------------------
+| true  = ontbrekende sleutels tonen als [[translation_key]]
+| false = ontbrekende sleutels tonen als translation_key
+|--------------------------------------------------------------------------
+*/
+$languageDebug = true;
+
 try {
     $stmt = $db->query("SELECT language_code FROM settings LIMIT 1");
     $value = $stmt->fetchColumn();
@@ -12,8 +22,7 @@ try {
         $languageCode = strtolower(trim($value));
     }
 } catch (Throwable $e) {
-    // Als de database of tabel niet beschikbaar is,
-    // blijft Nederlands de standaardtaal.
+    // Fallback blijft Nederlands
 }
 
 $allowedLanguages = [
@@ -39,7 +48,13 @@ $translations = require $languageFile;
 
 function __(string $key): string
 {
-    global $translations;
+    global $translations, $languageDebug;
 
-    return $translations[$key] ?? $key;
+    if (isset($translations[$key])) {
+        return $translations[$key];
+    }
+
+    return $languageDebug
+        ? "[[{$key}]]"
+        : $key;
 }
