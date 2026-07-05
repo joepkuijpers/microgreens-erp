@@ -197,4 +197,9 @@ return [
 'quantity' => 'Quantity',
 'seed' => 'Seed',
 'product_not_found' => 'Product not found.',
+'add_inventory' => 'Add inventory',
+'item_name' => 'Item name',
+'category_placeholder' => 'E.g. Seeds, Packaging, Substrate',
+'unit_placeholder' => 'KG, grams, pieces',
+'unit_cost' => 'Unit cost (€)',
 ];
