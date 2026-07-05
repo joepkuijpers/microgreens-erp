@@ -226,4 +226,6 @@ return [
 'category_placeholder' => 'Bijv. Zaden, Verpakking, Substraat',
 'unit_placeholder' => 'KG, gram, stuks',
 'unit_cost' => 'Kostprijs per eenheid (€)',
+'invalid_inventory_input' => 'Ongeldige invoer. Controleer artikelnaam, hoeveelheid, eenheid en kostprijs.',
+'new_inventory_item_created' => 'Nieuw voorraaditem aangemaakt',
 ];

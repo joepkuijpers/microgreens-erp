@@ -202,4 +202,6 @@ return [
 'category_placeholder' => 'E.g. Seeds, Packaging, Substrate',
 'unit_placeholder' => 'KG, grams, pieces',
 'unit_cost' => 'Unit cost (€)',
+'invalid_inventory_input' => 'Invalid input. Check item name, quantity, unit and unit cost.',
+'new_inventory_item_created' => 'New inventory item created',
 ];
