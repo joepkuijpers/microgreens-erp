@@ -144,4 +144,6 @@ return [
 'hardware_control_center' => 'Hardware Control Center',
 'simulation' => 'simulation',
 'gpio_monitor_active' => 'GPIO monitor active',
+'production_alerts' => 'Production alerts',
+'no_production_alerts' => 'No production alerts.',
 ];
