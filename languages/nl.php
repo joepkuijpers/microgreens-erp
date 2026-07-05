@@ -46,4 +46,8 @@ return [
 'load' => 'Belasting',
 'ram' => 'RAM',
 'disk' => 'Schijf',
-  ];
+'new_batch' => 'Nieuwe teelt',
+'new_inventory' => 'Nieuwe voorraad',
+'new_sale' => 'Nieuwe verkoop',
+'new_customer' => 'Nieuwe klant', 
+];

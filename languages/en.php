@@ -47,4 +47,8 @@ return [
 'load' => 'Load',
 'ram' => 'RAM',
 'disk' => 'Disk',
+'new_batch' => 'New batch',
+'new_inventory' => 'New inventory',
+'new_sale' => 'New sale',
+'new_customer' => 'New customer',
 ];
