@@ -162,4 +162,12 @@ return [
 'customer' => 'Klant',
 'quantity' => 'Hoeveelheid',
 'seed' => 'Zaad',
+'rack_tray_capacity' => 'Rack / Tray Capaciteit',
+'rack_capacity' => 'Rackcapaciteit',
+'free' => 'vrij',
+'total_capacity' => 'Totale capaciteit',
+'occupied' => 'Bezet',
+'positions' => 'plaatsen',
+'total' => 'Totaal',
+'shelf' => 'Plank',
 ];

@@ -161,4 +161,12 @@ return [
 'customer' => 'Customer',
 'quantity' => 'Quantity',
 'seed' => 'Seed',
+'rack_tray_capacity' => 'Rack / Tray Capacity',
+'rack_capacity' => 'Rack capacity',
+'free' => 'free',
+'total_capacity' => 'Total capacity',
+'occupied' => 'Occupied',
+'positions' => 'positions',
+'total' => 'Total',
+'shelf' => 'Shelf',
 ];
