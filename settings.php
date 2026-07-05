@@ -2,6 +2,8 @@
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
+include 'includes/language.php';
+
 
 $message = "";
 
@@ -45,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $languageCode
     ]);
 
-    $message = "✅ Instellingen opgeslagen.";
+    $message = "✅ " . __('settings_saved');
 }
 
 $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
@@ -105,7 +107,7 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
 
 <div class="settings-page">
 
-    <h1>⚙️ Instellingen</h1>
+    <h1>⚙️ <?= __('settings') ?></h1>
 
     <?php if ($message): ?>
         <div class="success"><?= htmlspecialchars($message) ?></div>
@@ -114,7 +116,7 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
     <form method="post">
         <div class="settings-card">
 
-            <h2>🌞 Licht</h2>
+ <h2>🌞 <?= __('light') ?></h2>           
 
             <label>Minimum Lux</label><br>
             <input type="number" name="light_min" value="<?= htmlspecialchars($settings['light_min']) ?>"><br><br>
@@ -122,7 +124,7 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
             <label>Maximum Lux</label><br>
             <input type="number" name="light_max" value="<?= htmlspecialchars($settings['light_max']) ?>"><br><br>
 
-            <h2>🌡 Klimaat</h2>
+            <h2>🌡 <?= __('climate') ?></h2>
 
             <label>Minimum temperatuur °C</label><br>
             <input type="number" step="0.1" name="temp_min" value="<?= htmlspecialchars($settings['temp_min']) ?>"><br><br>
@@ -136,14 +138,14 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
             <label>Maximum luchtvochtigheid %</label><br>
             <input type="number" step="0.1" name="humidity_max" value="<?= htmlspecialchars($settings['humidity_max']) ?>"><br><br>
 
-            <h2>📈 Dashboard</h2>
+            <h2>📈 <?= __('dashboard') ?></h2>
 
             <label>Verversinterval seconden</label><br>
             <input type="number" name="refresh_seconds" value="<?= htmlspecialchars($settings['refresh_seconds']) ?>"><br><br>
 
-            <h2>🌍 Taal</h2>
+            <h2>🌍 <?= __('language') ?></h2>
 
-            <label>ERP taal</label><br>
+            <label><?= __('erp_language') ?></label>
             <select name="language_code">
                 <?php foreach ($allowedLanguages as $code => $label): ?>
                     <option value="<?= htmlspecialchars($code) ?>" <?= ($settings['language_code'] ?? 'nl') === $code ? 'selected' : '' ?>>
@@ -152,7 +154,7 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
                 <?php endforeach; ?>
             </select><br><br>
 
-            <button class="save-btn" type="submit">💾 Instellingen opslaan</button>
+          <button class="save-btn" type="submit">💾 <?= __('save_settings') ?></button>  
 
         </div>
     </form>
