@@ -124,4 +124,12 @@ return [
 'water' => 'Water',
 'automatic' => 'Automatisch',
 'no_notes' => 'Geen notities',
+'growth_timeline' => 'Growth Timeline',
+'no_active_batch' => 'Geen actieve teelt',
+'completed' => 'Voltooid',
+'pending' => 'Nog open',
+'harvest_status' => 'Oogststatus',
+'days_overdue' => 'dagen te laat',
+'days_until_harvest' => 'dagen tot oogst',
+'current_day' => 'Huidige dag',
 ];

@@ -7,15 +7,15 @@ $timeline = getGrowthTimeline($db);
 <div class="climate-card">
     <div class="sensor-card-header">
         <div>
-            <h3>📅 Growth Timeline</h3>
+            <h3>📅 <?= htmlspecialchars(t('growth_timeline')) ?></h3>
             <p>
-                <?= htmlspecialchars($timeline['crop_name'] ?? 'Geen actieve teelt') ?>
-                <?= isset($timeline['batch_id']) ? ' | Batch #' . htmlspecialchars((string)$timeline['batch_id']) : '' ?>
+                <?= htmlspecialchars($timeline['crop_name'] ?? t('no_active_batch')) ?>
+                <?= isset($timeline['batch_id']) ? ' | ' . htmlspecialchars(t('batch')) . ' #' . htmlspecialchars((string)$timeline['batch_id']) : '' ?>
             </p>
         </div>
 
         <span class="sensor-status-badge <?= ($timeline['current_stage'] ?? '') === 'overdue' ? 'alarm' : 'ok' ?>">
-            <?= htmlspecialchars($timeline['label'] ?? 'Geen data') ?>
+            <?= htmlspecialchars($timeline['label'] ?? t('no_data')) ?>
         </span>
     </div>
 
@@ -24,19 +24,19 @@ $timeline = getGrowthTimeline($db);
             <div class="live-sensor-item <?= $item['done'] ? 'ok' : 'alarm' ?>">
                 <strong><?= htmlspecialchars($item['label']) ?></strong>
                 <span><?= htmlspecialchars($item['date']) ?></span>
-                <small><?= $item['done'] ? 'Voltooid' : 'Nog open' ?></small>
+                <small><?= $item['done'] ? htmlspecialchars(t('completed')) : htmlspecialchars(t('pending')) ?></small>
             </div>
         <?php endforeach; ?>
 
         <div class="live-sensor-item <?= ($timeline['days_overdue'] ?? 0) > 0 ? 'alarm' : 'ok' ?>">
-            <strong>Oogststatus</strong>
+            <strong><?= htmlspecialchars(t('harvest_status')) ?></strong>
             <span>
                 <?= ($timeline['days_overdue'] ?? 0) > 0
-                    ? htmlspecialchars((string)$timeline['days_overdue']) . ' dagen te laat'
-                    : htmlspecialchars((string)($timeline['days_until_harvest'] ?? 0)) . ' dagen tot oogst'
+                    ? htmlspecialchars((string)$timeline['days_overdue']) . ' ' . htmlspecialchars(t('days_overdue'))
+                    : htmlspecialchars((string)($timeline['days_until_harvest'] ?? 0)) . ' ' . htmlspecialchars(t('days_until_harvest'))
                 ?>
             </span>
-            <small>Huidige dag: <?= htmlspecialchars((string)($timeline['day_number'] ?? '-')) ?></small>
+            <small><?= htmlspecialchars(t('current_day')) ?>: <?= htmlspecialchars((string)($timeline['day_number'] ?? '-')) ?></small>
         </div>
     </div>
 </div>

@@ -123,4 +123,12 @@ return [
 'water' => 'Water',
 'automatic' => 'Automatic',
 'no_notes' => 'No notes',
+'growth_timeline' => 'Growth Timeline',
+'no_active_batch' => 'No active batch',
+'completed' => 'Completed',
+'pending' => 'Pending',
+'harvest_status' => 'Harvest status',
+'days_overdue' => 'days overdue',
+'days_until_harvest' => 'days until harvest',
+'current_day' => 'Current day',
 ];
