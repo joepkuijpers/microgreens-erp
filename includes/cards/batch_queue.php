@@ -9,37 +9,60 @@ $next = $queue['next'];
 <div class="climate-card">
     <div class="sensor-card-header">
         <div>
-            <h3>📦 Batch Queue</h3>
-            <p>Actieve teelt, volgende batch en oogstprioriteit</p>
+            <h3>📦 <?= htmlspecialchars(t('batch_queue')) ?></h3>
+            <p><?= htmlspecialchars(t('active_crop_next_batch_harvest_priority')) ?></p>
         </div>
+
         <span class="sensor-status-badge <?= ($queue['counts']['overdue'] ?? 0) > 0 ? 'alarm' : 'ok' ?>">
-            <?= ($queue['counts']['overdue'] ?? 0) > 0 ? 'Achterstallig' : 'Planning OK' ?>
+            <?= ($queue['counts']['overdue'] ?? 0) > 0
+                ? htmlspecialchars(t('overdue'))
+                : htmlspecialchars(t('planning_ok')) ?>
         </span>
     </div>
 
     <div class="live-sensor-grid">
+
         <div class="live-sensor-item <?= $active ? 'alarm' : 'ok' ?>">
-            <strong>Actieve batch</strong>
-            <span><?= $active ? htmlspecialchars($active['crop_name']) : 'Geen' ?></span>
-            <small><?= $active ? 'Batch #' . htmlspecialchars((string)$active['id']) . ' | ' . htmlspecialchars($active['status']) : 'Geen actieve teelt' ?></small>
+            <strong><?= htmlspecialchars(t('active_batch')) ?></strong>
+
+            <span><?= $active ? htmlspecialchars($active['crop_name']) : htmlspecialchars(t('none')) ?></span>
+
+            <small>
+                <?= $active
+                    ? htmlspecialchars(t('batch')) . ' #' . htmlspecialchars((string)$active['id']) . ' | ' . htmlspecialchars($active['status'])
+                    : htmlspecialchars(t('no_active_batch'))
+                ?>
+            </small>
         </div>
 
         <div class="live-sensor-item <?= $next ? 'ok' : 'alarm' ?>">
-            <strong>Volgende batch</strong>
-            <span><?= $next ? htmlspecialchars($next['crop_name']) : 'Geen wachtrij' ?></span>
-            <small><?= $next ? 'Batch #' . htmlspecialchars((string)$next['id']) : 'Nieuwe batch nodig' ?></small>
+            <strong><?= htmlspecialchars(t('next_batch')) ?></strong>
+
+            <span><?= $next ? htmlspecialchars($next['crop_name']) : htmlspecialchars(t('no_queue')) ?></span>
+
+            <small>
+                <?= $next
+                    ? htmlspecialchars(t('batch')) . ' #' . htmlspecialchars((string)$next['id'])
+                    : htmlspecialchars(t('new_batch_needed'))
+                ?>
+            </small>
         </div>
 
         <div class="live-sensor-item <?= ($queue['counts']['overdue'] ?? 0) > 0 ? 'alarm' : 'ok' ?>">
-            <strong>Achterstallig</strong>
+            <strong><?= htmlspecialchars(t('overdue')) ?></strong>
+
             <span><?= htmlspecialchars((string)($queue['counts']['overdue'] ?? 0)) ?></span>
-            <small>Moet geoogst of bijgewerkt worden</small>
+
+            <small><?= htmlspecialchars(t('must_be_harvested_or_updated')) ?></small>
         </div>
 
         <div class="live-sensor-item ok">
-            <strong>Afgerond</strong>
+            <strong><?= htmlspecialchars(t('completed')) ?></strong>
+
             <span><?= htmlspecialchars((string)($queue['counts']['completed'] ?? 0)) ?></span>
-            <small>Historische batches</small>
+
+            <small><?= htmlspecialchars(t('historical_batches')) ?></small>
         </div>
+
     </div>
 </div>
