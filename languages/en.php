@@ -183,4 +183,10 @@ return [
 'twenty_four_hours' => '24 hours',
 'seven_days' => '7 days',
 'thirty_days' => '30 days',
+'batch_management' => 'Batch management',
+'seed_inventory' => 'Seed inventory',
+'seed_usage' => 'Seed usage',
+'actions' => 'Actions',
+'details' => 'Details',
+'edit' => 'Edit',
 ];
