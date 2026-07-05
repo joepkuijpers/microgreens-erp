@@ -6,7 +6,7 @@ include 'db_connect.php';
 $id = (int)($_GET['id'] ?? 0);
 
 if ($id <= 0) {
-    die('Ongeldig batch-ID.');
+    die(t('invalid_batch_id'));
 }
 
 $stmt = $db->prepare("
@@ -23,7 +23,7 @@ $stmt->execute([':id' => $id]);
 $batch = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$batch) {
-    die('Batch niet gevonden.');
+    die(t('batch_not_found'));
 }
 
 $harvests = $db->prepare("
@@ -47,35 +47,35 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="main">
-    <h1>🔍 Batch details</h1>
+    <h1>🔍 <?= htmlspecialchars(t('batch_details')) ?></h1>
 
     <p>
-        <a class="btn" href="grow_batches.php">← Terug naar batchbeheer</a>
-        <a class="btn" href="edit_batch.php?id=<?= urlencode($batch['id']) ?>">✏️ Bewerken</a>
-        <a class="btn" href="harvest_batch.php?id=<?= urlencode($batch['id']) ?>">🌾 Oogsten</a>
+        <a class="btn" href="grow_batches.php">← <?= htmlspecialchars(t('back_to_batch_management')) ?></a>
+        <a class="btn" href="edit_batch.php?id=<?= urlencode($batch['id']) ?>">✏️ <?= htmlspecialchars(t('edit')) ?></a>
+        <a class="btn" href="harvest_batch.php?id=<?= urlencode($batch['id']) ?>">🌾 <?= htmlspecialchars(t('harvest')) ?></a>
     </p>
 
     <div class="card">
-        <h2>Batchinformatie</h2>
+        <h2><?= htmlspecialchars(t('batch_information')) ?></h2>
         <table>
             <tr><th>ID</th><td><?= htmlspecialchars($batch['id']) ?></td></tr>
-            <tr><th>Gewas</th><td><?= htmlspecialchars($batch['crop']) ?></td></tr>
-            <tr><th>Status</th><td><?= htmlspecialchars($batch['status']) ?></td></tr>
-            <tr><th>Zaaidatum</th><td><?= htmlspecialchars($batch['sow_date']) ?></td></tr>
-            <tr><th>Verwachte oogstdatum</th><td><?= htmlspecialchars($batch['expected_harvest_date'] ?? '-') ?></td></tr>
-            <tr><th>Werkelijke oogstdatum</th><td><?= htmlspecialchars($batch['harvest_date'] ?? '-') ?></td></tr>
-            <tr><th>Aantal trays</th><td><?= htmlspecialchars($batch['tray_count']) ?></td></tr>
-            <tr><th>Traytype</th><td><?= htmlspecialchars($batch['tray_type']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('crop')) ?></th><td><?= htmlspecialchars($batch['crop']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('status')) ?></th><td><?= htmlspecialchars($batch['status']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('sowing_date')) ?></th><td><?= htmlspecialchars($batch['sow_date']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('expected_harvest_date')) ?></th><td><?= htmlspecialchars($batch['expected_harvest_date'] ?? '-') ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('actual_harvest_date')) ?></th><td><?= htmlspecialchars($batch['harvest_date'] ?? '-') ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('tray_count')) ?></th><td><?= htmlspecialchars($batch['tray_count']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('tray_type')) ?></th><td><?= htmlspecialchars($batch['tray_type']) ?></td></tr>
         </table>
     </div>
 
     <div class="card">
-        <h2>Zaad / grondstof</h2>
+        <h2><?= htmlspecialchars(t('seed_raw_material')) ?></h2>
         <table>
-            <tr><th>Zaaditem</th><td><?= htmlspecialchars($batch['seed_name'] ?? 'Niet gekoppeld') ?></td></tr>
-            <tr><th>Categorie</th><td><?= htmlspecialchars($batch['seed_category'] ?? '-') ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('seed_item')) ?></th><td><?= htmlspecialchars($batch['seed_name'] ?? t('not_linked')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(t('category')) ?></th><td><?= htmlspecialchars($batch['seed_category'] ?? '-') ?></td></tr>
             <tr>
-                <th>Verbruikt</th>
+                <th><?= htmlspecialchars(t('used')) ?></th>
                 <td>
                     <?= number_format((float)($batch['seed_amount'] ?? 0), 2, ',', '.') ?>
                     <?= htmlspecialchars($batch['seed_unit'] ?? '') ?>
@@ -85,19 +85,19 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="card">
-        <h2>Oogsten</h2>
+        <h2><?= htmlspecialchars(t('harvests')) ?></h2>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Datum</th>
-                    <th>Gewicht gram</th>
-                    <th>Kwaliteit / opmerkingen</th>
+                    <th><?= htmlspecialchars(t('date')) ?></th>
+                    <th><?= htmlspecialchars(t('weight_grams')) ?></th>
+                    <th><?= htmlspecialchars(t('quality_notes')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (count($harvestRows) === 0): ?>
-                    <tr><td colspan="4">Nog geen oogsten geregistreerd.</td></tr>
+                    <tr><td colspan="4"><?= htmlspecialchars(t('no_harvests_registered')) ?></td></tr>
                 <?php endif; ?>
 
                 <?php foreach ($harvestRows as $harvest): ?>
@@ -113,22 +113,22 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="card">
-        <h2>Voorraadmutaties gekoppeld aan deze batch</h2>
+        <h2><?= htmlspecialchars(t('inventory_transactions_linked_to_batch')) ?></h2>
         <table>
             <thead>
                 <tr>
-                    <th>Datum</th>
-                    <th>Type</th>
-                    <th>Voor</th>
-                    <th>Na</th>
-                    <th>Verschil</th>
-                    <th>Eenheid</th>
-                    <th>Opmerking</th>
+                    <th><?= htmlspecialchars(t('date')) ?></th>
+                    <th><?= htmlspecialchars(t('type')) ?></th>
+                    <th><?= htmlspecialchars(t('before')) ?></th>
+                    <th><?= htmlspecialchars(t('after')) ?></th>
+                    <th><?= htmlspecialchars(t('difference')) ?></th>
+                    <th><?= htmlspecialchars(t('unit')) ?></th>
+                    <th><?= htmlspecialchars(t('note')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (count($transactionRows) === 0): ?>
-                    <tr><td colspan="7">Geen gekoppelde voorraadmutaties.</td></tr>
+                    <tr><td colspan="7"><?= htmlspecialchars(t('no_linked_inventory_transactions')) ?></td></tr>
                 <?php endif; ?>
 
                 <?php foreach ($transactionRows as $transaction): ?>
