@@ -41,13 +41,13 @@ $total = $db->query("
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Datum</th>
-                    <th>Klant</th>
-                    <th>Product</th>
-                    <th>Aantal</th>
-                    <th>Bedrag</th>
-                    <th>Status</th>
+        <th><?= htmlspecialchars(t('id')) ?></th>
+        <th><?= htmlspecialchars(t('date')) ?></th>
+        <th><?= htmlspecialchars(t('customer')) ?></th>
+        <th><?= htmlspecialchars(t('product')) ?></th>
+        <th><?= htmlspecialchars(t('quantity')) ?></th>
+        <th><?= htmlspecialchars(t('amount')) ?></th>
+        <th><?= htmlspecialchars(t('status')) ?></th>
                 </tr>
             </thead>
             <tbody>

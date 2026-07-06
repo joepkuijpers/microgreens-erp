@@ -256,4 +256,8 @@ return [
 'insufficient_finished_inventory' => 'Onvoldoende eindvoorraad voor deze verkoop.',
 'sale_save_error' => 'Fout bij opslaan verkoop',
 'total_revenue' => 'Totale omzet',
+'id' => 'ID',
+'date' => 'Datum',
+'amount' => 'Bedrag',
+'status' => 'Status',
 ];
