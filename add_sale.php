@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php';
+include 'includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: add_sale_form.php');
@@ -13,7 +14,7 @@ $quantity = (float)($_POST['quantity'] ?? 0);
 $status = trim($_POST['status'] ?? 'betaald');
 
 if ($customer_id <= 0 || $product_id <= 0 || $sale_date === '' || $quantity <= 0) {
-  die(__('invalid_sale_input'));  
+    die(__('invalid_sale_input'));
 }
 
 $stmt = $db->prepare("
@@ -33,6 +34,8 @@ $stmt = $db->prepare("
         f.product_id,
         f.quantity AS stock_quantity,
         f.unit,
+        f.batch_id,
+        f.harvest_id,
         p.name,
         p.sale_price
     FROM finished_inventory f
@@ -71,9 +74,9 @@ try {
 
     $insertSale = $db->prepare("
         INSERT INTO sales
-        (customer_name, sale_date, product, quantity, amount, status, customer_id, product_id)
+        (customer_name, sale_date, product, quantity, amount, status, customer_id, product_id, batch_id, harvest_id)
         VALUES
-        (:customer_name, :sale_date, :product, :quantity, :amount, :status, :customer_id, :product_id)
+        (:customer_name, :sale_date, :product, :quantity, :amount, :status, :customer_id, :product_id, :batch_id, :harvest_id)
     ");
 
     $insertSale->execute([
@@ -84,7 +87,9 @@ try {
         ':amount' => $amount,
         ':status' => $status,
         ':customer_id' => $customer_id,
-        ':product_id' => $product_id
+        ':product_id' => $product_id,
+        ':batch_id' => $product['batch_id'],
+        ':harvest_id' => $product['harvest_id']
     ]);
 
     $db->commit();

@@ -1,4 +1,5 @@
 <?php
+include 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
