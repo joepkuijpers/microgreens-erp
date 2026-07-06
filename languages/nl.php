@@ -276,4 +276,6 @@ return [
 'product_saved' => 'Product opgeslagen!',
 'new_product' => 'Nieuw product',
 'notes' => 'Notities',
+'customer_saved' => 'Klant opgeslagen!',
+'new_customer' => 'Nieuwe klant',
 ];

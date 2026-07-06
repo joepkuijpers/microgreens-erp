@@ -16,29 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['notes']
     ]);
 
-    echo "<p>Klant opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('customer_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe klant</h1>
+<h1><?= htmlspecialchars(t('new_customer')) ?></h1>
 
 <form method="post">
 
-Naam:<br>
+<?= htmlspecialchars(t('name')) ?>:<br>
 <input type="text" name="name"><br><br>
 
-Email:<br>
+<?= htmlspecialchars(t('email')) ?>:<br>
 <input type="email" name="email"><br><br>
 
-Telefoon:<br>
+<?= htmlspecialchars(t('phone')) ?>:<br>
 <input type="text" name="phone"><br><br>
 
-Notities:<br>
+<?= htmlspecialchars(t('notes')) ?>:<br>
 <input type="text" name="notes"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>

@@ -252,4 +252,6 @@ return [
 'product_saved' => 'Product saved!',
 'new_product' => 'New product',
 'notes' => 'Notes',
+'customer_saved' => 'Customer saved!',
+'new_customer' => 'New customer',
 ];
