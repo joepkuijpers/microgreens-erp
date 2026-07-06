@@ -236,4 +236,5 @@ return [
 'value' => 'Waarde',
 'delete' => 'Verwijderen',
 'confirm_delete_inventory_item' => 'Weet je zeker dat je dit voorraaditem wilt verwijderen?',
+'invalid_inventory_id' => 'Ongeldig voorraad-ID.',
 ];
