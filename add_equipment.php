@@ -43,14 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':active'   => $active
         ]);
 
-        $message = 'Apparaat succesvol opgeslagen.';
+        $message = __('equipment_saved');
 
     } else {
 
-        $message = 'Naam is verplicht.';
+        $message = __('name_required');
     }
 }
 ?>
+
 <h1>➕ <?= __('add_equipment') ?></h1>
 
 <?php if ($message !== ''): ?>
@@ -59,20 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <form method="post">
 
-    <label>Naam</label><br>
+    <label><?= __('name') ?></label><br>
     <input
         type="text"
         name="name"
         required
     ><br><br>
 
-    <label>Rek</label><br>
+    <label><?= __('rack') ?></label><br>
     <input
         type="text"
         name="rack_name"
     ><br><br>
 
-    <label>Vermogen (W)</label><br>
+    <label><?= __('wattage_w') ?></label><br>
     <input
         type="number"
         name="wattage"
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         min="0"
     ><br><br>
 
-    <label>Uren per dag</label><br>
+    <label><?= __('hours_per_day') ?></label><br>
     <input
         type="number"
         name="hours_per_day"
@@ -94,13 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             name="is_active"
             checked
         >
-        Actief
+        <?= __('active') ?>
     </label>
 
     <br><br>
 
     <button type="submit">
-        Opslaan
+        <?= __('save') ?>
     </button>
 
 </form>

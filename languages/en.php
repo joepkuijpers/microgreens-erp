@@ -266,4 +266,10 @@ return [
 'new_expense' => 'New expense',
 'linked_sale_saved' => 'Linked sale saved!',
 'new_linked_sale' => 'New linked sale',
+'equipment_saved' => 'Equipment saved successfully.',
+'name_required' => 'Name is required.',
+'rack' => 'Rack',
+'wattage_w' => 'Wattage (W)',
+'hours_per_day' => 'Hours per day',
+'active' => 'Active',
 ];

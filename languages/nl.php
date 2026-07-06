@@ -290,4 +290,10 @@ return [
 'new_expense' => 'Nieuwe kost',
 'linked_sale_saved' => 'Gekoppelde verkoop opgeslagen!',
 'new_linked_sale' => 'Nieuwe gekoppelde verkoop',
+'equipment_saved' => 'Apparaat succesvol opgeslagen.',
+'name_required' => 'Naam is verplicht.',
+'rack' => 'Rek',
+'wattage_w' => 'Vermogen (W)',
+'hours_per_day' => 'Uren per dag',
+'active' => 'Actief',
 ];
