@@ -17,32 +17,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['notes']
     ]);
 
-    echo "<p>Product opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('product_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuw product</h1>
+<h1><?= htmlspecialchars(t('new_product')) ?></h1>
 
 <form method="post">
 
-Naam:<br>
+<?= htmlspecialchars(t('name')) ?>:<br>
 <input type="text" name="name"><br><br>
 
-Categorie:<br>
+<?= htmlspecialchars(t('category')) ?>:<br>
 <input type="text" name="category"><br><br>
 
-Eenheid:<br>
+<?= htmlspecialchars(t('unit')) ?>:<br>
 <input type="text" name="unit" value="bakje"><br><br>
 
-Verkoopprijs:<br>
+<?= htmlspecialchars(t('sale_price')) ?>:<br>
 <input type="number" step="0.01" name="sale_price"><br><br>
 
-Notities:<br>
+<?= htmlspecialchars(t('notes')) ?>:<br>
 <input type="text" name="notes"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>

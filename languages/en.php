@@ -249,4 +249,7 @@ return [
 'unit' => 'Unit',
 'sale_price' => 'Sale price',
 'no_products_found' => 'No products found.',
+'product_saved' => 'Product saved!',
+'new_product' => 'New product',
+'notes' => 'Notes',
 ];

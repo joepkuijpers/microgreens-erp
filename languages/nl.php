@@ -273,4 +273,7 @@ return [
 'unit' => 'Eenheid',
 'sale_price' => 'Verkoopprijs',
 'no_products_found' => 'Nog geen producten gevonden.',
+'product_saved' => 'Product opgeslagen!',
+'new_product' => 'Nieuw product',
+'notes' => 'Notities',
 ];
