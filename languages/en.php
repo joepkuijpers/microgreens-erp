@@ -216,4 +216,12 @@ return [
 'inventory_transactions' => 'Inventory transactions',
 'back_to_inventory' => 'Back to inventory',
 'add_inventory_transaction' => 'Add transaction',
+'inventory_item' => 'Inventory item',
+'choose_inventory_item' => 'Choose inventory item',
+'transaction_type' => 'Transaction type',
+'choose_type' => 'Choose type',
+'inventory_note_placeholder' => 'E.g. purchase, count, loss, test',
+'save_transaction' => 'Save transaction',
+'inventory_item_not_found' => 'Inventory item not found.',
+'inventory_cannot_be_negative' => 'Error: inventory cannot go below 0.',
 ];

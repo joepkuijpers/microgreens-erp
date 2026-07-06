@@ -240,4 +240,12 @@ return [
 'inventory_transactions' => 'Voorraadmutaties',
 'back_to_inventory' => 'Terug naar voorraad',
 'add_inventory_transaction' => 'Mutatie toevoegen',
+'inventory_item' => 'Voorraaditem',
+'choose_inventory_item' => 'Kies voorraaditem',
+'transaction_type' => 'Type mutatie',
+'choose_type' => 'Kies type',
+'inventory_note_placeholder' => 'Bijv. inkoop, telling, verlies, test',
+'save_transaction' => 'Mutatie opslaan',
+'inventory_item_not_found' => 'Voorraaditem niet gevonden.',
+'inventory_cannot_be_negative' => 'Fout: voorraad kan niet onder 0 komen.',
 ];
