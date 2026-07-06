@@ -1,4 +1,3 @@
-@'
 <?php
 require 'config/database.php';
 
@@ -41,4 +40,3 @@ Status:<br>
 
 <input type="submit" value="Opslaan">
 </form>
-'@ | Set-Content add_batch_form.php
