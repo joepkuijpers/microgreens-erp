@@ -21,8 +21,8 @@ $stmt->execute([
 $equipment = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$equipment) {
-    echo "<h1>🗑 Apparatuur verwijderen</h1>";
-    echo "<p>Apparaat niet gevonden.</p>";
+    echo "<h1>🗑 " . __('delete_equipment') . "</h1>";
+    echo "<p>" . htmlspecialchars(__('equipment_not_found')) . "</p>";
     include 'includes/footer.php';
     exit;
 }
@@ -42,17 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-echo "<h1>🗑 " . __('delete_equipment') . "</h1>";
+<h1>🗑 <?= __('delete_equipment') ?></h1>
 
-<p>Weet je zeker dat je dit apparaat wilt verwijderen?</p>
+<p><?= __('confirm_delete_equipment') ?></p>
 
 <p>
     <strong><?= htmlspecialchars((string) $equipment['name']) ?></strong>
 </p>
 
 <form method="post">
-    <button type="submit">Ja, verwijderen</button>
-    <a href="equipment.php">Annuleren</a>
+    <button type="submit"><?= __('yes_delete') ?></button>
+    <a href="equipment.php"><?= __('cancel') ?></a>
 </form>
 
 <?php include 'includes/footer.php'; ?>

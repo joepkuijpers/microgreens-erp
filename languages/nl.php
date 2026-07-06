@@ -298,4 +298,7 @@ return [
 'active' => 'Actief',
 'equipment_not_found' => 'Apparaat niet gevonden.',
 'equipment_updated' => 'Apparaat succesvol bijgewerkt.',
+'confirm_delete_equipment' => 'Weet je zeker dat je dit apparaat wilt verwijderen?',
+'yes_delete' => 'Ja, verwijderen',
+'cancel' => 'Annuleren',
 ];

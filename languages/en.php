@@ -274,4 +274,7 @@ return [
 'active' => 'Active',
 'equipment_not_found' => 'Equipment not found.',
 'equipment_updated' => 'Equipment updated successfully.',
+'confirm_delete_equipment' => 'Are you sure you want to delete this equipment?',
+'yes_delete' => 'Yes, delete',
+'cancel' => 'Cancel',
 ];
