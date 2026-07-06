@@ -287,4 +287,7 @@ return [
 'minimum_humidity_percent' => 'Minimum humidity %',
 'maximum_humidity_percent' => 'Maximum humidity %',
 'refresh_interval_seconds' => 'Refresh interval seconds',
+'choose_section' => 'Choose a section:',
+'operations' => 'Operations',
+'raw_materials' => 'Raw materials',
 ];

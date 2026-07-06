@@ -311,4 +311,7 @@ return [
 'minimum_humidity_percent' => 'Minimum luchtvochtigheid %',
 'maximum_humidity_percent' => 'Maximum luchtvochtigheid %',
 'refresh_interval_seconds' => 'Verversinterval seconden',
+'choose_section' => 'Kies een onderdeel:',
+'operations' => 'Operations',
+'raw_materials' => 'Grondstoffen',
 ];
