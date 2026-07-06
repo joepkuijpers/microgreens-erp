@@ -25,15 +25,15 @@ $total = $db->query("
 ?>
 
 <div class="main">
-    <h1>🛒 Verkopen</h1>
+    <h1>🛒 <?= htmlspecialchars(t('sales')) ?></h1>
 
-    <p>
-        <a class="btn" href="add_sale_form.php">➕ Nieuwe verkoop</a>
-        <a class="btn" href="list_finished_inventory.php">📦 Eindvoorraad</a>
-    </p>
+<p>
+    <a class="btn" href="add_sale_form.php">➕ <?= htmlspecialchars(t('new_sale')) ?></a>
+    <a class="btn" href="list_finished_inventory.php">📦 <?= htmlspecialchars(t('finished_inventory')) ?></a>
+</p>
 
-    <div class="card">
-        <h2>Totale omzet</h2>
+<div class="card">
+    <h2><?= htmlspecialchars(t('total_revenue')) ?></h2>
         <h1>€ <?= number_format((float)$total['total'], 2, ',', '.') ?></h1>
     </div>
 

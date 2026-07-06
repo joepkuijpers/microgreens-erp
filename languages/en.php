@@ -231,5 +231,5 @@ return [
 'save_sale' => 'Save sale',
 'insufficient_finished_inventory' => 'Insufficient finished inventory for this sale.',
 'sale_save_error' => 'Error saving sale',
-
+'total_revenue' => 'Total revenue',
 ];

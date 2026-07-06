@@ -255,4 +255,5 @@ return [
 'save_sale' => 'Verkoop opslaan',
 'insufficient_finished_inventory' => 'Onvoldoende eindvoorraad voor deze verkoop.',
 'sale_save_error' => 'Fout bij opslaan verkoop',
+'total_revenue' => 'Totale omzet',
 ];
