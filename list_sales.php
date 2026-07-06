@@ -10,6 +10,8 @@ $sales = $db->query("
         s.quantity,
         s.amount,
         s.status,
+        s.batch_id,
+        s.harvest_id,
         COALESCE(c.name, s.customer_name) AS customer_name,
         COALESCE(p.name, s.product) AS product_name
     FROM sales s
@@ -45,6 +47,8 @@ $total = $db->query("
                     <th><?= htmlspecialchars(__('date')) ?></th>
                     <th><?= htmlspecialchars(__('customer')) ?></th>
                     <th><?= htmlspecialchars(__('product')) ?></th>
+                    <th>Batch</th>
+                    <th>Harvest</th>
                     <th><?= htmlspecialchars(__('quantity')) ?></th>
                     <th><?= htmlspecialchars(__('amount')) ?></th>
                     <th><?= htmlspecialchars(__('status')) ?></th>
@@ -57,6 +61,8 @@ $total = $db->query("
                         <td><?= htmlspecialchars((string)$sale['sale_date']) ?></td>
                         <td><?= htmlspecialchars((string)($sale['customer_name'] ?? '-')) ?></td>
                         <td><?= htmlspecialchars((string)($sale['product_name'] ?? '-')) ?></td>
+                        <td><?= htmlspecialchars((string)($sale['batch_id'] ?? '-')) ?></td>
+                        <td><?= htmlspecialchars((string)($sale['harvest_id'] ?? '-')) ?></td>
                         <td><?= number_format((float)$sale['quantity'], 2, ',', '.') ?></td>
                         <td>€ <?= number_format((float)$sale['amount'], 2, ',', '.') ?></td>
                         <td><?= htmlspecialchars((string)$sale['status']) ?></td>                  
