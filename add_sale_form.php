@@ -26,11 +26,11 @@ $products = $db->query("
 ?>
 
 <div class="main">
-    <h1>➕ Nieuwe verkoop</h1>
+<h1>➕ <?= htmlspecialchars(t('new_sale')) ?></h1>
 
-    <p>
-        <a class="btn" href="list_sales.php">← Terug naar verkopen</a>
-    </p>
+<p>
+    <a class="btn" href="list_sales.php">← <?= htmlspecialchars(t('back_to_sales')) ?></a>
+</p>
 
     <div class="card">
         <form method="post" action="add_sale.php">
@@ -70,7 +70,7 @@ $products = $db->query("
                 <option value="geannuleerd">Geannuleerd</option>
             </select><br><br>
 
-            <button type="submit" class="btn">Verkoop opslaan</button>
+            <button type="submit" class="btn"><?= htmlspecialchars(t('save_sale')) ?></button>
         </form>
     </div>
 </div>

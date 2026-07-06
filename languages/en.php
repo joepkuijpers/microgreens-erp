@@ -227,4 +227,6 @@ return [
 'finished_inventory' => 'Finished inventory',
 'go_to_batch_management' => 'Go to batch management',
 'total_finished_inventory_sales_value' => 'Total finished inventory sales value',
+'back_to_sales' => 'Back to sales',
+'save_sale' => 'Save sale',
 ];

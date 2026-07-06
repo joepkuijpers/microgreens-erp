@@ -251,4 +251,6 @@ return [
 'finished_inventory' => 'Eindvoorraad',
 'go_to_batch_management' => 'Naar batchbeheer',
 'total_finished_inventory_sales_value' => 'Totale verkoopwaarde eindvoorraad',
+'back_to_sales' => 'Terug naar verkopen',
+'save_sale' => 'Verkoop opslaan',
 ];
