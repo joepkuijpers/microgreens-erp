@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $seed_amount = (float)($_POST['seed_amount'] ?? 0);
 
     if ($crop === '' || $sow_date === '' || $expected_harvest_date === '' || $tray_count <= 0 || $inventory_id <= 0 || $seed_amount <= 0) {
-        die(t('invalid_batch_input'));
+        die(__('invalid_batch_input'));
     }
 
     $stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $seedItem = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$seedItem) {
-        die(t('seed_inventory_not_found'));
+        die(__('seed_inventory_not_found'));
     }
 
     $quantity_before = (float)$seedItem['quantity'];
     $quantity_after = $quantity_before - $seed_amount;
 
     if ($quantity_after < 0) {
-        die(t('insufficient_seed_inventory'));
+        die(__('insufficient_seed_inventory'));
     }
 
     $insert = $db->prepare("
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':quantity_before' => $quantity_before,
         ':quantity_after' => $quantity_after,
         ':unit' => $seedItem['unit'],
-        ':note' => t('seed_used_for_batch') . ': ' . $crop,
+        ':note' => __('seed_used_for_batch') . ': ' . $crop,
         ':reference_type' => 'grow_batch',
         ':reference_id' => $batch_id
     ]);
@@ -95,67 +95,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="main">
-    <h1>🌱 <?= htmlspecialchars(t('new_batch')) ?></h1>
+    <h1>🌱 <?= htmlspecialchars(__('new_batch')) ?></h1>
 
     <div class="card">
         <form method="post">
             <p>
-                <?= htmlspecialchars(t('crop')) ?><br>
+                <?= htmlspecialchars(__('crop')) ?><br>
                 <input type="text" name="crop" required>
             </p>
 
             <p>
-                <?= htmlspecialchars(t('sowing_date')) ?><br>
+                <?= htmlspecialchars(__('sowing_date')) ?><br>
                 <input type="date" name="sow_date" required>
             </p>
 
             <p>
-                <?= htmlspecialchars(t('expected_harvest_date')) ?><br>
+                <?= htmlspecialchars(__('expected_harvest_date')) ?><br>
                 <input type="date" name="expected_harvest_date" required>
             </p>
 
             <p>
-                <?= htmlspecialchars(t('tray_count')) ?><br>
+                <?= htmlspecialchars(__('tray_count')) ?><br>
                 <input type="number" name="tray_count" value="1" min="1" required>
             </p>
 
             <p>
-                <?= htmlspecialchars(t('tray_type')) ?><br>
+                <?= htmlspecialchars(__('tray_type')) ?><br>
                 <input type="text" name="tray_type" value="1020">
             </p>
 
             <p>
-                <?= htmlspecialchars(t('seed_inventory')) ?><br>
+                <?= htmlspecialchars(__('seed_inventory')) ?><br>
                 <select name="inventory_id" required>
-                    <option value=""><?= htmlspecialchars(t('choose_seed_inventory')) ?></option>
+                    <option value=""><?= htmlspecialchars(__('choose_seed_inventory')) ?></option>
                     <?php foreach ($inventoryItems as $item): ?>
                         <option value="<?= htmlspecialchars($item['id']) ?>">
                             <?= htmlspecialchars($item['item_name']) ?>
                             (<?= number_format((float)$item['quantity'], 2, ',', '.') ?>
-                            <?= htmlspecialchars($item['unit']) ?> <?= htmlspecialchars(t('available')) ?>)
+                            <?= htmlspecialchars($item['unit']) ?> <?= htmlspecialchars(__('available')) ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
             </p>
 
             <p>
-                <?= htmlspecialchars(t('seed_usage')) ?><br>
+                <?= htmlspecialchars(__('seed_usage')) ?><br>
                 <input type="number" step="0.01" name="seed_amount" required>
             </p>
 
             <p>
-                <?= htmlspecialchars(t('status')) ?><br>
+                <?= htmlspecialchars(__('status')) ?><br>
                 <select name="status">
-                    <option value="Gepland">Gepland</option>
-                    <option value="Groeiend" selected>Groeiend</option>
-                    <option value="Oogstklaar">Oogstklaar</option>
-                    <option value="Geoogst">Geoogst</option>
+               <option value="Gepland"><?= htmlspecialchars(__('planned')) ?></option>
+<option value="Groeiend" selected><?= htmlspecialchars(__('growing')) ?></option>
+<option value="Oogstklaar"><?= htmlspecialchars(__('ready_to_harvest')) ?></option>
+<option value="Geoogst"><?= htmlspecialchars(__('harvested')) ?></option> 
                 </select>
             </p>
 
             <p>
-                <button class="btn" type="submit">💾 <?= htmlspecialchars(t('save_batch')) ?></button>
-                <a class="btn" href="grow_batches.php"><?= htmlspecialchars(t('back')) ?></a>
+                <button class="btn" type="submit">💾 <?= htmlspecialchars(__('save_batch')) ?></button>
+                <a class="btn" href="grow_batches.php"><?= htmlspecialchars(__('back')) ?></a>
             </p>
         </form>
     </div>

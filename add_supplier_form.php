@@ -12,18 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->execute([$name]);
 
-    echo '<p>' . htmlspecialchars(t('supplier_saved')) . '</p>';
+    echo '<p>' . htmlspecialchars(__('supplier_saved')) . '</p>';
 }
 ?>
 
-<h1><?= htmlspecialchars(t('new_supplier')) ?></h1>
+<h1><?= htmlspecialchars(__('new_supplier')) ?></h1>
 
 <form method="post">
-    <?= htmlspecialchars(t('name')) ?>:<br>
+    <?= htmlspecialchars(__('name')) ?>:<br>
     <input type="text" name="name"><br><br>
 
-    <input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+    <input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 </form>
 
 <br>
-<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>
+<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>

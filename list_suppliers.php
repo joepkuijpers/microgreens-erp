@@ -13,20 +13,20 @@ $suppliers = $db->query("
 ?>
 
 <div class="main">
-    <h1><?= htmlspecialchars(t('suppliers')) ?></h1>
+    <h1><?= htmlspecialchars(__('suppliers')) ?></h1>
 
     <div class="card">
         <table>
             <thead>
                 <tr>
-                    <th><?= htmlspecialchars(t('id')) ?></th>
-                    <th><?= htmlspecialchars(t('name')) ?></th>
+                    <th><?= htmlspecialchars(__('id')) ?></th>
+                    <th><?= htmlspecialchars(__('name')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($suppliers)): ?>
                     <tr>
-                        <td colspan="2"><?= htmlspecialchars(t('no_suppliers_found')) ?></td>
+                        <td colspan="2"><?= htmlspecialchars(__('no_suppliers_found')) ?></td>
                     </tr>
                 <?php endif; ?>
 

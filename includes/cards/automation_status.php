@@ -9,11 +9,11 @@ $context = $automation['context'] ?? [];
 
 $activeOutputs = array_filter($outputs);
 $automationClass = count($activeOutputs) > 0 ? 'alarm' : 'ok';
-$automationText = count($activeOutputs) > 0 ? t('actions_active') : t('no_actions_needed');
+$automationText = count($activeOutputs) > 0 ? __('actions_active') : __('no_actions_needed');
 
-$lightingReason = $context['lighting']['reason'] ?? t('no_light_data');
-$climateReason = $context['climate']['label'] ?? t('no_climate_data');
-$waterReason = $context['water']['reason'] ?? t('no_water_data');
+$lightingReason = $context['lighting']['reason'] ?? __('no_light_data');
+$climateReason = $context['climate']['label'] ?? __('no_climate_data');
+$waterReason = $context['water']['reason'] ?? __('no_water_data');
 
 $climateActive = !empty($outputs['fan']) || !empty($outputs['humidifier']) || !empty($outputs['heater']) || !empty($outputs['cooler']);
 ?>
@@ -21,8 +21,8 @@ $climateActive = !empty($outputs['fan']) || !empty($outputs['humidifier']) || !e
 <div class="climate-card automation-card">
     <div class="live-sensor-header">
         <div>
-            <h3><?= htmlspecialchars(t('automation_controller')) ?></h3>
-            <p><?= htmlspecialchars(t('mode')) ?>: <?= htmlspecialchars($automation['mode'] ?? t('unknown')) ?> | <?= htmlspecialchars(t('last_check')) ?>: <?= htmlspecialchars($automation['timestamp'] ?? '-') ?></p>
+            <h3><?= htmlspecialchars(__('automation_controller')) ?></h3>
+            <p><?= htmlspecialchars(__('mode')) ?>: <?= htmlspecialchars($automation['mode'] ?? __('unknown')) ?> | <?= htmlspecialchars(__('last_check')) ?>: <?= htmlspecialchars($automation['timestamp'] ?? '-') ?></p>
         </div>
 
         <span class="sensor-status-badge <?= $automationClass ?>">
@@ -32,28 +32,28 @@ $climateActive = !empty($outputs['fan']) || !empty($outputs['humidifier']) || !e
 
     <div class="live-sensor-grid">
         <div class="live-sensor-item <?= !empty($outputs['grow_light']) ? 'alarm' : 'ok' ?>">
-            <strong><?= htmlspecialchars(t('grow_light')) ?></strong>
-            <span><?= !empty($outputs['grow_light']) ? htmlspecialchars(t('on')) : htmlspecialchars(t('off')) ?></span>
+            <strong><?= htmlspecialchars(__('grow_light')) ?></strong>
+            <span><?= !empty($outputs['grow_light']) ? htmlspecialchars(__('on')) : htmlspecialchars(__('off')) ?></span>
             <small><?= htmlspecialchars($lightingReason) ?></small>
         </div>
 
         <div class="live-sensor-item <?= $climateActive ? 'alarm' : 'ok' ?>">
-            <strong><?= htmlspecialchars(t('climate_hardware')) ?></strong>
-            <span><?= $climateActive ? htmlspecialchars(t('active')) : htmlspecialchars(t('off')) ?></span>
+            <strong><?= htmlspecialchars(__('climate_hardware')) ?></strong>
+            <span><?= $climateActive ? htmlspecialchars(__('active')) : htmlspecialchars(__('off')) ?></span>
             <small><?= htmlspecialchars($climateReason) ?></small>
         </div>
 
         <div class="live-sensor-item <?= !empty($outputs['water_pump']) ? 'alarm' : 'ok' ?>">
-            <strong><?= htmlspecialchars(t('water_pump')) ?></strong>
-            <span><?= !empty($outputs['water_pump']) ? htmlspecialchars(t('on')) : htmlspecialchars(t('off')) ?></span>
+            <strong><?= htmlspecialchars(__('water_pump')) ?></strong>
+            <span><?= !empty($outputs['water_pump']) ? htmlspecialchars(__('on')) : htmlspecialchars(__('off')) ?></span>
             <small><?= htmlspecialchars($waterReason) ?></small>
         </div>
     </div>
 </div>
 
 <script>
-const automationActionsActive = <?= json_encode(t('actions_active')) ?>;
-const automationNoActionsNeeded = <?= json_encode(t('no_actions_needed')) ?>;
+const automationActionsActive = <?= json_encode(__('actions_active')) ?>;
+const automationNoActionsNeeded = <?= json_encode(__('no_actions_needed')) ?>;
 
 async function updateAutomationCard() {
     try {

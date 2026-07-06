@@ -25,32 +25,32 @@ $total = $db->query("
 ?>
 
 <div class="main">
-    <h1>🛒 <?= htmlspecialchars(t('sales')) ?></h1>
+    <h1>🛒 <?= htmlspecialchars(__('sales')) ?></h1>
 
 <p>
-    <a class="btn" href="add_sale_form.php">➕ <?= htmlspecialchars(t('new_sale')) ?></a>
-    <a class="btn" href="list_finished_inventory.php">📦 <?= htmlspecialchars(t('finished_inventory')) ?></a>
+    <a class="btn" href="add_sale_form.php">➕ <?= htmlspecialchars(__('new_sale')) ?></a>
+    <a class="btn" href="list_finished_inventory.php">📦 <?= htmlspecialchars(__('finished_inventory')) ?></a>
 </p>
 
 <div class="card">
-    <h2><?= htmlspecialchars(t('total_revenue')) ?></h2>
+    <h2><?= htmlspecialchars(__('total_revenue')) ?></h2>
         <h1>€ <?= number_format((float)$total['total'], 2, ',', '.') ?></h1>
     </div>
 
     <div class="card">
-        <table>
+            <table>
             <thead>
                 <tr>
-        <th><?= htmlspecialchars(t('id')) ?></th>
-        <th><?= htmlspecialchars(t('date')) ?></th>
-        <th><?= htmlspecialchars(t('customer')) ?></th>
-        <th><?= htmlspecialchars(t('product')) ?></th>
-        <th><?= htmlspecialchars(t('quantity')) ?></th>
-        <th><?= htmlspecialchars(t('amount')) ?></th>
-        <th><?= htmlspecialchars(t('status')) ?></th>
+                    <th><?= htmlspecialchars(__('id')) ?></th>
+                    <th><?= htmlspecialchars(__('date')) ?></th>
+                    <th><?= htmlspecialchars(__('customer')) ?></th>
+                    <th><?= htmlspecialchars(__('product')) ?></th>
+                    <th><?= htmlspecialchars(__('quantity')) ?></th>
+                    <th><?= htmlspecialchars(__('amount')) ?></th>
+                    <th><?= htmlspecialchars(__('status')) ?></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>    
                 <?php foreach ($sales as $sale): ?>
                     <tr>
                          <td><?= htmlspecialchars((string)$sale['id']) ?></td>

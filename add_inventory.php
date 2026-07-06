@@ -13,7 +13,7 @@ $unit = trim($_POST['unit'] ?? '');
 $unit_cost = (float)($_POST['unit_cost'] ?? 0);
 
 if ($item_name === '' || $quantity < 0 || $unit === '' || $unit_cost < 0) {
-    die(t('invalid_inventory_input'));
+    die(__('invalid_inventory_input'));
 }
 
 $stmt = $db->prepare("
@@ -45,7 +45,7 @@ $log->execute([
     ':quantity_before' => 0,
     ':quantity_after' => $quantity,
     ':unit' => $unit,
-    ':note' => t('new_inventory_item_created'),
+    ':note' => __('new_inventory_item_created'),
     ':reference_type' => 'inventory',
     ':reference_id' => $inventory_id
 ]);

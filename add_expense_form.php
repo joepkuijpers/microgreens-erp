@@ -14,26 +14,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['amount']
     ]);
 
-    echo '<p>' . htmlspecialchars(t('expense_saved')) . '</p>';
+    echo '<p>' . htmlspecialchars(__('expense_saved')) . '</p>';
 }
 ?>
 
-<h1><?= htmlspecialchars(t('new_expense')) ?></h1>
+<h1><?= htmlspecialchars(__('new_expense')) ?></h1>
 
 <form method="post">
 
-<?= htmlspecialchars(t('date')) ?>:<br>
+<?= htmlspecialchars(__('date')) ?>:<br>
 <input type="date" name="expense_date"><br><br>
 
-<?= htmlspecialchars(t('description')) ?>:<br>
+<?= htmlspecialchars(__('description')) ?>:<br>
 <input type="text" name="description"><br><br>
 
-<?= htmlspecialchars(t('amount')) ?>:<br>
+<?= htmlspecialchars(__('amount')) ?>:<br>
 <input type="number" step="0.01" name="amount"><br><br>
 
-<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>
+<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>

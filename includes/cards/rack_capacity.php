@@ -5,22 +5,22 @@ $rackCapacity = getRackCapacity($db);
 ?>
 
 <div class="dashboard-section">
-    <h2>🧱 <?= htmlspecialchars(t('rack_tray_capacity')) ?></h2>
+    <h2>🧱 <?= htmlspecialchars(__('rack_tray_capacity')) ?></h2>
 </div>
 
 <div class="live-sensor-card">
     <div class="live-sensor-header">
-        <h3>🧱 <?= htmlspecialchars(t('rack_capacity')) ?></h3>
+        <h3>🧱 <?= htmlspecialchars(__('rack_capacity')) ?></h3>
         <span class="sensor-status-badge <?= $rackCapacity['summary']['free_positions'] > 0 ? 'ok' : 'alarm' ?>">
-            <?= (int)$rackCapacity['summary']['free_positions'] ?> <?= htmlspecialchars(t('free')) ?>
+            <?= (int)$rackCapacity['summary']['free_positions'] ?> <?= htmlspecialchars(__('free')) ?>
         </span>
     </div>
 
     <div class="live-sensor-item <?= $rackCapacity['summary']['free_positions'] > 0 ? 'ok' : 'alarm' ?>">
-        <span><?= htmlspecialchars(t('total_capacity')) ?></span>
+        <span><?= htmlspecialchars(__('total_capacity')) ?></span>
         <small>
-            <?= htmlspecialchars(t('occupied')) ?>: <?= (int)$rackCapacity['summary']['occupied_positions'] ?> /
-            <?= (int)$rackCapacity['summary']['total_positions'] ?> <?= htmlspecialchars(t('positions')) ?> |
+            <?= htmlspecialchars(__('occupied')) ?>: <?= (int)$rackCapacity['summary']['occupied_positions'] ?> /
+            <?= (int)$rackCapacity['summary']['total_positions'] ?> <?= htmlspecialchars(__('positions')) ?> |
             <?= htmlspecialchars((string)$rackCapacity['summary']['occupancy_percent']) ?>%
         </small>
     </div>
@@ -29,15 +29,15 @@ $rackCapacity = getRackCapacity($db);
         <div class="live-sensor-item <?= $rack['free_positions'] > 0 ? 'ok' : 'alarm' ?>">
             <span><?= htmlspecialchars($rack['rack_code']) ?></span>
             <small>
-                <?= htmlspecialchars(t('free')) ?>: <?= (int)$rack['free_positions'] ?> |
-                <?= htmlspecialchars(t('occupied')) ?>: <?= (int)$rack['occupied_positions'] ?> |
-                <?= htmlspecialchars(t('total')) ?>: <?= (int)$rack['total_positions'] ?>
+                <?= htmlspecialchars(__('free')) ?>: <?= (int)$rack['free_positions'] ?> |
+                <?= htmlspecialchars(__('occupied')) ?>: <?= (int)$rack['occupied_positions'] ?> |
+                <?= htmlspecialchars(__('total')) ?>: <?= (int)$rack['total_positions'] ?>
             </small>
         </div>
 
         <?php foreach ($rack['shelves'] as $shelfNumber => $positions): ?>
             <div class="live-sensor-item ok">
-                <span><?= htmlspecialchars(t('shelf')) ?> <?= (int)$shelfNumber ?></span>
+                <span><?= htmlspecialchars(__('shelf')) ?> <?= (int)$shelfNumber ?></span>
                 <small>
                     <?php foreach ($positions as $position): ?>
                         <?= $position['occupied'] ? '🟥' : '🟩' ?><?= (int)$position['position'] ?>

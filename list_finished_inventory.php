@@ -26,16 +26,16 @@ $totalValue = $db->query("
 ?>
 
 <div class="main">
-<h1>📦 <?= htmlspecialchars(t('finished_inventory')) ?></h1>
+<h1>📦 <?= htmlspecialchars(__('finished_inventory')) ?></h1>
 
 <p>
     <a class="btn" href="grow_batches.php">
-        🌱 <?= htmlspecialchars(t('go_to_batch_management')) ?>
+        🌱 <?= htmlspecialchars(__('go_to_batch_management')) ?>
     </a>
 </p>
 
 <div class="card">
-    <h2><?= htmlspecialchars(t('total_finished_inventory_sales_value')) ?></h2>
+    <h2><?= htmlspecialchars(__('total_finished_inventory_sales_value')) ?></h2>
         <h1>€ <?= number_format((float)$totalValue['total'], 2, ',', '.') ?></h1>
     </div>
 

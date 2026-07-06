@@ -77,12 +77,12 @@ include 'includes/sidebar.php';
 ?>
 
 <div class="main">
-<h1><?= htmlspecialchars(t('edit_inventory')) ?></h1>
+<h1><?= htmlspecialchars(__('edit_inventory')) ?></h1>
 
 <div class="card">
     <form method="post">
 
-        <label><?= htmlspecialchars(t('item_name')) ?></label><br>
+        <label><?= htmlspecialchars(__('item_name')) ?></label><br>
         <input
             type="text"
             name="item_name"
@@ -90,14 +90,14 @@ include 'includes/sidebar.php';
             required
         ><br><br>
 
-        <label><?= htmlspecialchars(t('category')) ?></label><br>
+        <label><?= htmlspecialchars(__('category')) ?></label><br>
         <input
             type="text"
             name="category"
             value="<?= htmlspecialchars($item['category'] ?? '') ?>"
         ><br><br>
 
-        <label><?= htmlspecialchars(t('quantity')) ?></label><br>
+        <label><?= htmlspecialchars(__('quantity')) ?></label><br>
         <input
             type="number"
             step="0.01"
@@ -106,7 +106,7 @@ include 'includes/sidebar.php';
             required
         ><br><br>
 
-        <label><?= htmlspecialchars(t('unit')) ?></label><br>
+        <label><?= htmlspecialchars(__('unit')) ?></label><br>
         <input
             type="text"
             name="unit"
@@ -114,7 +114,7 @@ include 'includes/sidebar.php';
             required
         ><br><br>
 
-        <label><?= htmlspecialchars(t('unit_cost')) ?></label><br>
+        <label><?= htmlspecialchars(__('unit_cost')) ?></label><br>
         <input
             type="number"
             step="0.01"
@@ -124,11 +124,11 @@ include 'includes/sidebar.php';
         ><br><br>
 
         <button type="submit" class="btn">
-            <?= htmlspecialchars(t('save')) ?>
+            <?= htmlspecialchars(__('save')) ?>
         </button>
 
         <a href="list_inventory.php" class="btn">
-            <?= htmlspecialchars(t('back')) ?>
+            <?= htmlspecialchars(__('back')) ?>
         </a>
 
     </form>

@@ -29,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['status']
     ]);
 
-    echo '<p>' . htmlspecialchars(t('linked_sale_saved')) . '</p>';
+    echo '<p>' . htmlspecialchars(__('linked_sale_saved')) . '</p>';
 }
 ?>
 
-<h1><?= htmlspecialchars(t('new_linked_sale')) ?></h1>
+<h1><?= htmlspecialchars(__('new_linked_sale')) ?></h1>
 
 <form method="post">
 
-<?= htmlspecialchars(t('customer')) ?>:<br>
+<?= htmlspecialchars(__('customer')) ?>:<br>
 <select name="customer_id">
 <?php
 foreach ($customers as $c) {
@@ -46,7 +46,7 @@ foreach ($customers as $c) {
 ?>
 </select><br><br>
 
-<?= htmlspecialchars(t('product')) ?>:<br>
+<?= htmlspecialchars(__('product')) ?>:<br>
 <select name="product_id">
 <?php
 foreach ($products as $p) {
@@ -55,21 +55,21 @@ foreach ($products as $p) {
 ?>
 </select><br><br>
 
-<?= htmlspecialchars(t('date')) ?>:<br>
+<?= htmlspecialchars(__('date')) ?>:<br>
 <input type="date" name="sale_date"><br><br>
 
-<?= htmlspecialchars(t('quantity')) ?>:<br>
+<?= htmlspecialchars(__('quantity')) ?>:<br>
 <input type="number" step="0.01" name="quantity"><br><br>
 
-<?= htmlspecialchars(t('amount')) ?>:<br>
+<?= htmlspecialchars(__('amount')) ?>:<br>
 <input type="number" step="0.01" name="amount"><br><br>
 
-<?= htmlspecialchars(t('status')) ?>:<br>
+<?= htmlspecialchars(__('status')) ?>:<br>
 <input type="text" name="status" value="betaald"><br><br>
 
-<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>
+<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>

@@ -6,7 +6,7 @@ include 'db_connect.php';
 $rows = $db->query("
     SELECT
         COALESCE(products.name, 'Onbekend product') AS product_name,
-        COUNT(sales.id) AS sale_count,
+        count(sales.id) AS sale_count,
         COALESCE(SUM(sales.amount), 0) AS total_revenue
     FROM sales
     LEFT JOIN products ON sales.product_id = products.id

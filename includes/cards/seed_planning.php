@@ -6,28 +6,28 @@ $seedStatus = $seedPlanning['summary']['shortage_grams'] > 0 ? 'alarm' : 'ok';
 ?>
 
 <div class="dashboard-section">
-    <h2>🌱 <?= htmlspecialchars(t('seed_planning')) ?></h2>
+    <h2>🌱 <?= htmlspecialchars(__('seed_planning')) ?></h2>
 </div>
 
 <div class="live-sensor-card">
     <div class="live-sensor-header">
-        <h3>🌱 <?= htmlspecialchars(t('seed_planning')) ?></h3>
+        <h3>🌱 <?= htmlspecialchars(__('seed_planning')) ?></h3>
         <span class="sensor-status-badge <?= $seedStatus ?>">
             <?= htmlspecialchars((string)$seedPlanning['summary']['available_seed_kg']) ?>
-            kg <?= htmlspecialchars(t('available')) ?>
+            kg <?= htmlspecialchars(__('available')) ?>
         </span>
     </div>
 
     <div class="live-sensor-item <?= $seedStatus ?>">
-        <span><?= htmlspecialchars(t('seed_requirement_14_days')) ?></span>
+        <span><?= htmlspecialchars(__('seed_requirement_14_days')) ?></span>
         <small>
-            <?= htmlspecialchars(t('required')) ?>:
+            <?= htmlspecialchars(__('required')) ?>:
             <?= htmlspecialchars((string)$seedPlanning['summary']['required_seed_kg']) ?> kg |
 
-            <?= htmlspecialchars(t('shortage')) ?>:
+            <?= htmlspecialchars(__('shortage')) ?>:
             <?= htmlspecialchars((string)round($seedPlanning['summary']['shortage_grams'] / 1000, 3)) ?> kg |
 
-            <?= htmlspecialchars(t('crops_to_plan')) ?>:
+            <?= htmlspecialchars(__('crops_to_plan')) ?>:
             <?= (int)$seedPlanning['summary']['crops_need_seed'] ?>
         </small>
     </div>
@@ -36,19 +36,19 @@ $seedStatus = $seedPlanning['summary']['shortage_grams'] > 0 ? 'alarm' : 'ok';
         <div class="live-sensor-item <?= htmlspecialchars($plan['priority']) ?>">
             <span><?= htmlspecialchars($plan['crop_name']) ?></span>
             <small>
-                <?= htmlspecialchars(t('active_planned')) ?>:
-                <?= (int)$plan['active_planned_trays'] ?> <?= htmlspecialchars(t('trays')) ?> |
+                <?= htmlspecialchars(__('active_planned')) ?>:
+                <?= (int)$plan['active_planned_trays'] ?> <?= htmlspecialchars(__('trays')) ?> |
 
-                <?= htmlspecialchars(t('recommended_new_trays')) ?>:
+                <?= htmlspecialchars(__('recommended_new_trays')) ?>:
                 <?= (int)$plan['recommended_new_trays'] ?><br>
 
-                <?= htmlspecialchars(t('seed_rate')) ?>:
+                <?= htmlspecialchars(__('seed_rate')) ?>:
                 <?= htmlspecialchars((string)$plan['seed_grams_per_tray']) ?> g/tray |
 
-                <?= htmlspecialchars(t('required')) ?>:
+                <?= htmlspecialchars(__('required')) ?>:
                 <?= htmlspecialchars((string)$plan['required_seed_grams']) ?> g<br>
 
-                <?= htmlspecialchars(t('advice')) ?>:
+                <?= htmlspecialchars(__('advice')) ?>:
                 <?= htmlspecialchars($plan['advice']) ?>
             </small>
         </div>

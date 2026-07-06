@@ -14,30 +14,30 @@ $checks = $liveSensorData['checks'];
 <div class="live-sensor-card">
     <div class="live-sensor-header">
         <div>
-            <h3><?= htmlspecialchars(t('live_sensor_status')) ?></h3>
-            <p><?= htmlspecialchars(t('last_measurement')) ?>: <?= htmlspecialchars($liveSensorData['timestamp'] ?? t('no_data')) ?></p>
+            <h3><?= htmlspecialchars(__('live_sensor_status')) ?></h3>
+            <p><?= htmlspecialchars(__('last_measurement')) ?>: <?= htmlspecialchars($liveSensorData['timestamp'] ?? __('no_data')) ?></p>
         </div>
 
-        <span class="sensor-status-badge <?= $statusClass ?>">
+        <span class="sensor-status-badge <?= htmlspecialchars($statusClass) ?>">
             <?= htmlspecialchars($statusText) ?>
         </span>
     </div>
 
     <div class="live-sensor-grid">
-        <div class="live-sensor-item <?= $checks['temperature']['status'] ?>">
-            <strong><?= htmlspecialchars(t('temperature')) ?></strong>
+        <div class="live-sensor-item <?= htmlspecialchars($checks['temperature']['status']) ?>">
+            <strong><?= htmlspecialchars(__('temperature')) ?></strong>
             <span><?= htmlspecialchars((string)($reading['temperature'] ?? '-')) ?> °C</span>
             <small><?= htmlspecialchars($checks['temperature']['label']) ?></small>
         </div>
 
-        <div class="live-sensor-item <?= $checks['humidity']['status'] ?>">
-            <strong><?= htmlspecialchars(t('humidity')) ?></strong>
+        <div class="live-sensor-item <?= htmlspecialchars($checks['humidity']['status']) ?>">
+            <strong><?= htmlspecialchars(__('humidity')) ?></strong>
             <span><?= htmlspecialchars((string)($reading['humidity'] ?? '-')) ?> %</span>
             <small><?= htmlspecialchars($checks['humidity']['label']) ?></small>
         </div>
 
-        <div class="live-sensor-item <?= $checks['light']['status'] ?>">
-            <strong><?= htmlspecialchars(t('light')) ?></strong>
+        <div class="live-sensor-item <?= htmlspecialchars($checks['light']['status']) ?>">
+            <strong><?= htmlspecialchars(__('light')) ?></strong>
             <span><?= htmlspecialchars((string)($reading['light'] ?? '-')) ?> lux</span>
             <small><?= htmlspecialchars($checks['light']['label']) ?></small>
         </div>
@@ -45,7 +45,7 @@ $checks = $liveSensorData['checks'];
 </div>
 
 <script>
-const liveSensorLastMeasurement = <?= json_encode(t('last_measurement')) ?>;
+const liveSensorLastMeasurement = <?= json_encode(__('last_measurement')) ?>;
 
 async function updateLiveSensorCard() {
     try {
@@ -55,41 +55,55 @@ async function updateLiveSensorCard() {
         const badge = document.querySelector('.sensor-status-badge');
         if (!badge) return;
 
-        badge.textContent = data.overall_label;
+        badge.textContent = data.overall_label || '--';
         badge.classList.remove('ok', 'alarm');
         badge.classList.add(data.overall_status === 'ok' ? 'ok' : 'alarm');
 
         const items = document.querySelectorAll('.live-sensor-item');
+
+        const reading = data.reading || {};
+        const checks = data.checks || {};
+
         const values = [
-            data.reading.temperature + ' °C',
-            data.reading.humidity + ' %',
-            data.reading.light + ' lux'
+            (reading.temperature ?? '-') + ' °C',
+            (reading.humidity ?? '-') + ' %',
+            (reading.light ?? '-') + ' lux'
         ];
 
         const labels = [
-            data.checks.temperature.label,
-            data.checks.humidity.label,
-            data.checks.light.label
+            checks.temperature?.label || '--',
+            checks.humidity?.label || '--',
+            checks.light?.label || '--'
         ];
 
         const statuses = [
-            data.checks.temperature.status,
-            data.checks.humidity.status,
-            data.checks.light.status
+            checks.temperature?.status || 'alarm',
+            checks.humidity?.status || 'alarm',
+            checks.light?.status || 'alarm'
         ];
 
         items.forEach((item, index) => {
             item.classList.remove('ok', 'alarm');
             item.classList.add(statuses[index]);
-            item.querySelector('span').textContent = values[index];
-            item.querySelector('small').textContent = labels[index];
+
+            const valueElement = item.querySelector('span');
+            if (valueElement) {
+                valueElement.textContent = values[index];
+            }
+
+            const labelElement = item.querySelector('small');
+            if (labelElement) {
+                labelElement.textContent = labels[index];
+            }
         });
 
         const timestamp = document.querySelector('.live-sensor-header p');
-        timestamp.textContent = liveSensorLastMeasurement + ': ' + data.timestamp;
+        if (timestamp) {
+            timestamp.textContent = liveSensorLastMeasurement + ': ' + (data.timestamp || '--');
+        }
 
     } catch (error) {
-        console.error(error);
+        console.error('Live sensor update failed:', error);
     }
 }
 

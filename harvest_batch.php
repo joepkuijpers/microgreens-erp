@@ -4,7 +4,7 @@ include 'db_connect.php';
 $id = (int)($_GET['id'] ?? 0);
 
 if ($id <= 0) {
-    die(t('invalid_batch_id'));
+    die(__('invalid_batch_id'));
 }
 
 $stmt = $db->prepare("
@@ -20,7 +20,7 @@ $stmt->execute([':id' => $id]);
 $batch = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$batch) {
-    die(t('batch_not_found'));
+    die(__('batch_not_found'));
 }
 
 $products = $db->query("
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $finished_quantity = (float)($_POST['finished_quantity'] ?? 0);
 
     if ($harvest_date === '' || $weight_grams <= 0 || $product_id <= 0 || $finished_quantity <= 0) {
-        die(t('invalid_harvest_input'));
+        die(__('invalid_harvest_input'));
     }
 
     $stmt = $db->prepare("
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$product) {
-   die(t('product_not_found'));     
+   die(__('product_not_found'));     
     }
 
     $db->beginTransaction();
@@ -134,13 +134,13 @@ include 'includes/sidebar.php';
 ?>
 
 <div class="main">
-    <h1>🌾 <?= htmlspecialchars(t('harvest_batch')) ?></h1>
+    <h1>🌾 <?= htmlspecialchars(__('harvest_batch')) ?></h1>
 
     <div class="card">
-     <p><strong><?= htmlspecialchars(t('crop')) ?>:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
-<p><strong><?= htmlspecialchars(t('sowing_date')) ?>:</strong> <?= htmlspecialchars((string)$batch['sow_date']) ?></p>
-<p><strong><?= htmlspecialchars(t('expected_harvest_date')) ?>:</strong> <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></p>
-<p><strong><?= htmlspecialchars(t('trays')) ?>:</strong> <?= htmlspecialchars((string)$batch['tray_count']) ?></p>   
+     <p><strong><?= htmlspecialchars(__('crop')) ?>:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
+<p><strong><?= htmlspecialchars(__('sowing_date')) ?>:</strong> <?= htmlspecialchars((string)$batch['sow_date']) ?></p>
+<p><strong><?= htmlspecialchars(__('expected_harvest_date')) ?>:</strong> <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></p>
+<p><strong><?= htmlspecialchars(__('trays')) ?>:</strong> <?= htmlspecialchars((string)$batch['tray_count']) ?></p>   
     </div>
 
     <div class="card">
@@ -151,7 +151,7 @@ include 'includes/sidebar.php';
             </p>
 
             <p>
-                <?= htmlspecialchars(t('harvest_weight_grams')) ?><br>
+                <?= htmlspecialchars(__('harvest_weight_grams')) ?><br>
                 <input type="number" step="0.01" name="weight_grams" required>
             </p>
 
@@ -174,14 +174,14 @@ include 'includes/sidebar.php';
             </p>
 
             <p>
-                <?= htmlspecialchars(t('quality_notes')) ?><br>
+                <?= htmlspecialchars(__('quality_notes')) ?><br>
                 <input type="text" name="quality_notes" placeholder="Bijv. mooi, kort, geel, test">
             </p>
 
             <p>
-                <button class="btn" type="submit">🌾 <?= htmlspecialchars(t('register_harvest')) ?></button>
+                <button class="btn" type="submit">🌾 <?= htmlspecialchars(__('register_harvest')) ?></button>
                 
-            </p><a class="btn" href="grow_batches.php"><?= htmlspecialchars(t('back')) ?></a>
+            </p><a class="btn" href="grow_batches.php"><?= htmlspecialchars(__('back')) ?></a>
         </form>
     </div>
 </div>

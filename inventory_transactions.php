@@ -21,15 +21,15 @@ $transactions = $db->query("
 ?>
 
 <div class="main">
-    <h1>🔄 <?= htmlspecialchars(t('inventory_transactions')) ?></h1>
+    <h1>🔄 <?= htmlspecialchars(__('inventory_transactions')) ?></h1>
 
     <p>
         <a class="btn" href="list_inventory.php">
-            ← <?= htmlspecialchars(t('back_to_inventory')) ?>
+            ← <?= htmlspecialchars(__('back_to_inventory')) ?>
         </a>
 
         <a class="btn" href="add_inventory_transaction.php">
-            ➕ <?= htmlspecialchars(t('add_inventory_transaction')) ?>
+            ➕ <?= htmlspecialchars(__('add_inventory_transaction')) ?>
         </a>
     </p>
 

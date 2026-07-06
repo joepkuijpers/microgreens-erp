@@ -16,23 +16,23 @@ $products = $db->query("
 ?>
 
 <div class="main">
-    <h1><?= htmlspecialchars(t('products')) ?></h1>
+    <h1><?= htmlspecialchars(__('products')) ?></h1>
 
     <div class="card">
         <table>
             <thead>
                 <tr>
-                    <th><?= htmlspecialchars(t('id')) ?></th>
-                    <th><?= htmlspecialchars(t('product')) ?></th>
-                    <th><?= htmlspecialchars(t('category')) ?></th>
-                    <th><?= htmlspecialchars(t('unit')) ?></th>
-                    <th><?= htmlspecialchars(t('sale_price')) ?></th>
+                    <th><?= htmlspecialchars(__('id')) ?></th>
+                    <th><?= htmlspecialchars(__('product')) ?></th>
+                    <th><?= htmlspecialchars(__('category')) ?></th>
+                    <th><?= htmlspecialchars(__('unit')) ?></th>
+                    <th><?= htmlspecialchars(__('sale_price')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($products)): ?>
                     <tr>
-                        <td colspan="5"><?= htmlspecialchars(t('no_products_found')) ?></td>
+                        <td colspan="5"><?= htmlspecialchars(__('no_products_found')) ?></td>
                     </tr>
                 <?php endif; ?>
 

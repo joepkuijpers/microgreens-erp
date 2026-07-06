@@ -16,29 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['status']
     ]);
 
-    echo '<p>' . htmlspecialchars(t('batch_saved')) . '</p>';
+    echo '<p>' . htmlspecialchars(__('batch_saved')) . '</p>';
 }
 ?>
 
-<h1><?= htmlspecialchars(t('new_batch')) ?></h1>
+<h1><?= htmlspecialchars(__('new_batch')) ?></h1>
 
 <form method="post">
 
-<?= htmlspecialchars(t('crop')) ?>:<br>
+<?= htmlspecialchars(__('crop')) ?>:<br>
 <input type="text" name="crop"><br><br>
 
-<?= htmlspecialchars(t('sow_date')) ?>:<br>
+<?= htmlspecialchars(__('sow_date')) ?>:<br>
 <input type="date" name="sow_date"><br><br>
 
-<?= htmlspecialchars(t('tray_count')) ?>:<br>
+<?= htmlspecialchars(__('tray_count')) ?>:<br>
 <input type="number" name="tray_count"><br><br>
 
-<?= htmlspecialchars(t('tray_type')) ?>:<br>
+<?= htmlspecialchars(__('tray_type')) ?>:<br>
 <input type="text" name="tray_type" value="1020 tray"><br><br>
 
-<?= htmlspecialchars(t('status')) ?>:<br>
+<?= htmlspecialchars(__('status')) ?>:<br>
 <input type="text" name="status" value="gezaaid"><br><br>
 
-<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 
 </form>

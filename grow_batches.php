@@ -21,10 +21,10 @@ $batches = $db->query("
 ?>
 
 <div class="main">
-    <h1>🌱 <?= htmlspecialchars(t('batch_management')) ?></h1>
+    <h1>🌱 <?= htmlspecialchars(__('batch_management')) ?></h1>
 
     <p>
-        <a class="btn" href="add_batch.php">➕ <?= htmlspecialchars(t('new_batch')) ?></a>
+        <a class="btn" href="add_batch.php">➕ <?= htmlspecialchars(__('new_batch')) ?></a>
     </p>
 
     <div class="card">
@@ -32,14 +32,14 @@ $batches = $db->query("
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th><?= htmlspecialchars(t('crop')) ?></th>
-                    <th><?= htmlspecialchars(t('sowing_date')) ?></th>
-                    <th><?= htmlspecialchars(t('expected_harvest')) ?></th>
-                    <th><?= htmlspecialchars(t('trays')) ?></th>
-                    <th><?= htmlspecialchars(t('seed_inventory')) ?></th>
-                    <th><?= htmlspecialchars(t('seed_usage')) ?></th>
-                    <th><?= htmlspecialchars(t('status')) ?></th>
-                    <th><?= htmlspecialchars(t('actions')) ?></th>
+                    <th><?= htmlspecialchars(__('crop')) ?></th>
+                    <th><?= htmlspecialchars(__('sowing_date')) ?></th>
+                    <th><?= htmlspecialchars(__('expected_harvest')) ?></th>
+                    <th><?= htmlspecialchars(__('trays')) ?></th>
+                    <th><?= htmlspecialchars(__('seed_inventory')) ?></th>
+                    <th><?= htmlspecialchars(__('seed_usage')) ?></th>
+                    <th><?= htmlspecialchars(__('status')) ?></th>
+                    <th><?= htmlspecialchars(__('actions')) ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -77,9 +77,9 @@ $batches = $db->query("
                             </span>
                         </td>
                         <td>
-                            <a href="batch_details.php?id=<?= urlencode((string)$batch['id']) ?>">🔍 <?= htmlspecialchars(t('details')) ?></a> |
-                            <a href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(t('edit')) ?></a> |
-                            <a href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(t('harvest')) ?></a>
+                            <a href="batch_details.php?id=<?= urlencode((string)$batch['id']) ?>">🔍 <?= htmlspecialchars(__('details')) ?></a> |
+                            <a href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a> |
+                            <a href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -19,7 +19,7 @@ function getProductionPlanner(PDO $db): array
 
         $stmt = $db->prepare("
             SELECT
-                COUNT(*) AS total_batches,
+                count(*) AS total_batches,
                 COALESCE(SUM(CASE WHEN lower(COALESCE(status, '')) IN ('active', 'actief') THEN tray_count ELSE 0 END), 0) AS active_trays,
                 COALESCE(SUM(CASE WHEN lower(COALESCE(status, '')) IN ('planned', 'gepland', 'gezaaid', 'sown') THEN tray_count ELSE 0 END), 0) AS planned_trays,
                 COALESCE(SUM(CASE WHEN lower(COALESCE(status, '')) IN ('harvested', 'geoogst', 'klaar', 'afgerond') THEN 1 ELSE 0 END), 0) AS harvested_batches,

@@ -16,29 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['notes']
     ]);
 
-    echo '<p>' . htmlspecialchars(t('customer_saved')) . '</p>';
+    echo '<p>' . htmlspecialchars(__('customer_saved')) . '</p>';
 }
 ?>
 
-<h1><?= htmlspecialchars(t('new_customer')) ?></h1>
+<h1><?= htmlspecialchars(__('new_customer')) ?></h1>
 
 <form method="post">
 
-<?= htmlspecialchars(t('name')) ?>:<br>
+<?= htmlspecialchars(__('name')) ?>:<br>
 <input type="text" name="name"><br><br>
 
-<?= htmlspecialchars(t('email')) ?>:<br>
+<?= htmlspecialchars(__('email')) ?>:<br>
 <input type="email" name="email"><br><br>
 
-<?= htmlspecialchars(t('phone')) ?>:<br>
+<?= htmlspecialchars(__('phone')) ?>:<br>
 <input type="text" name="phone"><br><br>
 
-<?= htmlspecialchars(t('notes')) ?>:<br>
+<?= htmlspecialchars(__('notes')) ?>:<br>
 <input type="text" name="notes"><br><br>
 
-<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>
+<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>

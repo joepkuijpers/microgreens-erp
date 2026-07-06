@@ -3,22 +3,22 @@ $planning = $productionData['planning'] ?? [];
 ?>
 
 <div class="card">
-    <h2>📅 <?= htmlspecialchars(t('production_schedule')) ?></h2>
+    <h2>📅 <?= htmlspecialchars(__('production_schedule')) ?></h2>
 
     <?php if (empty($planning)): ?>
-        <p><?= htmlspecialchars(t('no_production_planning_found')) ?></p>
+        <p><?= htmlspecialchars(__('no_production_planning_found')) ?></p>
     <?php else: ?>
         <table>
             <thead>
                 <tr>
-                    <th><?= htmlspecialchars(t('sowing_date')) ?></th>
-                    <th><?= htmlspecialchars(t('harvest_date')) ?></th>
-                    <th><?= htmlspecialchars(t('product')) ?></th>
-                    <th><?= htmlspecialchars(t('customer')) ?></th>
-                    <th><?= htmlspecialchars(t('quantity')) ?></th>
-                    <th><?= htmlspecialchars(t('trays')) ?></th>
-                    <th><?= htmlspecialchars(t('seed')) ?></th>
-                    <th><?= htmlspecialchars(t('status')) ?></th>
+                    <th><?= htmlspecialchars(__('sowing_date')) ?></th>
+                    <th><?= htmlspecialchars(__('harvest_date')) ?></th>
+                    <th><?= htmlspecialchars(__('product')) ?></th>
+                    <th><?= htmlspecialchars(__('customer')) ?></th>
+                    <th><?= htmlspecialchars(__('quantity')) ?></th>
+                    <th><?= htmlspecialchars(__('trays')) ?></th>
+                    <th><?= htmlspecialchars(__('seed')) ?></th>
+                    <th><?= htmlspecialchars(__('status')) ?></th>
                 </tr>
             </thead>
             <tbody>

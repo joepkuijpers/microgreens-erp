@@ -5,14 +5,14 @@ $productionPlanner = getProductionPlanner($db);
 ?>
 
 <div class="dashboard-section">
-    <h2>📅 <?= htmlspecialchars(t('production_planner')) ?></h2>
+    <h2>📅 <?= htmlspecialchars(__('production_planner')) ?></h2>
 </div>
 
 <div class="live-sensor-card">
     <div class="live-sensor-header">
-        <h3>📅 <?= htmlspecialchars(t('production_planning')) ?></h3>
+        <h3>📅 <?= htmlspecialchars(__('production_planning')) ?></h3>
         <span class="sensor-status-badge <?= $productionPlanner['summary']['needs_planning'] > 0 ? 'alarm' : 'ok' ?>">
-            <?= (int)$productionPlanner['summary']['needs_planning'] ?> <?= htmlspecialchars(t('action_needed')) ?>
+            <?= (int)$productionPlanner['summary']['needs_planning'] ?> <?= htmlspecialchars(__('action_needed')) ?>
         </span>
     </div>
 
@@ -20,14 +20,14 @@ $productionPlanner = getProductionPlanner($db);
         <div class="live-sensor-item <?= htmlspecialchars($plan['priority']) ?>">
             <span><?= htmlspecialchars($plan['crop_name']) ?></span>
             <small>
-                <?= htmlspecialchars(t('active')) ?>: <?= (int)$plan['active_trays'] ?> <?= htmlspecialchars(t('trays')) ?> |
-                <?= htmlspecialchars(t('planned')) ?>: <?= (int)$plan['planned_trays'] ?> <?= htmlspecialchars(t('trays')) ?> |
-                <?= htmlspecialchars(t('cycle')) ?>: <?= (int)$plan['cycle_days'] ?> <?= htmlspecialchars(t('days')) ?><br>
+                <?= htmlspecialchars(__('active')) ?>: <?= (int)$plan['active_trays'] ?> <?= htmlspecialchars(__('trays')) ?> |
+                <?= htmlspecialchars(__('planned')) ?>: <?= (int)$plan['planned_trays'] ?> <?= htmlspecialchars(__('trays')) ?> |
+                <?= htmlspecialchars(__('cycle')) ?>: <?= (int)$plan['cycle_days'] ?> <?= htmlspecialchars(__('days')) ?><br>
 
-                <?= htmlspecialchars(t('next_sowing')) ?>: <?= htmlspecialchars($plan['next_sow_date']) ?> |
-                <?= htmlspecialchars(t('expected_harvest')) ?>: <?= htmlspecialchars($plan['expected_harvest_date']) ?><br>
+                <?= htmlspecialchars(__('next_sowing')) ?>: <?= htmlspecialchars($plan['next_sow_date']) ?> |
+                <?= htmlspecialchars(__('expected_harvest')) ?>: <?= htmlspecialchars($plan['expected_harvest_date']) ?><br>
 
-                <?= htmlspecialchars(t('advice')) ?>: <?= htmlspecialchars($plan['advice']) ?>
+                <?= htmlspecialchars(__('advice')) ?>: <?= htmlspecialchars($plan['advice']) ?>
             </small>
         </div>
     <?php endforeach; ?>

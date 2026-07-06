@@ -16,28 +16,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['quality_notes']
     ]);
 
-    echo '<p>' . htmlspecialchars(t('harvest_saved')) . '</p>';
+    echo '<p>' . htmlspecialchars(__('harvest_saved')) . '</p>';
 }
 ?>
 
-<h1><?= htmlspecialchars(t('new_harvest')) ?></h1>
+<h1><?= htmlspecialchars(__('new_harvest')) ?></h1>
 
 <form method="post">
 
-<?= htmlspecialchars(t('batch_id')) ?>:<br>
+<?= htmlspecialchars(__('batch_id')) ?>:<br>
 <input type="number" name="batch_id"><br><br>
 
-<?= htmlspecialchars(t('harvest_date')) ?>:<br>
+<?= htmlspecialchars(__('harvest_date')) ?>:<br>
 <input type="date" name="harvest_date"><br><br>
 
-<?= htmlspecialchars(t('weight_grams')) ?>:<br>
+<?= htmlspecialchars(__('weight_grams')) ?>:<br>
 <input type="number" step="0.1" name="weight_grams"><br><br>
 
-<?= htmlspecialchars(t('quality_notes')) ?>:<br>
+<?= htmlspecialchars(__('quality_notes')) ?>:<br>
 <input type="text" name="quality_notes"><br><br>
 
-<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 
 </form>
 
-<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>
+<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>

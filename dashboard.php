@@ -7,20 +7,20 @@ require_once 'includes/batch_rotation_engine.php';
 
 $batchRotation = rotateActiveBatch($db);
 
-$producten = $db->query("SELECT COUNT(*) FROM products")->fetchColumn();
-$voorraad = $db->query("SELECT COUNT(*) FROM inventory")->fetchColumn();
-$teelten = $db->query("SELECT COUNT(*) FROM grow_batches")->fetchColumn();
-$verkopen = $db->query("SELECT COUNT(*) FROM sales")->fetchColumn();
-$klanten = $db->query("SELECT COUNT(*) FROM customers")->fetchColumn();
-$leveranciers = $db->query("SELECT COUNT(*) FROM suppliers")->fetchColumn();
-$oogsten = $db->query("SELECT COUNT(*) FROM harvests")->fetchColumn();
+$producten = $db->query("SELECT count(*) FROM products")->fetchColumn();
+$voorraad = $db->query("SELECT count(*) FROM inventory")->fetchColumn();
+$teelten = $db->query("SELECT count(*) FROM grow_batches")->fetchColumn();
+$verkopen = $db->query("SELECT count(*) FROM sales")->fetchColumn();
+$klanten = $db->query("SELECT count(*) FROM customers")->fetchColumn();
+$leveranciers = $db->query("SELECT count(*) FROM suppliers")->fetchColumn();
+$oogsten = $db->query("SELECT count(*) FROM harvests")->fetchColumn();
 
 $omzet = $db->query("SELECT COALESCE(SUM(amount),0) FROM sales")->fetchColumn();
 $kosten_bedrag = $db->query("SELECT COALESCE(SUM(amount),0) FROM expenses")->fetchColumn();
 
 $winst = $omzet - $kosten_bedrag;
 
-$lage_voorraad = $db->query("SELECT COUNT(*) FROM inventory WHERE quantity <= 1")->fetchColumn();
+$lage_voorraad = $db->query("SELECT count(*) FROM inventory WHERE quantity <= 1")->fetchColumn();
 ?>
 
 <h1>🌱 <?= __('dashboard_title') ?></h1>

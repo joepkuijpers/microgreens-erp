@@ -9,12 +9,12 @@ $gpioOutputs = gpioReadOutputs();
 <div class="climate-card hardware-control-card">
     <div class="live-sensor-header">
         <div>
-            <h3><?= htmlspecialchars(t('hardware_control_center')) ?></h3>
-            <p><?= htmlspecialchars(t('mode')) ?>: <?= htmlspecialchars($gpioConfig['mode'] ?? t('simulation')) ?></p>
+            <h3><?= htmlspecialchars(__('hardware_control_center')) ?></h3>
+            <p><?= htmlspecialchars(__('mode')) ?>: <?= htmlspecialchars($gpioConfig['mode'] ?? __('simulation')) ?></p>
         </div>
 
         <span class="sensor-status-badge ok">
-            <?= htmlspecialchars(t('gpio_monitor_active')) ?>
+            <?= htmlspecialchars(__('gpio_monitor_active')) ?>
         </span>
     </div>
 
@@ -26,7 +26,7 @@ $gpioOutputs = gpioReadOutputs();
             ?>
             <div class="live-sensor-item <?= $state ? 'alarm' : 'ok' ?>">
                 <strong><?= htmlspecialchars($relay['label']) ?></strong>
-                <span><?= $state ? htmlspecialchars(t('on')) : htmlspecialchars(t('off')) ?></span>
+                <span><?= $state ? htmlspecialchars(__('on')) : htmlspecialchars(__('off')) ?></span>
                 <small>GPIO <?= htmlspecialchars((string)$relay['gpio_pin']) ?> | <?= htmlspecialchars($name) ?></small>
             </div>
         <?php endforeach; ?>
@@ -52,7 +52,7 @@ async function updateHardwareControlCenter() {
             items[index].classList.add(state ? 'alarm' : 'ok');
 
             items[index].querySelector('span').textContent =
-                state ? '<?= addslashes(t('on')) ?>' : '<?= addslashes(t('off')) ?>';
+                state ? '<?= addslashes(__('on')) ?>' : '<?= addslashes(__('off')) ?>';
         });
 
     } catch (error) {

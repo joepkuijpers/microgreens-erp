@@ -6,7 +6,7 @@ include 'db_connect.php';
 $rows = $db->query("
     SELECT
         product,
-        COUNT(*) AS sales_count,
+        count(*) AS sales_count,
         SUM(amount) AS revenue
     FROM sales
     GROUP BY product
