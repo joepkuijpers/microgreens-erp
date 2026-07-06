@@ -173,12 +173,12 @@ include 'includes/sidebar.php';
 
             <p><?= htmlspecialchars(t('seed_usage')) ?><br>
                 <select name="inventory_id" required>
-                    <option value="">-- Kies zaadvoorraad --</option>
+                    <option value="">-- <?= htmlspecialchars(t('choose_seed_inventory')) ?> --</option>
                     <?php foreach ($inventoryItems as $item): ?>
                         <option value="<?= htmlspecialchars($item['id']) ?>" <?= ((int)$batch['inventory_id'] === (int)$item['id']) ? 'selected' : '' ?>>
                             <?= htmlspecialchars($item['item_name']) ?>
                             (<?= number_format((float)$item['quantity'], 2, ',', '.') ?>
-                            <?= htmlspecialchars($item['unit']) ?> beschikbaar)
+                            <?= htmlspecialchars($item['unit']) ?> <?= htmlspecialchars(t('available')) ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
