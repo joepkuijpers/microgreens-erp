@@ -21,11 +21,16 @@ $transactions = $db->query("
 ?>
 
 <div class="main">
-    <h1>🔄 Voorraadmutaties</h1>
+    <h1>🔄 <?= htmlspecialchars(t('inventory_transactions')) ?></h1>
 
     <p>
-        <a class="btn" href="list_inventory.php">← Terug naar voorraad</a>
-        <a class="btn" href="add_inventory_transaction.php">➕ Mutatie toevoegen</a>
+        <a class="btn" href="list_inventory.php">
+            ← <?= htmlspecialchars(t('back_to_inventory')) ?>
+        </a>
+
+        <a class="btn" href="add_inventory_transaction.php">
+            ➕ <?= htmlspecialchars(t('add_inventory_transaction')) ?>
+        </a>
     </p>
 
     <div class="card">

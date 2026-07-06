@@ -213,4 +213,7 @@ return [
 'delete' => 'Delete',
 'confirm_delete_inventory_item' => 'Are you sure you want to delete this inventory item?',
 'invalid_inventory_id' => 'Invalid inventory ID.',
+'inventory_transactions' => 'Inventory transactions',
+'back_to_inventory' => 'Back to inventory',
+'add_inventory_transaction' => 'Add transaction',
 ];

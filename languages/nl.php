@@ -237,4 +237,7 @@ return [
 'delete' => 'Verwijderen',
 'confirm_delete_inventory_item' => 'Weet je zeker dat je dit voorraaditem wilt verwijderen?',
 'invalid_inventory_id' => 'Ongeldig voorraad-ID.',
+'inventory_transactions' => 'Voorraadmutaties',
+'back_to_inventory' => 'Terug naar voorraad',
+'add_inventory_transaction' => 'Mutatie toevoegen',
 ];
