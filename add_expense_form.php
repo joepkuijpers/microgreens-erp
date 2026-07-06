@@ -14,24 +14,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['amount']
     ]);
 
-    echo "<p>Kost opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('expense_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe kost</h1>
+<h1><?= htmlspecialchars(t('new_expense')) ?></h1>
 
 <form method="post">
-Datum:<br>
+
+<?= htmlspecialchars(t('date')) ?>:<br>
 <input type="date" name="expense_date"><br><br>
 
-Omschrijving:<br>
+<?= htmlspecialchars(t('description')) ?>:<br>
 <input type="text" name="description"><br><br>
 
-Bedrag:<br>
+<?= htmlspecialchars(t('amount')) ?>:<br>
 <input type="number" step="0.01" name="amount"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>

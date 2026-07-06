@@ -262,4 +262,6 @@ return [
 'new_harvest' => 'New harvest',
 'batch_id' => 'Batch ID',
 'weight_grams' => 'Weight (grams)',
+'expense_saved' => 'Expense saved!',
+'new_expense' => 'New expense',
 ];

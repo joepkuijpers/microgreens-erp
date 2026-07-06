@@ -286,4 +286,6 @@ return [
 'new_harvest' => 'Nieuwe oogst',
 'batch_id' => 'Batch ID',
 'weight_grams' => 'Gewicht (gram)',
+'expense_saved' => 'Kost opgeslagen!',
+'new_expense' => 'Nieuwe kost',
 ];
