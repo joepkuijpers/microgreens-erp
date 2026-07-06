@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $note = trim($_POST['note'] ?? '');
 
     if ($inventory_id <= 0 || $type === '' || $amount <= 0) {
-        die('Ongeldige invoer.');
+        die(t('invalid_inventory_input'));
     }
 
     $stmt = $db->prepare("
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$item) {
-        die('Voorraaditem niet gevonden.');
+        die(t('inventory_item_not_found'));
     }
 
     $quantity_before = (float)$item['quantity'];
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity_after = $quantity_before + $quantity_change;
 
     if ($quantity_after < 0) {
-        die('Fout: voorraad kan niet onder 0 komen.');
+        die(t('inventory_cannot_be_negative'));
     }
 
     $update = $db->prepare("
@@ -87,18 +87,27 @@ include 'includes/sidebar.php';
 ?>
 
 <div class="main">
-    <h1>➕ Voorraadmutatie toevoegen</h1>
+    <h1>➕ <?= htmlspecialchars(t('add_inventory_transaction')) ?></h1>
 
     <p>
-        <a class="btn" href="list_inventory.php">← Terug naar voorraad</a>
-        <a class="btn" href="inventory_transactions.php">📋 Mutaties</a>
+        <a class="btn" href="list_inventory.php">
+            ← <?= htmlspecialchars(t('back_to_inventory')) ?>
+        </a>
+
+        <a class="btn" href="inventory_transactions.php">
+            📋 <?= htmlspecialchars(t('transactions')) ?>
+        </a>
     </p>
 
     <div class="card">
         <form method="post">
-            <label>Voorraaditem</label><br>
+
+            <label><?= htmlspecialchars(t('inventory_item')) ?></label><br>
             <select name="inventory_id" required>
-                <option value="">-- Kies voorraaditem --</option>
+                <option value="">
+                    -- <?= htmlspecialchars(t('choose_inventory_item')) ?> --
+                </option>
+
                 <?php foreach ($items as $item): ?>
                     <option value="<?= htmlspecialchars((string)$item['id']) ?>">
                         <?= htmlspecialchars((string)$item['item_name']) ?>
@@ -108,9 +117,12 @@ include 'includes/sidebar.php';
                 <?php endforeach; ?>
             </select><br><br>
 
-            <label>Type mutatie</label><br>
+            <label><?= htmlspecialchars(t('transaction_type')) ?></label><br>
             <select name="type" required>
-                <option value="">-- Kies type --</option>
+                <option value="">
+                    -- <?= htmlspecialchars(t('choose_type')) ?> --
+                </option>
+
                 <option value="INKOOP">Inkoop / voorraad erbij</option>
                 <option value="VERBRUIK">Verbruik / voorraad eraf</option>
                 <option value="VERLIES">Verlies / weggegooid</option>
@@ -118,13 +130,25 @@ include 'includes/sidebar.php';
                 <option value="CORRECTIE_MIN">Correctie min</option>
             </select><br><br>
 
-            <label>Aantal</label><br>
-            <input type="number" step="0.01" name="amount" required><br><br>
+            <label><?= htmlspecialchars(t('quantity')) ?></label><br>
+            <input
+                type="number"
+                step="0.01"
+                name="amount"
+                required
+            ><br><br>
 
-            <label>Opmerking</label><br>
-            <input type="text" name="note" placeholder="Bijv. inkoop, telling, verlies, test"><br><br>
+            <label><?= htmlspecialchars(t('notes')) ?></label><br>
+            <input
+                type="text"
+                name="note"
+                placeholder="<?= htmlspecialchars(t('inventory_note_placeholder')) ?>"
+            ><br><br>
 
-            <button type="submit" class="btn">Mutatie opslaan</button>
+            <button type="submit" class="btn">
+                <?= htmlspecialchars(t('save_transaction')) ?>
+            </button>
+
         </form>
     </div>
 </div>
