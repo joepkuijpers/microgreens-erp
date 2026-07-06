@@ -13,7 +13,7 @@ $quantity = (float)($_POST['quantity'] ?? 0);
 $status = trim($_POST['status'] ?? 'betaald');
 
 if ($customer_id <= 0 || $product_id <= 0 || $sale_date === '' || $quantity <= 0) {
-    die('Ongeldige invoer.');
+  die(t('invalid_sale_input'));  
 }
 
 $stmt = $db->prepare("
@@ -25,7 +25,7 @@ $stmt->execute([':id' => $customer_id]);
 $customer = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$customer) {
-    die('Klant niet gevonden.');
+    die(t('customer_not_found'));
 }
 
 $stmt = $db->prepare("
@@ -43,14 +43,14 @@ $stmt->execute([':product_id' => $product_id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$product) {
-    die('Product niet gevonden in eindvoorraad.');
+    die(t('product_not_found_in_finished_inventory'));
 }
 
 $stock_before = (float)$product['stock_quantity'];
 $stock_after = $stock_before - $quantity;
 
 if ($stock_after < 0) {
-    die('Fout: onvoldoende eindvoorraad voor deze verkoop.');
+    die(t('insufficient_finished_inventory'));
 }
 
 $amount = $quantity * (float)$product['sale_price'];
@@ -93,5 +93,5 @@ try {
     exit;
 } catch (Exception $e) {
     $db->rollBack();
-    die('Fout bij opslaan verkoop: ' . $e->getMessage());
+    die(t('sale_save_error') . ': ' . $e->getMessage());
 }
