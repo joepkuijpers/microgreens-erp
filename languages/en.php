@@ -277,4 +277,7 @@ return [
 'confirm_delete_equipment' => 'Are you sure you want to delete this equipment?',
 'yes_delete' => 'Yes, delete',
 'cancel' => 'Cancel',
+'no_equipment_found' => 'No equipment registered yet.',
+'kwh_per_day' => 'kWh / day',
+'inactive' => 'Inactive',
 ];

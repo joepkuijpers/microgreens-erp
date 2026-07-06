@@ -1,9 +1,9 @@
 <?php
+require_once 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 include 'includes/energy_engine.php';
-require_once 'includes/language.php';
 
 $rows = $db->query("
     SELECT
@@ -18,28 +18,28 @@ $rows = $db->query("
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h1>⚡ Apparatuur</h1>
+<h1>⚡ <?= __('equipment') ?></h1>
 
 <p>
     <a href="add_equipment.php" class="btn">
-        ➕ Apparatuur toevoegen
+        ➕ <?= __('add_equipment') ?>
     </a>
 </p>
 
 <?php if (empty($rows)): ?>
-    <p>Nog geen apparatuur geregistreerd.</p>
+    <p><?= __('no_equipment_found') ?></p>
 <?php else: ?>
 
 <table>
     <thead>
         <tr>
-            <th>Naam</th>
-            <th>Rek</th>
-            <th>Vermogen (W)</th>
-            <th>Uren / dag</th>
-            <th>kWh / dag</th>
-            <th>Status</th>
-            <th>Acties</th>
+            <th><?= __('name') ?></th>
+            <th><?= __('rack') ?></th>
+            <th><?= __('wattage_w') ?></th>
+            <th><?= __('hours_per_day') ?></th>
+            <th><?= __('kwh_per_day') ?></th>
+            <th><?= __('status') ?></th>
+            <th><?= __('actions') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -56,12 +56,12 @@ $rows = $db->query("
                 <td><?= htmlspecialchars((string) $row['wattage']) ?></td>
                 <td><?= htmlspecialchars((string) $row['hours_per_day']) ?></td>
                 <td><?= htmlspecialchars(number_format($dailyKwh, 3, ',', '.')) ?></td>
-                <td><?= $row['is_active'] ? 'Actief' : 'Inactief' ?></td>
+                <td><?= $row['is_active'] ? __('active') : __('inactive') ?></td>
                 <td>
-    <a href="edit_equipment.php?id=<?= htmlspecialchars((string) $row['id']) ?>">✏️ Bewerken</a>
-    |
-    <a href="delete_equipment.php?id=<?= htmlspecialchars((string) $row['id']) ?>">🗑️ Verwijderen</a>
-</td>
+                    <a href="edit_equipment.php?id=<?= htmlspecialchars((string) $row['id']) ?>">✏️ <?= __('edit') ?></a>
+                    |
+                    <a href="delete_equipment.php?id=<?= htmlspecialchars((string) $row['id']) ?>">🗑️ <?= __('delete') ?></a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>

@@ -301,4 +301,7 @@ return [
 'confirm_delete_equipment' => 'Weet je zeker dat je dit apparaat wilt verwijderen?',
 'yes_delete' => 'Ja, verwijderen',
 'cancel' => 'Annuleren',
+'no_equipment_found' => 'Nog geen apparatuur geregistreerd.',
+'kwh_per_day' => 'kWh / dag',
+'inactive' => 'Inactief',
 ];
