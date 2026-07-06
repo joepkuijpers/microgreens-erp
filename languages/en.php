@@ -224,4 +224,7 @@ return [
 'save_transaction' => 'Save transaction',
 'inventory_item_not_found' => 'Inventory item not found.',
 'inventory_cannot_be_negative' => 'Error: inventory cannot go below 0.',
+'finished_inventory' => 'Finished inventory',
+'go_to_batch_management' => 'Go to batch management',
+'total_finished_inventory_sales_value' => 'Total finished inventory sales value',
 ];

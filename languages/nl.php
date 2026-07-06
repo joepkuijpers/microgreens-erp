@@ -248,4 +248,7 @@ return [
 'save_transaction' => 'Mutatie opslaan',
 'inventory_item_not_found' => 'Voorraaditem niet gevonden.',
 'inventory_cannot_be_negative' => 'Fout: voorraad kan niet onder 0 komen.',
+'finished_inventory' => 'Eindvoorraad',
+'go_to_batch_management' => 'Naar batchbeheer',
+'total_finished_inventory_sales_value' => 'Totale verkoopwaarde eindvoorraad',
 ];

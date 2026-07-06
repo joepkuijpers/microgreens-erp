@@ -26,14 +26,16 @@ $totalValue = $db->query("
 ?>
 
 <div class="main">
-    <h1>📦 Eindvoorraad</h1>
+<h1>📦 <?= htmlspecialchars(t('finished_inventory')) ?></h1>
 
-    <p>
-        <a class="btn" href="grow_batches.php">🌱 Naar batchbeheer</a>
-    </p>
+<p>
+    <a class="btn" href="grow_batches.php">
+        🌱 <?= htmlspecialchars(t('go_to_batch_management')) ?>
+    </a>
+</p>
 
-    <div class="card">
-        <h2>Totale verkoopwaarde eindvoorraad</h2>
+<div class="card">
+    <h2><?= htmlspecialchars(t('total_finished_inventory_sales_value')) ?></h2>
         <h1>€ <?= number_format((float)$totalValue['total'], 2, ',', '.') ?></h1>
     </div>
 
