@@ -77,29 +77,61 @@ include 'includes/sidebar.php';
 ?>
 
 <div class="main">
-    <h1>Voorraad bewerken</h1>
+<h1><?= htmlspecialchars(t('edit_inventory')) ?></h1>
 
-    <div class="card">
-        <form method="post">
-            <label>Artikelnaam</label><br>
-            <input type="text" name="item_name" value="<?= htmlspecialchars($item['item_name']) ?>" required><br><br>
+<div class="card">
+    <form method="post">
 
-            <label>Categorie</label><br>
-            <input type="text" name="category" value="<?= htmlspecialchars($item['category'] ?? '') ?>"><br><br>
+        <label><?= htmlspecialchars(t('item_name')) ?></label><br>
+        <input
+            type="text"
+            name="item_name"
+            value="<?= htmlspecialchars($item['item_name']) ?>"
+            required
+        ><br><br>
 
-            <label>Hoeveelheid</label><br>
-            <input type="number" step="0.01" name="quantity" value="<?= htmlspecialchars($item['quantity']) ?>" required><br><br>
+        <label><?= htmlspecialchars(t('category')) ?></label><br>
+        <input
+            type="text"
+            name="category"
+            value="<?= htmlspecialchars($item['category'] ?? '') ?>"
+        ><br><br>
 
-            <label>Eenheid</label><br>
-            <input type="text" name="unit" value="<?= htmlspecialchars($item['unit'] ?? '') ?>" required><br><br>
+        <label><?= htmlspecialchars(t('quantity')) ?></label><br>
+        <input
+            type="number"
+            step="0.01"
+            name="quantity"
+            value="<?= htmlspecialchars($item['quantity']) ?>"
+            required
+        ><br><br>
 
-            <label>Kostprijs per eenheid (€)</label><br>
-            <input type="number" step="0.01" name="unit_cost" value="<?= htmlspecialchars($item['unit_cost']) ?>" required><br><br>
+        <label><?= htmlspecialchars(t('unit')) ?></label><br>
+        <input
+            type="text"
+            name="unit"
+            value="<?= htmlspecialchars($item['unit'] ?? '') ?>"
+            required
+        ><br><br>
 
-            <button type="submit" class="btn">Opslaan</button>
-            <a href="list_inventory.php" class="btn">Terug</a>
-        </form>
-    </div>
+        <label><?= htmlspecialchars(t('unit_cost')) ?></label><br>
+        <input
+            type="number"
+            step="0.01"
+            name="unit_cost"
+            value="<?= htmlspecialchars($item['unit_cost']) ?>"
+            required
+        ><br><br>
+
+        <button type="submit" class="btn">
+            <?= htmlspecialchars(t('save')) ?>
+        </button>
+
+        <a href="list_inventory.php" class="btn">
+            <?= htmlspecialchars(t('back')) ?>
+        </a>
+
+    </form>
 </div>
 
 <?php include 'includes/footer.php'; ?>
