@@ -357,4 +357,9 @@ return [
 'status_ready_to_harvest' => 'Klaar om te oogsten',
 'type' => 'Type',
 'used' => 'Gebruikt',
+'transaction_purchase' => 'Inkoop / voorraad erbij',
+'transaction_usage' => 'Verbruik / voorraad eraf',
+'transaction_loss' => 'Verlies / weggegooid',
+'transaction_correction_plus' => 'Correctie plus',
+'transaction_correction_min' => 'Correctie min',
 ];

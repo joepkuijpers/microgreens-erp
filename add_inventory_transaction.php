@@ -123,11 +123,11 @@ include 'includes/sidebar.php';
                     -- <?= htmlspecialchars(__('choose_type')) ?> --
                 </option>
 
-                <option value="INKOOP">Inkoop / voorraad erbij</option>
-                <option value="VERBRUIK">Verbruik / voorraad eraf</option>
-                <option value="VERLIES">Verlies / weggegooid</option>
-                <option value="CORRECTIE_PLUS">Correctie plus</option>
-                <option value="CORRECTIE_MIN">Correctie min</option>
+                <option value="INKOOP"><?= htmlspecialchars(__('transaction_purchase')) ?></option>
+                <option value="VERBRUIK"><?= htmlspecialchars(__('transaction_usage')) ?></option>
+                <option value="VERLIES"><?= htmlspecialchars(__('transaction_loss')) ?></option>
+                <option value="CORRECTIE_PLUS"><?= htmlspecialchars(__('transaction_correction_plus')) ?></option>
+                <option value="CORRECTIE_MIN"><?= htmlspecialchars(__('transaction_correction_min')) ?></option>
             </select><br><br>
 
             <label><?= htmlspecialchars(__('quantity')) ?></label><br>

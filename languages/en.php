@@ -351,4 +351,9 @@ return [
 'status_ready_to_harvest' => 'Ready to harvest',
 'type' => 'Type',
 'used' => 'Used',
+'transaction_purchase' => 'Purchase / stock added',
+'transaction_usage' => 'Usage / stock removed',
+'transaction_loss' => 'Loss / discarded',
+'transaction_correction_plus' => 'Correction plus',
+'transaction_correction_min' => 'Correction minus',
 ];
