@@ -12,18 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->execute([$name]);
 
-    echo "<p>Leverancier opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('supplier_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe leverancier</h1>
+<h1><?= htmlspecialchars(t('new_supplier')) ?></h1>
 
 <form method="post">
-    Naam:<br>
+    <?= htmlspecialchars(t('name')) ?>:<br>
     <input type="text" name="name"><br><br>
 
-    <input type="submit" value="Opslaan">
+    <input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>

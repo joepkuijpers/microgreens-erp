@@ -240,4 +240,9 @@ return [
 'email' => 'Email',
 'phone' => 'Phone',
 'no_customers_found' => 'No customers found.',
+'no_suppliers_found' => 'No suppliers found.',
+'supplier_saved' => 'Supplier saved!',
+'new_supplier' => 'New supplier',
+'save' => 'Save',
+'menu' => 'Menu',
 ];

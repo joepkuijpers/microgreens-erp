@@ -264,4 +264,9 @@ return [
 'email' => 'E-mail',
 'phone' => 'Telefoon',
 'no_customers_found' => 'Nog geen klanten gevonden.',
+'no_suppliers_found' => 'Nog geen leveranciers gevonden.',
+'supplier_saved' => 'Leverancier opgeslagen!',
+'new_supplier' => 'Nieuwe leverancier',
+'save' => 'Opslaan',
+'menu' => 'Menu',
 ];
