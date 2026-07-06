@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $finished_quantity = (float)($_POST['finished_quantity'] ?? 0);
 
     if ($harvest_date === '' || $weight_grams <= 0 || $product_id <= 0 || $finished_quantity <= 0) {
-        die('Ongeldige invoer. Controleer oogstdatum, gewicht, product en hoeveelheid.');
+        die(t('invalid_harvest_input'));
     }
 
     $stmt = $db->prepare("
@@ -137,10 +137,10 @@ include 'includes/sidebar.php';
     <h1>🌾 <?= htmlspecialchars(t('harvest_batch')) ?></h1>
 
     <div class="card">
-        <p><strong>Gewas:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
-        <p><strong>Zaaidatum:</strong> <?= htmlspecialchars((string)$batch['sow_date']) ?></p>
-        <p><strong>Verwachte oogstdatum:</strong> <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></p>
-        <p><strong>Trays:</strong> <?= htmlspecialchars((string)$batch['tray_count']) ?></p>
+     <p><strong><?= htmlspecialchars(t('crop')) ?>:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
+<p><strong><?= htmlspecialchars(t('sowing_date')) ?>:</strong> <?= htmlspecialchars((string)$batch['sow_date']) ?></p>
+<p><strong><?= htmlspecialchars(t('expected_harvest_date')) ?>:</strong> <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></p>
+<p><strong><?= htmlspecialchars(t('trays')) ?>:</strong> <?= htmlspecialchars((string)$batch['tray_count']) ?></p>   
     </div>
 
     <div class="card">
@@ -151,7 +151,7 @@ include 'includes/sidebar.php';
             </p>
 
             <p>
-                Oogstgewicht in gram<br>
+                <?= htmlspecialchars(t('harvest_weight_grams')) ?><br>
                 <input type="number" step="0.01" name="weight_grams" required>
             </p>
 
