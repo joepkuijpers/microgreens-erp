@@ -1,7 +1,5 @@
 <div class="card">
 
-<h2>⚡ <?= __('quick_actions') ?></h2>
-
 <a class="button" href="add_batch_form.php">
     🌱 <?= __('new_batch') ?>
 </a>
