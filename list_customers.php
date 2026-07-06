@@ -15,22 +15,22 @@ $customers = $db->query("
 ?>
 
 <div class="main">
-    <h1>👥 Klanten</h1>
+    <h1><?= htmlspecialchars(t('customers')) ?></h1>
 
     <div class="card">
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Naam</th>
-                    <th>E-mail</th>
-                    <th>Telefoon</th>
+                    <th><?= htmlspecialchars(t('id')) ?></th>
+                    <th><?= htmlspecialchars(t('name')) ?></th>
+                    <th><?= htmlspecialchars(t('email')) ?></th>
+                    <th><?= htmlspecialchars(t('phone')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($customers)): ?>
                     <tr>
-                        <td colspan="4">Nog geen klanten gevonden.</td>
+                        <td colspan="4"><?= htmlspecialchars(t('no_customers_found')) ?></td>
                     </tr>
                 <?php endif; ?>
 

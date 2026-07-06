@@ -236,4 +236,8 @@ return [
 'date' => 'Date',
 'amount' => 'Amount',
 'status' => 'Status',
+'name' => 'Name',
+'email' => 'Email',
+'phone' => 'Phone',
+'no_customers_found' => 'No customers found.',
 ];

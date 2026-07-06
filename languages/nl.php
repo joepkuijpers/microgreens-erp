@@ -260,4 +260,8 @@ return [
 'date' => 'Datum',
 'amount' => 'Bedrag',
 'status' => 'Status',
+'name' => 'Naam',
+'email' => 'E-mail',
+'phone' => 'Telefoon',
+'no_customers_found' => 'Nog geen klanten gevonden.',
 ];
