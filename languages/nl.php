@@ -296,4 +296,6 @@ return [
 'wattage_w' => 'Vermogen (W)',
 'hours_per_day' => 'Uren per dag',
 'active' => 'Actief',
+'equipment_not_found' => 'Apparaat niet gevonden.',
+'equipment_updated' => 'Apparaat succesvol bijgewerkt.',
 ];

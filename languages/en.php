@@ -272,4 +272,6 @@ return [
 'wattage_w' => 'Wattage (W)',
 'hours_per_day' => 'Hours per day',
 'active' => 'Active',
+'equipment_not_found' => 'Equipment not found.',
+'equipment_updated' => 'Equipment updated successfully.',
 ];

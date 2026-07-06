@@ -24,8 +24,8 @@ $stmt->execute([
 $equipment = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$equipment) {
- echo "<h1>✏️ " . __('edit_equipment') . "</h1>";   
-    echo "<p>Apparaat niet gevonden.</p>";
+    echo "<h1>✏️ " . __('edit_equipment') . "</h1>";
+    echo "<p>" . htmlspecialchars(__('equipment_not_found')) . "</p>";
     include 'includes/footer.php';
     exit;
 }
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':id' => $id
     ]);
 
-    $message = 'Apparaat succesvol bijgewerkt.';
+    $message = __('equipment_updated');
 
     $stmt->execute([
         ':id' => $id
@@ -76,24 +76,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
 <form method="post">
-    <label>Naam</label><br>
+    <label><?= __('name') ?></label><br>
     <input type="text" name="name" value="<?= htmlspecialchars((string) $equipment['name']) ?>" required><br><br>
 
-    <label>Rek</label><br>
+    <label><?= __('rack') ?></label><br>
     <input type="text" name="rack_name" value="<?= htmlspecialchars((string) $equipment['rack_name']) ?>"><br><br>
 
-    <label>Vermogen (W)</label><br>
+    <label><?= __('wattage_w') ?></label><br>
     <input type="number" name="wattage" step="0.1" min="0" value="<?= htmlspecialchars((string) $equipment['wattage']) ?>"><br><br>
 
-    <label>Uren per dag</label><br>
+    <label><?= __('hours_per_day') ?></label><br>
     <input type="number" name="hours_per_day" step="0.1" min="0" value="<?= htmlspecialchars((string) $equipment['hours_per_day']) ?>"><br><br>
 
     <label>
         <input type="checkbox" name="is_active" <?= $equipment['is_active'] ? 'checked' : '' ?>>
-        Actief
+        <?= __('active') ?>
     </label><br><br>
 
-    <button type="submit">Opslaan</button>
+    <button type="submit"><?= __('save') ?></button>
 </form>
 
 <?php include 'includes/footer.php'; ?>
