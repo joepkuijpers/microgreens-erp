@@ -245,4 +245,8 @@ return [
 'new_supplier' => 'New supplier',
 'save' => 'Save',
 'menu' => 'Menu',
+'category' => 'Category',
+'unit' => 'Unit',
+'sale_price' => 'Sale price',
+'no_products_found' => 'No products found.',
 ];

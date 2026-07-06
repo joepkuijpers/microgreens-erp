@@ -269,4 +269,8 @@ return [
 'new_supplier' => 'Nieuwe leverancier',
 'save' => 'Opslaan',
 'menu' => 'Menu',
+'category' => 'Categorie',
+'unit' => 'Eenheid',
+'sale_price' => 'Verkoopprijs',
+'no_products_found' => 'Nog geen producten gevonden.',
 ];
