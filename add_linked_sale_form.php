@@ -29,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['status']
     ]);
 
-    echo "<p>Gekoppelde verkoop opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('linked_sale_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe gekoppelde verkoop</h1>
+<h1><?= htmlspecialchars(t('new_linked_sale')) ?></h1>
 
 <form method="post">
 
-Klant:<br>
+<?= htmlspecialchars(t('customer')) ?>:<br>
 <select name="customer_id">
 <?php
 foreach ($customers as $c) {
@@ -46,7 +46,7 @@ foreach ($customers as $c) {
 ?>
 </select><br><br>
 
-Product:<br>
+<?= htmlspecialchars(t('product')) ?>:<br>
 <select name="product_id">
 <?php
 foreach ($products as $p) {
@@ -55,21 +55,21 @@ foreach ($products as $p) {
 ?>
 </select><br><br>
 
-Datum:<br>
+<?= htmlspecialchars(t('date')) ?>:<br>
 <input type="date" name="sale_date"><br><br>
 
-Aantal:<br>
+<?= htmlspecialchars(t('quantity')) ?>:<br>
 <input type="number" step="0.01" name="quantity"><br><br>
 
-Bedrag:<br>
+<?= htmlspecialchars(t('amount')) ?>:<br>
 <input type="number" step="0.01" name="amount"><br><br>
 
-Status:<br>
+<?= htmlspecialchars(t('status')) ?>:<br>
 <input type="text" name="status" value="betaald"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>

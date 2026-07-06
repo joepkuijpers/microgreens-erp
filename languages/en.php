@@ -264,4 +264,6 @@ return [
 'weight_grams' => 'Weight (grams)',
 'expense_saved' => 'Expense saved!',
 'new_expense' => 'New expense',
+'linked_sale_saved' => 'Linked sale saved!',
+'new_linked_sale' => 'New linked sale',
 ];

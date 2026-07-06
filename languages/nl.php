@@ -288,4 +288,6 @@ return [
 'weight_grams' => 'Gewicht (gram)',
 'expense_saved' => 'Kost opgeslagen!',
 'new_expense' => 'Nieuwe kost',
+'linked_sale_saved' => 'Gekoppelde verkoop opgeslagen!',
+'new_linked_sale' => 'Nieuwe gekoppelde verkoop',
 ];
