@@ -56,3 +56,6 @@ hardware/priority/priority.log
 # Hardware health runtime
 hardware/health/state.json
 hardware/health/health.log
+# Python cache
+__pycache__/
+*.py[cod]
