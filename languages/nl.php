@@ -304,4 +304,11 @@ return [
 'no_equipment_found' => 'Nog geen apparatuur geregistreerd.',
 'kwh_per_day' => 'kWh / dag',
 'inactive' => 'Inactief',
+'minimum_lux' => 'Minimum Lux',
+'maximum_lux' => 'Maximum Lux',
+'minimum_temperature_c' => 'Minimum temperatuur °C',
+'maximum_temperature_c' => 'Maximum temperatuur °C',
+'minimum_humidity_percent' => 'Minimum luchtvochtigheid %',
+'maximum_humidity_percent' => 'Maximum luchtvochtigheid %',
+'refresh_interval_seconds' => 'Verversinterval seconden',
 ];

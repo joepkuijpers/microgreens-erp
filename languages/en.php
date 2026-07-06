@@ -280,4 +280,11 @@ return [
 'no_equipment_found' => 'No equipment registered yet.',
 'kwh_per_day' => 'kWh / day',
 'inactive' => 'Inactive',
+'minimum_lux' => 'Minimum Lux',
+'maximum_lux' => 'Maximum Lux',
+'minimum_temperature_c' => 'Minimum temperature °C',
+'maximum_temperature_c' => 'Maximum temperature °C',
+'minimum_humidity_percent' => 'Minimum humidity %',
+'maximum_humidity_percent' => 'Maximum humidity %',
+'refresh_interval_seconds' => 'Refresh interval seconds',
 ];

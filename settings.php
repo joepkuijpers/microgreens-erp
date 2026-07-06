@@ -4,7 +4,6 @@ include 'includes/sidebar.php';
 include 'db_connect.php';
 include 'includes/language.php';
 
-
 $message = "";
 
 $allowedLanguages = [
@@ -116,31 +115,31 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
     <form method="post">
         <div class="settings-card">
 
- <h2>🌞 <?= __('light') ?></h2>           
+            <h2>🌞 <?= __('light') ?></h2>
 
-            <label>Minimum Lux</label><br>
+            <label><?= __('minimum_lux') ?></label><br>
             <input type="number" name="light_min" value="<?= htmlspecialchars($settings['light_min']) ?>"><br><br>
 
-            <label>Maximum Lux</label><br>
+            <label><?= __('maximum_lux') ?></label><br>
             <input type="number" name="light_max" value="<?= htmlspecialchars($settings['light_max']) ?>"><br><br>
 
             <h2>🌡 <?= __('climate') ?></h2>
 
-            <label>Minimum temperatuur °C</label><br>
+            <label><?= __('minimum_temperature_c') ?></label><br>
             <input type="number" step="0.1" name="temp_min" value="<?= htmlspecialchars($settings['temp_min']) ?>"><br><br>
 
-            <label>Maximum temperatuur °C</label><br>
+            <label><?= __('maximum_temperature_c') ?></label><br>
             <input type="number" step="0.1" name="temp_max" value="<?= htmlspecialchars($settings['temp_max']) ?>"><br><br>
 
-            <label>Minimum luchtvochtigheid %</label><br>
+            <label><?= __('minimum_humidity_percent') ?></label><br>
             <input type="number" step="0.1" name="humidity_min" value="<?= htmlspecialchars($settings['humidity_min']) ?>"><br><br>
 
-            <label>Maximum luchtvochtigheid %</label><br>
+            <label><?= __('maximum_humidity_percent') ?></label><br>
             <input type="number" step="0.1" name="humidity_max" value="<?= htmlspecialchars($settings['humidity_max']) ?>"><br><br>
 
             <h2>📈 <?= __('dashboard') ?></h2>
 
-            <label>Verversinterval seconden</label><br>
+            <label><?= __('refresh_interval_seconds') ?></label><br>
             <input type="number" name="refresh_seconds" value="<?= htmlspecialchars($settings['refresh_seconds']) ?>"><br><br>
 
             <h2>🌍 <?= __('language') ?></h2>
@@ -154,7 +153,7 @@ $settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_
                 <?php endforeach; ?>
             </select><br><br>
 
-          <button class="save-btn" type="submit">💾 <?= __('save_settings') ?></button>  
+            <button class="save-btn" type="submit">💾 <?= __('save_settings') ?></button>
 
         </div>
     </form>
