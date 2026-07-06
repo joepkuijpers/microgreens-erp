@@ -16,27 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['status']
     ]);
 
-    echo "<p>Teelt opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('batch_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe teelt</h1>
+<h1><?= htmlspecialchars(t('new_batch')) ?></h1>
 
 <form method="post">
-Gewas:<br>
+
+<?= htmlspecialchars(t('crop')) ?>:<br>
 <input type="text" name="crop"><br><br>
 
-Zaaidatum:<br>
+<?= htmlspecialchars(t('sow_date')) ?>:<br>
 <input type="date" name="sow_date"><br><br>
 
-Aantal trays:<br>
+<?= htmlspecialchars(t('tray_count')) ?>:<br>
 <input type="number" name="tray_count"><br><br>
 
-Tray type:<br>
+<?= htmlspecialchars(t('tray_type')) ?>:<br>
 <input type="text" name="tray_type" value="1020 tray"><br><br>
 
-Status:<br>
+<?= htmlspecialchars(t('status')) ?>:<br>
 <input type="text" name="status" value="gezaaid"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
+
 </form>

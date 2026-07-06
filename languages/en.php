@@ -254,4 +254,8 @@ return [
 'notes' => 'Notes',
 'customer_saved' => 'Customer saved!',
 'new_customer' => 'New customer',
+'batch_saved' => 'Batch saved!',
+'new_batch' => 'New batch',
+'tray_count' => 'Tray count',
+'tray_type' => 'Tray type',
 ];

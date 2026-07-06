@@ -278,4 +278,8 @@ return [
 'notes' => 'Notities',
 'customer_saved' => 'Klant opgeslagen!',
 'new_customer' => 'Nieuwe klant',
+'batch_saved' => 'Teelt opgeslagen!',
+'new_batch' => 'Nieuwe teelt',
+'tray_count' => 'Aantal trays',
+'tray_type' => 'Tray type',
 ];
