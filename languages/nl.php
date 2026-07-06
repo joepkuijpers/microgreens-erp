@@ -282,4 +282,8 @@ return [
 'new_batch' => 'Nieuwe teelt',
 'tray_count' => 'Aantal trays',
 'tray_type' => 'Tray type',
+'harvest_saved' => 'Oogst opgeslagen!',
+'new_harvest' => 'Nieuwe oogst',
+'batch_id' => 'Batch ID',
+'weight_grams' => 'Gewicht (gram)',
 ];

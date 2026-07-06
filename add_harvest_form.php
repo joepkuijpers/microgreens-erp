@@ -16,28 +16,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['quality_notes']
     ]);
 
-    echo "<p>Oogst opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(t('harvest_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe oogst</h1>
+<h1><?= htmlspecialchars(t('new_harvest')) ?></h1>
 
 <form method="post">
 
-Batch ID:<br>
+<?= htmlspecialchars(t('batch_id')) ?>:<br>
 <input type="number" name="batch_id"><br><br>
 
-Oogstdatum:<br>
+<?= htmlspecialchars(t('harvest_date')) ?>:<br>
 <input type="date" name="harvest_date"><br><br>
 
-Gewicht (gram):<br>
+<?= htmlspecialchars(t('weight_grams')) ?>:<br>
 <input type="number" step="0.1" name="weight_grams"><br><br>
 
-Opmerking:<br>
+<?= htmlspecialchars(t('quality_notes')) ?>:<br>
 <input type="text" name="quality_notes"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(t('save')) ?>">
 
 </form>
 
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(t('menu')) ?></a>

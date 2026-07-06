@@ -258,4 +258,8 @@ return [
 'new_batch' => 'New batch',
 'tray_count' => 'Tray count',
 'tray_type' => 'Tray type',
+'harvest_saved' => 'Harvest saved!',
+'new_harvest' => 'New harvest',
+'batch_id' => 'Batch ID',
+'weight_grams' => 'Weight (grams)',
 ];
