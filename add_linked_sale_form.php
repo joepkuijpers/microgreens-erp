@@ -1,5 +1,6 @@
 <?php
-require 'config/database.php';
+require 'db_connect.php';
+require 'includes/language.php';
 
 $customers = $db->query("SELECT id, name FROM customers ORDER BY name")->fetchAll();
 $products = $db->query("SELECT id, name, sale_price FROM products ORDER BY name")->fetchAll();
@@ -12,22 +13,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $customer_name = $db->query("SELECT name FROM customers WHERE id = $customer_id")->fetchColumn();
     $product_name = $db->query("SELECT name FROM products WHERE id = $product_id")->fetchColumn();
 
-    $stmt = $db->prepare("
-        INSERT INTO sales
-        (customer_id, product_id, customer_name, product, sale_date, quantity, amount, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ");
+$inventory_stmt = $db->prepare("
+    SELECT batch_id, harvest_id
+    FROM finished_inventory
+    WHERE product_id = ?
+      AND quantity > 0
+    ORDER BY id ASC
+    LIMIT 1
+");
+$inventory_stmt->execute([$product_id]);
+$inventory_trace = $inventory_stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt->execute([
-        $customer_id,
-        $product_id,
-        $customer_name,
-        $product_name,
-        $_POST['sale_date'],
-        $_POST['quantity'],
-        $_POST['amount'],
-        $_POST['status']
-    ]);
+$batch_id = $inventory_trace['batch_id'] ?? null;
+$harvest_id = $inventory_trace['harvest_id'] ?? null;
+
+$stmt = $db->prepare("
+    INSERT INTO sales
+    (customer_id, product_id, customer_name, product, sale_date, quantity, amount, status, batch_id, harvest_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
+
+$stmt->execute([
+    $customer_id,
+    $product_id,
+    $customer_name,
+    $product_name,
+    $_POST['sale_date'],
+    $_POST['quantity'],
+    $_POST['amount'],
+    $_POST['status'],
+    $batch_id,
+    $harvest_id
+]);
 
     echo '<p>' . htmlspecialchars(__('linked_sale_saved')) . '</p>';
 }
