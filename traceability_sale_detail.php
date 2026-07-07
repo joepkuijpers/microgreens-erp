@@ -62,7 +62,14 @@ if (!$sale) {
         →
         <strong>Harvest #<?= htmlspecialchars((string)($sale['harvest_id'] ?? '-')) ?></strong>
         →
-        <strong>Grow Batch #<?= htmlspecialchars((string)($sale['batch_id'] ?? '-')) ?></strong>
+        <?php if (!empty($sale['batch_id'])): ?>
+    <a class="btn" href="batch_details.php?id=<?= urlencode((string)$sale['batch_id']) ?>">
+        Grow Batch #<?= htmlspecialchars((string)$sale['batch_id']) ?>
+    </a>
+<?php else: ?>
+    <strong>Grow Batch #-</strong>
+<?php endif; ?>
+
     </p>
 </div>
 <div class="card">
