@@ -1,7 +1,8 @@
 <?php
+include 'db_connect.php';
+include 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
-include 'db_connect.php';
 
 $sales = $db->query("
     SELECT
@@ -52,6 +53,7 @@ $total = $db->query("
                     <th><?= htmlspecialchars(__('quantity')) ?></th>
                     <th><?= htmlspecialchars(__('amount')) ?></th>
                     <th><?= htmlspecialchars(__('status')) ?></th>
+                <th>Details</th>
                 </tr>
             </thead>
             <tbody>    
@@ -66,6 +68,7 @@ $total = $db->query("
                         <td><?= number_format((float)$sale['quantity'], 2, ',', '.') ?></td>
                         <td>€ <?= number_format((float)$sale['amount'], 2, ',', '.') ?></td>
                         <td><?= htmlspecialchars((string)$sale['status']) ?></td>                  
+                    <td><a class="btn" href="traceability_sale_detail.php?id=<?= urlencode((string)$sale['id']) ?>">🔎 Details</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
