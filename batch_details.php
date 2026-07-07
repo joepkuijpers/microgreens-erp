@@ -60,6 +60,7 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
         <table>
             <tr><th>ID</th><td><?= htmlspecialchars($batch['id']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('crop')) ?></th><td><?= htmlspecialchars($batch['crop']) ?></td></tr>
+            <tr><th>Crop Profile ID</th><td><?= htmlspecialchars((string)($batch['crop_profile_id'] ?? '-')) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('status')) ?></th><td><?= htmlspecialchars($batch['status']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('sowing_date')) ?></th><td><?= htmlspecialchars($batch['sow_date']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('expected_harvest_date')) ?></th><td><?= htmlspecialchars($batch['expected_harvest_date'] ?? '-') ?></td></tr>
