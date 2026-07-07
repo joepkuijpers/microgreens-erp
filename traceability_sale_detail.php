@@ -52,7 +52,19 @@ if (!$sale) {
 <div class="main">
 
 <h1>🔎 Traceability Detail</h1>
+<div class="card">
+    <h2>Traceability Chain</h2>
 
+    <p>
+        <strong>Sale #<?= htmlspecialchars((string)$sale['id']) ?></strong>
+        →
+        <strong><?= htmlspecialchars((string)$sale['product_name']) ?></strong>
+        →
+        <strong>Harvest #<?= htmlspecialchars((string)($sale['harvest_id'] ?? '-')) ?></strong>
+        →
+        <strong>Grow Batch #<?= htmlspecialchars((string)($sale['batch_id'] ?? '-')) ?></strong>
+    </p>
+</div>
 <div class="card">
     <h2>Sale</h2>
 
