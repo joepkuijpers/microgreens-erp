@@ -1,5 +1,6 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
@@ -14,9 +15,11 @@ $stmt = $db->prepare("
         g.*,
         i.item_name AS seed_name,
         i.category AS seed_category,
-        i.unit AS seed_stock_unit
+        i.unit AS seed_stock_unit,
+        cp.crop_name AS crop_profile_name
     FROM grow_batches g
     LEFT JOIN inventory i ON i.id = g.inventory_id
+    LEFT JOIN crop_profiles cp ON cp.id = g.crop_profile_id
     WHERE g.id = :id
 ");
 $stmt->execute([':id' => $id]);
@@ -60,7 +63,21 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
         <table>
             <tr><th>ID</th><td><?= htmlspecialchars($batch['id']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('crop')) ?></th><td><?= htmlspecialchars($batch['crop']) ?></td></tr>
-            <tr><th>Crop Profile ID</th><td><?= htmlspecialchars((string)($batch['crop_profile_id'] ?? '-')) ?></td></tr>
+            <tr>
+                <th>Crop Profile</th>
+                <td>
+                    <?php
+                    if (!empty($batch['crop_profile_name'])) {
+                        echo htmlspecialchars($batch['crop_profile_name'])
+                            . ' (ID '
+                            . htmlspecialchars((string)$batch['crop_profile_id'])
+                            . ')';
+                    } else {
+                        echo '-';
+                    }
+                    ?>
+                </td>
+            </tr>
             <tr><th><?= htmlspecialchars(__('status')) ?></th><td><?= htmlspecialchars($batch['status']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('sowing_date')) ?></th><td><?= htmlspecialchars($batch['sow_date']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('expected_harvest_date')) ?></th><td><?= htmlspecialchars($batch['expected_harvest_date'] ?? '-') ?></td></tr>
