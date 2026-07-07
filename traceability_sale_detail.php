@@ -60,7 +60,13 @@ if (!$sale) {
         →
         <strong><?= htmlspecialchars((string)$sale['product_name']) ?></strong>
         →
-        <strong>Harvest #<?= htmlspecialchars((string)($sale['harvest_id'] ?? '-')) ?></strong>
+       <?php if (!empty($sale['harvest_id'])): ?>
+    <a class="btn" href="harvest_details.php?id=<?= urlencode((string)$sale['harvest_id']) ?>">
+        Harvest #<?= htmlspecialchars((string)$sale['harvest_id']) ?>
+    </a>
+<?php else: ?>
+    <strong>Harvest #-</strong>
+<?php endif; ?> 
         →
         <?php if (!empty($sale['batch_id'])): ?>
     <a class="btn" href="batch_details.php?id=<?= urlencode((string)$sale['batch_id']) ?>">
