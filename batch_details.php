@@ -68,10 +68,14 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                     <?php
                     if (!empty($batch['crop_profile_name'])) {
-                        echo htmlspecialchars($batch['crop_profile_name'])
+                                            echo '<a href="crop_profile_details.php?id='
+                            . urlencode((string)$batch['crop_profile_id'])
+                            . '">'
+                            . htmlspecialchars($batch['crop_profile_name'])
+                            . '</a>'
                             . ' (ID '
                             . htmlspecialchars((string)$batch['crop_profile_id'])
-                            . ')';
+                            . ')';   
                     } else {
                         echo '-';
                     }
