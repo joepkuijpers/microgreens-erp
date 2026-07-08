@@ -1,11 +1,13 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
 $transactions = $db->query("
     SELECT
         it.id,
+        it.inventory_id,
         it.transaction_date,
         it.type,
         it.quantity_change,
@@ -56,14 +58,22 @@ $transactions = $db->query("
                 <?php foreach ($transactions as $transaction): ?>
                     <tr>
                         <td><?= htmlspecialchars((string)$transaction['transaction_date']) ?></td>
-                        <td><?= htmlspecialchars((string)($transaction['item_name'] ?? 'Onbekend item')) ?></td>
+                        <td>
+                            <?php if (!empty($transaction['inventory_id'])): ?>
+                                <a href="edit_inventory.php?id=<?= urlencode((string)$transaction['inventory_id']) ?>">
+                                    <?= htmlspecialchars((string)($transaction['item_name'] ?? 'Onbekend item')) ?>
+                                </a>
+                            <?php else: ?>
+                                <?= htmlspecialchars((string)($transaction['item_name'] ?? 'Onbekend item')) ?>
+                            <?php endif; ?>
+                        </td>
                         <td><?= htmlspecialchars((string)$transaction['type']) ?></td>
                         <td>
-                            <?= number_format((float)$transaction['quantity_change'], 2, ',', '.') ?>
+                            <?= htmlspecialchars(number_format((float)$transaction['quantity_change'], 2, ',', '.')) ?>
                             <?= htmlspecialchars((string)($transaction['unit'] ?? '')) ?>
                         </td>
-                        <td><?= number_format((float)$transaction['quantity_before'], 2, ',', '.') ?></td>
-                        <td><?= number_format((float)$transaction['quantity_after'], 2, ',', '.') ?></td>
+                        <td><?= htmlspecialchars(number_format((float)$transaction['quantity_before'], 2, ',', '.')) ?></td>
+                        <td><?= htmlspecialchars(number_format((float)$transaction['quantity_after'], 2, ',', '.')) ?></td>
                         <td><?= htmlspecialchars((string)($transaction['note'] ?? '-')) ?></td>
                     </tr>
                 <?php endforeach; ?>
