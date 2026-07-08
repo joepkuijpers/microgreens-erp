@@ -196,11 +196,12 @@ if ($expectedTotalYield > 0) {
                     <th><?= htmlspecialchars(__('date')) ?></th>
                     <th><?= htmlspecialchars(__('weight_grams')) ?></th>
                     <th><?= htmlspecialchars(__('quality_notes')) ?></th>
+                    <th><?= htmlspecialchars(__('details')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (count($harvestRows) === 0): ?>
-                    <tr><td colspan="4"><?= htmlspecialchars(__('no_harvests_registered')) ?></td></tr>
+                    <tr><td colspan="5"><?= htmlspecialchars(__('no_harvests_registered')) ?></td></tr>
                 <?php endif; ?>
 
                 <?php foreach ($harvestRows as $harvest): ?>
@@ -208,8 +209,11 @@ if ($expectedTotalYield > 0) {
                         <td><?= htmlspecialchars((string)$harvest['id']) ?></td>
                         <td><?= htmlspecialchars($harvest['harvest_date']) ?></td>
                         <td><?= number_format((float)$harvest['weight_grams'], 2, ',', '.') ?></td>
-                        <td><?= htmlspecialchars($harvest['quality_notes'] ?? '') ?></td>
-                    </tr>
+                        <td>
+    <a href="harvest_details.php?id=<?= urlencode((string)$harvest['id']) ?>">
+        🔍 <?= htmlspecialchars(__('details')) ?>
+    </a>
+</td>
                 <?php endforeach; ?>
             </tbody>
         </table>
