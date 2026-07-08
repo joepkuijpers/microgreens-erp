@@ -33,7 +33,11 @@ if (!$batch) {
 }
 
 $harvests = $db->prepare("
-    SELECT *
+    SELECT
+        id,
+        harvest_date,
+        weight_grams,
+        quality_notes
     FROM harvests
     WHERE batch_id = :id
     ORDER BY harvest_date DESC, id DESC
@@ -42,7 +46,14 @@ $harvests->execute([':id' => $id]);
 $harvestRows = $harvests->fetchAll(PDO::FETCH_ASSOC);
 
 $transactions = $db->prepare("
-    SELECT *
+    SELECT
+        transaction_date,
+        type,
+        quantity_before,
+        quantity_after,
+        quantity_change,
+        unit,
+        note
     FROM inventory_transactions
     WHERE reference_type = 'grow_batch'
       AND reference_id = :id
@@ -209,11 +220,13 @@ if ($expectedTotalYield > 0) {
                         <td><?= htmlspecialchars((string)$harvest['id']) ?></td>
                         <td><?= htmlspecialchars($harvest['harvest_date']) ?></td>
                         <td><?= number_format((float)$harvest['weight_grams'], 2, ',', '.') ?></td>
+                        <td><?= htmlspecialchars($harvest['quality_notes'] ?? '') ?></td>
                         <td>
-    <a href="harvest_details.php?id=<?= urlencode((string)$harvest['id']) ?>">
-        🔍 <?= htmlspecialchars(__('details')) ?>
-    </a>
-</td>
+                            <a href="harvest_details.php?id=<?= urlencode((string)$harvest['id']) ?>">
+                                🔍 <?= htmlspecialchars(__('details')) ?>
+                            </a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
