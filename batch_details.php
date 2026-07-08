@@ -16,7 +16,8 @@ $stmt = $db->prepare("
         i.item_name AS seed_name,
         i.category AS seed_category,
         i.unit AS seed_stock_unit,
-        cp.crop_name AS crop_profile_name
+        cp.crop_name AS crop_profile_name,
+        cp.expected_yield_grams_per_tray
     FROM grow_batches g
     LEFT JOIN inventory i ON i.id = g.inventory_id
     LEFT JOIN crop_profiles cp ON cp.id = g.crop_profile_id
@@ -47,6 +48,26 @@ $transactions = $db->prepare("
 ");
 $transactions->execute([':id' => $id]);
 $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
+
+$totalHarvestedGrams = 0;
+
+foreach ($harvestRows as $harvest) {
+    $totalHarvestedGrams += (float)($harvest['weight_grams'] ?? 0);
+}
+
+$trayCount = (int)($batch['tray_count'] ?? 0);
+$expectedYieldPerTray = (float)($batch['expected_yield_grams_per_tray'] ?? 0);
+$expectedTotalYield = $trayCount * $expectedYieldPerTray;
+
+$actualYieldPerTray = $trayCount > 0
+    ? $totalHarvestedGrams / $trayCount
+    : 0;
+
+$yieldDifference = $totalHarvestedGrams - $expectedTotalYield;
+
+$yieldDifferencePercent = $expectedTotalYield > 0
+    ? ($yieldDifference / $expectedTotalYield) * 100
+    : 0;
 ?>
 
 <div class="main">
@@ -54,45 +75,54 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 
     <p>
         <a class="btn" href="grow_batches.php">← <?= htmlspecialchars(__('back_to_batch_management')) ?></a>
-        <a class="btn" href="edit_batch.php?id=<?= urlencode($batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
-        <a class="btn" href="harvest_batch.php?id=<?= urlencode($batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
+        <a class="btn" href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
+        <a class="btn" href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
     </p>
 
     <div class="card">
         <h2><?= htmlspecialchars(__('batch_information')) ?></h2>
+
         <table>
-            <tr><th>ID</th><td><?= htmlspecialchars($batch['id']) ?></td></tr>
+            <tr><th>ID</th><td><?= htmlspecialchars((string)$batch['id']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('crop')) ?></th><td><?= htmlspecialchars($batch['crop']) ?></td></tr>
             <tr>
                 <th>Crop Profile</th>
                 <td>
-                    <?php
-                    if (!empty($batch['crop_profile_name'])) {
-                                            echo '<a href="crop_profile_details.php?id='
-                            . urlencode((string)$batch['crop_profile_id'])
-                            . '">'
-                            . htmlspecialchars($batch['crop_profile_name'])
-                            . '</a>'
-                            . ' (ID '
-                            . htmlspecialchars((string)$batch['crop_profile_id'])
-                            . ')';   
-                    } else {
-                        echo '-';
-                    }
-                    ?>
+                    <?php if (!empty($batch['crop_profile_name'])): ?>
+                        <a href="crop_profile_details.php?id=<?= urlencode((string)$batch['crop_profile_id']) ?>">
+                            <?= htmlspecialchars($batch['crop_profile_name']) ?>
+                        </a>
+                        (ID <?= htmlspecialchars((string)$batch['crop_profile_id']) ?>)
+                    <?php else: ?>
+                        -
+                    <?php endif; ?>
                 </td>
             </tr>
             <tr><th><?= htmlspecialchars(__('status')) ?></th><td><?= htmlspecialchars($batch['status']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('sowing_date')) ?></th><td><?= htmlspecialchars($batch['sow_date']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('expected_harvest_date')) ?></th><td><?= htmlspecialchars($batch['expected_harvest_date'] ?? '-') ?></td></tr>
             <tr><th><?= htmlspecialchars(__('actual_harvest_date')) ?></th><td><?= htmlspecialchars($batch['harvest_date'] ?? '-') ?></td></tr>
-            <tr><th><?= htmlspecialchars(__('tray_count')) ?></th><td><?= htmlspecialchars($batch['tray_count']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('tray_count')) ?></th><td><?= htmlspecialchars((string)$batch['tray_count']) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('tray_type')) ?></th><td><?= htmlspecialchars($batch['tray_type']) ?></td></tr>
         </table>
     </div>
 
     <div class="card">
+        <h2>Batch KPI's</h2>
+
+        <table>
+            <tr><th>Total harvested</th><td><?= number_format($totalHarvestedGrams, 2, ',', '.') ?> g</td></tr>
+            <tr><th>Expected yield / tray</th><td><?= number_format($expectedYieldPerTray, 2, ',', '.') ?> g</td></tr>
+            <tr><th>Expected total yield</th><td><?= number_format($expectedTotalYield, 2, ',', '.') ?> g</td></tr>
+            <tr><th>Actual yield / tray</th><td><?= number_format($actualYieldPerTray, 2, ',', '.') ?> g</td></tr>
+            <tr><th>Yield difference</th><td><?= number_format($yieldDifference, 2, ',', '.') ?> g</td></tr>
+            <tr><th>Yield difference %</th><td><?= number_format($yieldDifferencePercent, 2, ',', '.') ?>%</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
         <h2><?= htmlspecialchars(__('seed_raw_material')) ?></h2>
+
         <table>
             <tr><th><?= htmlspecialchars(__('seed_item')) ?></th><td><?= htmlspecialchars($batch['seed_name'] ?? __('not_linked')) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('category')) ?></th><td><?= htmlspecialchars($batch['seed_category'] ?? '-') ?></td></tr>
@@ -108,6 +138,7 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="card">
         <h2><?= htmlspecialchars(__('harvests')) ?></h2>
+
         <table>
             <thead>
                 <tr>
@@ -124,7 +155,7 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 
                 <?php foreach ($harvestRows as $harvest): ?>
                     <tr>
-                        <td><?= htmlspecialchars($harvest['id']) ?></td>
+                        <td><?= htmlspecialchars((string)$harvest['id']) ?></td>
                         <td><?= htmlspecialchars($harvest['harvest_date']) ?></td>
                         <td><?= number_format((float)$harvest['weight_grams'], 2, ',', '.') ?></td>
                         <td><?= htmlspecialchars($harvest['quality_notes'] ?? '') ?></td>
@@ -136,6 +167,7 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="card">
         <h2><?= htmlspecialchars(__('inventory_transactions_linked_to_batch')) ?></h2>
+
         <table>
             <thead>
                 <tr>
@@ -167,6 +199,7 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
+
     <p>
         <a class="btn" href="grow_batches.php">← <?= htmlspecialchars(__('back_to_batch_management')) ?></a>
         <a class="btn" href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
