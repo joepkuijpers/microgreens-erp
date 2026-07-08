@@ -14,9 +14,9 @@ $batches = $db->query("
         g.seed_amount,
         g.seed_unit,
         g.status,
+        g.crop_profile_id,
         i.item_name AS inventory_item_name,
-g.crop_profile_id,
-cp.crop_name AS crop_profile_name
+        cp.crop_name AS crop_profile_name
     FROM grow_batches g
     LEFT JOIN inventory i ON i.id = g.inventory_id
     LEFT JOIN crop_profiles cp ON cp.id = g.crop_profile_id
@@ -37,7 +37,7 @@ cp.crop_name AS crop_profile_name
                 <tr>
                     <th>ID</th>
                     <th><?= htmlspecialchars(__('crop')) ?></th>
-                    <th>Crop Profile</th>
+                    <th><?= htmlspecialchars(__('crop_profiles')) ?></th>
                     <th><?= htmlspecialchars(__('sowing_date')) ?></th>
                     <th><?= htmlspecialchars(__('expected_harvest')) ?></th>
                     <th><?= htmlspecialchars(__('trays')) ?></th>
@@ -50,50 +50,55 @@ cp.crop_name AS crop_profile_name
             <tbody>
                 <?php foreach ($batches as $batch): ?>
                     <?php
-                    $status = $batch['status'] ?? '';
-                    $kleur = '#2563eb';
+                    $status = (string)($batch['status'] ?? '');
+                    $normalizedStatus = mb_strtolower($status);
+                    $statusColor = '#2563eb';
 
-                    if ($status === 'Groeiend' || $status === 'gezaaid') {
-                        $kleur = '#16a34a';
+                    if (in_array($normalizedStatus, ['groeiend', 'gezaaid', 'growing', 'sown'], true)) {
+                        $statusColor = '#16a34a';
                     }
 
-                    if ($status === 'Geoogst') {
-                        $kleur = '#6b7280';
+                    if (in_array($normalizedStatus, ['oogstklaar', 'ready to harvest'], true)) {
+                        $statusColor = '#ea580c';
                     }
 
-                    if ($status === 'Oogstklaar') {
-                        $kleur = '#ea580c';
+                    if (in_array($normalizedStatus, ['geoogst', 'harvested'], true)) {
+                        $statusColor = '#6b7280';
                     }
+
+                    $isHarvested = in_array($normalizedStatus, ['geoogst', 'harvested'], true);
                     ?>
                     <tr>
                         <td><?= htmlspecialchars((string)$batch['id']) ?></td>
                         <td><?= htmlspecialchars((string)$batch['crop']) ?></td>
                         <td>
-<?php if (!empty($batch['crop_profile_name'])): ?>
-    <a href="crop_profile_details.php?id=<?= urlencode((string)$batch['crop_profile_id']) ?>">
-        <?= htmlspecialchars($batch['crop_profile_name']) ?>
-    </a>
-<?php else: ?>
-    -
-<?php endif; ?>
-</td>
+                            <?php if (!empty($batch['crop_profile_name']) && !empty($batch['crop_profile_id'])): ?>
+                                <a href="crop_profile_details.php?id=<?= urlencode((string)$batch['crop_profile_id']) ?>">
+                                    <?= htmlspecialchars((string)$batch['crop_profile_name']) ?>
+                                </a>
+                            <?php else: ?>
+                                -
+                            <?php endif; ?>
+                        </td>
                         <td><?= htmlspecialchars((string)($batch['sow_date'] ?? '')) ?></td>
                         <td><?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></td>
                         <td><?= htmlspecialchars((string)($batch['tray_count'] ?? '')) ?></td>
                         <td><?= htmlspecialchars((string)($batch['inventory_item_name'] ?? '-')) ?></td>
                         <td>
-                            <?= number_format((float)($batch['seed_amount'] ?? 0), 2, ',', '.') ?>
+                            <?= htmlspecialchars(number_format((float)($batch['seed_amount'] ?? 0), 2, ',', '.')) ?>
                             <?= htmlspecialchars((string)($batch['seed_unit'] ?? '')) ?>
                         </td>
                         <td>
-                            <span style="background:<?= htmlspecialchars((string)$kleur) ?>; color:white; padding:6px 12px; border-radius:20px; font-weight:bold; display:inline-block; min-width:100px; text-align:center;">
-                                <?= htmlspecialchars((string)$status) ?>
+                            <span style="background: <?= htmlspecialchars($statusColor) ?>; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; display: inline-block; min-width: 100px; text-align: center;">
+                                <?= htmlspecialchars($status) ?>
                             </span>
                         </td>
                         <td>
                             <a href="batch_details.php?id=<?= urlencode((string)$batch['id']) ?>">🔍 <?= htmlspecialchars(__('details')) ?></a> |
-                            <a href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a> |
-                            <a href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
+                            <a href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
+                            <?php if (!$isHarvested): ?>
+                                | <a href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
