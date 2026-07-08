@@ -1,5 +1,6 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
@@ -13,9 +14,12 @@ $batches = $db->query("
         g.seed_amount,
         g.seed_unit,
         g.status,
-        i.item_name AS inventory_item_name
+        i.item_name AS inventory_item_name,
+g.crop_profile_id,
+cp.crop_name AS crop_profile_name
     FROM grow_batches g
     LEFT JOIN inventory i ON i.id = g.inventory_id
+    LEFT JOIN crop_profiles cp ON cp.id = g.crop_profile_id
     ORDER BY g.sow_date DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -33,6 +37,7 @@ $batches = $db->query("
                 <tr>
                     <th>ID</th>
                     <th><?= htmlspecialchars(__('crop')) ?></th>
+                    <th>Crop Profile</th>
                     <th><?= htmlspecialchars(__('sowing_date')) ?></th>
                     <th><?= htmlspecialchars(__('expected_harvest')) ?></th>
                     <th><?= htmlspecialchars(__('trays')) ?></th>
@@ -63,6 +68,15 @@ $batches = $db->query("
                     <tr>
                         <td><?= htmlspecialchars((string)$batch['id']) ?></td>
                         <td><?= htmlspecialchars((string)$batch['crop']) ?></td>
+                        <td>
+<?php if (!empty($batch['crop_profile_name'])): ?>
+    <a href="crop_profile_details.php?id=<?= urlencode((string)$batch['crop_profile_id']) ?>">
+        <?= htmlspecialchars($batch['crop_profile_name']) ?>
+    </a>
+<?php else: ?>
+    -
+<?php endif; ?>
+</td>
                         <td><?= htmlspecialchars((string)($batch['sow_date'] ?? '')) ?></td>
                         <td><?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></td>
                         <td><?= htmlspecialchars((string)($batch['tray_count'] ?? '')) ?></td>
