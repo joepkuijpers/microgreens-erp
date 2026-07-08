@@ -167,6 +167,11 @@ $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
+    <p>
+        <a class="btn" href="grow_batches.php">← <?= htmlspecialchars(__('back_to_batch_management')) ?></a>
+        <a class="btn" href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
+        <a class="btn" href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
+    </p>
 </div>
 
 <?php include 'includes/footer.php'; ?>
