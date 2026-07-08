@@ -1,63 +1,75 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
 $inventoryItems = $db->query("
-    SELECT id, item_name, quantity, unit
+    SELECT
+        id,
+        item_name,
+        quantity,
+        unit
     FROM inventory
     ORDER BY item_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $crop = trim($_POST['crop'] ?? '');
-    $sow_date = trim($_POST['sow_date'] ?? '');
-    $expected_harvest_date = trim($_POST['expected_harvest_date'] ?? '');
-    $tray_count = (int)($_POST['tray_count'] ?? 1);
-    $tray_type = trim($_POST['tray_type'] ?? '');
+    $sowDate = trim($_POST['sow_date'] ?? '');
+    $expectedHarvestDate = trim($_POST['expected_harvest_date'] ?? '');
+    $trayCount = (int)($_POST['tray_count'] ?? 1);
+    $trayType = trim($_POST['tray_type'] ?? '');
     $status = trim($_POST['status'] ?? 'Groeiend');
-    $inventory_id = (int)($_POST['inventory_id'] ?? 0);
-    $seed_amount = (float)($_POST['seed_amount'] ?? 0);
+    $inventoryId = (int)($_POST['inventory_id'] ?? 0);
+    $seedAmount = (float)($_POST['seed_amount'] ?? 0);
 
-    if ($crop === '' || $sow_date === '' || $expected_harvest_date === '' || $tray_count <= 0 || $inventory_id <= 0 || $seed_amount <= 0) {
+    if ($crop === '' || $sowDate === '' || $expectedHarvestDate === '' || $trayCount <= 0 || $inventoryId <= 0 || $seedAmount <= 0) {
         die(__('invalid_batch_input'));
     }
 
-    $stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
-    $stmt->execute([':id' => $inventory_id]);
+    $stmt = $db->prepare("
+        SELECT
+            id,
+            quantity,
+            unit
+        FROM inventory
+        WHERE id = :id
+    ");
+    $stmt->execute([':id' => $inventoryId]);
     $seedItem = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$seedItem) {
         die(__('seed_inventory_not_found'));
     }
 
-    $quantity_before = (float)$seedItem['quantity'];
-    $quantity_after = $quantity_before - $seed_amount;
+    $quantityBefore = (float)$seedItem['quantity'];
+    $quantityAfter = $quantityBefore - $seedAmount;
 
-    if ($quantity_after < 0) {
+    if ($quantityAfter < 0) {
         die(__('insufficient_seed_inventory'));
     }
 
     $insert = $db->prepare("
         INSERT INTO grow_batches
-        (crop, sow_date, expected_harvest_date, tray_count, tray_type, status, inventory_id, seed_amount, seed_unit)
+            (crop, sow_date, expected_harvest_date, tray_count, tray_type, status, inventory_id, seed_amount, seed_unit)
         VALUES
-        (:crop, :sow_date, :expected_harvest_date, :tray_count, :tray_type, :status, :inventory_id, :seed_amount, :seed_unit)
+            (:crop, :sow_date, :expected_harvest_date, :tray_count, :tray_type, :status, :inventory_id, :seed_amount, :seed_unit)
     ");
 
     $insert->execute([
         ':crop' => $crop,
-        ':sow_date' => $sow_date,
-        ':expected_harvest_date' => $expected_harvest_date,
-        ':tray_count' => $tray_count,
-        ':tray_type' => $tray_type,
+        ':sow_date' => $sowDate,
+        ':expected_harvest_date' => $expectedHarvestDate,
+        ':tray_count' => $trayCount,
+        ':tray_type' => $trayType,
         ':status' => $status,
-        ':inventory_id' => $inventory_id,
-        ':seed_amount' => $seed_amount,
+        ':inventory_id' => $inventoryId,
+        ':seed_amount' => $seedAmount,
         ':seed_unit' => $seedItem['unit']
     ]);
 
-    $batch_id = $db->lastInsertId();
+    $batchId = $db->lastInsertId();
 
     $updateInventory = $db->prepare("
         UPDATE inventory
@@ -66,27 +78,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ");
 
     $updateInventory->execute([
-        ':quantity' => $quantity_after,
-        ':id' => $inventory_id
+        ':quantity' => $quantityAfter,
+        ':id' => $inventoryId
     ]);
 
     $log = $db->prepare("
         INSERT INTO inventory_transactions
-        (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
+            (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
         VALUES
-        (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
+            (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
     ");
 
     $log->execute([
-        ':inventory_id' => $inventory_id,
+        ':inventory_id' => $inventoryId,
         ':type' => 'VERBRUIK',
-        ':quantity_change' => -$seed_amount,
-        ':quantity_before' => $quantity_before,
-        ':quantity_after' => $quantity_after,
+        ':quantity_change' => -$seedAmount,
+        ':quantity_before' => $quantityBefore,
+        ':quantity_after' => $quantityAfter,
         ':unit' => $seedItem['unit'],
         ':note' => __('seed_used_for_batch') . ': ' . $crop,
         ':reference_type' => 'grow_batch',
-        ':reference_id' => $batch_id
+        ':reference_id' => $batchId
     ]);
 
     header('Location: grow_batches.php');
@@ -129,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select name="inventory_id" required>
                     <option value=""><?= htmlspecialchars(__('choose_seed_inventory')) ?></option>
                     <?php foreach ($inventoryItems as $item): ?>
-                        <option value="<?= htmlspecialchars($item['id']) ?>">
+                        <option value="<?= htmlspecialchars((string)$item['id']) ?>">
                             <?= htmlspecialchars($item['item_name']) ?>
                             (<?= number_format((float)$item['quantity'], 2, ',', '.') ?>
                             <?= htmlspecialchars($item['unit']) ?> <?= htmlspecialchars(__('available')) ?>)
@@ -146,10 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>
                 <?= htmlspecialchars(__('status')) ?><br>
                 <select name="status">
-               <option value="Gepland"><?= htmlspecialchars(__('planned')) ?></option>
-<option value="Groeiend" selected><?= htmlspecialchars(__('growing')) ?></option>
-<option value="Oogstklaar"><?= htmlspecialchars(__('ready_to_harvest')) ?></option>
-<option value="Geoogst"><?= htmlspecialchars(__('harvested')) ?></option> 
+                    <option value="Gepland"><?= htmlspecialchars(__('planned')) ?></option>
+                    <option value="Groeiend" selected><?= htmlspecialchars(__('growing')) ?></option>
+                    <option value="Oogstklaar"><?= htmlspecialchars(__('ready_to_harvest')) ?></option>
+                    <option value="Geoogst"><?= htmlspecialchars(__('harvested')) ?></option>
                 </select>
             </p>
 
