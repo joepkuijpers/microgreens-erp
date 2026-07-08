@@ -17,7 +17,9 @@ $stmt = $db->prepare("
         i.category AS seed_category,
         i.unit AS seed_stock_unit,
         cp.crop_name AS crop_profile_name,
-        cp.expected_yield_grams_per_tray
+        cp.expected_yield_grams_per_tray,
+        cp.grow_days_min,
+        cp.grow_days_max
     FROM grow_batches g
     LEFT JOIN inventory i ON i.id = g.inventory_id
     LEFT JOIN crop_profiles cp ON cp.id = g.crop_profile_id
@@ -68,6 +70,43 @@ $yieldDifference = $totalHarvestedGrams - $expectedTotalYield;
 $yieldDifferencePercent = $expectedTotalYield > 0
     ? ($yieldDifference / $expectedTotalYield) * 100
     : 0;
+
+$actualGrowDays = null;
+
+if (!empty($batch['sow_date']) && !empty($batch['harvest_date'])) {
+    $sowTimestamp = strtotime($batch['sow_date']);
+    $harvestTimestamp = strtotime($batch['harvest_date']);
+
+    if ($sowTimestamp !== false && $harvestTimestamp !== false) {
+        $actualGrowDays = (int)round(($harvestTimestamp - $sowTimestamp) / 86400);
+    }
+}
+
+$expectedGrowDaysMin = (int)($batch['grow_days_min'] ?? 0);
+$expectedGrowDaysMax = (int)($batch['grow_days_max'] ?? 0);
+$growDaysStatus = '-';
+
+if ($actualGrowDays !== null && $expectedGrowDaysMin > 0 && $expectedGrowDaysMax > 0) {
+    if ($actualGrowDays < $expectedGrowDaysMin) {
+        $growDaysStatus = 'Shorter than expected';
+    } elseif ($actualGrowDays > $expectedGrowDaysMax) {
+        $growDaysStatus = 'Longer than expected';
+    } else {
+        $growDaysStatus = 'Within expected range';
+    }
+}
+
+$performanceStatus = 'No expected yield available';
+
+if ($expectedTotalYield > 0) {
+    if ($yieldDifferencePercent >= 10) {
+        $performanceStatus = 'Above expectation';
+    } elseif ($yieldDifferencePercent <= -10) {
+        $performanceStatus = 'Below expectation';
+    } else {
+        $performanceStatus = 'Within expectation';
+    }
+}
 ?>
 
 <div class="main">
@@ -117,6 +156,17 @@ $yieldDifferencePercent = $expectedTotalYield > 0
             <tr><th>Actual yield / tray</th><td><?= number_format($actualYieldPerTray, 2, ',', '.') ?> g</td></tr>
             <tr><th>Yield difference</th><td><?= number_format($yieldDifference, 2, ',', '.') ?> g</td></tr>
             <tr><th>Yield difference %</th><td><?= number_format($yieldDifferencePercent, 2, ',', '.') ?>%</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Batch Performance</h2>
+
+        <table>
+            <tr><th>Performance status</th><td><?= htmlspecialchars($performanceStatus) ?></td></tr>
+            <tr><th>Actual grow days</th><td><?= htmlspecialchars($actualGrowDays !== null ? (string)$actualGrowDays : '-') ?></td></tr>
+            <tr><th>Expected grow days</th><td><?= htmlspecialchars((string)$expectedGrowDaysMin) ?> - <?= htmlspecialchars((string)$expectedGrowDaysMax) ?></td></tr>
+            <tr><th>Grow days status</th><td><?= htmlspecialchars($growDaysStatus) ?></td></tr>
         </table>
     </div>
 
