@@ -84,27 +84,27 @@ if (!empty($batch['sow_date']) && !empty($batch['harvest_date'])) {
 
 $expectedGrowDaysMin = (int)($batch['grow_days_min'] ?? 0);
 $expectedGrowDaysMax = (int)($batch['grow_days_max'] ?? 0);
-$growDaysStatus = '-';
+$growDaysStatus = __('none');
 
 if ($actualGrowDays !== null && $expectedGrowDaysMin > 0 && $expectedGrowDaysMax > 0) {
     if ($actualGrowDays < $expectedGrowDaysMin) {
-        $growDaysStatus = 'Shorter than expected';
+        $growDaysStatus = __('shorter_than_expected');
     } elseif ($actualGrowDays > $expectedGrowDaysMax) {
-        $growDaysStatus = 'Longer than expected';
+        $growDaysStatus = __('longer_than_expected');
     } else {
-        $growDaysStatus = 'Within expected range';
+        $growDaysStatus = __('within_expected_range');
     }
 }
 
-$performanceStatus = 'No expected yield available';
+$performanceStatus = __('no_expected_yield_available');
 
 if ($expectedTotalYield > 0) {
     if ($yieldDifferencePercent >= 10) {
-        $performanceStatus = 'Above expectation';
+        $performanceStatus = __('above_expectation');
     } elseif ($yieldDifferencePercent <= -10) {
-        $performanceStatus = 'Below expectation';
+        $performanceStatus = __('below_expectation');
     } else {
-        $performanceStatus = 'Within expectation';
+        $performanceStatus = __('within_expectation');
     }
 }
 ?>
@@ -147,26 +147,26 @@ if ($expectedTotalYield > 0) {
     </div>
 
     <div class="card">
-        <h2>Batch KPI's</h2>
+        <h2><?= htmlspecialchars(__('batch_kpis')) ?></h2>
 
         <table>
-            <tr><th>Total harvested</th><td><?= number_format($totalHarvestedGrams, 2, ',', '.') ?> g</td></tr>
-            <tr><th>Expected yield / tray</th><td><?= number_format($expectedYieldPerTray, 2, ',', '.') ?> g</td></tr>
-            <tr><th>Expected total yield</th><td><?= number_format($expectedTotalYield, 2, ',', '.') ?> g</td></tr>
-            <tr><th>Actual yield / tray</th><td><?= number_format($actualYieldPerTray, 2, ',', '.') ?> g</td></tr>
-            <tr><th>Yield difference</th><td><?= number_format($yieldDifference, 2, ',', '.') ?> g</td></tr>
-            <tr><th>Yield difference %</th><td><?= number_format($yieldDifferencePercent, 2, ',', '.') ?>%</td></tr>
+            <tr><th><?= htmlspecialchars(__('total_harvested')) ?></th><td><?= number_format($totalHarvestedGrams, 2, ',', '.') ?> g</td></tr>
+            <tr><th><?= htmlspecialchars(__('expected_yield_per_tray')) ?></th><td><?= number_format($expectedYieldPerTray, 2, ',', '.') ?> g</td></tr>
+            <tr><th><?= htmlspecialchars(__('expected_total_yield')) ?></th><td><?= number_format($expectedTotalYield, 2, ',', '.') ?> g</td></tr>
+            <tr><th><?= htmlspecialchars(__('actual_yield_per_tray')) ?></th><td><?= number_format($actualYieldPerTray, 2, ',', '.') ?> g</td></tr>
+            <tr><th><?= htmlspecialchars(__('yield_difference')) ?></th><td><?= number_format($yieldDifference, 2, ',', '.') ?> g</td></tr>
+            <tr><th><?= htmlspecialchars(__('yield_difference_percent')) ?></th><td><?= number_format($yieldDifferencePercent, 2, ',', '.') ?>%</td></tr>
         </table>
     </div>
 
     <div class="card">
-        <h2>Batch Performance</h2>
+        <h2><?= htmlspecialchars(__('batch_performance')) ?></h2>
 
         <table>
-            <tr><th>Performance status</th><td><?= htmlspecialchars($performanceStatus) ?></td></tr>
-            <tr><th>Actual grow days</th><td><?= htmlspecialchars($actualGrowDays !== null ? (string)$actualGrowDays : '-') ?></td></tr>
-            <tr><th>Expected grow days</th><td><?= htmlspecialchars((string)$expectedGrowDaysMin) ?> - <?= htmlspecialchars((string)$expectedGrowDaysMax) ?></td></tr>
-            <tr><th>Grow days status</th><td><?= htmlspecialchars($growDaysStatus) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('performance_status')) ?></th><td><?= htmlspecialchars($performanceStatus) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('actual_grow_days')) ?></th><td><?= htmlspecialchars($actualGrowDays !== null ? (string)$actualGrowDays : '-') ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('expected_grow_days')) ?></th><td><?= htmlspecialchars((string)$expectedGrowDaysMin) ?> - <?= htmlspecialchars((string)$expectedGrowDaysMax) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('grow_days_status')) ?></th><td><?= htmlspecialchars($growDaysStatus) ?></td></tr>
         </table>
     </div>
 
