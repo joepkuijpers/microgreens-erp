@@ -36,6 +36,37 @@ $batches = $db->prepare("
 ");
 $batches->execute([':id' => $id]);
 $batchRows = $batches->fetchAll(PDO::FETCH_ASSOC);
+
+$totalBatches = count($batchRows);
+$totalTrays = 0;
+$harvestedBatches = 0;
+$activeBatches = 0;
+$firstSowing = null;
+$lastSowing = null;
+
+foreach ($batchRows as $batch) {
+    $totalTrays += (int)($batch['tray_count'] ?? 0);
+
+    if (($batch['status'] ?? '') === 'Geoogst') {
+        $harvestedBatches++;
+    } else {
+        $activeBatches++;
+    }
+
+    if (!empty($batch['sow_date'])) {
+        if ($firstSowing === null || $batch['sow_date'] < $firstSowing) {
+            $firstSowing = $batch['sow_date'];
+        }
+
+        if ($lastSowing === null || $batch['sow_date'] > $lastSowing) {
+            $lastSowing = $batch['sow_date'];
+        }
+    }
+}
+
+$averageTrays = $totalBatches > 0
+    ? round($totalTrays / $totalBatches, 1)
+    : 0;
 ?>
 
 <div class="main">
@@ -62,6 +93,20 @@ $batchRows = $batches->fetchAll(PDO::FETCH_ASSOC);
             <tr><th>Irrigation</th><td><?= nl2br(htmlspecialchars($profile['irrigation_notes'] ?? '-')) ?></td></tr>
             <tr><th>Notes</th><td><?= nl2br(htmlspecialchars($profile['notes'] ?? '-')) ?></td></tr>
             <tr><th>Internal notes</th><td><?= nl2br(htmlspecialchars($profile['notes_internal'] ?? '-')) ?></td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Crop Profile Statistics</h2>
+
+        <table>
+            <tr><th>Total batches</th><td><?= htmlspecialchars((string)$totalBatches) ?></td></tr>
+            <tr><th>Harvested batches</th><td><?= htmlspecialchars((string)$harvestedBatches) ?></td></tr>
+            <tr><th>Active batches</th><td><?= htmlspecialchars((string)$activeBatches) ?></td></tr>
+            <tr><th>Total trays</th><td><?= htmlspecialchars((string)$totalTrays) ?></td></tr>
+            <tr><th>Average trays / batch</th><td><?= number_format($averageTrays, 1, ',', '.') ?></td></tr>
+            <tr><th>First sowing</th><td><?= htmlspecialchars($firstSowing ?? '-') ?></td></tr>
+            <tr><th>Last sowing</th><td><?= htmlspecialchars($lastSowing ?? '-') ?></td></tr>
         </table>
     </div>
 
