@@ -362,4 +362,26 @@ return [
 'transaction_loss' => 'Verlies / weggegooid',
 'transaction_correction_plus' => 'Correctie plus',
 'transaction_correction_min' => 'Correctie min',
+
+'batch_kpis' => 'Batch KPI’s',
+'total_harvested' => 'Totaal geoogst',
+'expected_yield_per_tray' => 'Verwachte opbrengst / tray',
+'expected_total_yield' => 'Verwachte totale opbrengst',
+'actual_yield_per_tray' => 'Werkelijke opbrengst / tray',
+'yield_difference' => 'Opbrengstverschil',
+'yield_difference_percent' => 'Opbrengstverschil %',
+'batch_performance' => 'Teeltprestatie',
+'performance_status' => 'Prestatiestatus',
+'actual_grow_days' => 'Werkelijke groeidagen',
+'expected_grow_days' => 'Verwachte groeidagen',
+'grow_days_status' => 'Groeidagenstatus',
+'no_expected_yield_available' => 'Geen verwachte opbrengst beschikbaar',
+'above_expectation' => 'Boven verwachting',
+'below_expectation' => 'Onder verwachting',
+'within_expectation' => 'Binnen verwachting',
+'shorter_than_expected' => 'Korter dan verwacht',
+'longer_than_expected' => 'Langer dan verwacht',
+'within_expected_range' => 'Binnen verwachte periode',
 ];
+
+
