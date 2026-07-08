@@ -376,4 +376,10 @@ return [
 'shorter_than_expected' => 'Shorter than expected',
 'longer_than_expected' => 'Longer than expected',
 'within_expected_range' => 'Within expected range',
+'harvest_details' => 'Harvest details',
+'back_to_harvests' => 'Back to harvests',
+'view_grow_batch' => 'View grow batch',
+'invalid_harvest_id' => 'Invalid harvest ID.',
+'harvest_not_found' => 'Harvest not found.',
+'harvest_information' => 'Harvest information',
 ];

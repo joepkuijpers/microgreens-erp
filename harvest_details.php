@@ -7,7 +7,7 @@ include 'includes/sidebar.php';
 $id = (int)($_GET['id'] ?? 0);
 
 if ($id <= 0) {
-    die('Invalid harvest ID.');
+    die(__('invalid_harvest_id'));
 }
 
 $stmt = $db->prepare("
@@ -23,56 +23,63 @@ $stmt = $db->prepare("
         g.harvest_date AS batch_harvest_date,
         g.status AS batch_status
     FROM harvests h
-    LEFT JOIN grow_batches g
-        ON h.batch_id = g.id
+    LEFT JOIN grow_batches g ON h.batch_id = g.id
     WHERE h.id = :id
 ");
-
-$stmt->execute([
-    ':id' => $id
-]);
-
+$stmt->execute([':id' => $id]);
 $harvest = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$harvest) {
-    die('Harvest not found.');
+    die(__('harvest_not_found'));
 }
 ?>
 
 <div class="main">
+    <h1>🌾 <?= htmlspecialchars(__('harvest_details')) ?></h1>
 
-<h1>🌾 Harvest Details</h1>
+    <p>
+        <a class="btn" href="list_harvests.php">← <?= htmlspecialchars(__('back_to_harvests')) ?></a>
 
-<p>
-    <a class="btn" href="list_harvests.php">← Back to Harvests</a>
+        <?php if (!empty($harvest['batch_id'])): ?>
+            <a class="btn" href="batch_details.php?id=<?= urlencode((string)$harvest['batch_id']) ?>">
+                🌱 <?= htmlspecialchars(__('view_grow_batch')) ?>
+            </a>
+        <?php endif; ?>
+    </p>
 
-    <?php if (!empty($harvest['batch_id'])): ?>
-        <a class="btn" href="batch_details.php?id=<?= urlencode((string)$harvest['batch_id']) ?>">
-            🌱 View Grow Batch
-        </a>
-    <?php endif; ?>
-</p>
+    <div class="card">
+        <h2><?= htmlspecialchars(__('harvest_information')) ?></h2>
 
-<div class="card">
-    <h2>Harvest</h2>
+        <table>
+            <tr><th>ID</th><td><?= htmlspecialchars((string)$harvest['id']) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('date')) ?></th><td><?= htmlspecialchars((string)($harvest['harvest_date'] ?? '-')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('weight_grams')) ?></th><td><?= number_format((float)$harvest['weight_grams'], 2, ',', '.') ?> g</td></tr>
+            <tr><th><?= htmlspecialchars(__('quality_notes')) ?></th><td><?= htmlspecialchars((string)($harvest['quality_notes'] ?? '-')) ?></td></tr>
+        </table>
+    </div>
 
-    <p><strong>ID:</strong> <?= htmlspecialchars((string)$harvest['id']) ?></p>
-    <p><strong>Date:</strong> <?= htmlspecialchars((string)($harvest['harvest_date'] ?? '-')) ?></p>
-    <p><strong>Weight:</strong> <?= number_format((float)$harvest['weight_grams'], 2, ',', '.') ?> g</p>
-    <p><strong>Quality:</strong> <?= htmlspecialchars((string)($harvest['quality_notes'] ?? '-')) ?></p>
-</div>
+    <div class="card">
+        <h2><?= htmlspecialchars(__('batch_information')) ?></h2>
 
-<div class="card">
-    <h2>Grow Batch</h2>
+        <table>
+            <tr><th>ID</th><td><?= htmlspecialchars((string)($harvest['batch_id'] ?? '-')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('crop')) ?></th><td><?= htmlspecialchars((string)($harvest['crop'] ?? '-')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('sowing_date')) ?></th><td><?= htmlspecialchars((string)($harvest['sow_date'] ?? '-')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('expected_harvest_date')) ?></th><td><?= htmlspecialchars((string)($harvest['expected_harvest_date'] ?? '-')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('actual_harvest_date')) ?></th><td><?= htmlspecialchars((string)($harvest['batch_harvest_date'] ?? '-')) ?></td></tr>
+            <tr><th><?= htmlspecialchars(__('status')) ?></th><td><?= htmlspecialchars((string)($harvest['batch_status'] ?? '-')) ?></td></tr>
+        </table>
+    </div>
 
-    <p><strong>Batch ID:</strong> <?= htmlspecialchars((string)($harvest['batch_id'] ?? '-')) ?></p>
-    <p><strong>Crop:</strong> <?= htmlspecialchars((string)($harvest['crop'] ?? '-')) ?></p>
-    <p><strong>Sow date:</strong> <?= htmlspecialchars((string)($harvest['sow_date'] ?? '-')) ?></p>
-    <p><strong>Expected harvest:</strong> <?= htmlspecialchars((string)($harvest['expected_harvest_date'] ?? '-')) ?></p>
-    <p><strong>Harvest date:</strong> <?= htmlspecialchars((string)($harvest['batch_harvest_date'] ?? '-')) ?></p>
-    <p><strong>Status:</strong> <?= htmlspecialchars((string)($harvest['batch_status'] ?? '-')) ?></p>
-</div>
+    <p>
+        <a class="btn" href="list_harvests.php">← <?= htmlspecialchars(__('back_to_harvests')) ?></a>
 
+        <?php if (!empty($harvest['batch_id'])): ?>
+            <a class="btn" href="batch_details.php?id=<?= urlencode((string)$harvest['batch_id']) ?>">
+                🌱 <?= htmlspecialchars(__('view_grow_batch')) ?>
+            </a>
+        <?php endif; ?>
+    </p>
 </div>
 
 <?php include 'includes/footer.php'; ?>

@@ -382,6 +382,12 @@ return [
 'shorter_than_expected' => 'Korter dan verwacht',
 'longer_than_expected' => 'Langer dan verwacht',
 'within_expected_range' => 'Binnen verwachte periode',
+'harvest_details' => 'Harvest details',
+'back_to_harvests' => 'Back to harvests',
+'view_grow_batch' => 'View grow batch',
+'invalid_harvest_id' => 'Invalid harvest ID.',
+'harvest_not_found' => 'Harvest not found.',
+'harvest_information' => 'Harvest information',
 ];
 
 
