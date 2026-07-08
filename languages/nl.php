@@ -388,6 +388,9 @@ return [
 'invalid_harvest_id' => 'Invalid harvest ID.',
 'harvest_not_found' => 'Harvest not found.',
 'harvest_information' => 'Harvest information',
+'sales_batch' => 'Batch',
+'sales_harvest' => 'Harvest',
+'no_sales_registered' => 'Geen verkopen geregistreerd.',
 ];
 
 
