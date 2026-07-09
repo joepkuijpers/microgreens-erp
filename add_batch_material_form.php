@@ -1,5 +1,5 @@
 <?php
-require 'config/database.php';
+include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $batch_id = $_POST['batch_id'];
