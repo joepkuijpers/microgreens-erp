@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php';
+include 'includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
