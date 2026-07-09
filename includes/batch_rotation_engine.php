@@ -26,7 +26,7 @@ function rotateActiveBatch(PDO $db): array
         $finished->execute();
 
         $activeStmt = $db->query("
-            SELECT *
+            SELECT id
             FROM grow_batches
             WHERE lower(COALESCE(status, '')) IN ('active', 'actief')
               AND harvest_date IS NULL
@@ -46,7 +46,7 @@ function rotateActiveBatch(PDO $db): array
         }
 
         $nextStmt = $db->query("
-            SELECT *
+            SELECT id
             FROM grow_batches
             WHERE harvest_date IS NULL
               AND lower(COALESCE(status, '')) IN ('planned', 'gepland', 'gezaaid', 'sown', '')

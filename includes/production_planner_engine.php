@@ -1,84 +1,93 @@
 <?php
 
-function getProductionPlanner(PDO $db): array
+function normalizeBatchStatus(?string $status): string
 {
-    $profiles = $db->query("
-        SELECT *
-        FROM crop_profiles
-        ORDER BY crop_name ASC
-    ")->fetchAll(PDO::FETCH_ASSOC);
+    $status = strtolower(trim((string)$status));
 
-    $plans = [];
-    $today = new DateTimeImmutable('today');
+    return match ($status) {
+        'geoogst', 'harvested', 'klaar', 'afgerond' => 'harvested',
+        'active', 'actief' => 'active',
+        'planned', 'gepland', 'gezaaid', 'sown' => 'planned',
+        default => $status !== '' ? $status : 'planned',
+    };
+}
 
-    foreach ($profiles as $profile) {
-        $profileId = (int)$profile['id'];
-        $growMin = (int)($profile['grow_days_min'] ?? 7);
-        $growMax = (int)($profile['grow_days_max'] ?? 14);
-        $cycleDays = max(1, (int)ceil(($growMin + $growMax) / 2));
+function rotateActiveBatch(PDO $db): array
+{
+    $db->beginTransaction();
 
-        $stmt = $db->prepare("
-            SELECT
-                count(*) AS total_batches,
-                COALESCE(SUM(CASE WHEN lower(COALESCE(status, '')) IN ('active', 'actief') THEN tray_count ELSE 0 END), 0) AS active_trays,
-                COALESCE(SUM(CASE WHEN lower(COALESCE(status, '')) IN ('planned', 'gepland', 'gezaaid', 'sown') THEN tray_count ELSE 0 END), 0) AS planned_trays,
-                COALESCE(SUM(CASE WHEN lower(COALESCE(status, '')) IN ('harvested', 'geoogst', 'klaar', 'afgerond') THEN 1 ELSE 0 END), 0) AS harvested_batches,
-                MAX(sow_date) AS last_sow_date
-            FROM grow_batches
-            WHERE crop_profile_id = :profile_id
+    try {
+        $finished = $db->prepare("
+            UPDATE grow_batches
+            SET status = 'harvested'
+            WHERE harvest_date IS NOT NULL
+              AND lower(COALESCE(status, '')) NOT IN ('harvested', 'geoogst', 'klaar', 'afgerond')
         ");
-        $stmt->execute([':profile_id' => $profileId]);
-        $batchStats = $stmt->fetch(PDO::FETCH_ASSOC);
+        $finished->execute();
 
-        $lastSowDate = $batchStats['last_sow_date'] ?? null;
+        $activeStmt = $db->query("
+            SELECT id
+            FROM grow_batches
+            WHERE lower(COALESCE(status, '')) IN ('active', 'actief')
+              AND harvest_date IS NULL
+            ORDER BY sow_date ASC, id ASC
+            LIMIT 1
+        ");
+        $active = $activeStmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($lastSowDate) {
-            $nextSow = (new DateTimeImmutable($lastSowDate))->modify('+' . $cycleDays . ' days');
-            if ($nextSow < $today) {
-                $nextSow = $today;
-            }
-        } else {
-            $nextSow = $today;
+        if ($active) {
+            $db->commit();
+
+            return [
+                'changed' => false,
+                'active_batch_id' => (int)$active['id'],
+                'message' => 'Actieve batch blijft actief.'
+            ];
         }
 
-        $expectedHarvest = $nextSow->modify('+' . $growMin . ' days');
+        $nextStmt = $db->query("
+            SELECT id
+            FROM grow_batches
+            WHERE harvest_date IS NULL
+              AND lower(COALESCE(status, '')) IN ('planned', 'gepland', 'gezaaid', 'sown', '')
+            ORDER BY sow_date ASC, id ASC
+            LIMIT 1
+        ");
+        $next = $nextStmt->fetch(PDO::FETCH_ASSOC);
 
-        $activeTrays = (int)($batchStats['active_trays'] ?? 0);
-        $plannedTrays = (int)($batchStats['planned_trays'] ?? 0);
+        if (!$next) {
+            $db->commit();
 
-        if ($activeTrays > 0) {
-            $advice = 'Productie actief';
-            $priority = 'ok';
-        } elseif ($plannedTrays > 0) {
-            $advice = 'Gepland, wacht op activatie';
-            $priority = 'warning';
-        } else {
-            $advice = 'Nieuwe batch plannen';
-            $priority = 'alarm';
+            return [
+                'changed' => false,
+                'active_batch_id' => null,
+                'message' => 'Geen wachtende batch gevonden.'
+            ];
         }
 
-        $plans[] = [
-            'crop_profile_id' => $profileId,
-            'crop_name' => $profile['crop_name'],
-            'cycle_days' => $cycleDays,
-            'active_trays' => $activeTrays,
-            'planned_trays' => $plannedTrays,
-            'harvested_batches' => (int)($batchStats['harvested_batches'] ?? 0),
-            'last_sow_date' => $lastSowDate,
-            'next_sow_date' => $nextSow->format('Y-m-d'),
-            'expected_harvest_date' => $expectedHarvest->format('Y-m-d'),
-            'advice' => $advice,
-            'priority' => $priority,
+        $activate = $db->prepare("
+            UPDATE grow_batches
+            SET status = 'active'
+            WHERE id = :id
+        ");
+        $activate->execute([':id' => $next['id']]);
+
+        $db->commit();
+
+        return [
+            'changed' => true,
+            'active_batch_id' => (int)$next['id'],
+            'message' => 'Volgende batch automatisch actief gemaakt.'
+        ];
+    } catch (Throwable $e) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+
+        return [
+            'changed' => false,
+            'active_batch_id' => null,
+            'message' => 'Batch rotation fout: ' . $e->getMessage()
         ];
     }
-
-    return [
-        'generated_at' => date('Y-m-d H:i:s'),
-        'plans' => $plans,
-        'summary' => [
-            'profiles' => count($profiles),
-            'needs_planning' => count(array_filter($plans, fn($plan) => $plan['priority'] === 'alarm')),
-            'active_crops' => count(array_filter($plans, fn($plan) => $plan['active_trays'] > 0)),
-        ],
-    ];
 }
