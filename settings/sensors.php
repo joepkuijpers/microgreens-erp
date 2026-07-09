@@ -5,7 +5,18 @@ $navPrefix = '../';
 include '../db_connect.php';
 require_once __DIR__ . '/../includes/sensor_service.php';
 
-$settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
+$settings = $db->query("
+    SELECT
+        light_min,
+        light_max,
+        temp_min,
+        temp_max,
+        humidity_min,
+        humidity_max,
+        refresh_seconds
+    FROM settings
+    WHERE id = 1
+")->fetch(PDO::FETCH_ASSOC);
 
 $pageIcon = '🌡';
 $pageTitle = 'Sensorinstellingen';

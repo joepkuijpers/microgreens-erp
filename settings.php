@@ -49,7 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $message = "✅ " . __('settings_saved');
 }
 
-$settings = $db->query("SELECT * FROM settings WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
+$settings = $db->query("
+    SELECT
+        light_min,
+        light_max,
+        temp_min,
+        temp_max,
+        humidity_min,
+        humidity_max,
+        refresh_seconds,
+        language_code
+    FROM settings
+    WHERE id = 1
+")->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <style>

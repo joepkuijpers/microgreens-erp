@@ -6,7 +6,15 @@ function get_sensor_settings(PDO $db): array
 {
     $profile = getActiveCropProfile($db);
 
-    $stmt = $db->query("SELECT * FROM settings ORDER BY id ASC LIMIT 1");
+  $stmt = $db->query("
+    SELECT
+        light_min,
+        light_max,
+        refresh_seconds
+    FROM settings
+    ORDER BY id ASC
+    LIMIT 1
+");  
     $settings = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return [
