@@ -70,43 +70,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':quality_notes' => $quality_notes
         ]);
 
-        $stmt = $db->prepare("
-            SELECT id, product_id, quantity, unit
-            FROM finished_inventory
-            WHERE product_id = :product_id
+        $harvestId = (int)$db->lastInsertId();
+
+        $insertFinished = $db->prepare("
+            INSERT INTO finished_inventory
+            (product_id, quantity, unit, batch_id, harvest_id)
+            VALUES
+            (:product_id, :quantity, :unit, :batch_id, :harvest_id)
         ");
-        $stmt->execute([':product_id' => $product_id]);
-        $finished = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($finished) {
-            $newQuantity = (float)$finished['quantity'] + $finished_quantity;
-
-            $updateFinished = $db->prepare("
-                UPDATE finished_inventory
-                SET quantity = :quantity,
-                    unit = :unit
-                WHERE product_id = :product_id
-            ");
-
-            $updateFinished->execute([
-                ':quantity' => $newQuantity,
-                ':unit' => $product['unit'],
-                ':product_id' => $product_id
-            ]);
-        } else {
-            $insertFinished = $db->prepare("
-                INSERT INTO finished_inventory
-                (product_id, quantity, unit)
-                VALUES
-                (:product_id, :quantity, :unit)
-            ");
-
-            $insertFinished->execute([
-                ':product_id' => $product_id,
-                ':quantity' => $finished_quantity,
-                ':unit' => $product['unit']
-            ]);
-        }
+        $insertFinished->execute([
+            ':product_id' => $product_id,
+            ':quantity' => $finished_quantity,
+            ':unit' => $product['unit'],
+            ':batch_id' => $id,
+            ':harvest_id' => $harvestId
+        ]);
 
         $updateBatch = $db->prepare("
             UPDATE grow_batches
