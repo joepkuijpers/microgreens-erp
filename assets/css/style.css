@@ -240,7 +240,17 @@ td {
 tr:hover {
     background: #f5fff5;
 }
+.table-scroll {
+    max-height: 65vh;
+    overflow: auto;
+}
 
+.table-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--card);
+}
 input,
 select,
 textarea {
