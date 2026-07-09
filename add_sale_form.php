@@ -14,9 +14,12 @@ $customers = $db->query("
 
 $products = $db->query("
     SELECT
+        f.id AS finished_inventory_id,
         f.product_id,
         f.quantity,
         f.unit,
+        f.batch_id,
+        f.harvest_id,
         p.name,
         p.sale_price
     FROM finished_inventory f
@@ -46,11 +49,13 @@ $products = $db->query("
             </select><br><br>
 
             <label>Product uit eindvoorraad</label><br>
-            <select name="product_id" required>
+            <select name="finished_inventory_id" required>
                 <option value="">-- Kies product --</option>
                 <?php foreach ($products as $product): ?>
-                    <option value="<?= htmlspecialchars((string)$product['product_id']) ?>">
+                    <option value="<?= htmlspecialchars((string)$product['finished_inventory_id']) ?>">
                         <?= htmlspecialchars((string)$product['name']) ?>
+                        — Batch <?= htmlspecialchars((string)($product['batch_id'] ?? '-')) ?>
+                        / Harvest <?= htmlspecialchars((string)($product['harvest_id'] ?? '-')) ?>
                         (<?= number_format((float)$product['quantity'], 2, ',', '.') ?>
                         <?= htmlspecialchars((string)($product['unit'] ?? '')) ?> beschikbaar,
                         € <?= number_format((float)$product['sale_price'], 2, ',', '.') ?>)

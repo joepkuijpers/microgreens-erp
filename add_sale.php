@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $customer_id = (int)($_POST['customer_id'] ?? 0);
-$product_id = (int)($_POST['product_id'] ?? 0);
+$finished_inventory_id = (int)($_POST['finished_inventory_id'] ?? 0);
 $sale_date = trim($_POST['sale_date'] ?? '');
 $quantity = (float)($_POST['quantity'] ?? 0);
 $status = trim($_POST['status'] ?? 'betaald');
 
-if ($customer_id <= 0 || $product_id <= 0 || $sale_date === '' || $quantity <= 0) {
+if ($customer_id <= 0 || $finished_inventory_id <= 0 || $sale_date === '' || $quantity <= 0) {
     die(__('invalid_sale_input'));
 }
 
@@ -31,6 +31,7 @@ if (!$customer) {
 
 $stmt = $db->prepare("
     SELECT
+        f.id AS finished_inventory_id,
         f.product_id,
         f.quantity AS stock_quantity,
         f.unit,
@@ -40,9 +41,9 @@ $stmt = $db->prepare("
         p.sale_price
     FROM finished_inventory f
     LEFT JOIN products p ON p.id = f.product_id
-    WHERE f.product_id = :product_id
+    WHERE f.id = :finished_inventory_id
 ");
-$stmt->execute([':product_id' => $product_id]);
+$stmt->execute([':finished_inventory_id' => $finished_inventory_id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$product) {
@@ -64,12 +65,12 @@ try {
     $updateStock = $db->prepare("
         UPDATE finished_inventory
         SET quantity = :quantity
-        WHERE product_id = :product_id
+        WHERE id = :finished_inventory_id
     ");
 
     $updateStock->execute([
         ':quantity' => $stock_after,
-        ':product_id' => $product_id
+        ':finished_inventory_id' => $finished_inventory_id
     ]);
 
     $insertSale = $db->prepare("
@@ -87,7 +88,7 @@ try {
         ':amount' => $amount,
         ':status' => $status,
         ':customer_id' => $customer_id,
-        ':product_id' => $product_id,
+        ':product_id' => $product['product_id'],
         ':batch_id' => $product['batch_id'],
         ':harvest_id' => $product['harvest_id']
     ]);
