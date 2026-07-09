@@ -226,8 +226,15 @@ h1 {
 
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin-top: 15px;
+}
+
+.card table {
+    display: block;
+    max-height: 65vh;
+    overflow: auto;
 }
 
 th,
@@ -235,6 +242,14 @@ td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
     text-align: left;
+}
+
+.card thead th {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--green-dark);
+    color: white;
 }
 
 tr:hover {
