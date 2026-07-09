@@ -51,7 +51,7 @@ $batches = $db->query("
                 <?php foreach ($batches as $batch): ?>
                     <?php
                     $status = (string)($batch['status'] ?? '');
-                    $normalizedStatus = mb_strtolower($status);
+                    $normalizedStatus = strtolower($status);
                     $statusColor = '#2563eb';
 
                     if (in_array($normalizedStatus, ['groeiend', 'gezaaid', 'growing', 'sown'], true)) {
