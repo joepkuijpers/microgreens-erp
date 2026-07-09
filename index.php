@@ -14,7 +14,7 @@ include 'includes/header.php';
 <a class="button" href="grow_batches.php"><?= __('batches') ?></a>
 <a class="button" href="list_sales.php"><?= __('sales') ?></a>
 <a class="button" href="list_products.php"><?= __('products') ?></a>
-<a class="button" href="report_profit_by_month.php"><?= __('reports') ?></a>
+<a class="button" href="report_product_profit.php"><?= __('reports') ?></a>
 
 </div>
 
