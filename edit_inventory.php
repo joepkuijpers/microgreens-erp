@@ -7,7 +7,11 @@ if ($id <= 0) {
     die('Ongeldig voorraad-ID.');
 }
 
-$stmt = $db->prepare("SELECT * FROM inventory WHERE id = :id");
+$stmt = $db->prepare("
+    SELECT id, item_name, category, quantity, unit, unit_cost
+    FROM inventory
+    WHERE id = :id
+");
 $stmt->execute([':id' => $id]);
 $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
