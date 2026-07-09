@@ -30,14 +30,15 @@ $products = $db->query("
 ?>
 
 <div class="main">
-<h1>➕ <?= htmlspecialchars(__('new_sale')) ?></h1>
+    <h1>➕ <?= htmlspecialchars(__('new_sale')) ?></h1>
 
-<p>
-    <a class="btn" href="list_sales.php">← <?= htmlspecialchars(__('back_to_sales')) ?></a>
-</p>
+    <p>
+        <a class="btn" href="list_sales.php">← <?= htmlspecialchars(__('back_to_sales')) ?></a>
+    </p>
 
     <div class="card">
         <form method="post" action="add_sale.php">
+
             <label>Klant</label><br>
             <select name="customer_id" required>
                 <option value="">-- Kies klant --</option>
@@ -46,37 +47,58 @@ $products = $db->query("
                         <?= htmlspecialchars((string)$customer['name']) ?>
                     </option>
                 <?php endforeach; ?>
-            </select><br><br>
+            </select>
+            <br><br>
 
             <label>Product uit eindvoorraad</label><br>
             <select name="finished_inventory_id" required>
                 <option value="">-- Kies product --</option>
+
                 <?php foreach ($products as $product): ?>
                     <option value="<?= htmlspecialchars((string)$product['finished_inventory_id']) ?>">
-                        <?= htmlspecialchars((string)$product['name']) ?>
-                        — Batch <?= htmlspecialchars((string)($product['batch_id'] ?? '-')) ?>
-                        / Harvest <?= htmlspecialchars((string)($product['harvest_id'] ?? '-')) ?>
-                        (<?= number_format((float)$product['quantity'], 2, ',', '.') ?>
-                        <?= htmlspecialchars((string)($product['unit'] ?? '')) ?> beschikbaar,
-                        € <?= number_format((float)$product['sale_price'], 2, ',', '.') ?>)
+                        #<?= htmlspecialchars((string)$product['finished_inventory_id']) ?>
+                        | <?= htmlspecialchars((string)$product['name']) ?>
+                        | Batch <?= htmlspecialchars((string)($product['batch_id'] ?? '-')) ?>
+                        | Harvest <?= htmlspecialchars((string)($product['harvest_id'] ?? '-')) ?>
+                        | <?= number_format((float)$product['quantity'], 2, ',', '.') ?>
+                        <?= htmlspecialchars((string)($product['unit'] ?? '')) ?>
+                        | € <?= number_format((float)$product['sale_price'], 2, ',', '.') ?>
                     </option>
                 <?php endforeach; ?>
-            </select><br><br>
+
+            </select>
+            <br><br>
 
             <label>Verkoopdatum</label><br>
-            <input type="date" name="sale_date" value="<?= date('Y-m-d') ?>" required><br><br>
+            <input
+                type="date"
+                name="sale_date"
+                value="<?= date('Y-m-d') ?>"
+                required
+            >
+            <br><br>
 
             <label>Aantal</label><br>
-            <input type="number" step="0.01" name="quantity" required><br><br>
+            <input
+                type="number"
+                step="0.01"
+                name="quantity"
+                required
+            >
+            <br><br>
 
             <label>Status</label><br>
             <select name="status" required>
                 <option value="betaald">Betaald</option>
                 <option value="open">Open</option>
                 <option value="geannuleerd">Geannuleerd</option>
-            </select><br><br>
+            </select>
+            <br><br>
 
-            <button type="submit" class="btn"><?= htmlspecialchars(__('save_sale')) ?></button>
+            <button type="submit" class="btn">
+                <?= htmlspecialchars(__('save_sale')) ?>
+            </button>
+
         </form>
     </div>
 </div>
