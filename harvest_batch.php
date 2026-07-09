@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php';
+include 'includes/language.php';
 
 $id = (int)($_GET['id'] ?? 0);
 
