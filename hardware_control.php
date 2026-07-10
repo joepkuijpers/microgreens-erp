@@ -1,4 +1,5 @@
 <?php
+include 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 ?>
@@ -133,7 +134,8 @@ include 'includes/sidebar.php';
 }
 </style>
 
-<div class="hardware-page">
+<div class="main">
+    <div class="hardware-page">
     <div class="hardware-header">
         <h1>Hardware Control Center</h1>
         <p>Handmatige relaisbediening via GPIO HAL.</p>
@@ -217,10 +219,14 @@ async function loadRelays() {
 async function setRelay(output, state) {
     await fetch(`api/relay_test.php?output=${encodeURIComponent(output)}&state=${encodeURIComponent(state)}`);
     await loadRelays();
+
 }
 
 loadRelays();
 setInterval(loadRelays, 5000);
 </script>
+
+    </div>
+</div>
 
 <?php include 'includes/footer.php'; ?>
