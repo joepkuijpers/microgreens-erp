@@ -1,5 +1,6 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
@@ -15,29 +16,31 @@ $suppliers = $db->query("
 <div class="main">
     <h1><?= htmlspecialchars(__('suppliers')) ?></h1>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= htmlspecialchars(__('id')) ?></th>
-                    <th><?= htmlspecialchars(__('name')) ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (empty($suppliers)): ?>
+    <div class="card suppliers-table-card">
+        <div class="table-scroll">
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="2"><?= htmlspecialchars(__('no_suppliers_found')) ?></td>
+                        <th><?= htmlspecialchars(__('id')) ?></th>
+                        <th><?= htmlspecialchars(__('name')) ?></th>
                     </tr>
-                <?php endif; ?>
+                </thead>
+                <tbody>
+                    <?php if (empty($suppliers)): ?>
+                        <tr>
+                            <td colspan="2"><?= htmlspecialchars(__('no_suppliers_found')) ?></td>
+                        </tr>
+                    <?php endif; ?>
 
-                <?php foreach ($suppliers as $supplier): ?>
-                    <tr>
-                        <td><?= htmlspecialchars((string)$supplier['id']) ?></td>
-                        <td><?= htmlspecialchars((string)$supplier['name']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                    <?php foreach ($suppliers as $supplier): ?>
+                        <tr>
+                            <td><?= htmlspecialchars((string)$supplier['id']) ?></td>
+                            <td><?= htmlspecialchars((string)$supplier['name']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
