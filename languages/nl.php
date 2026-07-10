@@ -391,6 +391,8 @@ return [
 'sales_batch' => 'Batch',
 'sales_harvest' => 'Harvest',
 'no_sales_registered' => 'Geen verkopen geregistreerd.',
+'weight' => 'Gewicht',
+'no_harvests_found' => 'Nog geen oogsten gevonden.',
 ];
 
 

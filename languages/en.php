@@ -385,4 +385,6 @@ return [
 'sales_batch' => 'Batch',
 'sales_harvest' => 'Harvest',
 'no_sales_registered' => 'No sales registered.',
+'weight' => 'Weight',
+'no_harvests_found' => 'No harvests found.',
 ];
