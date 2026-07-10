@@ -1,5 +1,6 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
@@ -17,33 +18,35 @@ $customers = $db->query("
 <div class="main">
     <h1><?= htmlspecialchars(__('customers')) ?></h1>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= htmlspecialchars(__('id')) ?></th>
-                    <th><?= htmlspecialchars(__('name')) ?></th>
-                    <th><?= htmlspecialchars(__('email')) ?></th>
-                    <th><?= htmlspecialchars(__('phone')) ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (empty($customers)): ?>
+    <div class="card customers-table-card">
+        <div class="table-scroll">
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="4"><?= htmlspecialchars(__('no_customers_found')) ?></td>
+                        <th><?= htmlspecialchars(__('id')) ?></th>
+                        <th><?= htmlspecialchars(__('name')) ?></th>
+                        <th><?= htmlspecialchars(__('email')) ?></th>
+                        <th><?= htmlspecialchars(__('phone')) ?></th>
                     </tr>
-                <?php endif; ?>
+                </thead>
+                <tbody>
+                    <?php if (empty($customers)): ?>
+                        <tr>
+                            <td colspan="4"><?= htmlspecialchars(__('no_customers_found')) ?></td>
+                        </tr>
+                    <?php endif; ?>
 
-                <?php foreach ($customers as $customer): ?>
-                    <tr>
-                        <td><?= htmlspecialchars((string)$customer['id']) ?></td>
-                        <td><?= htmlspecialchars((string)$customer['name']) ?></td>
-                        <td><?= htmlspecialchars((string)($customer['email'] ?? '-')) ?></td>
-                        <td><?= htmlspecialchars((string)($customer['phone'] ?? '-')) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                    <?php foreach ($customers as $customer): ?>
+                        <tr>
+                            <td><?= htmlspecialchars((string)$customer['id']) ?></td>
+                            <td><?= htmlspecialchars((string)$customer['name']) ?></td>
+                            <td><?= htmlspecialchars((string)($customer['email'] ?? '-')) ?></td>
+                            <td><?= htmlspecialchars((string)($customer['phone'] ?? '-')) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
