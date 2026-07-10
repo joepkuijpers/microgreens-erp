@@ -1,5 +1,6 @@
 <?php
 include 'includes/header.php';
+include 'includes/language.php';
 include 'includes/sidebar.php';
 include 'db_connect.php';
 
@@ -35,38 +36,40 @@ $totalValue = $db->query("
         <h1>€ <?= number_format((float)$totalValue['total'], 2, ',', '.') ?></h1>
     </div>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th><?= htmlspecialchars(__('item')) ?></th>
-                    <th><?= htmlspecialchars(__('category')) ?></th>
-                    <th><?= htmlspecialchars(__('quantity')) ?></th>
-                    <th><?= htmlspecialchars(__('unit')) ?></th>
-                    <th><?= htmlspecialchars(__('unit_cost_short')) ?></th>
-                    <th><?= htmlspecialchars(__('value')) ?></th>
-                    <th><?= htmlspecialchars(__('actions')) ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($items as $item): ?>
+    <div class="card inventory-table-card">
+        <div class="table-scroll">
+            <table>
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars((string)$item['id']) ?></td>
-                        <td><?= htmlspecialchars($item['item_name']) ?></td>
-                        <td><?= htmlspecialchars($item['category'] ?? '-') ?></td>
-                        <td><?= number_format((float)$item['quantity'], 2, ',', '.') ?></td>
-                        <td><?= htmlspecialchars($item['unit'] ?? '-') ?></td>
-                        <td>€ <?= number_format((float)$item['unit_cost'], 2, ',', '.') ?></td>
-                        <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
-                        <td>
-                            <a class="btn" href="edit_inventory.php?id=<?= urlencode($item['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
-                            <a class="btn" href="delete_inventory.php?id=<?= urlencode($item['id']) ?>" onclick="return confirm('<?= htmlspecialchars(__('confirm_delete_inventory_item')) ?>');">🗑️ <?= htmlspecialchars(__('delete')) ?></a>
-                        </td>
+                        <th>ID</th>
+                        <th><?= htmlspecialchars(__('item')) ?></th>
+                        <th><?= htmlspecialchars(__('category')) ?></th>
+                        <th><?= htmlspecialchars(__('quantity')) ?></th>
+                        <th><?= htmlspecialchars(__('unit')) ?></th>
+                        <th><?= htmlspecialchars(__('unit_cost_short')) ?></th>
+                        <th><?= htmlspecialchars(__('value')) ?></th>
+                        <th><?= htmlspecialchars(__('actions')) ?></th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($items as $item): ?>
+                        <tr>
+                            <td><?= htmlspecialchars((string)$item['id']) ?></td>
+                            <td><?= htmlspecialchars((string)$item['item_name']) ?></td>
+                            <td><?= htmlspecialchars((string)($item['category'] ?? '-')) ?></td>
+                            <td><?= number_format((float)$item['quantity'], 2, ',', '.') ?></td>
+                            <td><?= htmlspecialchars((string)($item['unit'] ?? '-')) ?></td>
+                            <td>€ <?= number_format((float)$item['unit_cost'], 2, ',', '.') ?></td>
+                            <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
+                            <td>
+                                <a class="btn" href="edit_inventory.php?id=<?= urlencode((string)$item['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
+                                <a class="btn" href="delete_inventory.php?id=<?= urlencode((string)$item['id']) ?>" onclick="return confirm('<?= htmlspecialchars(__('confirm_delete_inventory_item')) ?>');">🗑️ <?= htmlspecialchars(__('delete')) ?></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+include 'includes/language.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 ?>
