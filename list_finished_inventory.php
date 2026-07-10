@@ -43,53 +43,55 @@ $totalValue = $db->query("
         <h1>€ <?= htmlspecialchars(number_format((float)$totalValue['total'], 2, ',', '.')) ?></h1>
     </div>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Product</th>
-                    <th>Categorie</th>
-                    <th>Batch</th>
-                    <th>Harvest</th>
-                    <th>Hoeveelheid</th>
-                    <th>Eenheid</th>
-                    <th>Verkoopprijs</th>
-                    <th>Totale waarde</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($items as $item): ?>
+    <div class="card finished-inventory-table-card">
+        <div class="table-scroll">
+            <table>
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars((string)$item['id']) ?></td>
-                        <td><?= htmlspecialchars((string)($item['product_name'] ?? 'Onbekend product')) ?></td>
-                        <td><?= htmlspecialchars((string)($item['category'] ?? '-')) ?></td>
-                        <td>
-                            <?php if (!empty($item['batch_id'])): ?>
-                                <a href="batch_details.php?id=<?= urlencode((string)$item['batch_id']) ?>">
-                                    #<?= htmlspecialchars((string)$item['batch_id']) ?>
-                                </a>
-                            <?php else: ?>
-                                -
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php if (!empty($item['harvest_id'])): ?>
-                                <a href="harvest_details.php?id=<?= urlencode((string)$item['harvest_id']) ?>">
-                                    #<?= htmlspecialchars((string)$item['harvest_id']) ?>
-                                </a>
-                            <?php else: ?>
-                                -
-                            <?php endif; ?>
-                        </td>
-                        <td><?= htmlspecialchars(number_format((float)$item['quantity'], 2, ',', '.')) ?></td>
-                        <td><?= htmlspecialchars((string)($item['unit'] ?? '-')) ?></td>
-                        <td>€ <?= htmlspecialchars(number_format((float)$item['sale_price'], 2, ',', '.')) ?></td>
-                        <td>€ <?= htmlspecialchars(number_format((float)$item['total_value'], 2, ',', '.')) ?></td>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Categorie</th>
+                        <th>Batch</th>
+                        <th>Harvest</th>
+                        <th>Hoeveelheid</th>
+                        <th>Eenheid</th>
+                        <th>Verkoopprijs</th>
+                        <th>Totale waarde</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($items as $item): ?>
+                        <tr>
+                            <td><?= htmlspecialchars((string)$item['id']) ?></td>
+                            <td><?= htmlspecialchars((string)($item['product_name'] ?? 'Onbekend product')) ?></td>
+                            <td><?= htmlspecialchars((string)($item['category'] ?? '-')) ?></td>
+                            <td>
+                                <?php if (!empty($item['batch_id'])): ?>
+                                    <a href="batch_details.php?id=<?= urlencode((string)$item['batch_id']) ?>">
+                                        #<?= htmlspecialchars((string)$item['batch_id']) ?>
+                                    </a>
+                                <?php else: ?>
+                                    -
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if (!empty($item['harvest_id'])): ?>
+                                    <a href="harvest_details.php?id=<?= urlencode((string)$item['harvest_id']) ?>">
+                                        #<?= htmlspecialchars((string)$item['harvest_id']) ?>
+                                    </a>
+                                <?php else: ?>
+                                    -
+                                <?php endif; ?>
+                            </td>
+                            <td><?= htmlspecialchars(number_format((float)$item['quantity'], 2, ',', '.')) ?></td>
+                            <td><?= htmlspecialchars((string)($item['unit'] ?? '-')) ?></td>
+                            <td>€ <?= htmlspecialchars(number_format((float)$item['sale_price'], 2, ',', '.')) ?></td>
+                            <td>€ <?= htmlspecialchars(number_format((float)$item['total_value'], 2, ',', '.')) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
