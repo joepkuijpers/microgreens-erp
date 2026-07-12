@@ -387,4 +387,5 @@ return [
 'no_sales_registered' => 'No sales registered.',
 'weight' => 'Weight',
 'no_harvests_found' => 'No harvests found.',
+'labor_registration' => 'Labor registration',
 ];

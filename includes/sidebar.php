@@ -38,6 +38,8 @@ function activeClass($condition) {
 
     <a class="<?= activeClass($page == 'list_products.php') ?>" href="<?= $navPrefix ?>list_products.php">🌿 <?= __('products') ?></a>
 
+    <a class="<?= activeClass(in_array($page, ['list_labor.php', 'add_labor_form.php'])) ?>" href="<?= $navPrefix ?>list_labor.php">👷 <?= __('labor_registration') ?></a>
+
     <a class="<?= activeClass($page == 'scheduler.php') ?>" href="<?= $navPrefix ?>scheduler.php">⏱ <?= __('scheduler') ?></a>
 
     <a class="<?= activeClass(in_array($page, ['hardware_control.php','gpio_logs.php'])) ?>" href="<?= $navPrefix ?>hardware_control.php">🔌 <?= __('hardware') ?></a>

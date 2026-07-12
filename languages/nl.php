@@ -393,6 +393,7 @@ return [
 'no_sales_registered' => 'Geen verkopen geregistreerd.',
 'weight' => 'Gewicht',
 'no_harvests_found' => 'Nog geen oogsten gevonden.',
+'labor_registration' => 'Arbeidsregistratie',
 ];
 
 
