@@ -87,6 +87,9 @@ foreach ($harvestRows as $harvest) {
 }
 
 $trayCount = (int)($batch['tray_count'] ?? 0);
+$laborCostPerTray = $trayCount > 0
+    ? $totalGrossLaborValue / $trayCount
+    : null;
 $expectedYieldPerTray = (float)($batch['expected_yield_grams_per_tray'] ?? 0);
 $expectedTotalYield = $trayCount * $expectedYieldPerTray;
 
@@ -217,6 +220,16 @@ if ($expectedTotalYield > 0) {
                 <tr>
                     <th>Gross Labor Value</th>
                     <td>€ <?= number_format($totalGrossLaborValue, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <th>Labor Cost per Tray</th>
+                    <td>
+                        <?php if ($laborCostPerTray !== null): ?>
+                            € <?= number_format($laborCostPerTray, 2, ',', '.') ?>
+                        <?php else: ?>
+                            Not available
+                        <?php endif; ?>
+                    </td>
                 </tr>
             </table>
         <?php endif; ?>
