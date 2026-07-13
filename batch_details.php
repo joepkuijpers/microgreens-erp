@@ -62,6 +62,24 @@ $transactions = $db->prepare("
 $transactions->execute([':id' => $id]);
 $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 
+$laborSummaryStmt = $db->prepare("
+    SELECT
+        COUNT(*) AS labor_entry_count,
+        COALESCE(SUM(hours_worked), 0) AS total_hours,
+        COALESCE(
+            SUM(hours_worked * gross_hourly_rate),
+            0
+        ) AS total_gross_labor_value
+    FROM labor_entries
+    WHERE batch_id = :id
+");
+$laborSummaryStmt->execute([':id' => $id]);
+$laborSummary = $laborSummaryStmt->fetch(PDO::FETCH_ASSOC);
+
+$laborEntryCount = (int)($laborSummary['labor_entry_count'] ?? 0);
+$totalLaborHours = (float)($laborSummary['total_hours'] ?? 0);
+$totalGrossLaborValue = (float)($laborSummary['total_gross_labor_value'] ?? 0);
+
 $totalHarvestedGrams = 0;
 
 foreach ($harvestRows as $harvest) {
@@ -179,6 +197,35 @@ if ($expectedTotalYield > 0) {
             <tr><th><?= htmlspecialchars(__('expected_grow_days')) ?></th><td><?= htmlspecialchars((string)$expectedGrowDaysMin) ?> - <?= htmlspecialchars((string)$expectedGrowDaysMax) ?></td></tr>
             <tr><th><?= htmlspecialchars(__('grow_days_status')) ?></th><td><?= htmlspecialchars($growDaysStatus) ?></td></tr>
         </table>
+    </div>
+
+    <div class="card">
+        <h2>⏱ Labor Summary</h2>
+
+        <?php if ($laborEntryCount === 0): ?>
+            <p>No labor registrations are linked to this batch.</p>
+        <?php else: ?>
+            <table>
+                <tr>
+                    <th>Labor Entries</th>
+                    <td><?= htmlspecialchars((string)$laborEntryCount) ?></td>
+                </tr>
+                <tr>
+                    <th>Total Hours</th>
+                    <td><?= number_format($totalLaborHours, 2, ',', '.') ?> h</td>
+                </tr>
+                <tr>
+                    <th>Gross Labor Value</th>
+                    <td>€ <?= number_format($totalGrossLaborValue, 2, ',', '.') ?></td>
+                </tr>
+            </table>
+        <?php endif; ?>
+
+        <p>
+            <a class="btn" href="list_labor.php">
+                View Labor Registrations
+            </a>
+        </p>
     </div>
 
     <div class="card">
