@@ -90,6 +90,9 @@ $trayCount = (int)($batch['tray_count'] ?? 0);
 $laborCostPerTray = $trayCount > 0
     ? $totalGrossLaborValue / $trayCount
     : null;
+$laborCostPerGram = $totalHarvestedGrams > 0
+    ? $totalGrossLaborValue / $totalHarvestedGrams
+    : null;
 $expectedYieldPerTray = (float)($batch['expected_yield_grams_per_tray'] ?? 0);
 $expectedTotalYield = $trayCount * $expectedYieldPerTray;
 
@@ -226,6 +229,16 @@ if ($expectedTotalYield > 0) {
                     <td>
                         <?php if ($laborCostPerTray !== null): ?>
                             € <?= number_format($laborCostPerTray, 2, ',', '.') ?>
+                        <?php else: ?>
+                            Not available
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Labor Cost per Gram</th>
+                    <td>
+                        <?php if ($laborCostPerGram !== null): ?>
+                            € <?= number_format($laborCostPerGram, 4, ',', '.') ?>
                         <?php else: ?>
                             Not available
                         <?php endif; ?>
