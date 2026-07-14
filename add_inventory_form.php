@@ -1,36 +1,48 @@
 <?php
-require 'config/database.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $item_name = $_POST['item_name'];
-    $category = $_POST['category'];
-    $quantity = $_POST['quantity'];
-    $unit = $_POST['unit'];
-
-    $stmt = $db->prepare("INSERT INTO inventory (item_name, category, quantity, unit) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$item_name, $category, $quantity, $unit]);
-
-    echo "<p>Voorraaditem opgeslagen!</p>";
-}
+include 'includes/header.php';
+include 'includes/sidebar.php';
 ?>
 
-<h1>Nieuw voorraaditem</h1>
+<div class="main">
+    <h1><?= htmlspecialchars(__('add_inventory')) ?></h1>
 
-<form method="post">
-Item naam:<br>
-<input type="text" name="item_name"><br><br>
+    <div class="card">
+        <form method="post" action="add_inventory.php">
 
-Categorie:<br>
-<input type="text" name="category"><br><br>
+            <label><?= htmlspecialchars(__('item_name')) ?></label><br>
+            <input type="text" name="item_name" required><br><br>
 
-Aantal:<br>
-<input type="number" step="0.01" name="quantity"><br><br>
+            <label><?= htmlspecialchars(__('category')) ?></label><br>
+            <input
+                type="text"
+                name="category"
+                placeholder="<?= htmlspecialchars(__('category_placeholder')) ?>"
+            ><br><br>
 
-Eenheid:<br>
-<input type="text" name="unit"><br><br>
+            <label><?= htmlspecialchars(__('quantity')) ?></label><br>
+            <input type="number" step="0.01" name="quantity" required><br><br>
 
-<input type="submit" value="Opslaan">
-</form>
+            <label><?= htmlspecialchars(__('unit')) ?></label><br>
+            <input
+                type="text"
+                name="unit"
+                placeholder="<?= htmlspecialchars(__('unit_placeholder')) ?>"
+                required
+            ><br><br>
 
-<br>
-<a href="index.php">Menu</a>
+            <label><?= htmlspecialchars(__('unit_cost')) ?></label><br>
+            <input type="number" step="0.01" name="unit_cost" required><br><br>
+
+            <button type="submit" class="btn">
+                <?= htmlspecialchars(__('save')) ?>
+            </button>
+
+            <a href="list_inventory.php" class="btn">
+                <?= htmlspecialchars(__('back')) ?>
+            </a>
+
+        </form>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>

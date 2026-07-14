@@ -1,0 +1,111 @@
+<?php
+require_once 'includes/language.php';
+include 'includes/header.php';
+include 'includes/sidebar.php';
+include 'db_connect.php';
+
+$message = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $name = trim($_POST['name'] ?? '');
+    $rack = trim($_POST['rack_name'] ?? '');
+    $wattage = (float) ($_POST['wattage'] ?? 0);
+    $hours = (float) ($_POST['hours_per_day'] ?? 0);
+    $active = isset($_POST['is_active']) ? 1 : 0;
+
+    if ($name !== '') {
+
+        $stmt = $db->prepare("
+            INSERT INTO equipment
+                (
+                    name,
+                    rack_name,
+                    wattage,
+                    hours_per_day,
+                    is_active
+                )
+            VALUES
+                (
+                    :name,
+                    :rack,
+                    :wattage,
+                    :hours,
+                    :active
+                )
+        ");
+
+        $stmt->execute([
+            ':name'     => $name,
+            ':rack'     => $rack,
+            ':wattage'  => $wattage,
+            ':hours'    => $hours,
+            ':active'   => $active
+        ]);
+
+        $message = __('equipment_saved');
+
+    } else {
+
+        $message = __('name_required');
+    }
+}
+?>
+
+<h1>➕ <?= __('add_equipment') ?></h1>
+
+<?php if ($message !== ''): ?>
+    <p><?= htmlspecialchars($message) ?></p>
+<?php endif; ?>
+
+<form method="post">
+
+    <label><?= __('name') ?></label><br>
+    <input
+        type="text"
+        name="name"
+        required
+    ><br><br>
+
+    <label><?= __('rack') ?></label><br>
+    <input
+        type="text"
+        name="rack_name"
+    ><br><br>
+
+    <label><?= __('wattage_w') ?></label><br>
+    <input
+        type="number"
+        name="wattage"
+        step="0.1"
+        min="0"
+    ><br><br>
+
+    <label><?= __('hours_per_day') ?></label><br>
+    <input
+        type="number"
+        name="hours_per_day"
+        step="0.1"
+        min="0"
+    ><br><br>
+
+    <label>
+        <input
+            type="checkbox"
+            name="is_active"
+            checked
+        >
+        <?= __('active') ?>
+    </label>
+
+    <br><br>
+
+    <button type="submit">
+        <?= __('save') ?>
+    </button>
+
+</form>
+
+<?php
+include 'includes/footer.php';
+?>

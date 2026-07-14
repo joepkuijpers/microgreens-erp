@@ -1,49 +1,106 @@
 <?php
-require 'config/database.php';
+include 'includes/language.php';
+include 'includes/header.php';
+include 'includes/sidebar.php';
+include 'db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $stmt = $db->prepare("
-        INSERT INTO sales
-        (customer_name, sale_date, product, quantity, amount, status)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ");
+$customers = $db->query("
+    SELECT
+        id,
+        name
+    FROM customers
+    ORDER BY name ASC
+")->fetchAll(PDO::FETCH_ASSOC);
 
-    $stmt->execute([
-        $_POST['customer_name'],
-        $_POST['sale_date'],
-        $_POST['product'],
-        $_POST['quantity'],
-        $_POST['amount'],
-        $_POST['status']
-    ]);
-
-    echo "<p>Verkoop opgeslagen!</p>";
-}
+$products = $db->query("
+    SELECT
+        f.id AS finished_inventory_id,
+        f.product_id,
+        f.quantity,
+        f.unit,
+        f.batch_id,
+        f.harvest_id,
+        p.name,
+        p.sale_price
+    FROM finished_inventory f
+    LEFT JOIN products p ON p.id = f.product_id
+    WHERE f.quantity > 0
+    ORDER BY p.name ASC
+")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h1>Nieuwe verkoop</h1>
+<div class="main">
+    <h1>➕ <?= htmlspecialchars(__('new_sale')) ?></h1>
 
-<form method="post">
-Klant:<br>
-<input type="text" name="customer_name"><br><br>
+    <p>
+        <a class="btn" href="list_sales.php">← <?= htmlspecialchars(__('back_to_sales')) ?></a>
+    </p>
 
-Datum:<br>
-<input type="date" name="sale_date"><br><br>
+    <div class="card">
+        <form method="post" action="add_sale.php">
 
-Product:<br>
-<input type="text" name="product"><br><br>
+            <label>Klant</label><br>
+            <select name="customer_id" required>
+                <option value="">-- Kies klant --</option>
+                <?php foreach ($customers as $customer): ?>
+                    <option value="<?= htmlspecialchars((string)$customer['id']) ?>">
+                        <?= htmlspecialchars((string)$customer['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <br><br>
 
-Aantal:<br>
-<input type="number" step="0.01" name="quantity"><br><br>
+            <label>Product uit eindvoorraad</label><br>
+            <select name="finished_inventory_id" required>
+                <option value="">-- Kies product --</option>
 
-Bedrag:<br>
-<input type="number" step="0.01" name="amount"><br><br>
+                <?php foreach ($products as $product): ?>
+                    <option value="<?= htmlspecialchars((string)$product['finished_inventory_id']) ?>">
+                        #<?= htmlspecialchars((string)$product['finished_inventory_id']) ?>
+                        | <?= htmlspecialchars((string)$product['name']) ?>
+                        | Batch <?= htmlspecialchars((string)($product['batch_id'] ?? '-')) ?>
+                        | Harvest <?= htmlspecialchars((string)($product['harvest_id'] ?? '-')) ?>
+                        | <?= number_format((float)$product['quantity'], 2, ',', '.') ?>
+                        <?= htmlspecialchars((string)($product['unit'] ?? '')) ?>
+                        | € <?= number_format((float)$product['sale_price'], 2, ',', '.') ?>
+                    </option>
+                <?php endforeach; ?>
 
-Status:<br>
-<input type="text" name="status" value="betaald"><br><br>
+            </select>
+            <br><br>
 
-<input type="submit" value="Opslaan">
-</form>
+            <label>Verkoopdatum</label><br>
+            <input
+                type="date"
+                name="sale_date"
+                value="<?= date('Y-m-d') ?>"
+                required
+            >
+            <br><br>
 
-<br>
-<a href="index.php">Menu</a>
+            <label>Aantal</label><br>
+            <input
+                type="number"
+                step="0.01"
+                name="quantity"
+                required
+            >
+            <br><br>
+
+            <label>Status</label><br>
+            <select name="status" required>
+                <option value="betaald">Betaald</option>
+                <option value="open">Open</option>
+                <option value="geannuleerd">Geannuleerd</option>
+            </select>
+            <br><br>
+
+            <button type="submit" class="btn">
+                <?= htmlspecialchars(__('save_sale')) ?>
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>

@@ -1,12 +1,12 @@
 <div class="card">
-    <h2>🟢 Systeemstatus</h2>
+    <h2>🟢 <?= __('system_status') ?></h2>
 
-    <p>🖥 Raspberry Pi: <strong>Online</strong></p>
-    <p>🌐 Apache: <strong>Actief</strong></p>
-    <p>💾 Database: <strong id="databaseStatus">--</strong></p>
+    <p>🖥 Raspberry Pi: <strong><?= __('online') ?></strong></p>
+    <p>🌐 Apache: <strong><?= __('active') ?></strong></p>
+    <p>💾 <?= __('database') ?>: <strong id="databaseStatus">--</strong></p>
 
-    <p>📡 Sensoren: <span id="sensorStatus">⏳ Laden...</span></p>
-    <p>🕒 Laatste meting: <span id="statusLastUpdate">--</span></p>
-    <p>⏱ Laatste update: <span id="statusSecondsAgo">--</span></p>
-    <p>🔄 Refresh: <span id="statusRefresh">--</span></p>
+    <p>📡 <?= __('sensors') ?>: <span id="sensorStatus">⏳ <?= __('loading') ?></span></p>
+    <p>🕒 <?= __('last_measurement') ?>: <span id="statusLastUpdate">--</span></p>
+    <p>⏱ <?= __('last_update') ?>: <span id="statusSecondsAgo">--</span></p>
+    <p>🔄 <?= __('refresh') ?>: <span id="statusRefresh">--</span></p>
 </div>

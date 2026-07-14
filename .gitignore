@@ -1,0 +1,61 @@
+# Live database
+database/MicrogreensERP_Live.sqlite
+
+# Template database
+!database/MicrogreensERP_Template.sqlite
+
+# Local development databases
+database/MicrogreensERP_Development.sqlite
+database/MicrogreensERP_Backup_*.sqlite
+
+# Sensor logs
+sensors/logs/*.log
+
+# Backups
+*.backup
+*.bak
+
+# Editor swap files
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# GPIO runtime files
+hardware/gpio/gpio_actions.log
+hardware/gpio/simulation_state.json
+
+# Scheduler runtime files
+hardware/scheduler/schedules.json
+hardware/scheduler/scheduler.log
+
+# Scheduler cron runtime
+hardware/scheduler/cron.log
+
+# Safety runtime files
+hardware/safety/state.json
+hardware/safety/safety.log
+
+# Manual override runtime
+hardware/override/state.json
+hardware/override/override.log
+
+# Watchdog runtime files
+hardware/watchdog/state.json
+hardware/watchdog/watchdog.log
+
+# Relay runtime
+hardware/relay/state.json
+hardware/relay/relay.log
+
+# Priority runtime
+hardware/priority/state.json
+hardware/priority/priority.log
+
+# Hardware health runtime
+hardware/health/state.json
+hardware/health/health.log
+# Python cache
+__pycache__/
+*.py[cod]

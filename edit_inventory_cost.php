@@ -1,5 +1,5 @@
 <?php
-require 'config/database.php';
+include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $db->prepare("
@@ -16,7 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "<p>Kostprijs opgeslagen!</p>";
 }
 
-$items = $db->query("SELECT * FROM inventory ORDER BY item_name");
+$items = $db->query("
+    SELECT id, item_name, quantity, unit
+    FROM inventory
+    ORDER BY item_name
+");
 ?>
 
 <h1>Kostprijs voorraad aanpassen</h1>

@@ -1,5 +1,6 @@
 <?php
-require 'config/database.php';
+include 'db_connect.php';
+include 'includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -16,29 +17,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['notes']
     ]);
 
-    echo "<p>Klant opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(__('customer_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe klant</h1>
+<h1><?= htmlspecialchars(__('new_customer')) ?></h1>
 
 <form method="post">
 
-Naam:<br>
+<?= htmlspecialchars(__('name')) ?>:<br>
 <input type="text" name="name"><br><br>
 
-Email:<br>
+<?= htmlspecialchars(__('email')) ?>:<br>
 <input type="email" name="email"><br><br>
 
-Telefoon:<br>
+<?= htmlspecialchars(__('phone')) ?>:<br>
 <input type="text" name="phone"><br><br>
 
-Notities:<br>
+<?= htmlspecialchars(__('notes')) ?>:<br>
 <input type="text" name="notes"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
 
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>

@@ -1,0 +1,15 @@
+<?php
+include 'db_connect.php';
+
+$id = (int)($_GET['id'] ?? 0);
+
+if ($id <= 0) {
+    die(__('invalid_inventory_id'));
+}
+
+$stmt = $db->prepare("DELETE FROM inventory WHERE id = :id");
+$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+$stmt->execute();
+
+header('Location: list_inventory.php');
+exit;

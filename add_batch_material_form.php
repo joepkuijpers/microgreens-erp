@@ -1,5 +1,5 @@
 <?php
-require 'config/database.php';
+include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $batch_id = $_POST['batch_id'];
@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "<p>Materiaalverbruik opgeslagen en voorraad bijgewerkt!</p>";
 }
 
-$batches = $db->query("SELECT * FROM grow_batches ORDER BY id DESC");
-$inventory = $db->query("SELECT * FROM inventory ORDER BY item_name");
+$batches = $db->query("SELECT id, crop FROM grow_batches ORDER BY id DESC");
+$inventory = $db->query("SELECT id, item_name, quantity, unit FROM inventory ORDER BY item_name");
 ?>
 
 <h1>Materiaalverbruik registreren</h1>

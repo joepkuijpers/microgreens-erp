@@ -1,6 +1,6 @@
-@'
 <?php
-require 'config/database.php';
+include 'db_connect.php';
+include 'includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $db->prepare("
@@ -17,28 +17,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['status']
     ]);
 
-    echo "<p>Teelt opgeslagen!</p>";
+    echo '<p>' . htmlspecialchars(__('batch_saved')) . '</p>';
 }
 ?>
 
-<h1>Nieuwe teelt</h1>
+<h1><?= htmlspecialchars(__('new_batch')) ?></h1>
 
 <form method="post">
-Gewas:<br>
+
+<?= htmlspecialchars(__('crop')) ?>:<br>
 <input type="text" name="crop"><br><br>
 
-Zaaidatum:<br>
+<?= htmlspecialchars(__('sow_date')) ?>:<br>
 <input type="date" name="sow_date"><br><br>
 
-Aantal trays:<br>
+<?= htmlspecialchars(__('tray_count')) ?>:<br>
 <input type="number" name="tray_count"><br><br>
 
-Tray type:<br>
+<?= htmlspecialchars(__('tray_type')) ?>:<br>
 <input type="text" name="tray_type" value="1020 tray"><br><br>
 
-Status:<br>
+<?= htmlspecialchars(__('status')) ?>:<br>
 <input type="text" name="status" value="gezaaid"><br><br>
 
-<input type="submit" value="Opslaan">
+<input type="submit" value="<?= htmlspecialchars(__('save')) ?>">
+
 </form>
-'@ | Set-Content add_batch_form.php
