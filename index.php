@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/language.php';
 include 'includes/header.php';
 ?>
 
