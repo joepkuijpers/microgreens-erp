@@ -117,7 +117,60 @@ Objectives include:
 
 ---
 
-## Horizon 5 — Professional ERP Platform
+## Horizon 5 — Financial Stewardship
+
+Develop a financially sustainable foundation that enables the long-term vision of the Microgreens ERP project.
+
+Economic sustainability is recognised as an essential requirement for maintaining, improving, and expanding the Food Chain.
+
+Financial success is not regarded as the purpose of the project.
+
+Instead, it provides the resources necessary to support continuous research, responsible innovation, sustainable growth, and long-term societal impact.
+
+The project seeks to build an economically resilient foundation that remains aligned with its Vision, Mission, Core Values, Ethics, and Guiding Principles.
+
+Objectives include:
+
+- Responsible Financial Management
+- Long-Term Financial Stability
+- Sustainable Growth
+- Continuous Reinvestment
+- Research Funding
+- Infrastructure Development
+- Responsible Resource Allocation
+- Technology Development
+- Philanthropic Impact
+
+### Financial Philosophy
+
+Economic sustainability enables the mission.
+
+It is not the mission.
+
+Financial resources should be regarded as tools that strengthen the project rather than objectives to be pursued independently.
+
+Whenever practical, financial success should be reinvested into:
+
+- Scientific Research
+- Sustainable Food Production
+- Technological Innovation
+- Educational Initiatives
+- Infrastructure Development
+- Environmental Improvements
+- Humanitarian Projects
+- Local Food Security
+- Knowledge Sharing
+
+The project recognises that responsible financial management is necessary for long-term continuity.
+
+Commercial success is therefore welcomed when it strengthens the project's ability to create lasting value for people, communities, agriculture, and the environment.
+
+Growth should increase the project's capacity to improve the Food Chain rather than becoming an objective in itself.
+
+Profit should remain a consequence of creating meaningful value, never the primary purpose of the project.
+---
+
+## Horizon 6 — Professional ERP Platform
 
 Develop a professional, transparent, traceable and maintainable ERP platform that supports every stage of the Food Chain.
 
@@ -142,7 +195,7 @@ The ERP therefore functions not only as a management system but also as a contin
 
 ---
 
-## Horizon 6 — Freeze Dryer Development
+## Horizon 7 — Freeze Dryer Development
 
 Develop a modular and energy-efficient Freeze Dryer platform.
 
@@ -161,7 +214,7 @@ Objectives include:
 
 ---
 
-## Horizon 7 — Certified Organic Production
+## Horizon 8 — Certified Organic Production
 
 Work toward cultivation based on certified organic principles whenever practical.
 
@@ -178,7 +231,7 @@ Objectives include:
 
 ---
 
-## Horizon 8 — Automation
+## Horizon 9 — Automation
 
 Automate repetitive processes while preserving human understanding and control.
 

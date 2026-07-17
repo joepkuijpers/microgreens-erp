@@ -1,258 +1,532 @@
 # Glossary
 
-> Official terminology and definitions for the Microgreens ERP project.
+## Purpose
+
+The Glossary establishes the controlled vocabulary of the Microgreens ERP project.
+
+Its purpose is to provide one authoritative definition for every significant concept, principle, technical term, workflow, role, and domain-specific expression used throughout the project.
+
+The Glossary supports consistent communication across the Project Foundation, documentation, software, database, hardware, research, automation, Artificial Intelligence, Safety & Resilience, Stewardship & Governance, operations, and future development.
+
+The Glossary is not a simple dictionary.
+
+It is the semantic backbone of the project.
+
+By maintaining one shared vocabulary, the project reduces ambiguity, improves coordination, strengthens traceability, supports automated validation, and reduces the risk of inconsistent interpretation.
 
 ---
 
-## Document Information
+## Philosophy
 
-| Property | Value |
-|----------|-------|
-| Document ID | DOC-017 |
-| Document | Glossary |
-| Version | 1.0 |
-| Status | 📋 Planned |
-| Author | Joep Kuijpers |
-| Project | Microgreens ERP |
-| Location | /docs/17_glossary.md |
-| Last Updated | 2026-07-12 |
-| Target Audience | Developers, administrators and project members |
+Language shapes understanding.
 
----
+Consistent terminology enables consistent thinking.
 
-# Purpose
+Consistent thinking enables consistent design.
 
-The Glossary defines the official terminology used throughout the Microgreens ERP project.
+Consistent design enables reliable implementation.
 
-All documentation, source code, database objects and user interfaces should use the terminology defined in this document as the project standard.
+Terminology is therefore regarded as part of the project's architecture rather than merely part of its documentation.
+
+Every significant concept should have one authoritative definition.
+
+Other documents should reference that definition instead of creating competing interpretations.
 
 ---
 
-# Contents
+## Objectives
 
-- ERP Terminology
-- Technical Terminology
-- Hardware
-- Database
-- Programming Languages
-- Development Tools
-- Abbreviations
-- Naming Conventions
-- Definitions
-- Standard Terminology
+The Glossary aims to:
 
----
-
-# Usage
-
-Before introducing new functionality, always verify whether a term already exists in this glossary.
-
-If a term does not yet exist, add it to the Glossary before using it elsewhere in the project.
+- Establish one common language across the project
+- Provide one authoritative definition for every significant concept
+- Reduce ambiguity and duplicate terminology
+- Improve communication between technical and non-technical contributors
+- Strengthen traceability across software, documentation, research, and engineering
+- Support automated terminology checks
+- Preserve knowledge across contributors and generations
+- Support future expansion without destabilising existing definitions
 
 ---
 
-# Project Terminology
+## Core Principles
 
-## ERP Modules
+### Single Point of Definition
 
-| Official Term | Do Not Use | Notes |
-|--------------|------------|-------|
-| Crop Profiles | Cultivation Profiles | Module name and database table |
-| Grow Batches | Grows | Module name |
-| Harvests | Harvesting (as module name) | Module name |
-| Inventory | Stock | Module name |
-| Inventory Transactions | Stock Movements | Module name |
-| Finished Inventory | Final Inventory | Module name |
-| Products | Items | Module name |
-| Customers | Customer List | Module name |
-| Suppliers | Supplier List | Module name |
-| Sales | Orders | Module name |
-| Labor | Work | Module name |
-| Equipment | Devices | Module name |
-| Energy Dashboard | Energy Overview | Module name |
-| Production Planner | Production Planning | Module name |
-| Scheduler | Planning | Module name |
-| Settings | Configuration | Module name |
+Every significant concept should have exactly one authoritative definition.
 
----
+Other documents may explain how the concept applies in a specific context, but they should not redefine its meaning.
 
-## Traceability
+### Stable Identity
 
-| Official Term | Do Not Use |
-|--------------|------------|
-| Traceability | Product Tracking |
-| Batch | Lot |
-| Harvest | Crop Harvest (as technical object) |
-| Crop Profile | Cultivation Profile |
-| Grow Batch | Cultivation Batch |
+Every approved glossary concept may receive a permanent Glossary Identifier.
 
----
+Definitions may be refined as understanding improves.
 
-## Hardware
+Identifiers should remain stable and should never be reused for another concept.
 
-| Official Term | Do Not Use |
-|--------------|------------|
-| Raspberry Pi | RasPi |
-| GPIO | General IO |
-| BH1750 | Lux Sensor |
-| BME280 | Climate Sensor |
-| Relay | Switch |
-| Water Pump | Pump |
-| Grow Light | Lamp |
-| Fan | Ventilator (as object name) |
+### Timeless Definitions
+
+Definitions should describe the underlying concept rather than a temporary implementation whenever practical.
+
+Technology, interfaces, and workflows may change.
+
+The meaning of the concept should remain understandable across those changes.
+
+### Project-Wide Consistency
+
+The same term should carry the same meaning throughout the project.
+
+Alternative wording may be recorded as an alias, but one preferred term should remain authoritative.
+
+### Human Understanding Before Automation
+
+Automated systems may detect, validate, and suggest terminology changes.
+
+They should not silently redefine project concepts.
+
+Meaning remains subject to human review and stewardship.
+
+### Continuous Evolution
+
+The Glossary develops alongside the project.
+
+Definitions may be expanded, clarified, merged, deprecated, or linked as knowledge grows.
+
+Changes should preserve traceability and should not erase the reasoning behind earlier definitions.
 
 ---
 
-## Database
+## Controlled Vocabulary
 
-Always use the same names as defined in the database schema.
+The Glossary functions as the project's controlled vocabulary.
 
-| SQL Table | Description |
-|-----------|-------------|
-| crop_profiles | Crop Profiles |
-| grow_batches | Grow Batches |
-| harvests | Harvests |
-| inventory | Inventory |
-| inventory_transactions | Inventory Transactions |
-| finished_inventory | Finished Inventory |
-| products | Products |
-| customers | Customers |
-| suppliers | Suppliers |
-| sales | Sales |
-| labor_entries | Labor |
-| equipment | Equipment |
-| settings | Settings |
+Whenever practical, new concepts should be introduced into the Glossary before they become widely used elsewhere in the project.
 
----
+A controlled vocabulary reduces:
 
-## Programming Languages
+- Inconsistent naming
+- Duplicate concepts
+- Accidental redefinition
+- Unclear database terminology
+- Conflicting software labels
+- Documentation drift
+- Incorrect automation assumptions
+- Avoidable coordination errors
 
-| Always Use | Do Not Use |
-|------------|------------|
-| PHP | Php |
-| JavaScript | JS Script |
-| HTML | Html |
-| CSS | Css |
-| SQL | Sql |
+Non-standard terminology should be flagged and linked to the preferred term.
 
 ---
 
-## Development Tools
+## Glossary Identifiers
 
-| Always Use | Do Not Use |
-|------------|------------|
-| Git | GIT |
-| GitHub | Github |
-| VS Code | Visual Studio Code Editor |
-| PowerShell | Powershell |
-| SQLite | SqlLite |
-| Apache | Apache2 (in documentation) |
+Each approved glossary entry may be assigned a permanent identifier.
 
----
+The standard format is:
 
-## Abbreviations
+```text
+GLS-NNN
+```
 
-| Abbreviation | Meaning |
-|--------------|---------|
-| ERP | Enterprise Resource Planning |
-| AI | Artificial Intelligence |
-| GPIO | General Purpose Input/Output |
-| EC | Electrical Conductivity |
-| pH | Potential of Hydrogen |
-| HACCP | Hazard Analysis and Critical Control Points |
-| SOP | Standard Operating Procedure |
-| KPI | Key Performance Indicator |
+Examples:
 
----
+```text
+GLS-001 Food Chain
+GLS-002 Crop Profile
+GLS-003 Batch
+GLS-004 Observation
+GLS-005 Understanding
+GLS-006 Experience
+GLS-007 Development
+GLS-008 Contribution
+GLS-009 Knowledge
+GLS-010 Human Flourishing
+```
 
-## Project Vocabulary
+Identifiers should:
 
-The following terminology is standardized throughout the Microgreens ERP project.
+- Use leading zeros
+- Remain unique
+- Remain stable
+- Never be reassigned
+- Remain reserved after retirement
+- Be referenced together with the concept name whenever practical
 
-Use these terms consistently in all documentation, source code, user interfaces and project communication.
+Example:
 
-| Preferred Term | Description |
-|----------------|-------------|
-| Food Chain | Standard term for the complete chain from cultivation to consumption. |
-| Project Foundation | Collection of documents defining the project's long-term direction, principles and philosophy. |
-| Vision | Defines the long-term future the project strives to help create. |
-| Mission | Defines how the vision is translated into action. |
-| Core Values | Fundamental values that guide every decision within the project. |
-| Guiding Principles | Principles used to support technical, operational and strategic decisions. |
-| Design Philosophy | The design approach used throughout the project. |
-| Long-Term Strategy | Defines the long-term development and growth of the project. |
-| Sustainability | Responsible use of resources while balancing environmental, social and economic considerations. |
-| Transparency | Openness in processes, decisions, documentation and communication. |
-| Continuous Improvement | Ongoing optimization of processes, software, hardware and documentation. |
-| Knowledge Sharing | Openly sharing knowledge, experience and research to encourage collaboration and innovation. |
-| Food Production and preservation | The complete process of cultivating, processing and distributing food. |
-| Cultivation Based on Biological Principles | Standard description of the cultivation method until certified organic production is achieved. |
-| Certified Organic Production | Use only when referring to the long-term objective after official certification has been obtained. |
-| Freeze Drying | The preservation process that removes moisture while maintaining product quality. |
-| Freeze Dryer | The machine used to perform freeze drying. |
-| Artificial Intelligence (AI) | Use the full term on first reference, then use AI thereafter. |
-| Single Source of Truth | The authoritative location for information that should not be duplicated elsewhere. |
-| Documentation Architecture | The overall structure and organization of the project's documentation. |
-| Scalable | Designed to support future growth without requiring major redesign. |
-| Modular | Designed so that components can be developed, replaced or extended independently. |
-| Maintainable | Designed to simplify long-term maintenance, updates and continuous improvement. |
+```text
+Observation (GLS-004)
+```
 
 ---
 
-## GreenScope
+## Standard Glossary Entry
 
-The project's framework for evaluating, implementing and continuously improving environmental practices throughout the Food Chain.
+Each glossary entry should follow a consistent structure.
+
+```markdown
+## GLS-NNN — Concept Name
+
+### Preferred Term
+
+Concept Name
+
+### Definition
+
+The authoritative definition of the concept.
+
+### Purpose
+
+Why the concept exists within the project.
+
+### Scope
+
+What the concept includes and excludes.
+
+### Aliases
+
+Alternative wording that may be encountered.
+
+### Related Terms
+
+Related glossary concepts.
+
+### Used In
+
+Project areas where the concept is used.
+
+### Referenced By
+
+Documents, modules, tables, interfaces, or strategies that reference the concept.
+
+### Related Documents
+
+Relevant documentation.
+
+### Related Strategies
+
+Relevant Project Foundation strategies.
+
+### Related Modules
+
+Relevant ERP or technical modules.
+
+### Related Database Objects
+
+Relevant database tables, fields, views, or relationships.
+
+### Status
+
+Draft, Approved, Deprecated, Retired, or Replaced.
+
+### Revision History
+
+A record of significant definition changes.
+```
+
+Not every entry requires every subsection.
+
+The structure provides a consistent framework that can grow with the project.
 
 ---
 
-## Plant Biotope
+## Concept Relationships
 
-The complete environmental conditions required to reproduce the crop's natural biological habitat.
+Glossary concepts should not exist in isolation.
 
-A Plant Biotope includes:
+Where appropriate, an entry should identify:
 
-- Light
-- Temperature
-- Relative Humidity
-- Carbon Dioxide
-- Airflow
-- Root Environment
-- Water
-- Nutrient Availability
-- Biological Interactions
+- Parent concepts
+- Child concepts
+- Related concepts
+- Supporting concepts
+- Dependent concepts
+- Opposing concepts
+- Aliases
+- Deprecated terms
+- Replacement terms
 
-The Plant Biotope may be either controlled or dynamic depending on the crop and cultivation method.
-
----
-
-## Thermal Zoning
-
-The intentional separation of warm and cold operational environments to reduce energy consumption and improve overall system efficiency.
+These relationships transform the Glossary into an interconnected knowledge network.
 
 ---
 
-## Adaptive Energy Control
+## Terminology Status
 
-The continuous adjustment of energy consumption to match the requirements of the Plant Biotope and operational processes.
+### Draft
+
+The concept has been detected or proposed but is not yet authoritative.
+
+### Approved
+
+The concept has been reviewed and accepted as part of the controlled vocabulary.
+
+### Deprecated
+
+The term should no longer be introduced, but remains documented for backwards compatibility.
+
+### Replaced
+
+The concept or term has been superseded by another approved glossary entry.
+
+### Retired
+
+The concept is no longer active but remains preserved for traceability.
 
 ---
 
-## Sourcefulness
+## Automated Glossary Maintenance
 
-Making the most effective use of existing knowledge, materials, equipment, infrastructure and natural resources before introducing additional resources.
+The Glossary should support automated validation and assisted maintenance.
+
+Automation may detect:
+
+- New concepts without Glossary Identifiers
+- Duplicate or near-duplicate concepts
+- Unrecognised terminology
+- Inconsistent capitalisation
+- Undefined abbreviations
+- Conflicting definitions
+- Outdated aliases
+- Broken glossary references
+- Use of deprecated terms
+- Missing relationships
+- Formatting errors
+- Entries that do not follow the approved structure
+
+Detected issues should produce suggestions rather than uncontrolled changes.
+
+The standard review flow is:
+
+```text
+Detect
+    ↓
+Analyse
+    ↓
+Validate
+    ↓
+Suggest
+    ↓
+Human Review
+    ↓
+Apply or Defer
+    ↓
+Re-Validate
+    ↓
+Commit
+```
 
 ---
 
-## Systems Integration
+## Glossary Suggestion Actions
 
-Designing systems so that individual processes strengthen one another instead of operating independently.
+Every automated glossary suggestion should support the following actions:
+
+| Action | Purpose |
+|---|---|
+| Accept | Approve the suggestion without changes. |
+| Edit | Modify the suggestion before approval. |
+| Skip | Leave the suggestion unresolved for later review. |
+| Delete | Remove an incorrect or unnecessary suggestion. |
+| Regenerate | Produce a new suggestion using current project information. |
+| Re-Validate | Re-run validation after edits or structural changes. |
+| Link | Associate the suggestion with an existing glossary concept. |
+| Merge | Combine duplicate or overlapping concepts under one authoritative entry. |
+| Reject | Decline the suggestion while recording the reason. |
+
+Automation should never approve its own terminology changes when they affect Vision, Mission, Core Values, Ethics, Safety, Governance, Human Flourishing, Architecture, or Project Philosophy.
+
+These changes require explicit human review.
 
 ---
 
-## Sustaindoity
+## Suggestion Lifecycle
 
-The stage at which sustainability becomes an integrated way of thinking rather than an objective.
+Every glossary suggestion should have a traceable lifecycle.
 
-Sustaindoity is achieved when sustainable principles naturally influence every decision throughout the Food Chain.
+```text
+Detected
+    ↓
+Analysed
+    ↓
+Suggested
+    ↓
+Edited
+    ↓
+Validated
+    ↓
+Accepted
+    ↓
+Implemented
+    ↓
+Verified
+    ↓
+Archived
+```
 
-It represents the transition from measuring sustainability to living sustainability.
+Alternative paths may include:
+
+```text
+Detected → Suggested → Skipped
+Detected → Suggested → Merged → Re-Validated
+Detected → Suggested → Rejected → Archived
+Detected → Suggested → Deleted
+```
+
+Deleted suggestions should remain recoverable where an audit trail is required.
+
+---
+
+## Suggestion Records
+
+Glossary suggestions may receive their own identifiers.
+
+The recommended format is:
+
+```text
+SGS-NNNNN
+```
+
+Example:
+
+```text
+SGS-00021
+
+Status:
+Suggested
+
+Origin:
+Documentation Validator
+
+Detected In:
+07_version-control-and-deployment.md
+
+Proposed Concept:
+Decision Traceability
+
+Suggested Glossary Identifier:
+GLS-041
+
+Related Strategy:
+STR-013
+
+Affected Documents:
+DOC-007
+DOC-020
+
+Current State:
+Awaiting Review
+```
+
+Suggestion identifiers preserve the audit trail even when a proposal is edited, merged, rejected, or deleted.
+
+---
+
+## Machine-Readable Register
+
+The human-readable Glossary should remain in Markdown.
+
+A machine-readable register may be maintained alongside it.
+
+Recommended file:
+
+```text
+docs/glossary-register.json
+```
+
+The register may contain:
+
+- Glossary Identifier
+- Preferred Term
+- Definition
+- Status
+- Aliases
+- Relationships
+- Referenced Documents
+- Referenced Modules
+- Referenced Database Objects
+- Revision Metadata
+
+The Markdown file remains authoritative for human understanding.
+
+The machine-readable register supports validation, automation, dependency analysis, search, and future tooling.
+
+---
+
+## Validation Rules
+
+The Glossary validator should verify:
+
+- Identifier uniqueness
+- Identifier format
+- Preferred-term uniqueness
+- Alias conflicts
+- Required headings
+- Valid statuses
+- Valid concept relationships
+- Valid references
+- Missing referenced concepts
+- Use of deprecated terms
+- Duplicate definitions
+- Formatting consistency
+
+Validation should produce a report before changes are committed.
+
+```text
+Glossary validation
+
+Passed:
+✓ Identifier format
+✓ No duplicate approved identifiers
+✓ Valid entry structure
+✓ Valid internal references
+
+Review required:
+! 2 new concepts detected
+! 1 possible duplicate
+! 1 deprecated term still in use
+
+No files were changed automatically.
+```
+
+---
+
+## Knowledge Integrity
+
+The Glossary protects the semantic integrity of the project.
+
+Every strategy, document, software module, database table, interface, workflow, and research activity should use the same terminology for the same concept.
+
+Automation exists to reduce errors, identify inconsistencies, and suggest improvements.
+
+Human contributors remain responsible for meaning, context, and final approval.
+
+---
+
+## Relationship with the Project Reference System
+
+The Glossary defines what concepts mean.
+
+The Project Reference System defines how significant project objects are uniquely identified and connected.
+
+The Glossary uses the `GLS` category within the Project Reference System.
+
+Together they provide semantic consistency, stable identification, cross-document traceability, automated validation, reduced coordination errors, and preserved project knowledge.
+
+---
+
+## Long-Term Vision
+
+The Glossary should develop into a continuously maintained semantic map of the Microgreens ERP project.
+
+It should enable contributors to:
+
+- Discover the authoritative meaning of a concept
+- Locate where that concept is implemented
+- Understand which systems depend upon it
+- Identify related strategies and documents
+- Detect conflicting terminology
+- Preserve meaning across future revisions
+
+The objective is not to control language unnecessarily.
+
+The objective is to ensure that shared understanding remains strong enough to support safe, coordinated, and responsible development.

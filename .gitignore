@@ -58,4 +58,6 @@ hardware/health/state.json
 hardware/health/health.log
 # Python cache
 __pycache__/
-*.py[cod]
+*.py[cod]docs/Templates/unsaved files dont know path of/
+
+/docs/Templates/unsaved files dont know path of/
