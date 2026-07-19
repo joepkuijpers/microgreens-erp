@@ -1,5 +1,5 @@
 <div class="top-status-bar">
-    <span>🟢 <strong id="topSensorStatus">--</strong></span>
+    <span>📡 <?= __('sensors') ?>: <strong id="topSensorStatus">--</strong></span>
     <span>💾 <?= __('database') ?>: <strong id="topDatabaseStatus">--</strong></span>
     <span>🌡 CPU: <strong id="topCpuTemp">--</strong>°C</span>
     <span>⚙ <?= __('load') ?>: <strong id="topCpuLoad">--</strong></span>
