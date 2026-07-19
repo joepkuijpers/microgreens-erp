@@ -923,7 +923,7 @@ The primary documentation structure is organised as follows.
 ├── 00_project-handbook.md
 ├── README.md
 │
-├── project-foundation/
+├── 01_project-foundation/
 │
 ├── software-architecture/
 │

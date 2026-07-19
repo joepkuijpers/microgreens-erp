@@ -55,7 +55,7 @@ The Project Foundation defines the long-term direction of the project.
 Location:
 
 ```text
-docs/project-foundation/
+docs/01_project-foundation/
 ```
 
 ---
