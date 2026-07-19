@@ -6,15 +6,15 @@ function get_sensor_settings(PDO $db): array
 {
     $profile = getActiveCropProfile($db);
 
-  $stmt = $db->query("
-    SELECT
-        light_min,
-        light_max,
-        refresh_seconds
-    FROM settings
-    ORDER BY id ASC
-    LIMIT 1
-");  
+    $stmt = $db->query("
+        SELECT
+            light_min,
+            light_max,
+            refresh_seconds
+        FROM settings
+        ORDER BY id ASC
+        LIMIT 1
+    ");
     $settings = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return [
@@ -108,17 +108,83 @@ function get_sensor_health(PDO $db): array
             'settings' => $settings,
             'reading' => null,
             'checks' => [
-                'temperature' => check_sensor_value(null, $settings['temp_min'], $settings['temp_max'], '°C'),
-                'humidity' => check_sensor_value(null, $settings['humidity_min'], $settings['humidity_max'], '%'),
-                'light' => check_sensor_value(null, $settings['light_min'], $settings['light_max'], 'lux')
+                'temperature' => check_sensor_value(
+                    null,
+                    $settings['temp_min'],
+                    $settings['temp_max'],
+                    '°C'
+                ),
+                'humidity' => check_sensor_value(
+                    null,
+                    $settings['humidity_min'],
+                    $settings['humidity_max'],
+                    '%'
+                ),
+                'light' => check_sensor_value(
+                    null,
+                    $settings['light_min'],
+                    $settings['light_max'],
+                    'lux'
+                )
+            ]
+        ];
+    }
+
+    $readingTimestamp = strtotime($reading['timestamp']);
+    $staleAfterSeconds = max(60, $settings['refresh_seconds'] * 3);
+
+    if (
+        $readingTimestamp === false ||
+        (time() - $readingTimestamp) > $staleAfterSeconds
+    ) {
+        return [
+            'overall_status' => 'alarm',
+            'overall_label' => 'Sensor disconnected',
+            'timestamp' => $reading['timestamp'],
+            'settings' => $settings,
+            'reading' => null,
+            'checks' => [
+                'temperature' => check_sensor_value(
+                    null,
+                    $settings['temp_min'],
+                    $settings['temp_max'],
+                    '°C'
+                ),
+                'humidity' => check_sensor_value(
+                    null,
+                    $settings['humidity_min'],
+                    $settings['humidity_max'],
+                    '%'
+                ),
+                'light' => check_sensor_value(
+                    null,
+                    $settings['light_min'],
+                    $settings['light_max'],
+                    'lux'
+                )
             ]
         ];
     }
 
     $checks = [
-        'temperature' => check_sensor_value($reading['temperature'], $settings['temp_min'], $settings['temp_max'], '°C'),
-        'humidity' => check_sensor_value($reading['humidity'], $settings['humidity_min'], $settings['humidity_max'], '%'),
-        'light' => check_sensor_value($reading['light'], $settings['light_min'], $settings['light_max'], 'lux')
+        'temperature' => check_sensor_value(
+            $reading['temperature'],
+            $settings['temp_min'],
+            $settings['temp_max'],
+            '°C'
+        ),
+        'humidity' => check_sensor_value(
+            $reading['humidity'],
+            $settings['humidity_min'],
+            $settings['humidity_max'],
+            '%'
+        ),
+        'light' => check_sensor_value(
+            $reading['light'],
+            $settings['light_min'],
+            $settings['light_max'],
+            'lux'
+        )
     ];
 
     $overallStatus = 'ok';
@@ -132,7 +198,9 @@ function get_sensor_health(PDO $db): array
 
     return [
         'overall_status' => $overallStatus,
-        'overall_label' => $overallStatus === 'ok' ? 'Alle sensoren OK' : 'Sensor alarm actief',
+        'overall_label' => $overallStatus === 'ok'
+            ? 'Alle sensoren OK'
+            : 'Sensor alarm actief',
         'timestamp' => $reading['timestamp'],
         'settings' => $settings,
         'reading' => $reading,
