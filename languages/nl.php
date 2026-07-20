@@ -332,6 +332,7 @@ return [
 'growing' => 'Groeiend',
 'hardware' => 'Hardware',
 'harvested' => 'Geoogst',
+'batch_already_harvested' => 'Deze batch is al geoogst.',
 'insufficient_seed_inventory' => 'Onvoldoende zaadvoorraad.',
 'invalid_batch_input' => 'Ongeldige teeltinvoer.',
 'invalid_sale_input' => 'Ongeldige verkoopinvoer.',

@@ -1,4 +1,5 @@
 <?php
+
 include 'db_connect.php';
 include 'includes/language.php';
 
@@ -13,7 +14,8 @@ $stmt = $db->prepare("
         crop,
         sow_date,
         expected_harvest_date,
-        tray_count
+        tray_count,
+        status
     FROM grow_batches
     WHERE id = :id
 ");
@@ -22,6 +24,10 @@ $batch = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$batch) {
     die(__('batch_not_found'));
+}
+
+if (($batch['status'] ?? '') === 'Geoogst') {
+    die(__('batch_already_harvested'));
 }
 
 $products = $db->query("
@@ -37,7 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_id = (int)($_POST['product_id'] ?? 0);
     $finished_quantity = (float)($_POST['finished_quantity'] ?? 0);
 
-    if ($harvest_date === '' || $weight_grams <= 0 || $product_id <= 0 || $finished_quantity <= 0) {
+    if (
+        $harvest_date === '' ||
+        $weight_grams <= 0 ||
+        $product_id <= 0 ||
+        $finished_quantity <= 0
+    ) {
         die(__('invalid_harvest_input'));
     }
 
@@ -50,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$product) {
-   die(__('product_not_found'));     
+        die(__('product_not_found'));
     }
 
     $db->beginTransaction();
@@ -117,28 +128,54 @@ include 'includes/sidebar.php';
     <h1>🌾 <?= htmlspecialchars(__('harvest_batch')) ?></h1>
 
     <div class="card">
-     <p><strong><?= htmlspecialchars(__('crop')) ?>:</strong> <?= htmlspecialchars((string)$batch['crop']) ?></p>
-<p><strong><?= htmlspecialchars(__('sowing_date')) ?>:</strong> <?= htmlspecialchars((string)$batch['sow_date']) ?></p>
-<p><strong><?= htmlspecialchars(__('expected_harvest_date')) ?>:</strong> <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?></p>
-<p><strong><?= htmlspecialchars(__('trays')) ?>:</strong> <?= htmlspecialchars((string)$batch['tray_count']) ?></p>   
+        <p>
+            <strong><?= htmlspecialchars(__('crop')) ?>:</strong>
+            <?= htmlspecialchars((string)$batch['crop']) ?>
+        </p>
+
+        <p>
+            <strong><?= htmlspecialchars(__('sowing_date')) ?>:</strong>
+            <?= htmlspecialchars((string)$batch['sow_date']) ?>
+        </p>
+
+        <p>
+            <strong><?= htmlspecialchars(__('expected_harvest_date')) ?>:</strong>
+            <?= htmlspecialchars((string)($batch['expected_harvest_date'] ?? '')) ?>
+        </p>
+
+        <p>
+            <strong><?= htmlspecialchars(__('trays')) ?>:</strong>
+            <?= htmlspecialchars((string)$batch['tray_count']) ?>
+        </p>
     </div>
 
     <div class="card">
         <form method="post">
             <p>
                 Werkelijke oogstdatum<br>
-                <input type="date" name="harvest_date" value="<?= date('Y-m-d') ?>" required>
+                <input
+                    type="date"
+                    name="harvest_date"
+                    value="<?= date('Y-m-d') ?>"
+                    required
+                >
             </p>
 
             <p>
                 <?= htmlspecialchars(__('harvest_weight_grams')) ?><br>
-                <input type="number" step="0.01" name="weight_grams" required>
+                <input
+                    type="number"
+                    name="weight_grams"
+                    step="0.01"
+                    required
+                >
             </p>
 
             <p>
                 Product voor eindvoorraad<br>
                 <select name="product_id" required>
                     <option value="">-- Kies product --</option>
+
                     <?php foreach ($products as $product): ?>
                         <option value="<?= htmlspecialchars((string)$product['id']) ?>">
                             <?= htmlspecialchars((string)$product['name']) ?>
@@ -150,18 +187,32 @@ include 'includes/sidebar.php';
 
             <p>
                 Hoeveelheid eindvoorraad<br>
-                <input type="number" step="0.01" name="finished_quantity" required>
+                <input
+                    type="number"
+                    name="finished_quantity"
+                    step="0.01"
+                    required
+                >
             </p>
 
             <p>
                 <?= htmlspecialchars(__('quality_notes')) ?><br>
-                <input type="text" name="quality_notes" placeholder="Bijv. mooi, kort, geel, test">
+                <input
+                    type="text"
+                    name="quality_notes"
+                    placeholder="Bijv. mooi, kort, geel, test"
+                >
             </p>
 
             <p>
-                <button class="btn" type="submit">🌾 <?= htmlspecialchars(__('register_harvest')) ?></button>
-                
-            </p><a class="btn" href="grow_batches.php"><?= htmlspecialchars(__('back')) ?></a>
+                <button class="btn" type="submit">
+                    🌾 <?= htmlspecialchars(__('register_harvest')) ?>
+                </button>
+            </p>
+
+            <a class="btn" href="grow_batches.php">
+                <?= htmlspecialchars(__('back')) ?>
+            </a>
         </form>
     </div>
 </div>

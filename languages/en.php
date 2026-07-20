@@ -314,6 +314,7 @@ return [
 'hardware' => 'Hardware',
 'harvest_batch' => 'Harvest batch',
 'harvested' => 'Harvested',
+'batch_already_harvested' => 'This batch has already been harvested.',
 'harvest_weight_grams' => 'Harvest weight grams',
 'historical_batches' => 'Historical batches',
 'insufficient_seed_inventory' => 'Insufficient seed inventory.',
