@@ -1,4 +1,4 @@
-# Chapter 18 — Why Does Time Matter?
+﻿# Chapter 18 — Why Does Time Matter?
 
 > *"Life changes through time. Preservation begins by changing the pace of that change."*
 
@@ -46,6 +46,8 @@ Preservation therefore does not change time itself.
 
 It changes the pace at which biology continues.
 
+## Part I — Time Provides Opportunity
+
 Many expressions suggest that time damages food.
 
 Time spoils.
@@ -84,6 +86,8 @@ Each method changes the rate of change.
 
 None changes time itself.
 
+## Part II — Every Process Has Its Own Clock
+
 Not all biological processes proceed equally quickly.
 
 Some occur within fractions of a second.
@@ -118,6 +122,8 @@ Different foods possess different biological priorities.
 
 Successful preservation respects those differences.
 
+## Part III — Engineering the Pace of Change
+
 Humans cannot create more time.
 
 Neither can we remove it.
@@ -149,6 +155,8 @@ Technology engineers time by engineering biology, chemistry and physics.
 The food follows its natural laws.
 
 The environment determines how quickly those laws unfold.
+
+## Closing Reflection
 
 Every preserved food carries a history.
 

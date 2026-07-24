@@ -450,6 +450,8 @@ Every adjustment draws upon finite reserves.
 
 Gradually, the balance shifts.
 
+## Closing Reflection
+
 Repair becomes slower than deterioration.
 
 Maintenance becomes more difficult than damage.

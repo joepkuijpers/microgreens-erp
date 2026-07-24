@@ -258,6 +258,8 @@ A lipid that oxidises changes flavour.
 
 A vitamin that degrades reduces nutritional value.
 
+## Closing Reflection
+
 The quality of food therefore emerges from the combined behaviour of many different molecules working together.
 
 Preservation is not concerned with protecting a single molecule.

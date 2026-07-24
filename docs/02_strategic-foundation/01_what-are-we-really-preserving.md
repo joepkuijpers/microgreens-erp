@@ -382,7 +382,7 @@ Understanding these compromises begins with understanding what is actually being
 
 Only then can different preservation technologies be compared objectively.
 
-Closing
+## Closing Reflection
 
 This chapter began with a simple question.
 

@@ -72,9 +72,9 @@ This allows organisms to store large amounts of biological potential while using
 
 The advantage extends beyond efficiency.
 
-Lipids are insoluble in water.
+Many storage lipids are poorly soluble in water.
 
-Unlike sugars, they do not continuously influence the water balance within cells.
+They can therefore be stored in concentrated form without creating the same osmotic effects as large quantities of dissolved sugars.
 
 They can therefore accumulate in large quantities without disrupting many of the biological processes required for life.
 
@@ -232,7 +232,9 @@ Life depends not upon rigid perfection.
 
 It depends upon controlled flexibility.
 
-The flexibility that makes lipid membranes so effective also makes many lipids chemically vulnerable.
+The lipid composition that helps membranes remain fluid can also make them chemically vulnerable.
+
+Unsaturated fatty acids support fluidity, but their double bonds are especially sensitive to oxidation.
 
 Some remain remarkably stable.
 
@@ -310,7 +312,7 @@ Natural antioxidants interrupt reactions before they spread.
 
 Pigments and vitamins can absorb energy or react with unstable molecules.
 
-Enzymes repair some forms of damage while the tissue remains alive.
+While tissue remains alive, antioxidant systems limit reactive molecules and cells can replace or remodel some damaged lipids.
 
 Protection is therefore distributed across the biological system.
 

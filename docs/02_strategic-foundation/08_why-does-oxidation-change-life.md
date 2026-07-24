@@ -570,6 +570,8 @@ Water availability is managed.
 
 Each intervention reduces the opportunities for undesirable reactions while allowing biological organisation to endure for longer.
 
+## Closing Reflection
+
 Oxidation therefore teaches an important lesson.
 
 The greatest threats to quality are rarely dramatic.

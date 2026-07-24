@@ -16,7 +16,7 @@ They transport nutrients.
 
 They respond to their environment.
 
-None of these processes occur spontaneously.
+Within living systems, these processes depend upon carefully organised chemical reactions.
 
 They require molecules capable of performing highly specialised tasks.
 
@@ -260,9 +260,7 @@ Proteins can lose their structure.
 
 Sometimes this loss is undesirable.
 
-Fresh vegetables become softer.
-
-Fruit loses firmness.
+Milk proteins coagulate under particular acidic, enzymatic or thermal conditions.
 
 Milk curdles.
 
@@ -336,11 +334,15 @@ What should be allowed to change?
 
 Only after answering these questions can an appropriate preservation strategy be designed.
 
-Technology does not decide the objective.
+The intended food defines the objective.
 
-Biology does.
+Biology defines what is possible.
+
+Engineering creates the conditions that support the desired outcome.
 
 Engineering simply provides the conditions that allow the desired biological outcome to occur.
+
+## Closing Reflection
 
 Proteins demonstrate one of biology's most important principles.
 
@@ -354,7 +356,9 @@ Sometimes it represents transformation.
 
 The difference depends not upon the biology itself, but upon the purpose we seek to achieve.
 
-Preservation is therefore not the preservation of molecules.
+Preservation is therefore not only the preservation of individual molecules.
+
+It is the preservation—or deliberate transformation—of biological organisation.
 
 It is the preservation—or deliberate transformation—of biological organisation.
 

@@ -1,4 +1,4 @@
-# Chapter 17 — Why Does Food Have Aroma and Flavour?
+﻿# Chapter 17 — Why Does Food Have Aroma and Flavour?
 
 > *"Colour speaks to the eyes. Aroma speaks to the nose. Flavour speaks to the entire organism. Preservation begins by understanding the language of life."*
 
@@ -86,7 +86,7 @@ Sweetness often reflects the presence of sugars.
 
 Acidity results from organic acids.
 
-Bitterness frequently signals defensive compounds produced by plants.
+Bitterness may reflect defensive compounds produced by plants, although many other molecules can also taste bitter.
 
 Saltiness reflects dissolved mineral ions.
 
@@ -96,7 +96,7 @@ Although smell and taste are often experienced together, they provide different 
 
 The nose detects molecules travelling through the air.
 
-The tongue analyses molecules dissolved in liquid.
+Taste receptors detect molecules dissolved in saliva.
 
 The brain combines these signals into what we recognise as flavour.
 
@@ -118,15 +118,15 @@ To preserve flavour, we must first understand why this chemical language never r
 
 ## Part II — Aroma Is Always Changing
 
-Unlike carbohydrates or proteins, many aroma compounds are remarkably small.
+Many aroma compounds are relatively small and sufficiently volatile to enter the surrounding air.
 
 They escape easily from the surface of food.
 
 With every breath taken near a freshly harvested herb, fruit or flower, tiny amounts of these molecules leave the organism and enter the surrounding air.
 
-The aroma we experience is therefore not something contained within the food.
+The aroma compounds originate within the food, but aroma is experienced only when some of them enter the surrounding air.
 
-It is a continuous exchange between the food and its environment.
+Aroma therefore depends upon a continuous exchange between the food and its environment.
 
 This exchange never truly stops.
 
@@ -220,11 +220,9 @@ Cheddar should mature.
 
 Fresh lettuce should not.
 
-The biology is the same.
+The same biological and chemical principles remain active.
 
-The chemistry is the same.
-
-Only the objective has changed.
+The processes and desired outcomes differ.
 
 Successful food engineering therefore begins with a simple question.
 
@@ -232,11 +230,13 @@ What experience should the final product provide?
 
 Only then can biology, chemistry and technology be guided towards that outcome.
 
-Technology does not create flavour.
+Technology does not decide what flavour should become.
 
-It creates the conditions under which flavour develops.
+It creates and controls conditions under which flavour develops.
 
-Life and chemistry do the rest.
+Biology and chemistry produce the resulting molecules.
+
+## Closing Reflection
 
 Flavour is one of biology's richest forms of communication.
 

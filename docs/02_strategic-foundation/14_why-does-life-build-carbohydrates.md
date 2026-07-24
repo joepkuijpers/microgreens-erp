@@ -1,4 +1,4 @@
-# Chapter 14 — Why Does Life Build Carbohydrates?
+﻿# Chapter 14 — Why Does Life Build Carbohydrates?
 
 > *"Life requires more than workers. It requires materials to build, energy to grow and structure to endure. Preservation begins by understanding all three."*
 
@@ -22,7 +22,7 @@ Their diversity is remarkable.
 
 Some dissolve easily in water.
 
-Others form fibres stronger than steel when compared by weight.
+Others form lightweight fibres with remarkable strength.
 
 Some provide immediate energy.
 
@@ -32,7 +32,7 @@ Many contribute directly to the structure of living organisms.
 
 Despite these differences, carbohydrates share a common origin.
 
-They are produced by living organisms to capture, store and organise energy.
+Living organisms use them to capture, store and distribute energy, and to build biological structure.
 
 Without carbohydrates, plants could not build their cell walls.
 
@@ -70,7 +70,7 @@ Every apple.
 
 Every leaf.
 
-Each represents stored sunlight.
+Each contains chemical energy that plants originally captured through photosynthesis.
 
 When organisms consume carbohydrates, that stored energy becomes available once again.
 
@@ -198,9 +198,7 @@ By controlling the environment, it slows the biological and chemical processes t
 
 The energy remains available.
 
-The organism no longer decides how it is used.
-
-The environment does.
+As biological regulation weakens after harvest, the surrounding environment increasingly directs these changes.
 
 Energy can be stored.
 
@@ -330,11 +328,9 @@ Microorganisms consume sugars as an energy source, producing new compounds that 
 
 Although these examples appear different, they all reflect the same underlying principle.
 
-Carbohydrates remain biologically active long after harvest.
+Carbohydrates continue to participate in biological and chemical processes long after harvest.
 
-The organism no longer controls these changes.
-
-The environment does.
+Their direction and rate increasingly reflect the conditions surrounding the food.
 
 Successful preservation therefore seeks not to stop carbohydrate chemistry, but to guide it.
 
@@ -348,19 +344,21 @@ Understanding this principle transforms our view of carbohydrates.
 
 They are not passive ingredients waiting to deteriorate.
 
-They remain active participants in the continuing biology and chemistry of harvested food.
+They continue to participate in the biology and chemistry of harvested food.
+
+## Closing Reflection
 
 Carbohydrates reveal one of life's greatest achievements.
 
-They capture sunlight.
+They capture energy.
 
-Store energy.
+Store biological reserves.
 
 Build living structures.
 
 Support growth.
 
-Sustain future generations.
+And sustain future generations.
 
 Even after harvest, their story continues.
 
@@ -372,9 +370,9 @@ Some gradually change.
 
 Preservation does not remove carbohydrates from this story.
 
-It simply guides the conditions under which the story continues.
+It guides the conditions under which the story continues.
 
-To preserve food is therefore to understand not only the molecules themselves, but also the environment in which they continue to live.
+To preserve food is therefore to understand not only the molecules themselves, but also the environment in which they continue to exist.
 
 Carbohydrates provide much of life's accessible energy.
 

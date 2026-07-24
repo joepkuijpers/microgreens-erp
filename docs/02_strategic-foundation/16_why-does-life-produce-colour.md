@@ -30,9 +30,9 @@ Bright colours warned predators.
 
 Camouflage protected vulnerable organisms.
 
-Every colour carried information.
+Many colours carry biological information.
 
-Pigments make this possible.
+Pigments make much of this communication possible.
 
 These remarkable molecules absorb certain wavelengths of light while reflecting others.
 
@@ -110,7 +110,7 @@ The same colour may arise from different pigments in different organisms.
 
 Even within one plant, a pigment may serve several purposes.
 
-Biology rarely builds a molecule for appearance alone.
+Biological molecules rarely serve appearance alone.
 
 Colour emerges because particular molecules interact with light in particular structures.
 
@@ -122,7 +122,7 @@ A pigment never acts in isolation.
 
 Its appearance depends upon the environment surrounding it.
 
-Acidity can change the electrical organisation of a pigment.
+Acidity can change the molecular form and electrical charge of a pigment.
 
 This is why anthocyanin-rich foods may shift between red, purple and blue as pH changes.
 
@@ -132,7 +132,7 @@ Heat can accelerate chemical change.
 
 Light can both reveal colour and provide the energy that damages it.
 
-Enzymes can create new colours when tissues are cut, bruised or aged.
+Enzymes can catalyse reactions that create new colours when tissues are cut, bruised or aged.
 
 Water influences molecular movement and the physical structure through which light travels.
 
@@ -252,7 +252,7 @@ Life produces colour because pigments capture energy, protect tissues and commun
 
 After harvest, those pigments continue responding to their surroundings.
 
-Their colours reveal changes in molecules, structure and environment.
+Their colours can reveal changes in molecules, structure and environment.
 
 Preservation should therefore neither ignore colour nor pursue it blindly.
 

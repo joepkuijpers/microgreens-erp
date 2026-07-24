@@ -338,6 +338,8 @@ Water continues to seek balance.
 
 Preservation determines the path it takes.
 
+## Closing Reflection
+
 Engineering therefore does not oppose the movement of water. It seeks to guide that movement in a way that preserves biological organisation.
 
 Water moves differently through every biological structure.
