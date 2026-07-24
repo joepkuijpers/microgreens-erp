@@ -14,7 +14,7 @@ A food chain in which every stage exists as part of one interconnected ecosystem
 
 A food chain in which technology, automation and cultivation based on biological principles strengthen rather than replace natural processes.
 
-A food chain that minimizes waste, values natural resources and continuously improves through research, innovation and knowledge sharing.
+A food chain that minimises waste, values natural resources and continuously improves through research, innovation and knowledge sharing.
 
 A food chain in which sustainable preservation methods, such as freeze drying, maintain nutritional value while reducing storage space, transportation requirements and resource consumption.
 
@@ -23,6 +23,7 @@ A food chain in which transparency is the standard, allowing people to understan
 A food chain that inspires future generations to reconnect with the origin of life and strengthen the relationship between people, plants, animals, nature and one another.
 
 The vision is intentionally long-term and technology-independent. It defines the future the project strives to support rather than the specific methods used to achieve it.
+
 ## Related Documents
 
 - [Project Foundation](README.md)
