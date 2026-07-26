@@ -165,7 +165,7 @@ Optimization should preserve the original purpose while improving efficiency, ma
 - [Vision](01_vision.md)
 - [Mission](02_mission.md)
 - [Core Values](03_core-values.md)
-- [Guiding Principles](04_guiding-principles.md)
+- [Guiding Principles](08_guiding-principles.md)
 - [Sustainability](06_sustainability.md)
 - [Ethics](07_ethics.md)
 - [Long-Term Strategy](08_long-term-strategy.md)

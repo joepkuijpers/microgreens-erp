@@ -274,7 +274,7 @@ Every significant decision should strengthen trust, preserve integrity and contr
 - [Vision](01_vision.md)
 - [Mission](02_mission.md)
 - [Core Values](03_core-values.md)
-- [Guiding Principles](04_guiding-principles.md)
+- [Guiding Principles](08_guiding-principles.md)
 - [Design Philosophy](05_design-philosophy.md)
 - [Sustainability](06_sustainability.md)
 - [Long-Term Strategy](08_long-term-strategy.md)

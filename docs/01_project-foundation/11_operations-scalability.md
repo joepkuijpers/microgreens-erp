@@ -294,7 +294,7 @@ Before expanding operational capacity, ask:
 - [Vision](01_vision.md)
 - [Mission](02_mission.md)
 - [Core Values](03_core-values.md)
-- [Guiding Principles](04_guiding-principles.md)
+- [Guiding Principles](08_guiding-principles.md)
 - [Design Philosophy](05_design-philosophy.md)
 - [Founder's Notes](06_founders-notes.md)
 - [Sustainability](07_sustainability.md)

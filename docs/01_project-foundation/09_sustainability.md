@@ -301,7 +301,7 @@ Before implementing significant changes, ask:
 - [Vision](01_vision.md)
 - [Mission](02_mission.md)
 - [Core Values](03_core-values.md)
-- [Guiding Principles](04_guiding-principles.md)
+- [Guiding Principles](08_guiding-principles.md)
 - [Design Philosophy](05_design-philosophy.md)
 - [Operational Scalability](09_operational-scalability.md)
 - [Glossary](../17_glossary.md)
