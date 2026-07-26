@@ -46,7 +46,7 @@ Everything that follows in this book begins with that distinction.
 
 ---
 
-# Part I — Life Is Never Finished
+## Part I — Life Is Never Finished
 
 Imagine visiting a beautiful garden.
 
@@ -110,7 +110,7 @@ That continuous work is so successful that we rarely notice it.
 
 Until one day it can no longer continue.
 
-# Part II — Harvest Changes the Rules
+## Part II — Harvest Changes the Rules
 
 If life depends upon continuous maintenance, another question immediately follows.
 
@@ -203,7 +203,7 @@ The question is no longer whether change will occur.
 
 It is how that change will unfold.
 
-# Part III — The Direction of Biology
+## Part III — The Direction of Biology
 
 Imagine placing a freshly harvested leaf on a laboratory bench.
 
@@ -271,7 +271,7 @@ If every biological process continues at its own pace,
 
 how can we understand the countless changes taking place inside a harvested plant?
 
-# Part IV — Every Harvest Starts Many Clocks
+## Part IV — Every Harvest Starts Many Clocks
 
 Imagine walking into a room filled with clocks.
 
@@ -351,7 +351,7 @@ That question changes preservation from guessing into understanding.
 
 The remaining challenge is learning what each of those clocks represents.
 
-# Part V — Every Clock Tells a Different Story
+## Part V — Every Clock Tells a Different Story
 
 The idea of biological clocks provides a useful way of thinking about preservation.
 
@@ -425,7 +425,7 @@ This complexity explains why preservation is never about stopping one clock.
 
 It is about understanding which clocks matter most and deciding how best to slow them together.
 
-# Part VI — Preservation Cannot Stop Time
+## Part VI — Preservation Cannot Stop Time
 
 Once we understand that harvest starts many biological clocks, an important question follows.
 
@@ -505,7 +505,7 @@ Every successful preservation strategy begins with the same question.
 
 Only after answering that question does it make sense to decide how they should be slowed.
 
-# Part VII — Engineering Biological Change
+## Part VII — Engineering Biological Change
 
 Understanding biological clocks changes more than our understanding of preservation.
 

@@ -36,7 +36,7 @@ The answer lies in energy.
 
 Understanding how energy influences biological systems reveals why temperature affects every living organism, why preservation methods work, and why controlling energy is one of the most powerful tools available in food preservation.
 
-# Part I — Nothing in Biology Stands Still
+## Part I — Nothing in Biology Stands Still
 
 At first glance, living organisms appear remarkably still.
 
@@ -106,7 +106,7 @@ The answer lies in one of the most fundamental concepts in both biology and phys
 
 Energy.
 
-# Part II — Energy Makes Movement Possible
+## Part II — Energy Makes Movement Possible
 
 Imagine placing a cup of hot tea on a kitchen table.
 
@@ -198,7 +198,7 @@ This seemingly simple relationship explains why nearly every preservation techni
 
 By changing the energy available within a biological system, we change the pace at which biological processes can continue.
 
-# Part III — Life Depends Upon Encounters
+## Part III — Life Depends Upon Encounters
 
 Every living organism is built from countless molecules.
 
@@ -306,7 +306,7 @@ It emerges from an unimaginable number of successful molecular encounters occurr
 
 Temperature influences life because it changes the likelihood of those encounters.
 
-# Part IV — Temperature Changes Probability
+## Part IV — Temperature Changes Probability
 
 Imagine watching people leave a football stadium.
 
@@ -394,7 +394,7 @@ Preservation therefore does not begin by stopping biology.
 
 It begins by influencing probability.
 
-# Part V — Cooling Biology
+## Part V — Cooling Biology
 
 For thousands of years, people have recognised that food remains fresh for longer in cold conditions.
 
@@ -474,7 +474,7 @@ Not to stop time.
 
 But to reduce the opportunities for biological change while preserving as much biological organisation as possible.
 
-# Part VI — Engineering Energy
+## Part VI — Engineering Energy
 
 Every preservation system is, in essence, an exercise in energy management.
 

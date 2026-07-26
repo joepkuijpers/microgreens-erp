@@ -80,7 +80,7 @@ The goal is not to fight microorganisms.
 
 The goal is to understand the biological conditions that allow them to grow.
 
-# Part I — Life Requires Opportunity
+## Part I — Life Requires Opportunity
 
 Take a walk through a garden.
 
@@ -160,7 +160,7 @@ Rather than asking how to eliminate microorganisms, we begin to ask a different 
 
 How can we reduce the opportunities that allow them to grow?
 
-# Part II — Every Living Organism Has the Same Needs
+## Part II — Every Living Organism Has the Same Needs
 
 At first glance, bacteria, yeasts and fungi appear very different from plants and animals.
 
@@ -228,7 +228,7 @@ Preservation is not primarily about destroying microorganisms.
 
 It is about preventing the environment from providing everything they require to grow.
 
-# Part III — Every Organism Has Its Limits
+## Part III — Every Organism Has Its Limits
 
 Life is remarkably adaptable.
 
@@ -298,7 +298,7 @@ The goal is not to eliminate life.
 
 The goal is to create conditions in which unwanted microorganisms can no longer grow, while preserving the quality of the harvested food.
 
-# Part IV — Life Depends Upon Its Most Limiting Requirement
+## Part IV — Life Depends Upon Its Most Limiting Requirement
 
 Imagine growing a tomato plant.
 
@@ -378,7 +378,7 @@ Successful preservation rarely depends upon changing every environmental conditi
 
 Often, changing a single limiting factor is enough to prevent unwanted growth.
 
-# Part V — Adaptation Comes at a Cost
+## Part V — Adaptation Comes at a Cost
 
 Life is remarkably adaptable.
 
@@ -438,7 +438,7 @@ Successful preservation does not necessarily make life impossible.
 
 Often it simply makes growth biologically uneconomical.
 
-# Part VI — Life Exists Through Competition
+## Part VI — Life Exists Through Competition
 
 No organism lives in isolation.
 

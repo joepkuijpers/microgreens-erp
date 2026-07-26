@@ -52,7 +52,7 @@ They run through water.
 
 To understand preservation, we must therefore understand the medium that allows biology itself to function.
 
-# Part I — Water Is Everywhere
+## Part I — Water Is Everywhere
 
 Water is so familiar that it often becomes invisible.
 
@@ -112,7 +112,7 @@ The more important question is why.
 
 Why has life become so dependent upon a substance that, at first glance, appears so ordinary?
 
-# Part II — Water Is Never Just Water
+## Part II — Water Is Never Just Water
 
 If water were simply a liquid, life could almost certainly have evolved around another substance.
 
@@ -184,7 +184,7 @@ Biology does not merely contain water.
 
 Biology depends upon the unique behaviour of water.
 
-# Part III — Life Happens Through Water
+## Part III — Life Happens Through Water
 
 Imagine a city in which every road suddenly disappears.
 
@@ -264,7 +264,7 @@ The question therefore is no longer whether water is important.
 
 The real question is how changes in water alter the behaviour of living systems.
 
-# Part IV — Not All Water Is Available
+## Part IV — Not All Water Is Available
 
 At first, the solution to slowing biological change appears straightforward.
 
@@ -348,7 +348,7 @@ It explains why products with similar moisture contents may have completely diff
 
 It explains why microorganisms flourish in some environments but remain inactive in others.
 
-# Part V — Measuring Available Water
+## Part V — Measuring Available Water
 
 If water availability determines the speed of biological change, another question naturally follows.
 
@@ -416,7 +416,7 @@ This transforms preservation from reacting to biological change into anticipatin
 
 Most importantly, it explains why successful preservation depends not simply on removing water, but on controlling its availability.
 
-# Part VI — Guiding the River
+## Part VI — Guiding the River
 
 Understanding water changes how we think about engineering.
 

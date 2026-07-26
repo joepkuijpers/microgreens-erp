@@ -76,7 +76,7 @@ Chemistry simply follows the opportunities available to it.
 
 To understand preservation, we must therefore understand not only the biology that builds organisation, but also the chemistry that continually reshapes it.
 
-# Part I — Nothing Remains Unchanged
+## Part I — Nothing Remains Unchanged
 
 Imagine placing a freshly polished piece of iron outdoors.
 
@@ -148,7 +148,7 @@ Chemistry transforms.
 
 Oxidation is one of the most important examples of this continual transformation.
 
-# Part II — Every Reaction Is an Exchange
+## Part II — Every Reaction Is an Exchange
 
 Chemistry is often introduced as a collection of reactions.
 
@@ -220,7 +220,7 @@ Even many of the chemical changes responsible for food deterioration begin with 
 
 To understand oxidation, we must therefore follow the movement of electrons.
 
-# Part III — Why Electrons Matter
+## Part III — Why Electrons Matter
 
 At first sight, electrons seem insignificant.
 
@@ -298,7 +298,7 @@ Instead, preservation seeks to reduce the opportunities for these reactions to o
 
 By slowing chemical change, biological organisation can remain intact for longer.
 
-# Part IV — Why Oxygen Is So Reactive
+## Part IV — Why Oxygen Is So Reactive
 
 Walk through a forest after a storm.
 
@@ -372,7 +372,7 @@ The challenge is not oxygen itself.
 
 The challenge is controlling when, where and how oxygen is allowed to react.
 
-# Part V — Every Reaction Must Overcome a Barrier
+## Part V — Every Reaction Must Overcome a Barrier
 
 If oxygen is constantly surrounding us, an obvious question remains.
 
@@ -438,7 +438,7 @@ Instead, it reduces the likelihood that molecules possess enough energy to cross
 
 In doing so, it slows the countless reactions that gradually reshape biological organisation.
 
-# Part VI — Temperature Creates Opportunities
+## Part VI — Temperature Creates Opportunities
 
 Every molecule is in constant motion.
 
@@ -508,7 +508,7 @@ This is why controlling temperature remains one of the most powerful tools in fo
 
 It slows not only biological activity, but also the countless chemical reactions that continually reshape biological organisation.
 
-# Closing Reflection
+## Closing Reflection
 
 Life continually builds biological organisation.
 
@@ -569,8 +569,6 @@ Light is reduced.
 Water availability is managed.
 
 Each intervention reduces the opportunities for undesirable reactions while allowing biological organisation to endure for longer.
-
-## Closing Reflection
 
 Oxidation therefore teaches an important lesson.
 
