@@ -30,7 +30,9 @@ The project is under active development.
 
 Development and testing take place locally on Windows. Changes are reviewed, tested and committed before deployment to the Raspberry Pi environment.
 
-The current PHP application uses several entry files in the repository root. This structure remains in place while the application is working and will only be reorganised through a separately tested migration.
+The application uses a separated runtime structure. Public web entry points are stored in `public/`, while application logic, configuration, database resources and runtime data remain outside the public web layer.
+
+On the Raspberry Pi, Apache serves the existing `/microgreens/PHP/` URL from `public/`. Private application paths are not directly accessible through the web server. Scheduled processes run through `scripts/`, and generated state and log files are stored in `storage/`.
 
 ## Documentation
 
@@ -49,17 +51,14 @@ The documentation explains the project's purpose, scientific foundation and tech
 
 | Path | Purpose |
 |------|---------|
-| `index.php` | Main application entry point. |
-| `dashboard.php` | Main monitoring and management dashboard. |
-| `operations_dashboard.php` | Operational overview and control entry point. |
-| `api/` | Application endpoints for data and system functions. |
-| `assets/` | Stylesheets, scripts and visual assets. |
+| `app/` | Private application services, shared components, language files and hardware integration. |
+| `config/` | Environment-aware application configuration. |
 | `database/` | Database definitions, migrations and controlled database resources. |
 | `docs/` | Project, scientific and engineering documentation. |
-| `hardware/` | Hardware integration and control components. |
-| `includes/` | Shared PHP services, layouts, components and application logic. |
-| `languages/` | Translation files used by the language system. |
-| `settings/` | Application configuration pages and handlers. |
+| `public/` | Web-accessible PHP entry points, API endpoints, settings pages and assets. |
+| `scripts/` | Command-line and scheduled application entry points. |
+| `sensors/` | Sensor-reading services and related operational resources. |
+| `storage/` | Generated runtime state and log files; runtime contents are excluded from Git. |
 
 ## Development Workflow
 
