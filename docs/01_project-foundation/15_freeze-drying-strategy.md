@@ -1,6 +1,6 @@
-Freeze Drying Strategy
+# Freeze Drying Strategy
 
-Purpose
+## Purpose
 
 Freeze drying is a strategic pillar of the Microgreens ERP project.
 
@@ -8,49 +8,49 @@ Its purpose extends beyond food preservation. It is a technology that supports a
 
 The long-term ambition is to integrate freeze drying into a transparent, data-driven food chain where every product remains fully traceable from seed to final consumer.
 
-Vision
+## Vision
 
 Microgreens are among the most nutrient-dense foods available, yet they are also highly perishable.
 
-Freeze drying transforms this limitation into an opportunity by preserving nutritional value while dramatically reducing product weight, storage requirements, and transportation complexity.
+Freeze drying transforms this limitation into an opportunity by preserving nutritional value while dramatically reducing product weight, storage requirements, and transport complexity.
 
-Freeze drying is not intended as a secondary preservation method. It is a core technology that enables efficient storage, transport, and long-term availability of nutrient-rich food while reducing waste throughout the entire supply chain.
+Freeze drying is not intended as a secondary preservation method. It is a core technology that enables efficient storage, transport, and long-term availability of nutrient-rich food while reducing waste throughout the entire food chain.
 
 The project continuously evaluates cultivation, preservation, packaging, storage, and transport based on measurable environmental, nutritional, logistical, and economic performance.
 
-Design Principles
+## Design Principles
 
 The freeze drying system should:
 
-Preserve nutritional quality.
-Preserve flavour, colour, and product integrity.
-Minimise food waste.
-Reduce transportation weight and volume.
-Reduce long-term storage requirements.
-Eliminate unnecessary refrigeration during storage and transport.
-Integrate completely with the ERP.
-Maintain complete traceability throughout the production chain.
-Support continuous improvement through measurable data.
-Why Freeze Drying
+- Preserve nutritional quality.
+- Preserve flavour, colour, and product integrity.
+- Minimise food waste.
+- Reduce transport weight and volume.
+- Reduce long-term storage requirements.
+- Eliminate unnecessary refrigeration during storage and transport.
+- Integrate completely with the ERP.
+- Maintain complete traceability throughout the production chain.
+- Support continuous improvement through measurable data.
+## Why Freeze Drying
 
 Freeze drying offers unique advantages compared with conventional preservation methods.
 
 These include:
 
-Long shelf life.
-High nutrient retention.
-Excellent flavour retention.
-Excellent colour retention.
-Significant weight reduction.
-Lower transportation costs.
-Reduced storage space.
-Reduced food waste.
-Improved emergency food availability.
-Efficient international distribution.
+- Long shelf life.
+- High nutrient retention.
+- Excellent flavour retention.
+- Excellent colour retention.
+- Significant weight reduction.
+- Lower transport costs.
+- Reduced storage space.
+- Reduced food waste.
+- Improved emergency food availability.
+- Efficient international distribution.
 
 Rather than preserving products because they are surplus, the project views freeze drying as an integral production process designed from the beginning to maximise efficiency and sustainability.
 
-Supporting Local Food Systems
+## Supporting Local Food Systems
 
 One of the fundamental principles of this project is that freeze-dried microgreens are not intended to replace local agriculture.
 
@@ -64,176 +64,177 @@ Long-term partnerships should focus on empowering local communities through know
 
 Success is measured not by replacing existing food systems, but by helping them become stronger, more resilient, and more self-sufficient.
 
-ERP Integration
+## ERP Integration
 
 Every freeze drying cycle should become part of the complete production history.
 
 Each production batch should record:
 
-Source batch
-Harvest ID
-Crop profile
-Harvest date
-Freeze drying start
-Freeze drying end
-Total drying duration
-Operator
-Machine
-Cycle number
-Initial weight
-Final weight
-Moisture loss
-Yield percentage
-Packaging batch
-Storage location
-Expiration date
+- Source batch
+- Harvest ID
+- Crop profile
+- Harvest date
+- Freeze drying start
+- Freeze drying end
+- Total drying duration
+- Operator
+- Machine
+- Cycle number
+- Initial weight
+- Final weight
+- Moisture loss
+- Yield percentage
+- Packaging batch
+- Storage location
+- Expiry date
 
 Historical production data should never be overwritten.
 
 Complete traceability remains a fundamental principle of the ERP.
 
-Quality Assurance
+## Quality Assurance
 
 The ERP should record quality indicators including:
 
-Product appearance
-Colour retention
-Aroma
-Texture
-Moisture level
-Packaging integrity
-Vacuum level
-Oxygen absorber usage
-Customer feedback
+- Product appearance
+- Colour retention
+- Aroma
+- Texture
+- Moisture level
+- Packaging integrity
+- Vacuum level
+- Oxygen absorber usage
+- Customer feedback
 
 Future laboratory analysis may include:
 
-Vitamin retention
-Mineral retention
-Water activity
-Microbiological testing
-Nutritional stability during storage
-Sustainability
+- Vitamin retention
+- Mineral retention
+- Water activity
+- Microbiological testing
+- Nutritional stability during storage
+## Sustainability
 
 Freeze drying should contribute to measurable sustainability improvements through:
 
-Reduced food waste.
-Lower transportation emissions.
-Reduced refrigeration requirements.
-More efficient storage.
-Better resource utilisation.
-Improved food security.
-Longer product life.
-Higher overall supply chain efficiency.
+- Reduced food waste.
+- Lower transport emissions.
+- Reduced refrigeration requirements.
+- More efficient storage.
+- Better resource utilisation.
+- Improved food security.
+- Longer product life.
+- Higher overall food chain efficiency.
 
 The ERP should continuously measure these improvements rather than assuming they exist.
 
 Every sustainability claim should be supported by measurable data whenever possible.
 
-Future ERP Calculations
+## Future ERP Calculations
 
 The ERP should calculate and analyse:
 
-Production
-Fresh weight
-Dry weight
-Moisture loss
-Yield percentage
-Production efficiency
-Energy
-Energy consumption per cycle
-Energy per kilogram
-Energy per batch
-Energy per gram of finished product
-Economics
-Production cost
-Packaging cost
-Energy cost
-Storage cost
-Transportation cost
-Cost per gram
-Gross margin
-Return on investment
-Quality
-Shelf life prediction
-Product consistency
-Moisture stability
-Packaging performance
-Quality trends over time
-Logistics
+### Production
+- Fresh weight
+- Dry weight
+- Moisture loss
+- Yield percentage
+- Production efficiency
+### Energy
+- Energy consumption per cycle
+- Energy per kilogram
+- Energy per batch
+- Energy per gram of finished product
+### Economics
+- Production cost
+- Packaging cost
+- Energy cost
+- Storage cost
+- Transport cost
+- Cost per gram
+- Gross margin
+- Return on investment
+### Quality
+- Shelf life prediction
+- Product consistency
+- Moisture stability
+- Packaging performance
+- Quality trends over time
+## Logistics
 
 Freeze drying enables a fundamentally different logistics model.
 
 The ERP should optimise:
 
-Packaging selection
-Storage density
-Warehouse utilisation
-Container efficiency
-Shipping methods
-Distribution routes
-Inventory turnover
-Long-term emergency reserves
+- Packaging selection
+- Storage density
+- Warehouse utilisation
+- Container efficiency
+- Shipping methods
+- Distribution routes
+- Inventory turnover
+- Long-term emergency reserves
 
-The objective is to minimise unnecessary transportation, refrigeration, and storage costs while maintaining product quality.
+The objective is to minimise unnecessary transport, refrigeration, and storage costs while maintaining product quality.
 
-Research and Continuous Improvement
+## Research and Continuous Improvement
 
 The freeze drying process should continuously evolve through experimentation and measurement.
 
 Future research may include:
 
-Different drying profiles
-Crop-specific optimisation
-Packaging comparisons
-Nutrient retention studies
-Taste evaluations
-Shelf life validation
-Energy optimisation
-Process automation
+- Different drying profiles
+- Crop-specific optimisation
+- Packaging comparisons
+- Nutrient retention studies
+- Taste evaluations
+- Shelf life validation
+- Energy optimisation
+- Process automation
 
 Every experiment should be documented inside the ERP to create a continuously expanding knowledge base.
 
-Development Roadmap
-Phase 1
+## Development Roadmap
 
-Research freeze drying technologies.
+### Phase 1
 
-Compare commercial and self-built systems.
+- Research freeze drying technologies.
 
-Evaluate outsourcing opportunities.
+- Compare commercial and self-built systems.
 
-Phase 2
+- Evaluate outsourcing opportunities.
 
-Acquire a small freeze dryer.
+### Phase 2
 
-Develop ERP integration.
+- Acquire a small freeze dryer.
 
-Standardise operating procedures.
+- Develop ERP integration.
 
-Phase 3
+- Standardise operating procedures.
 
-Implement automated production tracking.
+### Phase 3
 
-Introduce quality assurance protocols.
+- Implement automated production tracking.
 
-Develop complete cost analysis.
+- Introduce quality assurance protocols.
 
-Phase 4
+- Develop complete cost analysis.
 
-Scale production capacity.
+### Phase 4
 
-Optimise packaging.
+- Scale production capacity.
 
-Improve logistics.
+- Optimise packaging.
 
-Automate reporting.
+- Improve logistics.
 
-Phase 5
+- Automate reporting.
 
-Integrate freeze drying into a complete sustainable food ecosystem where cultivation, preservation, storage, transport, and distribution operate as one connected, measurable system.
+### Phase 5
 
-Long-Term Vision
+- Integrate freeze drying into a complete sustainable food ecosystem where cultivation, preservation, storage, transport, and distribution operate as one connected, measurable system.
+
+## Long-Term Vision
 
 The long-term ambition of this project is not simply to produce freeze-dried microgreens.
 
