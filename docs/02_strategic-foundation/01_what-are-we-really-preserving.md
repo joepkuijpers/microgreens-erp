@@ -116,7 +116,7 @@ Understanding how this system works is therefore not only a biological question.
 
 The answer lies within one of nature's most elegant engineering solutions: the xylem.
 
-Definition — Xylem
+### Definition — Xylem
 
 The xylem is the structural transport network responsible for moving water and dissolved minerals from the roots to the rest of the plant.
 
@@ -172,7 +172,7 @@ How, then, do these parts receive the energy required to grow?
 
 Nature solves this problem with a second transport network.
 
-Definition — Phloem
+### Definition — Phloem
 
 The phloem is the living transport network responsible for distributing sugars, signalling molecules and many other dissolved compounds throughout the plant.
 
@@ -251,8 +251,6 @@ Perhaps preservation has never been about preserving plant material.
 Perhaps it has always been about preserving biological organisation.
 
 That possibility will guide every chapter that follows.
-
-
 
 ## Part VI — Organisation Creates Life
 
