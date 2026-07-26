@@ -252,8 +252,6 @@ Yet it also slowly reduces the very resources that give harvested food its nutri
 
 Understanding respiration in this way reveals why preservation is never about stopping biology completely.
 
-
-
 It is about guiding biology so that essential life processes continue as slowly and efficiently as possible.
 
 ## Part III — Every Harvest Breathes Differently
