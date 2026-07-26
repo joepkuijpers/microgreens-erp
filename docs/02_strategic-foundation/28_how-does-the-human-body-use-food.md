@@ -1000,8 +1000,6 @@ Some compounds are not required for survival in the same way as proteins, vitami
 
 Yet many contribute significantly to normal physiological function and long-term health.
 
-Among the most important are dietary fibre and phytochemicals.
-
 Dietary fibre consists primarily of components of plant cell walls that cannot be fully digested by human digestive enzymes.
 
 Rather than being absorbed in the small intestine, much of this material reaches the large intestine largely unchanged.
