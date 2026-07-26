@@ -10,9 +10,9 @@ At first, the answer appears obvious. We preserve food.
 
 Yet that answer quickly becomes insufficient.
 
-Food is not merely a collection of nutrients, nor is it simply somethingwe eat. Every fruit, leaf, seed and root is the result of countlessbiological processes working together within one organised system.
+Food is not merely a collection of nutrients, nor is it simply something we eat. Every fruit, leaf, seed and root is the result of countless biological processes working together within one organised system.
 
-Before discussing preservation, we must first understand what thatsystem really is. Only then can we understand what preservation trulymeans.
+Before discussing preservation, we must first understand what that system really is. Only then can we understand what preservation truly means.
 
 ## Engineering Objective
 
@@ -28,23 +28,23 @@ This chapter therefore establishes the biological foundation upon which every pr
 
 A leaf appears simple. It is thin, green and silent.
 
-It rests motionless in the sunlight and gives little indication of theextraordinary complexity hidden beneath its surface.
+It rests motionless in the sunlight and gives little indication of the extraordinary complexity hidden beneath its surface.
 
 Yet every healthy leaf is alive with activity.
 
-Millions of cells continuously cooperate with one another. Water movesthrough tissues. Sugars are transported from one part of the plant toanother. Minerals circulate. Hormones carry information. Proteins areproduced. Cells communicate, respond to their surroundings and repairdamage.
+Millions of cells continuously cooperate with one another. Water moves through tissues. Sugars are transported from one part of the plant to another. Minerals circulate. Hormones carry information. Proteins are produced. Cells communicate, respond to their surroundings and repair damage.
 
 Nothing inside a living leaf is truly static.
 
-Life depends on movement, but movement alone is not enough. Life alsodepends on organisation.
+Life depends on movement, but movement alone is not enough. Life also depends on organisation.
 
-A leaf is not alive simply because it contains living cells. It is alivebecause those cells remain arranged, connected and coordinated as onefunctioning biological system.
+A leaf is not alive simply because it contains living cells. It is alive because those cells remain arranged, connected and coordinated as one functioning biological system.
 
 This distinction is subtle, but it is fundamental.
 
 Throughout this book, we will repeatedly return to one central idea:
 
-Biological value does not arise from individual components alone. Itemerges from the way those components are organised.
+Biological value does not arise from individual components alone. It emerges from the way those components are organised.
 
 ## Part II — Every Plant Contains Infrastructure
 
