@@ -126,7 +126,7 @@ Everything ultimately serves the same purpose.
 
 Maintaining biological organisation.
 
-## Part II — Damage Is a Normal Part of Life
+## Part I — Damage Is a Normal Part of Life
 
 When we hear the word *damage*, we often think of something unusual.
 
@@ -222,7 +222,7 @@ But continuously.
 
 This is where deterioration begins.
 
-## Part III — Life Is an Investment
+## Part II — Life Is an Investment
 
 If damage is inevitable, another question naturally follows.
 
@@ -300,7 +300,7 @@ Deterioration is therefore not the sudden arrival of failure.
 
 It is the gradual moment at which the investment required to maintain life becomes greater than the resources available to support it.
 
-## Part IV — Harvest Changes the Rules
+## Part III — Harvest Changes the Rules
 
 Throughout its life, a plant exists as part of a much larger system.
 

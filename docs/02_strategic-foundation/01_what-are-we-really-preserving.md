@@ -24,7 +24,7 @@ If the objective is misunderstood, even highly efficient preservation technologi
 
 This chapter therefore establishes the biological foundation upon which every preservation method discussed throughout this book will be evaluated.
 
-Part I --- A Plant Is Not an Object
+## Part I — A Plant Is Not an Object
 
 A leaf appears simple. It is thin, green and silent.
 
@@ -46,7 +46,7 @@ Throughout this book, we will repeatedly return to one central idea:
 
 Biological value does not arise from individual components alone. Itemerges from the way those components are organised.
 
-Part III — Every Plant Contains Infrastructure
+## Part II — Every Plant Contains Infrastructure
 
 Imagine standing above a modern city.
 
@@ -88,7 +88,7 @@ It is an organised network.
 
 Understanding preservation begins by understanding that network.
 
-Part IV — Xylem: The Structural Water Network
+## Part III — Xylem: The Structural Water Network
 
 Imagine a mature tree standing thirty metres tall.
 
@@ -154,7 +154,7 @@ The xylem demonstrates one of the recurring themes of this book.
 
 The most efficient engineering solutions often arise not by adding complexity, but by understanding and working with the physical properties already present in nature.
 
-Part V — Phloem: The Living Distribution Network
+## Part IV — Phloem: The Living Distribution Network
 
 If the xylem solves the problem of transporting water, another question immediately arises.
 
@@ -208,7 +208,7 @@ Complex systems rarely depend upon a single component.
 
 Their strength emerges from the interaction between specialised systems working towards a common purpose.
 
-Part VI — A Leaf Is an Ecosystem
+## Part V — A Leaf Is an Ecosystem
 
 By now, a leaf appears very different from when this chapter began.
 
@@ -254,7 +254,7 @@ That possibility will guide every chapter that follows.
 
 
 
-Part VII — Organisation Creates Life
+## Part VI — Organisation Creates Life
 
 Imagine placing every component of a healthy leaf on a laboratory table.
 
@@ -328,7 +328,7 @@ The greater the preservation of biological organisation, the greater the preserv
 
 This principle will serve as one of the central foundations of this book.
 
-Part VIII — A New Definition of Preservation
+## Part VII — A New Definition of Preservation
 
 Throughout this chapter, one idea has appeared repeatedly.
 

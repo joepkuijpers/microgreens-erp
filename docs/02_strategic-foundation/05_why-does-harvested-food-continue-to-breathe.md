@@ -122,7 +122,7 @@ Respiration is therefore more than breathing.
 
 It is the biological process that reveals how harvested life continues after harvest.
 
-## Part II — Every Exchange Has a Purpose
+## Part I — Every Exchange Has a Purpose
 
 If harvested tissues continue to exchange with their surroundings, an important question remains.
 
@@ -186,7 +186,7 @@ It sustains life while gradually consuming it.
 
 Understanding this balance is essential to understanding why harvested food inevitably changes over time.
 
-## Part III — Breathing Without Lungs
+## Part II — Breathing Without Lungs
 
 When we hear the word *respiration*, most of us immediately think of breathing.
 
@@ -256,7 +256,7 @@ Understanding respiration in this way reveals why preservation is never about st
 
 It is about guiding biology so that essential life processes continue as slowly and efficiently as possible.
 
-## Part IV — Every Harvest Breathes Differently
+## Part III — Every Harvest Breathes Differently
 
 If respiration is essential for life, another question immediately follows.
 
@@ -330,7 +330,7 @@ The engineer then selects the technology that best supports that biology.
 
 Successful preservation therefore begins not by asking how long a product should last, but by understanding how actively it continues to live.
 
-## Part V — Changing the Air
+## Part IV — Changing the Air
 
 Every breath is an exchange.
 
@@ -414,7 +414,7 @@ They do not stop biology.
 
 They create conditions in which biology proceeds more slowly while remaining as healthy as possible.
 
-## Part VI — The Cost of Every Breath
+## Part V — The Cost of Every Breath
 
 Respiration allows harvested tissues to remain alive.
 

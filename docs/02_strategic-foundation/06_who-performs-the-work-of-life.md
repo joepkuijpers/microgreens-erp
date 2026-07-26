@@ -116,7 +116,7 @@ It also depends upon work.
 
 And nearly all biological work is performed by enzymes.
 
-## Part II — Enzymes Do Not Think
+## Part I — Enzymes Do Not Think
 
 The remarkable efficiency of living organisms can easily give the impression that enzymes make decisions.
 
@@ -212,7 +212,7 @@ It changes their working environment.
 
 The biological response follows naturally.
 
-## Part III — Every Worker Needs the Right Conditions
+## Part II — Every Worker Needs the Right Conditions
 
 Imagine asking a skilled carpenter to build a table.
 
@@ -300,7 +300,7 @@ The workers respond.
 
 The conditions decide.
 
-## Part IV — Life Is Built from Chains
+## Part III — Life Is Built from Chains
 
 Imagine a relay race.
 
@@ -382,7 +382,7 @@ Life is therefore not maintained by individual reactions.
 
 It is maintained by countless interconnected chains working together every moment.
 
-## Part V — Life Continues Through Balance
+## Part IV — Life Continues Through Balance
 
 Throughout this book, we have gradually uncovered how living systems function.
 
