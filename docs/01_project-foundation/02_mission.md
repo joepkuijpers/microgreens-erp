@@ -2,37 +2,37 @@
 
 ## Purpose
 
-This document defines how the long-term vision of the Microgreens ERP project is translated into practical action.
+This document explains how the long-term vision of the Microgreens ERP project is translated into practical action.
 
-It provides the strategic direction that guides planning, development and decision-making throughout the project.
+It provides direction for planning, development and decision-making throughout the project.
 
 ## Mission
 
-To develop a transparent, sustainable and scalable Food Chain that combines responsible innovation, biological principles and practical automation to produce nutritious food efficiently and ethically.
+To develop an honest, transparent and sustainable food chain based on biological understanding, responsible innovation and purposeful automation.
 
-Every stage of the Food Chain is part of one interconnected ecosystem. Cultivation, processing, preservation, storage, transportation, distribution and knowledge sharing are treated as connected processes that continuously support and improve one another.
+Every stage of the food chain is treated as part of one connected system. Cultivation, processing, preservation, storage, transport, distribution and knowledge sharing must support and improve one another.
 
-Cultivation follows biological principles while working toward the long-term objective of certified organic production. Every decision should strengthen natural processes rather than replace them whenever practical.
+Cultivation follows biological principles while working towards the long-term objective of certified organic production. Technology should strengthen natural processes rather than replace them whenever practical.
 
-Technology and automation are applied with purpose. Their role is to improve quality, consistency, efficiency and transparency while supporting responsible use of natural resources.
+Automation is applied with purpose. It should improve quality, consistency, efficiency and transparency while supporting the responsible use of natural resources.
 
-Operational growth follows the principles of standardization, modularity and scalability. Production systems, hardware, documentation and operational procedures should remain as uniform as practical to improve reliability, simplify maintenance and preserve consistent data within the ERP system.
+Processes must be measurable, traceable and repeatable. The ERP records how food is produced, which resources are used and how each process performs.
 
-Research and Continuous Improvement are integral parts of the project. Every process should be evaluated, documented and refined to increase knowledge, improve quality and support sustainable development.
+Operational growth should remain modular and manageable. Standardised production systems, hardware, documentation and procedures improve reliability, simplify maintenance and support responsible expansion.
 
-Knowledge, experience and research are shared openly whenever appropriate to encourage collaboration, innovation and continuous learning.
+Research and continuous improvement are integral to the project. Processes are observed, evaluated, documented and refined to increase knowledge, improve quality and reduce waste.
 
-Sustainable preservation methods, including freeze drying, are developed to maintain nutritional value, extend shelf life, reduce storage requirements and improve transportation efficiency while minimizing resource consumption.
+Knowledge, experience and research are shared openly whenever appropriate. Open knowledge supports collaboration, innovation and local capacity without creating unnecessary dependence.
 
-Infrastructure should grow through modular expansion whenever practical. Additional production capacity should be added using standardized systems that maintain operational consistency, simplify maintenance and support future scalability.
+Preservation is treated as part of the food chain rather than as a separate final step. Methods such as freeze drying should maintain nutritional value, extend shelf life and reduce storage and transport requirements while minimising resource consumption.
 
-Workforce development is based on transparency, responsibility and documented procedures. Every activity should be traceable, repeatable and continuously improved to support safe and scalable operations.
+Production should adapt to environmental conditions whenever practical. Indoor cultivation provides consistency when natural conditions are unsuitable. Outdoor cultivation should be considered when local conditions allow responsible and efficient production.
 
-Production should adapt to environmental conditions whenever practical. Indoor cultivation provides consistency when outdoor conditions are unsuitable, while outdoor cultivation should be used whenever natural conditions allow efficient and responsible production.
+Workforce development is based on transparency, responsibility and documented procedures. People should be able to understand their work, repeat it safely and contribute to its improvement.
 
 Every decision should contribute to environmental responsibility, economic sustainability and positive social impact.
 
-The ultimate mission is to build a Food Chain that strengthens the relationship between people, plants, animals and nature while inspiring future generations to produce food with transparency, responsibility and respect.
+The mission is to measure, understand and continuously improve the food chain while preserving the relationship between people, plants, animals and nature.
 
 ## Related Documents
 
