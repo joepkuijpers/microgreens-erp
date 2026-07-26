@@ -243,3 +243,17 @@ It is to demonstrate how modern technology can support a food system that is tra
 By integrating cultivation, preservation, logistics, research, and continuous improvement into a single ERP platform, every decision can be guided by evidence rather than assumption.
 
 Ultimately, the project seeks to contribute to a future in which nutritious food remains accessible, waste is minimised, local agriculture is strengthened, and technology serves both people and the environment.
+
+## Related Documents
+
+- [Vision](01_vision.md)
+- [Mission](02_mission.md)
+- [Sustainability](09_sustainability.md)
+- [Food Chain Strategy](12_food-chain-strategy.md)
+- [Safety and Resilience Strategy](13_safety-and-resilience-strategy.md)
+- [Automation Strategy](16_automation-strategy.md)
+- [Research Strategy](18_research-strategy.md)
+- [Energy Strategy](19-energy-strategy.md)
+- [Risk Strategy](22_risk-strategy.md)
+- [Engineering Freeze Dryer](../03_engineering/14_freeze-dryer.md)
+- [Engineering Energy](../03_engineering/15_energy.md)
