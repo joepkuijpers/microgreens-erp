@@ -1,3 +1,21 @@
+# Design Philosophy
+
+## Purpose
+
+This document explains the thinking behind the project's design decisions and long-term architecture.
+
+It translates the vision, mission, core values, Thinking Framework and Guiding Principles into practical design principles for software, hardware, documentation, production systems and operational workflows.
+
+## Definition
+
+Technology should adapt to biology, not biology to technology.
+
+Engineering exists to support biological understanding, not replace it.
+
+Systems should remain understandable, modular, traceable and adaptable. Complexity should only be introduced when it provides measurable and lasting value.
+
+## Design Principles
+
 ### Modularity
 
 **Principle**
@@ -14,23 +32,23 @@ Environmental practices should follow the same modular philosophy. Sustainable i
 
 ---
 
-### Standardization
+### Standardisation
 
 **Principle**
 
-Standardization establishes a reliable foundation for consistency, quality and continuous improvement.
+Standardisation establishes a reliable foundation for consistency, quality and continuous improvement.
 
 **Application**
 
-Whenever practical, production should use standardized tray sizes, production racks, hardware configurations, documentation and operational procedures.
+Whenever practical, production should use standardised tray sizes, production racks, hardware configurations, documentation and operational procedures.
 
-Indoor cultivation should use one standardized lighting system to ensure consistent measurements, simplify maintenance and improve ERP data quality.
+Indoor cultivation should use one standardised lighting system to ensure consistent measurements, simplify maintenance and improve ERP data quality.
 
 Whenever environmental conditions are suitable, outdoor cultivation should be preferred to reduce energy consumption and strengthen natural biological processes.
 
 Standards should only change after measurable evidence demonstrates a long-term improvement.
 
-Standardization provides the baseline from which meaningful innovation can be measured.
+Standardisation provides the baseline from which meaningful innovation can be measured.
 
 ---
 
@@ -68,19 +86,19 @@ Traceability preserves accountability, supports continuous improvement and enabl
 
 **Principle**
 
-Measure before optimizing.
+Measure before optimising.
 
 Optimize only after sufficient evidence has been collected.
 
 Measure again after implementation.
 
-Never optimize assumptions.
+Never optimise assumptions.
 
 **Application**
 
 Operational improvements should be based on observations, measurements, experimentation and validated data collected through the ERP system, sensors, documentation and practical experience.
 
-Every optimization should be verified after implementation to confirm that the intended improvement has actually been achieved.
+Every optimisation should be verified after implementation to confirm that the intended improvement has actually been achieved.
 
 Continuous measurement transforms improvement into a repeatable learning process.
 
@@ -98,7 +116,7 @@ Seek the simplest origin that naturally supports the intended application.
 
 Complexity should only be introduced when it provides measurable, justifiable and long-term value.
 
-Elegant engineering minimizes unnecessary components while maximizing clarity, maintainability, adaptability and future scalability.
+Elegant engineering minimises unnecessary components while maximising clarity, maintainability, adaptability and future scalability.
 
 ### Interoperability
 
@@ -126,7 +144,7 @@ Recovery should be simple, traceable and preserve data integrity.
 
 ---
 
-### Human-Centered Engineering
+### Human-Centred Engineering
 
 **Principle**
 
@@ -150,7 +168,7 @@ Automation should improve an already understood process rather than compensate f
 
 ---
 
-### Origin Before Optimization
+### Origin Before Optimisation
 
 **Principle**
 
@@ -158,17 +176,18 @@ Understand why a system exists before attempting to improve it.
 
 **Application**
 
-Optimization should preserve the original purpose while improving efficiency, maintainability and sustainability.
+Optimisation should preserve the original purpose while improving efficiency, maintainability and sustainability.
 
 ## Related Documents
 
 - [Vision](01_vision.md)
 - [Mission](02_mission.md)
 - [Core Values](03_core-values.md)
+- [Thinking Framework](04_thinking-framework.md)
 - [Guiding Principles](08_guiding-principles.md)
-- [Sustainability](06_sustainability.md)
+- [Sustainability](09_sustainability.md)
 - [Ethics](07_ethics.md)
-- [Long-Term Strategy](08_long-term-strategy.md)
-- [Operational Scalability](09_operational-scalability.md)
+- [Long-Term Strategy](10_long-term-strategy.md)
+- [Operational Scalability](11_operations-scalability.md)
 - [Glossary](../17_glossary.md)
 - [Documentation Style Guide](../18_documentation-style-guide.md)
