@@ -1,5 +1,6 @@
-Project Journey
-Purpose
+# Project Journey
+
+## Purpose
 
 This document explains the journey that gradually led to the creation of the Microgreens ERP project.
 
@@ -21,7 +22,7 @@ Many of those questions eventually developed into principles.
 
 Those principles became the foundation upon which this project is built.
 
-Growing Up
+## Growing Up
 
 I grew up in Oss, the Netherlands.
 
@@ -33,7 +34,7 @@ Instead of immediately continuing my education, I decided to explore the world a
 
 Looking back, that decision became the first step of a much longer journey.
 
-Tanzania
+## Tanzania
 
 At the age of eighteen, with the support of my grandfather, I travelled to Tanzania.
 
@@ -55,13 +56,13 @@ Different societies organise themselves differently.
 
 That experience taught me to observe before judging, a principle that still influences every aspect of this project.
 
-Wageningen
+## Wageningen
 
 After returning to the Netherlands, I enrolled at Van Hall Larenstein in Wageningen, where I studied Fair Trade Management and Tropical Agriculture.
 
 The programme introduced me to subjects including:
 
-value chains;
+food chains;
 international trade;
 transportation;
 plant science;
@@ -75,7 +76,7 @@ Alongside my studies I became familiar with alternative ways of living through c
 
 For the first time I began to see agriculture not as an isolated activity but as one interconnected system where biology, economics, logistics and society continuously influence one another.
 
-Nepal
+## Nepal
 
 During my second year I completed a six-month internship on an organic tea farm in Nepal.
 
@@ -97,7 +98,7 @@ This experience demonstrated that biological responsibility and economic systems
 
 Doing the right thing does not automatically create a sustainable business.
 
-Australia
+## Australia
 
 After returning from Nepal I realised that my interests had started moving beyond the structure of formal education.
 
@@ -111,7 +112,7 @@ Later I travelled through Tasmania.
 
 The contrast between intensive monoculture and Tasmania's biodiversity strengthened my appreciation for natural diversity, resilience and ecological balance.
 
-Spirit Restaurant
+## Spirit Restaurant
 
 Back in the Netherlands I worked at the organic restaurant Spirit.
 
@@ -137,7 +138,7 @@ Waste is often not created by bad intentions.
 
 It is created by systems that reward convenience over recovery.
 
-Borders
+## Borders
 
 Later I travelled through Israel, Palestine, the Sinai Peninsula and Egypt.
 
@@ -161,7 +162,7 @@ Rejecting systems entirely often creates new limitations rather than improving t
 
 Eventually I restored my documentation and continued forward with a deeper appreciation of both freedom and responsibility.
 
-Searching for Direction
+## Searching for Direction
 
 The years that followed included temporary jobs, periods of housing insecurity and an ongoing search for meaningful work.
 
@@ -181,7 +182,7 @@ This period reinforced another principle that still guides the project today.
 
 Learning should never depend entirely on formal education.
 
-Reflection
+## Reflection
 
 During a six-day fast I spent considerable time reflecting on the direction of my life.
 
@@ -200,7 +201,7 @@ continuous improvement.
 
 Rather than continuing to search for existing work, I decided to create meaningful work myself.
 
-Why Microgreens?
+## Why Microgreens?
 
 Microgreens became the practical starting point.
 
@@ -214,7 +215,7 @@ With relatively little capital, ideas can be tested, measured and continuously i
 
 The Microgreens ERP project therefore became the practical laboratory in which years of observations could finally be transformed into measurable improvements.
 
-From Observations to Principles
+## From Observations to Principles
 
 The project did not begin with solutions.
 
@@ -232,7 +233,7 @@ The software is therefore not the objective.
 
 It is one practical expression of a much broader vision.
 
-Continuing the Journey
+## Continuing the Journey
 
 The journey is still ongoing.
 
@@ -242,7 +243,7 @@ The objective has never been to build software alone.
 
 Nor has it been simply to grow microgreens.
 
-The objective is to contribute, one practical step at a time, to a Food Chain that is more transparent, biologically responsible, sustainable and accessible.
+The objective is to contribute, one practical step at a time, to a food chain that is more transparent, biologically responsible, sustainable and accessible.
 
 The Microgreens ERP project is not the destination.
 
