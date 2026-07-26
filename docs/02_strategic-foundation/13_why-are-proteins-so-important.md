@@ -360,8 +360,6 @@ Preservation is therefore not only the preservation of individual molecules.
 
 It is the preservation—or deliberate transformation—of biological organisation.
 
-It is the preservation—or deliberate transformation—of biological organisation.
-
 Proteins perform countless biological tasks.
 
 Yet they are only one part of every living organism.
