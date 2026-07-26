@@ -27,7 +27,7 @@ $uptime = runCommand("uptime -p");
 $ip = runCommand("hostname -I | awk '{print $1}'");
 $hostname = gethostname();
 
-$dbPath = __DIR__ . '/../database/MicrogreensERP_Live.sqlite';
+$dbPath = require __DIR__ . '/../config/database_path.php';
 $dbSize = file_exists($dbPath) ? round(filesize($dbPath) / 1024 / 1024, 2) : null;
 
 $model = runCommand("cat /proc/device-tree/model 2>/dev/null");
