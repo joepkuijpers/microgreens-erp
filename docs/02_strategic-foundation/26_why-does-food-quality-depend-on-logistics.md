@@ -1,4 +1,4 @@
-﻿# Chapter 26 — Why Does Food Quality Depend on Logistics?
+# Chapter 26 — Why Does Food Quality Depend on Logistics?
 
 > *"The quality of food is not determined only by how it is produced, but also by how it is moved."*
 

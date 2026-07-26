@@ -1,4 +1,4 @@
-﻿# Chapter 25 — Why Does Packaging Matter?
+# Chapter 25 — Why Does Packaging Matter?
 
 > *"Preservation protects food during processing. Packaging protects it afterwards."*
 

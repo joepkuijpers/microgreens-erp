@@ -1,4 +1,4 @@
-﻿# Chapter 22 — Why Does Freezing Preserve Food?
+# Chapter 22 — Why Does Freezing Preserve Food?
 
 > *"Cooling slows life. Freezing changes the environment in which life exists."*
 

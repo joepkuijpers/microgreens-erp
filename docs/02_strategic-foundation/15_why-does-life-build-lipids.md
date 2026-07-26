@@ -1,4 +1,4 @@
-﻿# Chapter 15 — Why Does Life Build Lipids?
+# Chapter 15 — Why Does Life Build Lipids?
 
 > *"Life stores energy in many forms. When endurance becomes more important than speed, biology turns to lipids. Preservation begins by understanding why."*
 

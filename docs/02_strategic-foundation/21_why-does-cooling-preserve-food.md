@@ -1,4 +1,4 @@
-﻿# Chapter 21 — Why Does Cooling Preserve Food?
+# Chapter 21 — Why Does Cooling Preserve Food?
 
 > *"Life depends upon energy. Cooling does not remove life—it slows the pace at which life continues. Preservation begins by understanding this distinction."*
 

@@ -1,4 +1,4 @@
-﻿# Chapter 20 — Why Does Drying Preserve Food?
+# Chapter 20 — Why Does Drying Preserve Food?
 
 > *"Long before refrigeration or electricity, humanity discovered that removing water could preserve life. Preservation begins by understanding why this simple observation changed civilisation."*
 

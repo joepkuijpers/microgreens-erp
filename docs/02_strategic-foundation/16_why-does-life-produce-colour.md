@@ -1,4 +1,4 @@
-﻿# Chapter 16 — Why Does Life Produce Colour?
+# Chapter 16 — Why Does Life Produce Colour?
 
 > *"Before life can be eaten, it must first be seen. Preservation begins by understanding the messages biology creates."*
 

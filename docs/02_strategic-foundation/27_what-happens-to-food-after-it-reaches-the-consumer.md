@@ -1,4 +1,4 @@
-﻿# Chapter 27 — What Happens to Food After It Reaches the Consumer?
+# Chapter 27 — What Happens to Food After It Reaches the Consumer?
 
 > *"The final stage of preservation begins when the food arrives in the kitchen."*
 

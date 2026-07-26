@@ -1,4 +1,4 @@
-﻿# Chapter 24 — Why Does Freeze Drying Preserve Food?
+# Chapter 24 — Why Does Freeze Drying Preserve Food?
 
 > *"Freeze drying preserves food by removing water without first returning it to the liquid state."*
 

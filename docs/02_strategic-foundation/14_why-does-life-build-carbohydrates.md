@@ -1,4 +1,4 @@
-﻿# Chapter 14 — Why Does Life Build Carbohydrates?
+# Chapter 14 — Why Does Life Build Carbohydrates?
 
 > *"Life requires more than workers. It requires materials to build, energy to grow and structure to endure. Preservation begins by understanding all three."*
 

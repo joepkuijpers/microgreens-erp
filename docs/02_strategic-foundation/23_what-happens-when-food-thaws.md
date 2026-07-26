@@ -1,4 +1,4 @@
-﻿# Chapter 23 — What Happens When Food Thaws?
+# Chapter 23 — What Happens When Food Thaws?
 
 > *"Freezing slows change. Thawing reveals what the freezing process has preserved."*
 

@@ -1,4 +1,4 @@
-﻿# Chapter 18 — Why Does Time Matter?
+# Chapter 18 — Why Does Time Matter?
 
 > *"Life changes through time. Preservation begins by changing the pace of that change."*
 

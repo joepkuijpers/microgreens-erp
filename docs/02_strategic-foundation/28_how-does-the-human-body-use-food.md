@@ -1,4 +1,4 @@
-﻿# Chapter 28 — How Does the Human Body Use Food?
+# Chapter 28 — How Does the Human Body Use Food?
 
 > *"Food is not consumed simply to satisfy hunger. It provides the materials and energy from which life is continuously rebuilt."*
 

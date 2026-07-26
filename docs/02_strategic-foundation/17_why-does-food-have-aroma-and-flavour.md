@@ -1,4 +1,4 @@
-﻿# Chapter 17 — Why Does Food Have Aroma and Flavour?
+# Chapter 17 — Why Does Food Have Aroma and Flavour?
 
 > *"Colour speaks to the eyes. Aroma speaks to the nose. Flavour speaks to the entire organism. Preservation begins by understanding the language of life."*
 
