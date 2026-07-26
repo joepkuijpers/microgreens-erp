@@ -1,113 +1,213 @@
 # Microgreens ERP Documentation
 
-Welcome to the official documentation of the Microgreens ERP project.
+The Microgreens ERP documentation preserves the project's philosophy, biological knowledge, engineering decisions, operational understanding and development history.
 
-This documentation serves as the central knowledge base for the project. It describes the project's architecture, development workflow, ERP modules, hardware, database, research, documentation standards and long-term vision.
+It is intended for the founder, future contributors, growers, engineers, researchers and students.
 
-The documentation is intended to remain clear, maintainable, scalable and easy to translate.
+The documentation should remain clear, traceable, maintainable and easy to translate.
 
----
+## Start Here
 
-# Documentation Structure
+New readers should begin with:
 
-## Core Documentation
+1. [Project Foundation](01_project-foundation/README.md)
+2. [Current Project Status](21_project-status.md)
+3. [Engineering Documentation](03_engineering/README.md)
+4. [Glossary](17_glossary.md)
+5. [Documentation Style Guide](18_documentation-style-guide.md)
 
-| Document | Purpose |
-|----------|---------|
-| 00_master-index.md | Central navigation for all documentation |
-| 01_daily-workflow.md | Daily development workflow |
-| 02_new-chat-prompt.md | Standard prompt for starting a new ChatGPT session |
-| 03_project-operating-manual.md | Project procedures and operating guidelines |
-| 04_project-knowledge-base.md | Central project knowledge |
-| 05_software-architecture.md | Software and system architecture |
-| 06_database-planning.md | Database design and planning |
-| 07_git-deployment.md | Git workflow and deployment process |
-| 08_programming-standards.md | Programming standards and conventions |
-| 09_raspberry-pi.md | Raspberry Pi hardware documentation |
-| 10_erp-modules.md | Overview of all ERP modules |
-| 11_roadmap.md | Project roadmap |
-| 12_changelog.md | Project change history |
-| 13_known-issues.md | Known issues and temporary workarounds |
-| 14_freeze-dryer.md | Freeze Dryer research and development |
-| 15_ai-automation.md | Artificial Intelligence and automation |
-| 16_decisions.md | Architectural and project decisions |
-| 17_glossary.md | Official project terminology |
-| 18_documentation-style-guide.md | Documentation writing and formatting standards |
+The Project Foundation explains why the project exists and which principles guide it.
 
----
+The Project Status describes the current stage.
 
-# Project Foundation
+Engineering documentation explains how technical systems support biological understanding.
 
-The Project Foundation defines the long-term direction of the project.
+## Documentation Areas
 
-| Document | Purpose |
-|----------|---------|
-| README.md | Introduction to the Project Foundation |
-| 01_vision.md | Long-term vision |
-| 02_mission.md | Mission and strategic direction |
-| 03_core-values.md | Core values |
-| 04_guiding-principles.md | Decision-making principles |
-| 05_design-philosophy.md | Design philosophy |
-| 06_sustainability.md | Sustainability strategy |
-| 07_ethics.md | Ethical framework |
-| 08_long-term-strategy.md | Long-term strategy |
+| Area | Status | Purpose |
+|------|--------|---------|
+| [Project Foundation](01_project-foundation/README.md) | Developed | Defines the project's origin, vision, mission, values, strategies and governance. |
+| [Preservation Energy Architecture](02_strategic-foundation/) | 28 chapters complete | Explains the biological, chemical and physical principles of food preservation. |
+| [Engineering](03_engineering/README.md) | Developed | Documents monitoring, measurement, racks, power, climate, water, preservation and maintenance. |
+| [Biological Production](<Biological production/>) | Developing | Organises knowledge about pests, diseases, beneficial organisms, indicator plants and biological monitoring. |
+| [Project Reference System](20_project-reference-system.md) | Developed | Provides permanent identifiers and traceability across project knowledge. |
+| [Decision Framework](23_decision-framework.md) | Developed | Defines how significant decisions should be prepared and evaluated. |
+| [Decision Records](24_decision-records.md) | Developed | Preserves the reasoning and history behind important decisions. |
+| [Templates](Templates/README.md) | Available | Provides reusable structures for decisions, meetings, SOPs, incidents and project records. |
 
-Location:
+## Project Foundation
 
-```text
-docs/01_project-foundation/
-```
+The Project Foundation is the primary source for long-term direction.
 
----
+It contains 26 documents covering:
 
-# Supporting Directories
+- project origin;
+- vision and mission;
+- core values;
+- thinking and design;
+- ethics;
+- sustainability;
+- operational strategy;
+- safety and resilience;
+- sensing;
+- preservation;
+- automation;
+- data;
+- research;
+- energy;
+- artificial intelligence;
+- risk;
+- future technologies;
+- human flourishing;
+- stewardship and governance.
 
-| Directory | Purpose |
-|-----------|---------|
-| diagrams/ | Architecture diagrams, workflows and technical drawings |
-| images/ | Screenshots, photos, icons and project graphics |
-| references/ | Books, datasheets, scientific papers and external resources |
-| templates/ | Markdown templates, SQL templates, SOPs and checklists |
-| notes/ | Temporary notes, research, ideas and troubleshooting |
+Use the [Project Foundation index](01_project-foundation/README.md) for its complete reading order.
 
----
+## Preservation Energy Architecture
 
-# Documentation Principles
+The Preservation Energy Architecture is a 28-chapter work explaining why harvested food changes and how preservation methods influence those changes.
 
-Every major directory should contain a `README.md`.
+It connects:
+
+- biological organisation;
+- water;
+- temperature;
+- respiration;
+- enzymes;
+- oxidation;
+- microorganisms;
+- molecular structure;
+- drying;
+- cooling;
+- freezing;
+- freeze drying;
+- packaging;
+- logistics;
+- human nutrition.
+
+The chapters are stored in [`docs/02_strategic-foundation/`](02_strategic-foundation/).
+
+Supporting drafts and editorial files in that directory are not automatically part of the approved chapter sequence.
+
+## Engineering
+
+Engineering documentation explains how technology supports observation, understanding and responsible operation.
+
+Current subjects include:
+
+- monitoring architecture;
+- measurement strategy;
+- sensor selection;
+- portable biological investigation;
+- rack architecture;
+- connectors and cabling;
+- power distribution;
+- sensor networks;
+- climate control;
+- lighting;
+- water systems;
+- experimental inputs;
+- freeze drying;
+- energy;
+- maintenance;
+- future technologies;
+- humanitarian nutrition and local resilience.
+
+Use the [Engineering index](03_engineering/README.md) for navigation.
+
+## Biological Production
+
+Biological Production documentation is still developing.
+
+It currently covers subjects such as:
+
+- integrated pest management;
+- beneficial organisms;
+- carnivorous plants;
+- companion and indicator plants;
+- pest and disease libraries;
+- environmental correlations;
+- biological monitoring;
+- biodiversity.
+
+This area should be treated as developing reference material until its own index and full audit are complete.
+
+## Supporting References
+
+The following developed documents support consistent work across the repository:
+
+- [Glossary](17_glossary.md)
+- [Documentation Style Guide](18_documentation-style-guide.md)
+- [Project Reference System](20_project-reference-system.md)
+- [Current Project Status](21_project-status.md)
+- [Documentation Standards](22_documentation-standards.md)
+- [Decision Framework](23_decision-framework.md)
+- [Decision Records](24_decision-records.md)
+
+## Documentation Status
+
+The repository still contains several historical top-level files that are empty, incomplete or damaged placeholders.
+
+These files are not listed as authoritative documentation.
+
+They should remain outside the primary navigation until they are:
+
+- restored;
+- completed;
+- replaced;
+- archived;
+- deliberately removed.
+
+An existing filename does not prove that a document is current or approved.
+
+Git history should be checked before repairing unclear historical material.
+
+## Documentation Principles
 
 Documentation should:
 
-- Use consistent terminology.
-- Follow the Documentation Style Guide.
-- Follow the Glossary.
-- Remain easy to navigate.
-- Remain easy to translate.
-- Remain easy for AI systems to interpret.
-- Avoid duplicate information.
-- Reference the Single Source of Truth whenever possible.
+- explain why before how;
+- use clear British English;
+- use consistent terminology;
+- distinguish evidence from assumption;
+- preserve important reasoning;
+- keep unfinished work visible;
+- avoid unnecessary duplication;
+- link to the relevant source of truth;
+- remain understandable to people outside the original context;
+- evolve through controlled and reviewable changes.
 
-Documentation evolves together with the software and is managed in the same Git repository.
+Technical detail should be stored in the domain where it can be maintained responsibly.
 
----
+## Change and Review
 
-# Getting Started
+Documentation is maintained in the same Git repository as the software.
 
-New contributors should read the documentation in the following order:
+Significant changes should follow the project workflow:
 
-1. README.md
-2. 00_master-index.md
-3. 01_daily-workflow.md
-4. 03_project-operating-manual.md
-5. 17_glossary.md
-6. 18_documentation-style-guide.md
+1. control;
+2. analysis;
+3. improvement plan;
+4. approval;
+5. one controlled change;
+6. testing;
+7. commit;
+8. push;
+9. deployment when applicable.
 
-Continue with the remaining documents as needed.
+Version control preserves the development of both technical systems and project knowledge.
 
----
+## Supporting Resources
 
-# Objective
+| Directory | Purpose |
+|-----------|---------|
+| [Diagrams](Diagrams/) | Architecture diagrams, workflows and technical drawings. |
+| [Images](Images/README.md) | Screenshots, photographs and project images. |
+| [References](references/README.md) | External papers, books, datasheets and source material. |
+| [Templates](Templates/README.md) | Reusable documentation and operational templates. |
 
-The objective of this documentation is to provide a complete, well-structured and maintainable knowledge base for the Microgreens ERP project.
+## Objective
 
-By documenting architecture, decisions, research, hardware, software and procedures in a consistent manner, the project remains understandable, scalable and maintainable for current and future contributors.
+The objective is a documentation system that remains useful as the project grows from one person, one Raspberry Pi and one cultivation rack into a wider biological production, research and preservation platform.
+
+Good documentation allows future contributors to understand not only what exists, but why it exists and how it may be improved responsibly.
