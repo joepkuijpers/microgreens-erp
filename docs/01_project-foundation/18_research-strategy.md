@@ -149,12 +149,12 @@ The food chain should continuously improve through evidence rather than assumpti
 
 This strategy should be read together with:
 
-- Food Chain Strategy
-- Sensor Strategy
-- Data Strategy
-- Project Knowledge Repository
-- Automation Strategy
-- Sustainability
-- Ethics
+- [Food Chain Strategy](12_food-chain-strategy.md)
+- [Sensor Strategy](14_sensor-strategy.md)
+- [Data Strategy](17_data-strategy.md)
+- [Project Knowledge Repository](21_project-knowledge-repository.md)
+- [Automation Strategy](16_automation-strategy.md)
+- [Sustainability](09_sustainability.md)
+- [Ethics](07_ethics.md)
 
 "The purpose of research is not to eliminate the unknown, but to continuously improve our understanding of it. Every discovery expands the boundaries of what remains unknown and inspires the next generation of observations, questions, and discoveries."

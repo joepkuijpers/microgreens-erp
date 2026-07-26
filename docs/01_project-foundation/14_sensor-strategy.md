@@ -224,10 +224,10 @@ The long-term ambition is to create a continuously evolving observation platform
 
 This strategy should be read together with:
 
-- Food Chain Strategy
-- Data Strategy
-- Research Strategy
-- Automation Strategy
-- Energy Strategy
+- [Food Chain Strategy](12_food-chain-strategy.md)
+- [Data Strategy](17_data-strategy.md)
+- [Research Strategy](18_research-strategy.md)
+- [Automation Strategy](16_automation-strategy.md)
+- [Energy Strategy](19-energy-strategy.md)
 
 Together these documents describe how observation supports continuous improvement throughout the Microgreens ERP project.

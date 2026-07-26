@@ -149,11 +149,11 @@ Technology, biology, and human knowledge should strengthen one another through r
 
 This strategy should be read together with:
 
-- Food Chain Strategy
-- Sensor Strategy
-- Research Strategy
-- Project Knowledge Repository
-- Automation Strategy
+- [Food Chain Strategy](12_food-chain-strategy.md)
+- [Sensor Strategy](14_sensor-strategy.md)
+- [Research Strategy](18_research-strategy.md)
+- [Project Knowledge Repository](21_project-knowledge-repository.md)
+- [Automation Strategy](16_automation-strategy.md)
 
 Definitions and terminology used throughout this document can be found in the Project Glossary.
 
