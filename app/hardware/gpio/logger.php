@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../../runtime_storage.php';
+
 function gpioLogFile(): string
 {
-    return __DIR__ . '/gpio_actions.log';
+    return runtimeStorageFile('hardware/gpio/gpio_actions.log');
 }
 
 function gpioLogAction(string $outputName, bool $state, array $result): void

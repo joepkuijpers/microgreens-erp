@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 function watchdogRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/watchdog';
+    return runtimeStoragePath('hardware/watchdog');
 }
 
 function watchdogStateFile(): string

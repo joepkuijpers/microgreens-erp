@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 require_once __DIR__ . '/../hardware/gpio/driver.php';
 require_once __DIR__ . '/watchdog_engine.php';
 require_once __DIR__ . '/safety_engine.php';
@@ -7,7 +9,7 @@ require_once __DIR__ . '/override_engine.php';
 
 function hardwareHealthRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/health';
+    return runtimeStoragePath('hardware/health');
 }
 
 function hardwareHealthStateFile(): string

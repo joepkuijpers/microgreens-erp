@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 function schedulerDefaultSchedules(): array
 {
     return [
@@ -32,7 +34,7 @@ function schedulerDefaultSchedules(): array
 
 function schedulerRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/scheduler';
+    return runtimeStoragePath('hardware/scheduler');
 }
 
 function schedulerSchedulesFile(): string

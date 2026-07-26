@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../../runtime_storage.php';
+
 function gpioSimulationStateFile(): string
 {
-    return __DIR__ . '/simulation_state.json';
+    return runtimeStorageFile('hardware/gpio/simulation_state.json');
 }
 
 function gpioSimulationWrite(string $outputName, bool $state, array $relayConfig): array

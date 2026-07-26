@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 function safetyRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/safety';
+    return runtimeStoragePath('hardware/safety');
 }
 
 function safetyStateFile(): string

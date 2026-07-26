@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 function relayRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/relay';
+    return runtimeStoragePath('hardware/relay');
 }
 
 function relayStateFile(): string

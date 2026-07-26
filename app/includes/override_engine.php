@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 function overrideRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/override';
+    return runtimeStoragePath('hardware/override');
 }
 
 function overrideStateFile(): string

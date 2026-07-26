@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../runtime_storage.php';
+
 function priorityRuntimeDir(): string
 {
-    return __DIR__ . '/../hardware/priority';
+    return runtimeStoragePath('hardware/priority');
 }
 
 function priorityStateFile(): string
