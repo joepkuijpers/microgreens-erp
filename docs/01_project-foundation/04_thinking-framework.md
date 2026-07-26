@@ -14,7 +14,7 @@ Thinking precedes decision-making.
 
 Every strategic, technical and operational decision should begin with understanding before action.
 
-The following principles summarize the project's preferred way of thinking.
+The following principles summarise the project's preferred way of thinking.
 
 ## Thinking Principles
 
@@ -70,15 +70,15 @@ Automation should improve understanding rather than replace it.
 
 ---
 
-### Measure Before Optimize
+### Measure Before Optimise
 
 Measure first.
 
-Optimize second.
+Optimise second.
 
 Measure again.
 
-Never optimize assumptions.
+Never optimise assumptions.
 
 ---
 
@@ -98,11 +98,11 @@ Expand.
 
 ---
 
-### Origin Before Optimization
+### Origin Before Optimisation
 
 Understand why a system exists before attempting to improve it.
 
-Optimization should preserve purpose while improving efficiency.
+Optimisation should preserve purpose while improving efficiency.
 
 ## Continuous Thinking Cycle
 
@@ -138,7 +138,7 @@ Better understanding produces better decisions.
 
 ## Related Documents
 
-- Guiding Principles
-- Design Philosophy
-- Ethics
-- Sustainability
+- [Guiding Principles](08_guiding-principles.md)
+- [Design Philosophy](05_design-philosophy.md)
+- [Ethics](07_ethics.md)
+- [Sustainability](09_sustainability.md)
