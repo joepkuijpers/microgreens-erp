@@ -48,7 +48,6 @@ $lage_voorraad = $db->query("SELECT count(*) FROM inventory WHERE quantity <= 1"
 <?php include 'includes/cards/growth_command_center.php'; ?>
 <?php include 'includes/cards/growth_timeline.php'; ?>
 <?php include 'includes/cards/batch_queue.php'; ?>
-<?php include 'includes/cards/production_planner.php'; ?>
 <?php include 'includes/cards/harvest_forecast.php'; ?>
 <?php include 'includes/cards/seed_planning.php'; ?>
 <?php include 'includes/cards/rack_capacity.php'; ?>
