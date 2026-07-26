@@ -248,3 +248,11 @@ The objective is to contribute, one practical step at a time, to a food chain th
 The Microgreens ERP project is not the destination.
 
 It is the beginning of that journey.
+
+## Related Documents
+
+- [Project Foundation](README.md)
+- [Vision](01_vision.md)
+- [Mission](02_mission.md)
+- [Founder's Notes](06_founders-notes.md)
+- [Human Flourishing Strategy](24_human-flourishing-strategy.md)
