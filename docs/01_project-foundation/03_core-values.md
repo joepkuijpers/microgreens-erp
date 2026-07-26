@@ -14,7 +14,7 @@ Core Values are the permanent principles that define the identity of the Microgr
 
 They provide the foundation for decision-making and ensure that growth never compromises the project's purpose, integrity or long-term vision.
 
-The Core Values are organized into two complementary pillars:
+The Core Values are organised into two complementary pillars:
 
 - Character
 - Action
@@ -39,7 +39,7 @@ Transparency is maintained through clear documentation, traceable ERP records, d
 
 **Definition**
 
-Respect recognizes the value of people, plants, animals, nature and future generations.
+Respect recognises the value of people, plants, animals, nature and future generations.
 
 Every decision should protect and strengthen these relationships whenever practical.
 
@@ -73,13 +73,13 @@ Harmony influences cultivation, automation, environmental control, energy use an
 
 **Definition**
 
-Every part of the Food Chain influences the whole.
+Every part of the food chain influences the whole.
 
-Successful solutions recognize the relationships between cultivation, preservation, transportation, knowledge, technology, society and the environment.
+Successful solutions recognise the relationships between cultivation, preservation, transportation, knowledge, technology, society and the environment.
 
 **Application**
 
-Interconnectedness encourages systems thinking, cross-disciplinary collaboration and holistic decision-making.
+Interconnectedness encourages systems thinking, cross-disciplinary collaboration and system-level decision-making.
 
 ### Long-Term Thinking
 
@@ -97,7 +97,7 @@ Long-Term Thinking guides investments, infrastructure, documentation, research a
 
 **Definition**
 
-The project is committed to cultivation based on biological principles while working toward certified organic production whenever practical and achievable.
+The project is committed to cultivation based on biological principles while working towards certified organic production whenever practical and achievable.
 
 Natural biological processes should be understood, respected and strengthened rather than replaced unnecessarily.
 
@@ -105,7 +105,7 @@ Natural biological processes should be understood, respected and strengthened ra
 
 Biological Integrity guides decisions related to cultivation methods, seed selection, growing media, irrigation, environmental control, preservation methods and future certification.
 
-Whenever practical, solutions should preserve the natural integrity of the Food Chain while supporting sustainable and responsible production.
+Whenever practical, solutions should preserve the natural integrity of the food chain while supporting sustainable and responsible production.
 
 ## Action
 
@@ -115,29 +115,29 @@ These values define how the project operates and continuously improves.
 
 **Definition**
 
-Environmental, social and economic sustainability should remain in balance throughout the entire Food Chain.
+Environmental, social and economic sustainability should remain in balance throughout the entire food chain.
 
 **Application**
 
 Sustainability influences energy management, cultivation, preservation, transportation, packaging, infrastructure planning and resource efficiency.
 
-### Standardization
+### Standardisation
 
 **Definition**
 
 Systems, processes and documentation should remain as uniform as practical.
 
-Standardization improves quality, reliability, maintainability, scalability and data consistency.
+Standardisation improves quality, reliability, maintainability, scalability and data consistency.
 
 **Application**
 
-Standardization applies to production racks, ERP workflows, documentation, hardware configurations, operating procedures and future expansion.
+Standardisation applies to production racks, ERP workflows, documentation, hardware configurations, operating procedures and future expansion.
 
 ### Quality
 
 **Definition**
 
-Quality is designed into every process rather than inspected afterward.
+Quality is designed into every process rather than inspected afterwards.
 
 Consistency and reliability are essential for long-term success.
 
@@ -155,7 +155,7 @@ Learning, evaluation, research and practical experience should continuously stre
 
 **Application**
 
-Continuous Improvement supports regular review of software, documentation, production systems, hardware, operational workflows and organizational processes.
+Continuous Improvement supports regular review of software, documentation, production systems, hardware, operational workflows and organisational processes.
 
 ### Innovation
 
@@ -167,7 +167,7 @@ Technology is adopted with purpose rather than for novelty.
 
 **Application**
 
-Innovation supports ERP development, automation, research, Freeze Dryer development, hardware integration and future expansion.
+Innovation supports ERP development, automation, research, freeze-drying development, hardware integration and future expansion.
 
 ### Knowledge Sharing
 
@@ -219,7 +219,7 @@ Before making any significant strategic, technical or operational decision, the 
 
 - Does it improve quality?
 - Does it simplify the system?
-- Can it be standardized?
+- Can it be standardised?
 - Is it modular?
 - Is it scalable?
 
@@ -275,7 +275,7 @@ Consider:
 - Harmony
 - Interconnectedness
 
-Prefer solutions that strengthen the Food Chain over time rather than providing only short-term benefits.
+Prefer solutions that strengthen the food chain over time rather than providing only short-term benefits.
 
 ### Step 3 — Improve Operations
 
@@ -283,7 +283,7 @@ Evaluate operational excellence.
 
 Consider:
 
-- Standardization
+- Standardisation
 - Quality
 - Continuous Improvement
 
@@ -303,7 +303,7 @@ Growth should strengthen the project without compromising the previous Core Valu
 
 ## Conflict Resolution
 
-The preferred solution is one that preserves the greatest balance between all Core Values rather than maximizing a single value.
+The preferred solution is one that preserves the greatest balance between all Core Values rather than maximising a single value.
 
 Whenever Core Values appear to conflict, priority should generally be given in the following order:
 
@@ -314,7 +314,7 @@ Whenever Core Values appear to conflict, priority should generally be given in t
 
 Every significant decision should be documented together with the Core Values that influenced the outcome.
 
-The Decision Framework is intended to support thoughtful and consistent decision-making rather than replace professional judgment.
+The Decision Framework is intended to support thoughtful and consistent decision-making rather than replace professional judgement.
 
 Every significant decision should strengthen the long-term vision of the project while preserving its identity, integrity and purpose.
 
