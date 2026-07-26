@@ -2,353 +2,677 @@
 
 ## Purpose
 
-This document defines how the Microgreens ERP project contributes to human flourishing alongside the development of a transparent, sustainable, and resilient Food Chain.
+This document defines how the Microgreens ERP project should contribute to human flourishing.
 
-The project recognises that the ultimate purpose of technology is not merely to improve production, efficiency, or economic performance.
+Food, technology and economic activity are means through which life can be supported.
 
-Its highest purpose is to contribute to healthier people, stronger families, resilient communities, responsible stewardship, and future generations that are better equipped to continue improving the Food Chain.
+They are not final objectives by themselves.
 
-Human flourishing therefore represents one of the highest objectives of the project.
-
-Every technological, biological, scientific, and organisational decision should ultimately contribute to improving the quality of life for people, society, and the natural environment.
-
----
+The project should ultimately help people live healthier, more capable and more meaningful lives while strengthening families, communities, nature and future generations.
 
 ## Vision
 
-The project seeks to create an environment where people of every generation can learn, contribute, discover, teach, and continue developing throughout their lives.
+The project seeks to create an environment in which people can learn, experience, create, contribute and continue developing throughout their lives.
 
-Technology should expand opportunities for people.
+Technology should expand human possibility.
 
-It should never reduce the opportunity to become fully human.
+It should not reduce people to productivity, data or competition with machines.
 
-A successful Food Chain nourishes far more than the body.
+A successful food chain nourishes more than the body.
 
-It should also nourish curiosity, knowledge, relationships, purpose, wellbeing, responsibility, and hope.
-
----
-
-## Core Philosophy
-
-A sustainable Food Chain should not only produce healthy food.
-
-It should also cultivate healthy people, healthy families, healthy communities, and healthy future generations.
-
-The project recognises that technology, research, automation, and innovation are not objectives in themselves.
-
-They are tools that should strengthen human wellbeing, preserve practical knowledge, encourage meaningful relationships, and create opportunities for every generation to learn, contribute, and flourish.
-
-Human flourishing is therefore regarded as one of the highest measures of success within the project.
-
----
+It can also strengthen knowledge, relationships, craftsmanship, responsibility, purpose and hope.
 
 ## Definition of Human Flourishing
 
-Human flourishing is the continuous development of people throughout every stage of life.
+Human flourishing is the continuing development of people and their relationships throughout every stage of life.
 
-It extends beyond health, education, employment, or economic prosperity alone.
+It includes:
 
-Human flourishing includes physical wellbeing, mental wellbeing, meaningful relationships, lifelong learning, craftsmanship, creativity, responsibility, stewardship, curiosity, purpose, and contribution.
+- physical and mental wellbeing;
+- autonomy;
+- meaningful relationships;
+- lifelong learning;
+- practical capability;
+- creativity;
+- craftsmanship;
+- responsibility;
+- purpose;
+- contribution;
+- stewardship;
+- time for life beyond production.
 
-The project recognises that every individual follows a unique path.
+Human flourishing cannot be reduced to income, employment, qualifications, efficiency or economic output.
 
-People should therefore be encouraged to discover, develop, and contribute according to their own strengths, interests, values, abilities, and aspirations.
+Every person follows a different path.
 
-Technology should support this journey rather than determine it.
+The project should create opportunities without prescribing one correct way to live.
 
-A flourishing society is one in which people continue learning, families remain connected, communities share knowledge, future generations inherit a stronger foundation, and innovation strengthens both humanity and the natural world.
+## Core Principles
 
-Human flourishing is therefore not regarded as a final destination, but as a lifelong process of continuous growth, contribution, and responsible stewardship.
+The Human Flourishing Strategy follows these principles:
 
----
-# Human Flourishing Strategy
+- People have value beyond their economic productivity.
+- Technology should serve people.
+- Autonomy requires understanding and responsibility.
+- Meaningful work should develop rather than diminish human capability.
+- Learning continues throughout life.
+- Knowledge grows when it is experienced and shared.
+- Families and communities take many forms and deserve respect.
+- Health includes physical, mental, social and environmental conditions.
+- Time and attention are valuable human resources.
+- Progress should strengthen future generations.
+- Local capability is more durable than permanent dependence.
+- Human value must never become a score in the ERP.
 
-Purpose
+> People should earn their living by living, learning, experiencing, creating, contributing and strengthening the foundation for future generations—not by competing with machines.
 
-Vision
+## Part I — The Individual
 
-Core Philosophy
+### Human-Centred Development
 
-Definition of Human Flourishing
+Technology, research and innovation exist to serve life.
 
-Part I — The Individual
+Development should begin with the person rather than with a predetermined technical role.
 
-• Human-Centred Development
-• Human Development
-• Meaningful Work
-• Lifelong Learning
-• Cross-Disciplinary Understanding
-• Knowledge Sharing
-• Human Potential
-• Health
-• Purpose
-• Time
+People need opportunities to observe, participate, experiment, reflect and discover where their abilities can create meaning and value.
 
-Part II — Families
+Human development is not a production target.
 
-• Families
-• Parents
-• Children
-• Intergenerational Learning
-• Home and Community
-• Mentorship
+It is a continuing process shaped by experience, relationships, responsibility and choice.
 
-Part III — Society
+### Choice and Autonomy
 
-• Community
-• Education
-• Stewardship
-• Future Generations
+Human flourishing requires room to discover one's own direction.
 
-Part IV — Technology
+People differ in their:
 
-• Technology as a Tool
-• Human-Centred Innovation
-• Relationship with Automation
-• Relationship with Artificial Intelligence
-• Preserving Human Capability
+- interests;
+- talents;
+- experiences;
+- values;
+- abilities;
+- responsibilities;
+- aspirations.
 
-Part V — Long-Term Vision
+No single path is appropriate for everyone.
 
-• The Future Food Chain
-• Relationship to Other Project Foundation Documents
+The project should provide access to knowledge and practical experience so people can make informed choices.
 
-Closing Reflection
+Technology should expand autonomy rather than create hidden dependence.
 
----
+Choice also carries responsibility towards other people, food safety, nature and future generations.
 
-# Part I — The Individual
+### Meaningful Work
 
-## Human-Centred Development
+Meaningful work extends beyond employment and financial compensation.
 
-The project recognises that technology, research, and innovation exist to serve people rather than the other way around.
+It may allow people to:
 
-Every improvement to the Food Chain should ultimately contribute to healthier lives, stronger relationships, greater understanding, meaningful work, and opportunities for people to continue developing throughout every stage of life.
+- apply their abilities;
+- develop craftsmanship;
+- solve useful problems;
+- care for living systems;
+- create;
+- learn;
+- teach;
+- support others;
+- contribute to a shared purpose.
 
-Human flourishing is therefore regarded as one of the highest measures of success within the project.
+Meaning cannot be defined identically for everyone.
 
-## Human Development
+Work becomes less meaningful when people lose understanding, autonomy or connection with its result.
 
-Human development is a lifelong process of learning, experiencing, reflecting, creating, and contributing.
+Automation should reduce unnecessary repetition, physical burden and preventable danger where responsible.
 
-The project recognises that every individual possesses unique talents, interests, aspirations, and perspectives that can strengthen the Food Chain in different ways.
+It should create more room for human attention, judgement, creativity, care and learning.
 
-Rather than directing people towards predefined roles, the project seeks to create an environment in which individuals are encouraged to discover where their abilities create the greatest value for themselves, for others, and for society.
+Automation is not successful merely because fewer people are required.
 
-Development should therefore be guided by curiosity, practical experience, responsibility, and continuous learning.
+It is successful when the complete system improves without diminishing human capability or responsibility.
 
-Technology should support this process by reducing unnecessary barriers and creating opportunities for people to explore, develop, and apply their abilities.
+### Lifelong Learning
 
-Human development is not measured solely by qualifications, productivity, or economic output.
+Learning is not limited to formal education.
 
-It is reflected in the continuous growth of knowledge, wisdom, craftsmanship, character, responsibility, relationships, and meaningful contribution.
+It develops through:
 
-The project therefore values continuous personal development as an essential part of building a resilient and sustainable Food Chain.
+- curiosity;
+- observation;
+- practical experience;
+- experimentation;
+- conversation;
+- teaching;
+- success;
+- failure;
+- reflection.
 
-## Choice and Autonomy
+Every cultivation cycle, technical change and operational decision can create knowledge.
 
-Human flourishing begins with the freedom to discover one's own path.
+People should be able to move between learning and contribution throughout life.
 
-The project recognises that every individual is unique.
+A person may be a student in one situation and a mentor in another.
 
-People differ in their interests, talents, experiences, values, aspirations, and ways of contributing.
+Thoughtful questions should be valued alongside good answers.
 
-No single path is therefore regarded as the correct path for everyone.
+### Cross-Disciplinary Understanding
 
-Rather than directing people towards predetermined roles, the project seeks to create opportunities through which individuals can explore different disciplines, develop practical experience, and gradually discover where they create the greatest value for themselves, for others, and for the Food Chain.
+The food chain connects biology, engineering, preservation, logistics, economics, technology, society and nature.
 
-Meaningful choices require understanding.
+People should be encouraged to explore beyond one specialism.
 
-The project therefore encourages learning through observation, participation, experimentation, and reflection before important decisions are made.
+Cross-disciplinary understanding helps people recognise how decisions in one area affect the wider system.
 
-Technology should expand human autonomy rather than reduce it.
+It does not require everyone to become an expert in everything.
 
-Its purpose is to provide people with greater freedom to learn, create, contribute, and shape their own development while remaining connected to the wider purpose of the project.
+It requires enough curiosity and shared language to collaborate responsibly.
 
-Choice carries responsibility.
+### Health and Wellbeing
 
-The freedom to choose is therefore accompanied by a commitment to continuous learning, respect for others, responsible stewardship, and meaningful contribution to present and future generations.
+Nutritious food can support health, but health depends on more than food alone.
 
-## Meaningful Work
+Wellbeing is also influenced by:
 
-Meaningful work extends beyond employment, productivity, or financial compensation.
+- safety;
+- movement;
+- rest;
+- meaningful relationships;
+- suitable work;
+- autonomy;
+- environmental quality;
+- access to knowledge and care;
+- freedom from unnecessary stress.
 
-It is work through which people are able to express their abilities, develop their character, contribute to something greater than themselves, and experience purpose through responsible participation.
+The project may contribute through responsible food production, safer work, knowledge sharing and healthier environments.
 
-The project recognises that every individual possesses different talents, interests, experiences, values, and aspirations.
+It must not make medical claims without appropriate evidence.
 
-Meaningful work therefore cannot be universally defined.
+The ERP is not a medical system and should not diagnose, rank or judge personal health.
 
-Instead, it should emerge through continuous learning, practical experience, observation, and personal development.
+### Purpose and Contribution
 
-Technology should not determine what gives work meaning.
+Purpose may develop through relationships, learning, care, craftsmanship, service, discovery or creation.
 
-Rather, it should reduce unnecessary burdens and repetitive activities so that people have greater opportunities to dedicate their time to work that aligns with their abilities, curiosity, creativity, craftsmanship, and sense of purpose.
+The project should not prescribe where people must find meaning.
 
-The project therefore seeks to create an environment in which people are encouraged to discover where they contribute most effectively instead of being confined to predetermined roles.
+It should create conditions in which meaningful contribution is possible.
 
-Meaningful work benefits both the individual and the Food Chain.
+Contribution may include:
 
-People who contribute according to their strengths are more likely to continue learning, share knowledge, preserve craftsmanship, and inspire others to develop their own capabilities.
+- growing food;
+- maintaining equipment;
+- observing plants;
+- developing software;
+- conducting research;
+- preparing meals;
+- teaching;
+- documenting;
+- supporting a family or community;
+- preserving knowledge.
 
-Technology should therefore strengthen meaningful work rather than replace it.
+Visible output is not the only form of value.
 
-Automation should never become a measure of success by itself.
+Care, patience and responsibility may be essential even when they are difficult to measure.
 
-Success is achieved when automation allows people to spend more time applying the qualities that make them uniquely human.
+### Time and Attention
 
-Meaningful work is therefore regarded as an essential contributor to human flourishing and to the long-term resilience of the Food Chain.
+Efficiency should return useful time to people.
 
-## Lifelong Learning
+Saving time has little value when the result is only greater pressure or more unnecessary activity.
 
-Learning is a continuous process that accompanies every stage of life.
+Time may support:
 
-The project recognises that knowledge is never complete and that every experience, observation, success, failure, and question contributes to a deeper understanding of the Food Chain.
+- rest;
+- family;
+- friendship;
+- learning;
+- observation;
+- creativity;
+- care;
+- participation in community;
+- experience of nature.
 
-Learning therefore extends beyond formal education.
+Attention is also limited.
 
-It develops through curiosity, practical experience, reflection, and continuous improvement.
+Poorly designed alarms, excessive data and unnecessary administrative work can consume attention without improving decisions.
 
-The project encourages an environment in which asking thoughtful questions is valued as highly as discovering meaningful answers.
+Technology should help people direct attention towards what genuinely requires human understanding.
 
-Lifelong learning is therefore regarded not as a temporary phase of life, but as a continuous commitment to personal growth, responsible stewardship, and a deeper understanding of the world.
+### Human Potential
 
-## Cross-Disciplinary Understanding
+Human potential is not a fixed quantity.
 
-The Food Chain is an interconnected system in which biology, technology, engineering, research, logistics, sustainability, and human relationships continuously influence one another.
+People develop when they receive opportunity, trust, useful feedback and access to experience.
 
-People should therefore be encouraged to explore disciplines beyond their primary area of expertise.
+The project should avoid assuming capability only from qualifications, age, background or previous role.
 
-Understanding the broader system strengthens judgement, encourages collaboration, and enables more responsible decision-making.
+People should be able to begin small, learn safely and take greater responsibility as understanding grows.
 
-The project values individuals who appreciate how their work contributes to the whole rather than only to a single process.
+The objective is not to maximise individual performance.
 
-Cross-disciplinary understanding therefore strengthens both the individual and the resilience of the Food Chain.
+It is to support people in developing and contributing without sacrificing health, relationships or integrity.
 
-## Knowledge Sharing
+## Part II — Families and Generations
 
-Knowledge gains its greatest value when it can be shared, understood, and expanded by others.
+### Families
 
-The project therefore encourages documentation, mentorship, collaboration, and open exchange of practical experience.
+Families provide care, identity, knowledge and continuity in many people's lives.
 
-Every observation, experiment, success, failure, and lesson learned contributes to a continuously growing body of knowledge that benefits both present and future generations.
+They may take different forms.
 
-Knowledge should never become isolated within individuals.
+The project does not define one correct family structure or way of living.
 
-By preserving and sharing understanding, every contributor strengthens the foundation upon which others can continue to learn, innovate, and improve the Food Chain.
+Its responsibility is to respect people and avoid working practices that unnecessarily weaken care, relationships or family life.
 
-## Human Potential
+### Parents and Caregivers
 
-*To be written.*
+Parents and caregivers carry responsibilities that may not appear in conventional measures of productivity.
 
-## Health
+Care requires time, patience, knowledge and attention.
 
-*To be written.*
+Flexible and understandable systems can make it easier for people to combine contribution with care.
 
-## Purpose
+The project should not treat caregiving as absence of value.
 
-*To be written.*
+It is an important contribution to present and future generations.
 
-## Time
+### Children
 
-*To be written.*
+Children should be able to encounter food, plants, nature and technology through safe and age-appropriate experiences.
 
----
+They should not be treated as labour or data sources.
 
-# Part II — Families
+Educational activities should protect:
 
-## Families
+- safety;
+- privacy;
+- curiosity;
+- consent appropriate to the situation;
+- freedom to explore;
+- freedom from commercial pressure.
 
-Strong families contribute to strong communities, and strong communities contribute to resilient Food Chains.
+The purpose is to help children understand where food and knowledge come from.
 
-Whenever practical, the project should encourage ways of working that allow people to spend meaningful time with those they care about.
+### Intergenerational Learning
 
-Technology should create opportunities for families to learn, create, and grow together rather than unnecessarily separating them from one another.
+Knowledge moves in more than one direction.
 
-Meaningful time shared between generations contributes not only to personal wellbeing but also to the preservation of knowledge, values, craftsmanship, and responsibility.
+Older generations may share experience, craftsmanship and historical understanding.
 
-## Parents
+Younger generations may bring new questions, methods and technological confidence.
 
-*To be written.*
+Intergenerational learning is strongest when neither group is treated as automatically superior.
 
-## Children
+The project should preserve knowledge while remaining open to responsible change.
 
-*To be written.*
+### Home and Community
 
-## Intergenerational Learning
+Food connects cultivation, kitchens, families and communities.
 
-*To be written.*
+Knowledge becomes more useful when people can apply it within their own circumstances.
 
-## Home and Community
+The project should support methods that can be understood and adapted locally where practical.
 
-*To be written.*
+A household or community should not require unnecessary dependence on distant suppliers, proprietary systems or continuous internet access to benefit from shared knowledge.
 
-## Mentorship
+### Mentorship
 
-*To be written.*
+Mentorship connects knowledge with experience.
 
----
+A mentor does not simply provide instructions.
 
-# Part III — Society
+A good mentor helps another person observe, reason, practise and eventually act independently.
 
-## Community
+Mentorship should therefore aim to reduce dependence on the mentor over time.
 
-*To be written.*
+Both people should remain open to learning.
 
-## Education
+## Part III — Society
 
-*To be written.*
+### Community
 
-## Knowledge Sharing
+A resilient food chain depends on relationships between growers, consumers, researchers, suppliers, educators and local communities.
 
-*To be written.*
+The project should strengthen cooperation where interests and responsibilities align.
 
-## Stewardship
+Community participation must remain voluntary and transparent.
 
-*To be written.*
+People should be able to understand the purpose of their contribution and how its results are used.
 
-## Future Generations
+### Education
 
-*To be written.*
+Education should connect understanding with experience.
 
----
+The project may support learning through:
 
-# Part IV — Technology
+- cultivation;
+- observation;
+- maintenance;
+- cooking;
+- preservation;
+- software;
+- measurement;
+- experiments;
+- documentation;
+- discussion.
 
-## Technology as a Tool
+Formal education remains valuable, but it is not the only path to knowledge.
 
-*To be written.*
+Practical experience should be documented and connected with reliable scientific understanding.
 
-## Human-Centred Innovation
+### Knowledge Sharing
 
-*To be written.*
+Knowledge gains value when it can be understood, tested and improved by others.
 
-## Relationship with Automation
+Open sharing may include:
 
-*To be written.*
+- cultivation methods;
+- research results;
+- unsuccessful experiments;
+- equipment designs;
+- software;
+- maintenance knowledge;
+- preservation methods;
+- educational material.
 
-## Relationship with Artificial Intelligence
+Not all information should automatically be public.
 
-*To be written.*
+Personal data, security-sensitive information, confidential agreements and unsafe instructions require appropriate protection.
 
-## Preserving Human Capability
+Openness should support responsibility rather than remove it.
 
-*To be written.*
+### Stewardship
 
----
+Stewardship means caring for resources, knowledge and relationships that extend beyond immediate ownership.
 
-# Part V — Long-Term Vision
+It includes responsibility for:
 
-## The Future Food Chain
+- soil;
+- water;
+- energy;
+- seeds;
+- equipment;
+- data;
+- shared knowledge;
+- public trust;
+- future generations.
 
-*To be written.*
+Stewardship asks not only what can be used today, but what condition remains afterwards.
 
-## Relationship to Other Project Foundation Documents
+### Local Capability
 
-*To be written.*
+Support should strengthen people's ability to act for themselves.
 
----
+Sharing knowledge for local cultivation may create more lasting value than repeatedly exporting finished food.
 
-## Closing Reflection
+Preserved food may still provide valuable support during shortages, seasonal gaps, disasters or disrupted infrastructure.
 
-*To be written.*
+Such support should complement local capability rather than create avoidable long-term dependence.
+
+Technology transfer should include maintenance, limitations and practical understanding.
+
+### Future Generations
+
+Future generations will inherit the consequences of present decisions.
+
+The project should therefore preserve:
+
+- healthy natural systems;
+- reliable knowledge;
+- repairable infrastructure;
+- understandable technology;
+- honest records;
+- freedom to improve what already exists.
+
+Long-term responsibility does not mean preventing change.
+
+It means leaving future generations a stronger foundation and meaningful choices.
+
+## Part IV — Technology
+
+### Technology as a Tool
+
+Technology has no independent purpose within the project.
+
+Its value depends on what it enables and what it changes.
+
+A useful technology may:
+
+- improve observation;
+- reduce dangerous work;
+- reduce avoidable repetition;
+- protect food quality;
+- prevent waste;
+- support accessibility;
+- preserve knowledge;
+- strengthen communication;
+- create time for meaningful activity.
+
+Technology should remain proportionate to the problem.
+
+More technology is not automatically more progress.
+
+### Human-Centred Innovation
+
+Innovation should begin with a human or biological need.
+
+Before adoption, ask:
+
+- Whose problem is being addressed?
+- Does the person affected recognise the problem?
+- Does the technology expand or reduce autonomy?
+- Which skills may be strengthened?
+- Which skills may disappear?
+- Who gains control?
+- Who becomes dependent?
+- Can the system be understood and challenged?
+- Can people continue safely when it fails?
+
+Human-centred innovation involves people in observation, testing and review.
+
+It does not treat them only as users of a predetermined solution.
+
+### Automation and Meaningful Work
+
+Automation should be applied with purpose.
+
+Appropriate uses may include repetitive, dangerous, highly consistent or time-sensitive tasks.
+
+Human responsibility remains necessary for:
+
+- ethics;
+- exceptions;
+- biological interpretation;
+- care;
+- accountability;
+- system improvement.
+
+A process should be understood before it is automated.
+
+People should retain enough practical experience to recognise poor automation and intervene responsibly.
+
+Work removed by automation should not automatically be replaced with more surveillance, administration or pressure.
+
+### Artificial Intelligence
+
+Artificial intelligence may support analysis, comparison, planning and learning.
+
+It cannot determine human worth, purpose or potential.
+
+AI-assisted decisions should remain linked to:
+
+- source information;
+- method or model;
+- uncertainty;
+- human review;
+- responsible person;
+- resulting action.
+
+People should be able to question important recommendations.
+
+AI should not imitate certainty when evidence is incomplete.
+
+Responsibility remains human.
+
+### Preserving Human Capability
+
+Convenience can weaken capability when people no longer understand the systems on which they depend.
+
+The project should preserve opportunities to practise:
+
+- observation;
+- cultivation;
+- maintenance;
+- troubleshooting;
+- judgement;
+- documentation;
+- communication;
+- manual recovery.
+
+Not every task needs to remain manual.
+
+The objective is to retain sufficient understanding and experience to act when technology fails, behaves unexpectedly or no longer serves its purpose.
+
+### Access, Dependence and Exclusion
+
+Technology may exclude people through cost, complexity, language, disability, connectivity or required expertise.
+
+Systems should be made accessible where practical through:
+
+- clear language;
+- understandable interfaces;
+- documentation;
+- open formats;
+- adaptable workflows;
+- offline capability;
+- training;
+- alternative ways to participate.
+
+Accessibility does not require every person to use every system in the same way.
+
+It requires avoiding unnecessary barriers to meaningful participation.
+
+## Part V — Long-Term Direction
+
+### The Future Food Chain
+
+The future food chain should connect nutrition, biological understanding, responsible technology and human development.
+
+It should enable people to understand:
+
+- where food comes from;
+- how it was produced;
+- which resources were used;
+- how quality was protected;
+- why important decisions were made.
+
+Transparency should strengthen trust and learning.
+
+It should not turn people into objects of continuous monitoring.
+
+### Measuring Human Value
+
+Human flourishing cannot be captured completely by metrics.
+
+Operational indicators may still reveal whether systems support people.
+
+Relevant questions include:
+
+- Has avoidable dangerous or repetitive work declined?
+- Can people understand and influence their work?
+- Is useful knowledge being shared?
+- Are skills developing?
+- Is time being used more responsibly?
+- Are local capabilities becoming stronger?
+- Are important decisions still accountable?
+- Are new dependencies being created?
+- Are people able to contribute in different ways?
+
+These questions support reflection.
+
+They must not become a score of personal worth.
+
+### Relationship to the ERP
+
+The ERP may support human flourishing by making work, knowledge and decisions more understandable.
+
+It may record:
+
+- roles and responsibilities;
+- training relevant to safe work;
+- contributions to processes;
+- working time where operationally necessary;
+- documented knowledge;
+- decisions;
+- feedback;
+- safety observations;
+- improvement proposals.
+
+The ERP should collect only information with a clear and legitimate purpose.
+
+Personal information requires suitable access control, retention and protection.
+
+The system must not:
+
+- calculate human worth;
+- create a happiness score;
+- diagnose health;
+- infer personality without justification;
+- rank people solely by productivity;
+- use hidden AI assessment for important decisions;
+- collect personal data merely because it is technically possible.
+
+People should know what relevant information is recorded and why.
+
+### Long-Term Direction
+
+The long-term direction is a food chain in which human capability grows alongside technical capability.
+
+People should have greater access to knowledge, healthier food, practical experience and meaningful contribution.
+
+Families and communities should be strengthened rather than treated as external to production.
+
+Automation should return time and reduce unnecessary burden.
+
+Artificial intelligence should support understanding without replacing responsibility.
+
+Knowledge should move between people, places and generations.
+
+The project succeeds only when its biological, technical and economic development contributes to life beyond the system itself.
+
+### Related Documents
+
+- [Project Journey](00_project-journey.md)
+- [Vision](01_vision.md)
+- [Mission](02_mission.md)
+- [Core Values](03_core-values.md)
+- [Thinking Framework](04_thinking-framework.md)
+- [Design Philosophy](05_design-philosophy.md)
+- [Founder's Notes](06_founders-notes.md)
+- [Ethics](07_ethics.md)
+- [Guiding Principles](08_guiding-principles.md)
+- [Sustainability](09_sustainability.md)
+- [Long-Term Strategy](10_long-term-strategy.md)
+- [Food Chain Strategy](12_food-chain-strategy.md)
+- [Safety and Resilience Strategy](13_safety-and-resilience-strategy.md)
+- [Automation Strategy](16_automation-strategy.md)
+- [Research Strategy](18_research-strategy.md)
+- [AI Strategy](20_ai-strategy.md)
+- [Project Knowledge Repository](21_project-knowledge-repository.md)
+- [Risk Strategy](22_risk-strategy.md)
+- [Future Technologies](23_future-technologies.md)
+- [Stewardship and Governance](25-stewardship-and-governance.md)
+- [Humanitarian Nutrition and Local Resilience](../03_engineering/18_humanitarian-nutrition-and-local-resilience.md)
+
+### Closing Reflection
+
+Food gives life material support.
+
+Knowledge helps life understand itself.
+
+Technology can extend what people are able to observe, create and share.
+
+None of these has meaning without people who can live, learn, care, contribute and pass a stronger foundation forward.
+
+Human flourishing is therefore not separate from the project.
+
+It is the reason the project should continue to improve.
