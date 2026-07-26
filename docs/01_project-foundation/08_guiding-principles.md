@@ -12,73 +12,11 @@ Guiding Principles translate the Vision, Mission and Core Values into repeatable
 
 They provide a practical framework for development, operations, research and long-term growth.
 
-## Foundational Thinking
+## Thinking Framework
 
-These principles define the mindset that should be applied before making significant decisions.
+The project's thinking methodology is defined in the [Thinking Framework](04_thinking-framework.md).
 
-### Scope Before Dive
-
-**Principle**
-
-Understand the complete system before focusing on individual components.
-
-**Application**
-
-Always begin with the broader context before solving specific problems. Understanding the whole system leads to better long-term decisions.
-
----
-
-### Know Before Believe
-
-**Principle**
-
-Knowledge should precede assumptions.
-
-**Application**
-
-Verify ideas through observation, evidence, testing and research before accepting them as truth.
-
----
-
-### Root Before Fruit
-
-**Principle**
-
-Strong foundations produce sustainable results.
-
-**Application**
-
-Strengthen the underlying system before expecting successful outcomes. Long-term quality begins with solid fundamentals.
-
----
-
-### Gain Feedback Before Overdrive
-
-**Principle**
-
-Seek meaningful feedback before amplifying ideas, assumptions or decisions.
-
-Feedback improves understanding and reveals weaknesses, while overdrive amplifies uncertainty, assumptions and misunderstanding until clarity is lost.
-
-**Application**
-
-Encourage review, experimentation and open-source collaboration before expanding systems, committing resources or making significant decisions.
-
-Feedback should strengthen clarity before momentum accelerates.
-
----
-
-### Mediate Before Mitigate
-
-**Principle**
-
-Seek understanding and balance before applying corrective actions.
-
-**Application**
-
-Identify root causes, understand the wider context and evaluate alternative perspectives before attempting to solve problems.
-
-Solutions should resolve causes rather than only reducing symptoms.
+It should be applied before using the practical principles in this document.
 
 ## Project Governance
 
@@ -134,7 +72,7 @@ Complexity should only be introduced when it provides measurable long-term value
 
 ---
 
-### Standardize Before Scale
+### Standardise Before Scale
 
 **Principle**
 
@@ -142,7 +80,7 @@ A stable and repeatable system should exist before expanding capacity.
 
 **Application**
 
-Production racks, ERP workflows, hardware configurations, documentation and operational procedures should be standardized before growth.
+Production racks, ERP workflows, hardware configurations, documentation and operational procedures should be standardised before growth.
 
 ---
 
@@ -158,7 +96,7 @@ Hardware, software and operational processes should support gradual expansion wh
 
 ---
 
-### Measure Before Optimize
+### Measure Before Optimise
 
 **Principle**
 
@@ -166,7 +104,7 @@ Improvement begins with understanding.
 
 **Application**
 
-Measurements collected through the ERP, sensors, testing and operational experience should guide optimization rather than assumptions.
+Measurements collected through the ERP, sensors, testing and operational experience should guide optimisation rather than assumptions.
 
 ## Development Principles
 
@@ -194,7 +132,7 @@ Small, controlled changes reduce risk.
 
 Every improvement follows the project's workflow:
 
-1. Review
+1. Control
 2. Analysis
 3. Improvement Plan
 4. Approval
@@ -263,8 +201,8 @@ Before making significant strategic, technical or operational decisions, ask:
 - Does it strengthen biological integrity?
 - Does it improve long-term sustainability?
 - Does it simplify the system?
-- Can it be standardized?
-- Can it be modular?
+- Can it be standardised?
+- Is it modular?
 - Can it be maintained?
 - Can it be documented?
 - Has sufficient feedback been gathered?
@@ -277,6 +215,7 @@ Before making significant strategic, technical or operational decisions, ask:
 - [Vision](01_vision.md)
 - [Mission](02_mission.md)
 - [Core Values](03_core-values.md)
+- [Thinking Framework](04_thinking-framework.md)
 - [Design Philosophy](05_design-philosophy.md)
 - [Glossary](../17_glossary.md)
 - [Documentation Style Guide](../18_documentation-style-guide.md)
