@@ -4,13 +4,13 @@
 
 This document defines how the Microgreens ERP project achieves long-term sustainability through responsible management of environmental, biological, operational, economic and social resources.
 
-Sustainability is viewed as a continuous process of balancing present needs with future opportunities while strengthening the integrity of the entire Food Chain.
+Sustainability is viewed as a continuous process of balancing present needs with future opportunities while strengthening the integrity of the entire food chain.
 
 ## Definition
 
 Sustainability means designing systems that continuously improve while remaining environmentally responsible, economically viable and socially beneficial.
 
-The objective is not only to reduce negative impact, but to regenerate resources, strengthen biological processes and improve resilience throughout the entire Food Chain.
+The objective is not only to reduce negative impact, but to regenerate resources, strengthen biological processes and improve resilience throughout the entire food chain.
 
 ## Environmental Sustainability
 
@@ -38,7 +38,7 @@ Biological systems should be strengthened rather than replaced.
 ### Application
 
 - Follow cultivation based on biological principles.
-- Work toward certified organic production whenever practical.
+- Work towards certified organic production whenever practical.
 - Preserve healthy growing environments.
 - Respect natural ecological processes.
 - Encourage resilient plant development.
@@ -53,7 +53,7 @@ Operations should remain efficient, maintainable, sourceful and adaptable throug
 
 ### Application
 
-- Standardize production systems.
+- Standardise production systems.
 - Design modular infrastructure.
 - Encourage Sourcefulness by making the best practical use of existing knowledge, equipment, materials and natural resources before introducing additional resources.
 - Continuously improve workflows.
@@ -85,20 +85,20 @@ Every process should consume only the energy required to achieve its intended pu
 
 ### Application
 
-#### Lighting Optimization
+#### Lighting Optimisation
 
 - Prefer outdoor cultivation whenever environmental conditions support healthy plant development.
-- Indoor cultivation should use standardized high-efficiency lighting systems whenever practical.
+- Indoor cultivation should use standardised high-efficiency lighting systems whenever practical.
 - Use programmable lighting schedules.
 - Use dimmable Grow Lights whenever practical.
 - Determine the minimum effective light intensity required for every crop.
-- Optimize lamp height through experimentation.
+- Optimise lamp height through experimentation.
 - Measure growth rate, yield, quality, uniformity and energy consumption after every adjustment.
-- Standardize lighting configurations only after measurable improvements have been verified.
+- Standardise lighting configurations only after measurable improvements have been verified.
 
-#### Airflow and Environmental Optimization
+#### Airflow and Environmental Optimisation
 
-Environmental control should reproduce the Plant Biotope while minimizing energy consumption.
+Environmental control should reproduce the Plant Biotope while minimising energy consumption.
 
 - Use power-regulated or variable-speed fans whenever practical.
 - Match airflow to the Plant Biotope of the crop.
@@ -120,7 +120,7 @@ Indoor cultivation should reproduce the Plant Biotope while introducing controll
 - Continuously evaluate opportunities to reduce energy consumption.
 - Measure every improvement before implementation.
 - Measure again after implementation.
-- Never optimize assumptions.
+- Never optimise assumptions.
 
 #### Energy Recovery
 
@@ -144,7 +144,7 @@ Whenever practical, controlled environmental variation should strengthen resilie
 ### Application
 
 - Reproduce the natural biological habitat of the crop whenever practical.
-- Optimize environmental conditions through observation, experimentation and continuous improvement.
+- Optimise environmental conditions through observation, experimentation and continuous improvement.
 - Balance environmental stability with natural adaptation.
 - Continuously improve cultivation through measured biological responses.
 
@@ -179,7 +179,7 @@ Healthy production begins with healthy seed.
 - Select high-quality seed.
 - Preserve seed quality during storage.
 - Purchase in bulk only after production has been validated.
-- Minimize unnecessary waste.
+- Minimise unnecessary waste.
 - Continuously evaluate suppliers.
 
 ---
@@ -188,13 +188,13 @@ Healthy production begins with healthy seed.
 
 ### Principle
 
-Packaging should protect the product while minimizing environmental impact.
+Packaging should protect the product while minimising environmental impact.
 
 ### Application
 
 - Select packaging appropriate for the product.
 - Reduce unnecessary packaging material.
-- Optimize packaging dimensions.
+- Optimise packaging dimensions.
 - Improve transportation efficiency.
 - Prefer recyclable materials whenever practical.
 - Evaluate compostable alternatives whenever practical.
@@ -241,7 +241,7 @@ Individual systems should strengthen one another rather than operate independent
 - Share environmental information between systems.
 - Integrate ERP, automation, sensors and production.
 - Reuse outputs from one process as inputs for another whenever practical.
-- Optimize the Food Chain as one interconnected ecosystem.
+- Optimise the food chain as one interconnected ecosystem.
 
 ## Continuous Sustainability
 
@@ -257,7 +257,7 @@ Continuously evaluate:
 - Biological performance
 - Energy consumption
 - Operational efficiency
-- Resource utilization
+- Resource utilisation
 - Economic performance
 - Social impact
 
@@ -293,7 +293,7 @@ Before implementing significant changes, ask:
 - Can fewer resources achieve the same outcome?
 - Can natural processes replace artificial ones?
 - Can energy be recovered or reused?
-- Does this strengthen the Food Chain?
+- Does this strengthen the food chain?
 - Can future generations benefit from this decision?
 
 ## Related Documents

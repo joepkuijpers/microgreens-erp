@@ -10,13 +10,13 @@ Ethics provide the moral framework for responsible decision-making and ensure th
 
 Ethics define how the project's Vision, Mission, Core Values and Guiding Principles are applied in practice.
 
-Every action should contribute to a Food Chain built on honesty, responsibility, transparency and respect for people, plants, animals, nature and future generations.
+Every action should contribute to a food chain built on honesty, responsibility, transparency and respect for people, plants, animals, nature and future generations.
 
 ## Ethical Principles
 
-The ethical principles of the Microgreens ERP project are organized into complementary areas.
+The ethical principles of the Microgreens ERP project are organised into complementary areas.
 
-Together they define how responsibility, integrity, transparency and respect are applied throughout the entire Food Chain.
+Together they define how responsibility, integrity, transparency and respect are applied throughout the entire food chain.
 
 Each area supports the Vision, Mission, Core Values and Guiding Principles while providing practical guidance for responsible decision-making.
 
@@ -39,14 +39,14 @@ Research should pursue knowledge through honesty, objectivity and repeatability.
 
 ### Principle
 
-Living organisms should be treated with respect throughout the entire Food Chain.
+Living organisms should be treated with respect throughout the entire food chain.
 
 ### Application
 
 - Work with biological principles whenever practical.
-- Minimize unnecessary stress on plants.
+- Minimise unnecessary stress on plants.
 - Encourage healthy and resilient plant development.
-- Work toward certified organic production whenever practical.
+- Work towards certified organic production whenever practical.
 - Respect natural biological processes.
 - Technology should strengthen biology rather than replace it unnecessarily.
 
@@ -154,10 +154,10 @@ Food should contribute positively to human health, society and the environment.
 ### Application
 
 - Preserve nutritional value whenever practical.
-- Minimize unnecessary waste.
+- Minimise unnecessary waste.
 - Improve food accessibility.
 - Support responsible preservation methods.
-- Contribute to a healthier, more sustainable and transparent Food Chain.
+- Contribute to a healthier, more sustainable and transparent food chain.
 
 > *"Reduction in waste increases taste."*
 
@@ -194,7 +194,7 @@ Before making significant decisions, ask:
 - Does this follow the Guiding Principles?
 - Does this strengthen Biological Integrity?
 - Does this preserve transparency?
-- Does this benefit the Food Chain?
+- Does this benefit the food chain?
 - Can the reasoning be openly documented?
 - Would this decision still be considered ethical in the future?
 
@@ -267,7 +267,7 @@ The Microgreens ERP project is committed to continuous ethical improvement.
 
 Ethics are not viewed as fixed rules but as a continuous process of learning, reflection and responsible decision-making.
 
-Every significant decision should strengthen trust, preserve integrity and contribute to a more transparent, sustainable and responsible Food Chain.
+Every significant decision should strengthen trust, preserve integrity and contribute to a more transparent, sustainable and responsible food chain.
 
 ## Related Documents
 

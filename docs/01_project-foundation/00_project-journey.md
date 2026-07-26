@@ -188,7 +188,7 @@ During a six-day fast I spent considerable time reflecting on the direction of m
 
 For the first time I deliberately connected all previous experiences instead of viewing them as unrelated events.
 
-I realised that nearly every experience pointed toward the same recurring themes:
+I realised that nearly every experience pointed towards the same recurring themes:
 
 biology;
 food;

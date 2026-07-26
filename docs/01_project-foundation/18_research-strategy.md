@@ -4,7 +4,7 @@
 
 Define the role of research within the Microgreens ERP project.
 
-Research exists to improve understanding of biological systems, validate assumptions, and support continuous improvement throughout the Food Chain.
+Research exists to improve understanding of biological systems, validate assumptions, and support continuous improvement throughout the food chain.
 
 ## Vision
 
@@ -143,7 +143,7 @@ The long-term ambition is to create a research platform where every cultivation 
 
 Research should become part of normal operations rather than a separate activity.
 
-The Food Chain should continuously improve through evidence rather than assumption.
+The food chain should continuously improve through evidence rather than assumption.
 
 ## Relationship to Other Project Foundation Documents
 

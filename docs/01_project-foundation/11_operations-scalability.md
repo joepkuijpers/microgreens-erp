@@ -4,7 +4,7 @@
 
 This document defines how the Microgreens ERP project scales while preserving consistency, quality, traceability, sustainability and operational simplicity.
 
-Operational scalability ensures that growth strengthens the entire Food Chain rather than increasing unnecessary complexity.
+Operational scalability ensures that growth strengthens the entire food chain rather than increasing unnecessary complexity.
 
 The objective is not simply to expand production capacity, but to create a resilient, modular and maintainable operational system that can evolve through continuous learning and responsible innovation.
 
@@ -14,18 +14,18 @@ Operational Scalability is the ability to increase or decrease operational capac
 
 Expansion should improve the entire system rather than creating isolated solutions or unnecessary complexity.
 
-Growth is therefore achieved through standardization, modularity, validated learning and continuous improvement.
+Growth is therefore achieved through standardisation, modularity, validated learning and continuous improvement.
 
 ## Operational Principles
 
 Operational scalability follows several fundamental principles.
 
-- Standardize before expanding.
+- Standardise before expanding.
 - Scale through validated learning.
 - Preserve simplicity.
 - Maintain traceability.
 - Design modular systems.
-- Optimize continuously.
+- Optimise continuously.
 - Measure every significant improvement.
 - Never sacrifice quality for growth.
 - Expand only when operational stability has been demonstrated.
@@ -60,15 +60,15 @@ The following sections describe the scalability principles and applications for 
 
 ### Principle
 
-Production should expand through standardized and repeatable production units.
+Production should expand through standardised and repeatable production units.
 
 ### Application
 
-- Standardize production racks.
-- Standardize tray dimensions.
-- Standardize cultivation procedures.
-- Standardize documentation.
-- Standardize measurements.
+- Standardise production racks.
+- Standardise tray dimensions.
+- Standardise cultivation procedures.
+- Standardise documentation.
+- Standardise measurements.
 - Expand by adding complete production units rather than modifying existing ones whenever practical.
 
 Uniform production simplifies maintenance, experimentation, ERP analysis and operational comparison.
@@ -87,14 +87,14 @@ Environmental conditions should remain predictable while respecting natural biol
 - Apply GreenScope.
 - Apply Adaptive Energy Control.
 - Apply Thermal Zoning whenever practical.
-- Standardize environmental monitoring.
+- Standardise environmental monitoring.
 - Use dimmable lighting.
 - Use variable-speed fans.
 - Continuously monitor plant requirements.
 
 Outdoor cultivation should be preferred whenever environmental conditions support healthy biological development.
 
-Natural outdoor variation can strengthen plant resilience and should therefore be utilized whenever practical.
+Natural outdoor variation can strengthen plant resilience and should therefore be utilised whenever practical.
 
 Indoor cultivation should reproduce the Plant Biotope while maintaining consistency between production units.
 
@@ -108,9 +108,9 @@ Energy systems should scale according to actual operational demand.
 
 ### Application
 
-- Continuously optimize lighting efficiency.
+- Continuously optimise lighting efficiency.
 - Determine minimum effective light intensity through experimentation.
-- Optimize lamp height through measurement.
+- Optimise lamp height through measurement.
 - Use timers whenever practical.
 - Use dimmable lighting systems.
 - Use power-regulated ventilation.
@@ -125,7 +125,7 @@ Every expansion should reduce energy consumption per unit of production whenever
 
 ### Principle
 
-Infrastructure should expand through independent, standardized and modular operational units.
+Infrastructure should expand through independent, standardised and modular operational units.
 
 ### Application
 
@@ -135,8 +135,8 @@ Infrastructure should expand through independent, standardized and modular opera
 - Modular sensor networks.
 - Modular automation.
 - Modular documentation.
-- Standardized room layouts.
-- Standardized maintenance procedures.
+- Standardised room layouts.
+- Standardised maintenance procedures.
 
 Each operational module should remain independently maintainable while integrating seamlessly into the complete production system.
 
@@ -153,9 +153,9 @@ Freeze Drying capacity should match operational demand.
 - Select chamber sizes appropriate for production volume.
 - Prefer multiple right-sized chambers over one unnecessarily oversized system whenever practical.
 - Expand through modular Freeze Dryer capacity.
-- Optimize chamber utilization.
+- Optimise chamber utilisation.
 - Recover usable waste heat whenever practical.
-- Standardize processing procedures.
+- Standardise processing procedures.
 - Preserve product quality throughout expansion.
 
 ---
@@ -186,8 +186,8 @@ Distribution should remain efficient while preserving product quality and tracea
 ### Application
 
 - Select packaging appropriate for the product.
-- Standardize packaging dimensions whenever practical.
-- Optimize transportation efficiency.
+- Standardise packaging dimensions whenever practical.
+- Optimise transportation efficiency.
 - Preserve traceability throughout distribution.
 - Reduce unused transport volume.
 - Design packaging that supports efficient storage and future expansion.
@@ -220,11 +220,11 @@ People should scale through knowledge rather than dependency.
 
 ### Application
 
-- Standardize procedures.
+- Standardise procedures.
 - Document workflows.
 - Clearly define responsibilities.
 - Encourage Knowledge Sharing.
-- Provide standardized training.
+- Provide standardised training.
 - Support both operational expansion and contraction while preserving quality.
 
 Responsibility should remain transparent regardless of organizational size.
@@ -242,7 +242,7 @@ The ERP Platform should remain maintainable regardless of operational growth.
 - Modular ERP development.
 - Preserve Decision Traceability.
 - Support multiple production locations.
-- Maintain standardized terminology.
+- Maintain standardised terminology.
 - Maintain the Single Source of Truth.
 - Preserve documentation quality.
 - Record operational knowledge for continuous improvement.

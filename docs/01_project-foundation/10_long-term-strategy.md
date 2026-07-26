@@ -10,7 +10,7 @@ The strategy provides a roadmap for continuous development rather than a fixed d
 
 ## Definition
 
-Long-term strategy focuses on building a resilient, transparent and scalable Food Chain through continuous learning, responsible innovation and practical implementation.
+Long-term strategy focuses on building a resilient, transparent and scalable food chain through continuous learning, responsible innovation and practical implementation.
 
 Growth is viewed as a gradual process in which every stage strengthens the foundation for the next.
 
@@ -22,8 +22,8 @@ The long-term strategy follows several fundamental principles.
 - Scale through validated learning.
 - Preserve simplicity while increasing capability.
 - Technology should strengthen biology.
-- Standardization enables meaningful innovation.
-- Every expansion should strengthen the entire Food Chain.
+- Standardisation enables meaningful innovation.
+- Every expansion should strengthen the entire food chain.
 - Long-term value has priority over short-term success.
 
 ---
@@ -36,17 +36,17 @@ The horizons are not strict phases but long-term focus areas. Several horizons m
 
 ---
 
-## Horizon 1 — Environmental Optimization
+## Horizon 1 — Environmental Optimisation
 
 Develop the most sustainable, resilient and biologically responsible Food Production System practical.
 
 Objectives include:
 
 - GreenScope
-- Plant Biotope Optimization
+- Plant Biotope Optimisation
 - Thermal Zoning
 - Adaptive Energy Control
-- Water Optimization
+- Water Optimisation
 - Resource Conservation
 - Energy Recovery
 - Circular Resource Management
@@ -83,7 +83,7 @@ The Professional ERP Platform should therefore not only store operational knowle
 
 ## Horizon 3 — Humanitarian Food Chain
 
-Contribute to a transparent, sustainable and resilient Food Chain that improves global access to nutritious food.
+Contribute to a transparent, sustainable and resilient food chain that improves global access to nutritious food.
 
 Objectives include:
 
@@ -121,7 +121,7 @@ Objectives include:
 
 Develop a financially sustainable foundation that enables the long-term vision of the Microgreens ERP project.
 
-Economic sustainability is recognised as an essential requirement for maintaining, improving, and expanding the Food Chain.
+Economic sustainability is recognised as an essential requirement for maintaining, improving, and expanding the food chain.
 
 Financial success is not regarded as the purpose of the project.
 
@@ -165,14 +165,14 @@ The project recognises that responsible financial management is necessary for lo
 
 Commercial success is therefore welcomed when it strengthens the project's ability to create lasting value for people, communities, agriculture, and the environment.
 
-Growth should increase the project's capacity to improve the Food Chain rather than becoming an objective in itself.
+Growth should increase the project's capacity to improve the food chain rather than becoming an objective in itself.
 
 Profit should remain a consequence of creating meaningful value, never the primary purpose of the project.
 ---
 
 ## Horizon 6 — Professional ERP Platform
 
-Develop a professional, transparent, traceable and maintainable ERP platform that supports every stage of the Food Chain.
+Develop a professional, transparent, traceable and maintainable ERP platform that supports every stage of the food chain.
 
 Objectives include:
 
@@ -187,7 +187,7 @@ Objectives include:
 
 ### Contribution to Open Knowledge
 
-The Professional ERP Platform strengthens Open Knowledge by collecting, organizing and preserving operational knowledge.
+The Professional ERP Platform strengthens Open Knowledge by collecting, organising and preserving operational knowledge.
 
 Traceability, documentation, measurements and decision history transform daily operations into reusable knowledge that supports research, education and continuous improvement.
 
@@ -203,11 +203,11 @@ Objectives include:
 
 - Modular Chamber Design
 - Modular Expansion
-- Chamber Optimization
-- Energy Optimization
+- Chamber Optimisation
+- Energy Optimisation
 - Energy Recovery Integration
 - Product Quality
-- Process Standardization
+- Process Standardisation
 - HACCP Compliance
 - Scalable Production
 - Food Preservation Research
@@ -216,7 +216,7 @@ Objectives include:
 
 ## Horizon 8 — Certified Organic Production
 
-Work toward cultivation based on certified organic principles whenever practical.
+Work towards cultivation based on certified organic principles whenever practical.
 
 Objectives include:
 
@@ -244,7 +244,7 @@ Objectives include:
 - Lighting Control
 - Climate Control
 - Production Monitoring
-- Process Optimization
+- Process Optimisation
 - Predictive Maintenance
 - Decision Support
 
@@ -262,14 +262,14 @@ Progress in one horizon strengthens the others, creating a continuous cycle of l
 
 For example:
 
-- Environmental Optimization supports Certified Organic Production.
+- Environmental Optimisation supports Certified Organic Production.
 - Open Knowledge strengthens the Professional ERP Platform.
 - The Professional ERP Platform preserves operational knowledge generated through research and daily operations.
 - Education expands Open Knowledge.
 - Freeze Dryer Development supports the Humanitarian Food Chain.
 - Automation strengthens every horizon through improved efficiency, consistency and informed decision-making.
 
-The long-term objective is therefore not the completion of individual horizons, but the continuous development of one integrated Food Chain.
+The long-term objective is therefore not the completion of individual horizons, but the continuous development of one integrated food chain.
 
 ---
 

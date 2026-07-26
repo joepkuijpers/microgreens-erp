@@ -206,7 +206,7 @@ Before making any significant strategic, technical or operational decision, the 
 ### Biological Integrity
 
 - Does it strengthen biological principles?
-- Does it move the project toward certified organic production whenever practical?
+- Does it move the project towards certified organic production whenever practical?
 - Does it work with nature rather than against it?
 
 ### Long-Term Impact

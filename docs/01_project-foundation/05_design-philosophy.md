@@ -88,7 +88,7 @@ Traceability preserves accountability, supports continuous improvement and enabl
 
 Measure before optimising.
 
-Optimize only after sufficient evidence has been collected.
+Optimise only after sufficient evidence has been collected.
 
 Measure again after implementation.
 
