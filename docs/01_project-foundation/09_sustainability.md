@@ -303,7 +303,7 @@ Before implementing significant changes, ask:
 - [Core Values](03_core-values.md)
 - [Guiding Principles](08_guiding-principles.md)
 - [Design Philosophy](05_design-philosophy.md)
-- [Operational Scalability](09_operational-scalability.md)
+- [Operational Scalability](11_operations-scalability.md)
 - [Glossary](../17_glossary.md)
 - [Documentation Style Guide](../18_documentation-style-guide.md)
 

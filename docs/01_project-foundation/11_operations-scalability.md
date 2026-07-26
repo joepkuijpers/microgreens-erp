@@ -297,9 +297,9 @@ Before expanding operational capacity, ask:
 - [Guiding Principles](08_guiding-principles.md)
 - [Design Philosophy](05_design-philosophy.md)
 - [Founder's Notes](06_founders-notes.md)
-- [Sustainability](07_sustainability.md)
-- [Ethics](08_ethics.md)
-- [Long-Term Strategy](09_long-term-strategy.md)
+- [Sustainability](09_sustainability.md)
+- [Ethics](07_ethics.md)
+- [Long-Term Strategy](10_long-term-strategy.md)
 - [Glossary](../17_glossary.md)
 - [Documentation Style Guide](../18_documentation-style-guide.md)
 

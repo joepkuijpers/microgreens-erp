@@ -51,6 +51,6 @@ This documentation focuses on:
 
 ## Related Documents
 
-- [Master Index](../00_master-index.md)
+- [Documentation Index](../README.md)
 - [Glossary](../17_glossary.md)
 - [Documentation Style Guide](../18_documentation-style-guide.md)
