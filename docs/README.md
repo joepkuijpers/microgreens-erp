@@ -12,13 +12,16 @@ New readers should begin with:
 
 1. [Project Foundation](01_project-foundation/README.md)
 2. [Current Project Status](21_project-status.md)
-3. [Engineering Documentation](03_engineering/README.md)
-4. [Glossary](17_glossary.md)
-5. [Documentation Style Guide](18_documentation-style-guide.md)
+3. [Project Roadmap](11_roadmap.md)
+4. [Engineering Documentation](03_engineering/README.md)
+5. [Glossary](17_glossary.md)
+6. [Documentation Style Guide](18_documentation-style-guide.md)
 
 The Project Foundation explains why the project exists and which principles guide it.
 
 The Project Status describes the current stage.
+
+The Project Roadmap defines the controlled order in which implementation should progress.
 
 Engineering documentation explains how technical systems support biological understanding.
 
@@ -140,6 +143,7 @@ The following developed documents support consistent work across the repository:
 - [Documentation Style Guide](18_documentation-style-guide.md)
 - [Project Reference System](20_project-reference-system.md)
 - [Current Project Status](21_project-status.md)
+- [Project Roadmap](11_roadmap.md)
 - [Documentation Standards](22_documentation-standards.md)
 - [Decision Framework](23_decision-framework.md)
 - [Decision Records](24_decision-records.md)
