@@ -242,6 +242,7 @@ return [
 'no_customers_found' => 'No customers found.',
 'no_suppliers_found' => 'No suppliers found.',
 'supplier_saved' => 'Supplier saved!',
+'supplier_already_exists' => 'This supplier already exists.',
 'new_supplier' => 'New supplier',
 'save' => 'Save',
 'menu' => 'Menu',

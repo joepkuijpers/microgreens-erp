@@ -14,6 +14,22 @@ if ($name === '') {
     exit;
 }
 
+$duplicateCheck = $db->prepare("
+    SELECT id
+    FROM suppliers
+    WHERE name COLLATE NOCASE = :name
+    LIMIT 1
+");
+
+$duplicateCheck->execute([
+    ':name' => $name,
+]);
+
+if ($duplicateCheck->fetchColumn() !== false) {
+    header('Location: add_supplier_form.php?error=supplier_exists');
+    exit;
+}
+
 $stmt = $db->prepare("
     INSERT INTO suppliers (name)
     VALUES (:name)

@@ -16,6 +16,12 @@ $error = $_GET['error'] ?? '';
         </div>
     <?php endif; ?>
 
+    <?php if ($error === 'supplier_exists'): ?>
+        <div class="card">
+            <p><?= htmlspecialchars(__('supplier_already_exists')) ?></p>
+        </div>
+    <?php endif; ?>
+
     <div class="card">
         <form method="post" action="add_supplier.php">
             <label for="name"><?= htmlspecialchars(__('name')) ?></label><br>

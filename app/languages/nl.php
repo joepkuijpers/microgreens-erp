@@ -266,6 +266,7 @@ return [
 'no_customers_found' => 'Nog geen klanten gevonden.',
 'no_suppliers_found' => 'Nog geen leveranciers gevonden.',
 'supplier_saved' => 'Leverancier opgeslagen!',
+'supplier_already_exists' => 'Deze leverancier bestaat al.',
 'new_supplier' => 'Nieuwe leverancier',
 'save' => 'Opslaan',
 'menu' => 'Menu',
