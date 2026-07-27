@@ -1,5 +1,6 @@
 <?php
 include '../app/db_connect.php';
+require_once '../app/includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: add_inventory_form.php');

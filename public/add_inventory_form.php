@@ -1,4 +1,5 @@
 <?php
+require_once '../app/includes/language.php';
 include '../app/includes/header.php';
 include '../app/includes/sidebar.php';
 ?>
