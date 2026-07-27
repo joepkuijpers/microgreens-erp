@@ -126,6 +126,6 @@ function getClimateState(PDO $db): array
         'temperature' => $temperatureState,
         'humidity' => $humidityState,
         'light' => $lightState,
-        'timestamp' => $reading['timestamp']
+        'timestamp' => $sensorData['timestamp'] ?? null
     ];
 }

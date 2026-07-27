@@ -57,6 +57,6 @@ function getLightingState(PDO $db): array
         'min_lux' => $lightMin,
         'max_lux' => $lightMax,
         'growth_stage' => $stage,
-        'timestamp' => $reading['timestamp']
+        'timestamp' => $sensorData['timestamp'] ?? null
     ];
 }
