@@ -6,15 +6,18 @@ include '../app/db_connect.php';
 
 $items = $db->query("
     SELECT
-        id,
-        item_name,
-        category,
-        quantity,
-        unit,
-        unit_cost,
-        (quantity * unit_cost) AS total_value
-    FROM inventory
-    ORDER BY category ASC, item_name ASC
+        i.id,
+        i.item_name,
+        i.category,
+        i.quantity,
+        i.unit,
+        i.unit_cost,
+        s.name AS supplier_name,
+        (i.quantity * i.unit_cost) AS total_value
+    FROM inventory i
+    LEFT JOIN suppliers s
+        ON s.id = i.supplier_id
+    ORDER BY i.category ASC, i.item_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
 $totalValue = $db->query("
@@ -43,6 +46,7 @@ $totalValue = $db->query("
                     <tr>
                         <th>ID</th>
                         <th><?= htmlspecialchars(__('item')) ?></th>
+                        <th><?= htmlspecialchars(__('supplier')) ?></th>
                         <th><?= htmlspecialchars(__('category')) ?></th>
                         <th><?= htmlspecialchars(__('quantity')) ?></th>
                         <th><?= htmlspecialchars(__('unit')) ?></th>
@@ -56,6 +60,14 @@ $totalValue = $db->query("
                         <tr>
                             <td><?= htmlspecialchars((string)$item['id']) ?></td>
                             <td><?= htmlspecialchars((string)$item['item_name']) ?></td>
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string)(
+                                        $item['supplier_name']
+                                        ?? __('supplier_not_linked')
+                                    )
+                                ) ?>
+                            </td>
                             <td><?= htmlspecialchars((string)($item['category'] ?? '-')) ?></td>
                             <td><?= number_format((float)$item['quantity'], 2, ',', '.') ?></td>
                             <td><?= htmlspecialchars((string)($item['unit'] ?? '-')) ?></td>

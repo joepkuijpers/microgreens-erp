@@ -8,22 +8,49 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $item_name = trim($_POST['item_name'] ?? '');
+$supplier_id_raw = trim((string)($_POST['supplier_id'] ?? ''));
 $category = trim($_POST['category'] ?? '');
 $quantity = (float)($_POST['quantity'] ?? 0);
 $unit = trim($_POST['unit'] ?? '');
 $unit_cost = (float)($_POST['unit_cost'] ?? 0);
 
-if ($item_name === '' || $quantity < 0 || $unit === '' || $unit_cost < 0) {
+if (
+    $item_name === '' ||
+    !ctype_digit($supplier_id_raw) ||
+    (int)$supplier_id_raw <= 0 ||
+    $quantity < 0 ||
+    $unit === '' ||
+    $unit_cost < 0
+) {
+    die(__('invalid_inventory_input'));
+}
+
+$supplier_id = (int)$supplier_id_raw;
+
+$supplierCheck = $db->prepare("
+    SELECT COUNT(*)
+    FROM suppliers
+    WHERE id = :supplier_id
+");
+
+$supplierCheck->execute([
+    ':supplier_id' => $supplier_id,
+]);
+
+if ((int)$supplierCheck->fetchColumn() !== 1) {
     die(__('invalid_inventory_input'));
 }
 
 $stmt = $db->prepare("
-    INSERT INTO inventory (item_name, category, quantity, unit, unit_cost)
-    VALUES (:item_name, :category, :quantity, :unit, :unit_cost)
+    INSERT INTO inventory
+    (item_name, supplier_id, category, quantity, unit, unit_cost)
+    VALUES
+    (:item_name, :supplier_id, :category, :quantity, :unit, :unit_cost)
 ");
 
 $stmt->execute([
     ':item_name' => $item_name,
+    ':supplier_id' => $supplier_id,
     ':category' => $category,
     ':quantity' => $quantity,
     ':unit' => $unit,
