@@ -16,6 +16,18 @@ $suppliers = $db->query("
 <div class="main">
     <h1><?= htmlspecialchars(__('suppliers')) ?></h1>
 
+    <p>
+        <a class="btn" href="add_supplier_form.php">
+            <?= htmlspecialchars(__('new_supplier')) ?>
+        </a>
+    </p>
+
+    <?php if (isset($_GET['created'])): ?>
+        <div class="card">
+            <p><?= htmlspecialchars(__('supplier_saved')) ?></p>
+        </div>
+    <?php endif; ?>
+
     <div class="card suppliers-table-card">
         <div class="table-scroll">
             <table>
