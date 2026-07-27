@@ -64,45 +64,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity_after = $quantity;
     $quantity_change = $quantity_after - $quantity_before;
 
-    $stmt = $db->prepare("
-        UPDATE inventory
-        SET item_name = :item_name,
-            supplier_id = :supplier_id,
-            category = :category,
-            quantity = :quantity,
-            unit = :unit,
-            unit_cost = :unit_cost
-        WHERE id = :id
-    ");
+    try {
+        $db->beginTransaction();
 
-    $stmt->execute([
-        ':item_name' => $item_name,
-        ':supplier_id' => $supplier_id,
-        ':category' => $category,
-        ':quantity' => $quantity,
-        ':unit' => $unit,
-        ':unit_cost' => $unit_cost,
-        ':id' => $id
-    ]);
+        $stmt = $db->prepare("
+            UPDATE inventory
+            SET item_name = :item_name,
+                supplier_id = :supplier_id,
+                category = :category,
+                quantity = :quantity,
+                unit = :unit,
+                unit_cost = :unit_cost
+            WHERE id = :id
+        ");
 
-    $log = $db->prepare("
-        INSERT INTO inventory_transactions
-        (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
-        VALUES
-        (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
-    ");
+        $stmt->execute([
+            ':item_name' => $item_name,
+            ':supplier_id' => $supplier_id,
+            ':category' => $category,
+            ':quantity' => $quantity,
+            ':unit' => $unit,
+            ':unit_cost' => $unit_cost,
+            ':id' => $id
+        ]);
 
-    $log->execute([
-        ':inventory_id' => $id,
-        ':type' => 'BEWERKING',
-        ':quantity_change' => $quantity_change,
-        ':quantity_before' => $quantity_before,
-        ':quantity_after' => $quantity_after,
-        ':unit' => $unit,
-        ':note' => 'Voorraaditem bewerkt',
-        ':reference_type' => 'inventory',
-        ':reference_id' => $id
-    ]);
+        $log = $db->prepare("
+            INSERT INTO inventory_transactions
+            (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
+            VALUES
+            (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
+        ");
+
+        $log->execute([
+            ':inventory_id' => $id,
+            ':type' => 'BEWERKING',
+            ':quantity_change' => $quantity_change,
+            ':quantity_before' => $quantity_before,
+            ':quantity_after' => $quantity_after,
+            ':unit' => $unit,
+            ':note' => 'Voorraaditem bewerkt',
+            ':reference_type' => 'inventory',
+            ':reference_id' => $id
+        ]);
+
+        $db->commit();
+    } catch (Throwable $exception) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+
+        throw $exception;
+    }
 
     header('Location: list_inventory.php');
     exit;
