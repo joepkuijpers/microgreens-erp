@@ -41,42 +41,54 @@ if ((int)$supplierCheck->fetchColumn() !== 1) {
     die(__('invalid_inventory_input'));
 }
 
-$stmt = $db->prepare("
-    INSERT INTO inventory
-    (item_name, supplier_id, category, quantity, unit, unit_cost)
-    VALUES
-    (:item_name, :supplier_id, :category, :quantity, :unit, :unit_cost)
-");
+try {
+    $db->beginTransaction();
 
-$stmt->execute([
-    ':item_name' => $item_name,
-    ':supplier_id' => $supplier_id,
-    ':category' => $category,
-    ':quantity' => $quantity,
-    ':unit' => $unit,
-    ':unit_cost' => $unit_cost
-]);
+    $stmt = $db->prepare("
+        INSERT INTO inventory
+        (item_name, supplier_id, category, quantity, unit, unit_cost)
+        VALUES
+        (:item_name, :supplier_id, :category, :quantity, :unit, :unit_cost)
+    ");
 
-$inventory_id = $db->lastInsertId();
+    $stmt->execute([
+        ':item_name' => $item_name,
+        ':supplier_id' => $supplier_id,
+        ':category' => $category,
+        ':quantity' => $quantity,
+        ':unit' => $unit,
+        ':unit_cost' => $unit_cost
+    ]);
 
-$log = $db->prepare("
-    INSERT INTO inventory_transactions
-    (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
-    VALUES
-    (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
-");
+    $inventory_id = $db->lastInsertId();
 
-$log->execute([
-    ':inventory_id' => $inventory_id,
-    ':type' => 'TOEVOEGING',
-    ':quantity_change' => $quantity,
-    ':quantity_before' => 0,
-    ':quantity_after' => $quantity,
-    ':unit' => $unit,
-    ':note' => __('new_inventory_item_created'),
-    ':reference_type' => 'inventory',
-    ':reference_id' => $inventory_id
-]);
+    $log = $db->prepare("
+        INSERT INTO inventory_transactions
+        (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id)
+        VALUES
+        (:inventory_id, :type, :quantity_change, :quantity_before, :quantity_after, :unit, :note, :reference_type, :reference_id)
+    ");
+
+    $log->execute([
+        ':inventory_id' => $inventory_id,
+        ':type' => 'TOEVOEGING',
+        ':quantity_change' => $quantity,
+        ':quantity_before' => 0,
+        ':quantity_after' => $quantity,
+        ':unit' => $unit,
+        ':note' => __('new_inventory_item_created'),
+        ':reference_type' => 'inventory',
+        ':reference_id' => $inventory_id
+    ]);
+
+    $db->commit();
+} catch (Throwable $exception) {
+    if ($db->inTransaction()) {
+        $db->rollBack();
+    }
+
+    throw $exception;
+}
 
 header('Location: list_inventory.php');
 exit;
