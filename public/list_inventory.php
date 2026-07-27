@@ -17,12 +17,14 @@ $items = $db->query("
     FROM inventory i
     LEFT JOIN suppliers s
         ON s.id = i.supplier_id
+    WHERE i.is_active = 1
     ORDER BY i.category ASC, i.item_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
 $totalValue = $db->query("
     SELECT COALESCE(SUM(quantity * unit_cost), 0) AS total
     FROM inventory
+    WHERE is_active = 1
 ")->fetch(PDO::FETCH_ASSOC);
 ?>
 
@@ -75,7 +77,21 @@ $totalValue = $db->query("
                             <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
                             <td>
                                 <a class="btn" href="edit_inventory.php?id=<?= urlencode((string)$item['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
-                                <a class="btn" href="delete_inventory.php?id=<?= urlencode((string)$item['id']) ?>" onclick="return confirm('<?= htmlspecialchars(__('confirm_delete_inventory_item')) ?>');">🗑️ <?= htmlspecialchars(__('delete')) ?></a>
+                                <form
+                                    method="post"
+                                    action="delete_inventory.php"
+                                    style="display: inline;"
+                                    onsubmit="return confirm('<?= htmlspecialchars(__('confirm_archive_inventory_item')) ?>');"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="id"
+                                        value="<?= htmlspecialchars((string)$item['id']) ?>"
+                                    >
+                                    <button type="submit" class="btn">
+                                        📦 <?= htmlspecialchars(__('archive')) ?>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
