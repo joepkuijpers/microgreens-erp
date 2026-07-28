@@ -39,6 +39,14 @@ Evidence may be:
 
 Several forms can support one another, but combining them does not automatically remove uncertainty.
 
+## Manual crop measurements
+
+Some crop properties require a sample and a controlled manual procedure rather than a continuously installed sensor.
+
+Brix measurement is one example. It measures the refractive behaviour of expressed plant sap and may support comparisons within the same crop, growth stage and sampling method. It must not be treated as a complete measure of sugar content, nutritional value or plant health.
+
+Raw readings, replicates and sampling context should be retained. The practical method is defined in the [Brix measurement SOP](../Sops-and-operations/01_brix-measurement.md).
+
 ## Measure in space and time
 
 One location may hide variation across a rack. One moment may miss daily changes. The strategy should match the expected pattern:

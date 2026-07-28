@@ -108,6 +108,18 @@ Monitoring these plants may reveal:
 
 ---
 
+### Brix Measurements
+
+Brix measurements can complement visual observations by recording the refractive soluble-solids level of expressed plant sap.
+
+The measurement is destructive and sensitive to crop age, plant part, water status, sampling position and time of day. Comparisons therefore require a consistent method and several independent samples.
+
+A Brix value should not be interpreted as a direct measure of sugar content, nutritional value or overall plant health. Its value comes from repeated, controlled comparison with crop observations, cultivation conditions and harvest outcomes.
+
+The practical method is defined in the [Brix measurement SOP](../Sops-and-operations/01_brix-measurement.md).
+
+---
+
 ### Beneficial Organisms
 
 Monitoring beneficial organisms helps determine whether biological control has become established.
