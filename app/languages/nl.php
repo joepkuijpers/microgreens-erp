@@ -451,4 +451,12 @@ return [
     'measurement_validity' => 'Geldigheid',
     'measurement_valid' => 'Geldig',
     'measurement_invalid' => 'Ongeldig',
+    'measurement_action' => 'Actie',
+    'invalidation_reason' => 'Reden van ongeldigverklaring',
+    'invalidate_measurement' => 'Meting ongeldig verklaren',
+    'confirm_invalidate_brix_reading' => 'Weet je zeker dat je deze meting ongeldig wilt verklaren? De oorspronkelijke waarde blijft bewaard.',
+    'brix_reading_invalidated' => 'De Brix-meting is ongeldig verklaard. De oorspronkelijke waarde blijft bewaard.',
+    'invalid_brix_invalidation_input' => 'Controleer de meting en vul een geldige reden in.',
+    'brix_reading_not_found' => 'De Brix-meting is niet gevonden.',
+    'brix_reading_already_invalid' => 'Deze Brix-meting is al ongeldig verklaard.',
 ];

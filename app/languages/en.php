@@ -445,4 +445,12 @@ return [
     'measurement_validity' => 'Validity',
     'measurement_valid' => 'Valid',
     'measurement_invalid' => 'Invalid',
+    'measurement_action' => 'Action',
+    'invalidation_reason' => 'Reason for invalidation',
+    'invalidate_measurement' => 'Invalidate measurement',
+    'confirm_invalidate_brix_reading' => 'Are you sure you want to invalidate this measurement? The original value will be retained.',
+    'brix_reading_invalidated' => 'The Brix measurement has been invalidated. The original value has been retained.',
+    'invalid_brix_invalidation_input' => 'Check the measurement and provide a valid reason.',
+    'brix_reading_not_found' => 'The Brix measurement was not found.',
+    'brix_reading_already_invalid' => 'This Brix measurement has already been invalidated.',
 ];

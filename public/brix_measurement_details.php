@@ -97,6 +97,14 @@ function displayOptionalValue($value): string
 <div class="main">
     <h1>🔬 <?= htmlspecialchars(__('brix_session_details')) ?></h1>
 
+    <?php if (($_GET['invalidated'] ?? '') === '1'): ?>
+        <div class="card">
+            <p>
+                <?= htmlspecialchars(__('brix_reading_invalidated')) ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
     <p>
         <a
             class="btn"
@@ -251,6 +259,7 @@ function displayOptionalValue($value): string
                             <th><?= htmlspecialchars(__('sample_temperature')) ?></th>
                             <th><?= htmlspecialchars(__('invalid_reason')) ?></th>
                             <th><?= htmlspecialchars(__('notes')) ?></th>
+                            <th><?= htmlspecialchars(__('measurement_action')) ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -322,6 +331,47 @@ function displayOptionalValue($value): string
                                             )
                                         )
                                     ) ?>
+                                </td>
+                                <td>
+                                    <?php if ((int)$reading['is_valid'] === 1): ?>
+                                        <form
+                                            method="post"
+                                            action="invalidate_brix_reading.php"
+                                            onsubmit="return confirm('<?= htmlspecialchars(
+                                                __('confirm_invalidate_brix_reading'),
+                                                ENT_QUOTES
+                                            ) ?>');"
+                                        >
+                                            <input
+                                                type="hidden"
+                                                name="reading_id"
+                                                value="<?= htmlspecialchars((string)$reading['id']) ?>"
+                                            >
+
+                                            <input
+                                                type="hidden"
+                                                name="session_id"
+                                                value="<?= htmlspecialchars((string)$session['id']) ?>"
+                                            >
+
+                                            <label>
+                                                <?= htmlspecialchars(__('invalidation_reason')) ?>
+                                            </label><br>
+
+                                            <input
+                                                type="text"
+                                                name="invalid_reason"
+                                                maxlength="500"
+                                                required
+                                            ><br><br>
+
+                                            <button type="submit" class="btn">
+                                                <?= htmlspecialchars(__('invalidate_measurement')) ?>
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
