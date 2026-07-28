@@ -299,7 +299,7 @@ function auth_require_login(): void
     );
 
     header(
-        'Location: login.php?next=' .
+        'Location: /microgreens/PHP/login.php?next=' .
         urlencode($requestUri)
     );
     exit;

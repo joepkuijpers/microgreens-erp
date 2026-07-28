@@ -48,4 +48,35 @@ function activeClass($condition) {
 
     <a class="<?= activeClass($page == 'settings.php' || strpos($currentPath, '/settings/') !== false) ?>" href="<?= $navPrefix ?>settings/">⚙ <?= __('settings') ?></a>
 
+    <?php $currentUser = auth_current_user(); ?>
+
+    <?php if ($currentUser !== null): ?>
+        <div style="margin-top: 24px; padding: 12px;">
+            <small>
+                <?= htmlspecialchars(__('logged_in_as')) ?><br>
+                <strong>
+                    <?= htmlspecialchars(
+                        (string)$currentUser['display_name']
+                    ) ?>
+                </strong>
+            </small>
+
+            <form
+                method="post"
+                action="<?= $navPrefix ?>logout.php"
+                style="margin-top: 10px;"
+            >
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="<?= htmlspecialchars(auth_csrf_token()) ?>"
+                >
+
+                <button type="submit" class="btn">
+                    <?= htmlspecialchars(__('logout')) ?>
+                </button>
+            </form>
+        </div>
+    <?php endif; ?>
+
 </div>

@@ -1,4 +1,6 @@
 <?php
+require_once '../app/includes/auth.php';
+auth_require_login();
 include '../app/includes/header.php';
 include '../app/includes/sidebar.php';
 
