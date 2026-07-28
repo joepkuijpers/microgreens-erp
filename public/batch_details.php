@@ -340,6 +340,13 @@ if ($expectedTotalYield > 0) {
             >
                 🔬 <?= htmlspecialchars(__('add_brix_measurement')) ?>
             </a>
+
+            <a
+                class="btn"
+                href="brix_measurements.php?batch_id=<?= urlencode((string)$batch['id']) ?>"
+            >
+                📋 <?= htmlspecialchars(__('view_brix_history')) ?>
+            </a>
         </p>
     </div>
 
