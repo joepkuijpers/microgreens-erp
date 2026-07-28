@@ -459,4 +459,12 @@ return [
     'invalid_brix_invalidation_input' => 'Controleer de meting en vul een geldige reden in.',
     'brix_reading_not_found' => 'De Brix-meting is niet gevonden.',
     'brix_reading_already_invalid' => 'Deze Brix-meting is al ongeldig verklaard.',
+    'erp_login' => 'Inloggen bij Microgreens ERP',
+    'login_explanation' => 'Log in met je persoonlijke ERP-account.',
+    'username' => 'Gebruikersnaam',
+    'password' => 'Wachtwoord',
+    'log_in' => 'Inloggen',
+    'log_out' => 'Uitloggen',
+    'invalid_login' => 'De gebruikersnaam of het wachtwoord is onjuist, of het account is tijdelijk geblokkeerd.',
+    'logged_in_as' => 'Ingelogd als',
 ];

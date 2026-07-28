@@ -453,4 +453,12 @@ return [
     'invalid_brix_invalidation_input' => 'Check the measurement and provide a valid reason.',
     'brix_reading_not_found' => 'The Brix measurement was not found.',
     'brix_reading_already_invalid' => 'This Brix measurement has already been invalidated.',
+    'erp_login' => 'Sign in to Microgreens ERP',
+    'login_explanation' => 'Sign in with your personal ERP account.',
+    'username' => 'Username',
+    'password' => 'Password',
+    'log_in' => 'Sign in',
+    'log_out' => 'Sign out',
+    'invalid_login' => 'The username or password is incorrect, or the account is temporarily locked.',
+    'logged_in_as' => 'Signed in as',
 ];
