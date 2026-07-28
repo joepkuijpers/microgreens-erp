@@ -62,6 +62,33 @@ $transactions = $db->prepare("
 $transactions->execute([':id' => $id]);
 $transactionRows = $transactions->fetchAll(PDO::FETCH_ASSOC);
 
+$brixSummaryStmt = $db->prepare("
+    SELECT
+        COUNT(DISTINCT s.id) AS session_count,
+        COUNT(
+            CASE WHEN r.is_valid = 1 THEN 1 END
+        ) AS valid_reading_count,
+        AVG(
+            CASE WHEN r.is_valid = 1 THEN r.brix_value END
+        ) AS mean_brix,
+        MIN(
+            CASE WHEN r.is_valid = 1 THEN r.brix_value END
+        ) AS minimum_brix,
+        MAX(
+            CASE WHEN r.is_valid = 1 THEN r.brix_value END
+        ) AS maximum_brix,
+        MAX(s.measured_at) AS latest_measurement
+    FROM brix_measurement_sessions s
+    LEFT JOIN brix_measurement_readings r
+        ON r.session_id = s.id
+    WHERE s.batch_id = :id
+");
+
+$brixSummaryStmt->execute([
+    ':id' => $id,
+]);
+
+$brixSummary = $brixSummaryStmt->fetch(PDO::FETCH_ASSOC);
 $laborSummaryStmt = $db->prepare("
     SELECT
         COUNT(*) AS labor_entry_count,
@@ -151,6 +178,7 @@ if ($expectedTotalYield > 0) {
         <a class="btn" href="grow_batches.php">← <?= htmlspecialchars(__('back_to_batch_management')) ?></a>
         <a class="btn" href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
         <a class="btn" href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
+        <a class="btn" href="add_brix_measurement.php?batch_id=<?= urlencode((string)$batch['id']) ?>">🔬 <?= htmlspecialchars(__('add_brix_measurement')) ?></a>
     </p>
 
     <div class="card">
@@ -255,6 +283,67 @@ if ($expectedTotalYield > 0) {
     </div>
 
     <div class="card">
+        <h2>🔬 <?= htmlspecialchars(__('brix_measurements')) ?></h2>
+
+        <p>
+            <?= htmlspecialchars(__('brix_optional_explanation')) ?>
+        </p>
+
+        <?php if ((int)($brixSummary['session_count'] ?? 0) === 0): ?>
+            <p><?= htmlspecialchars(__('no_brix_measurements')) ?></p>
+        <?php else: ?>
+            <table>
+                <tr>
+                    <th><?= htmlspecialchars(__('measurement_sessions')) ?></th>
+                    <td><?= htmlspecialchars((string)$brixSummary['session_count']) ?></td>
+                </tr>
+                <tr>
+                    <th><?= htmlspecialchars(__('valid_readings')) ?></th>
+                    <td><?= htmlspecialchars((string)$brixSummary['valid_reading_count']) ?></td>
+                </tr>
+                <tr>
+                    <th><?= htmlspecialchars(__('latest_measurement')) ?></th>
+                    <td><?= htmlspecialchars((string)($brixSummary['latest_measurement'] ?? '-')) ?></td>
+                </tr>
+                <tr>
+                    <th><?= htmlspecialchars(__('mean_brix')) ?></th>
+                    <td>
+                        <?php if ($brixSummary['mean_brix'] !== null): ?>
+                            <?= number_format((float)$brixSummary['mean_brix'], 2, ',', '.') ?> °Bx
+                        <?php else: ?>
+                            -
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><?= htmlspecialchars(__('brix_range')) ?></th>
+                    <td>
+                        <?php if (
+                            $brixSummary['minimum_brix'] !== null &&
+                            $brixSummary['maximum_brix'] !== null
+                        ): ?>
+                            <?= number_format((float)$brixSummary['minimum_brix'], 2, ',', '.') ?>
+                            –
+                            <?= number_format((float)$brixSummary['maximum_brix'], 2, ',', '.') ?> °Bx
+                        <?php else: ?>
+                            -
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            </table>
+        <?php endif; ?>
+
+        <p>
+            <a
+                class="btn"
+                href="add_brix_measurement.php?batch_id=<?= urlencode((string)$batch['id']) ?>"
+            >
+                🔬 <?= htmlspecialchars(__('add_brix_measurement')) ?>
+            </a>
+        </p>
+    </div>
+
+    <div class="card">
         <h2><?= htmlspecialchars(__('seed_raw_material')) ?></h2>
 
         <table>
@@ -344,6 +433,7 @@ if ($expectedTotalYield > 0) {
         <a class="btn" href="grow_batches.php">← <?= htmlspecialchars(__('back_to_batch_management')) ?></a>
         <a class="btn" href="edit_batch.php?id=<?= urlencode((string)$batch['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
         <a class="btn" href="harvest_batch.php?id=<?= urlencode((string)$batch['id']) ?>">🌾 <?= htmlspecialchars(__('harvest')) ?></a>
+        <a class="btn" href="add_brix_measurement.php?batch_id=<?= urlencode((string)$batch['id']) ?>">🔬 <?= htmlspecialchars(__('add_brix_measurement')) ?></a>
     </p>
 </div>
 
