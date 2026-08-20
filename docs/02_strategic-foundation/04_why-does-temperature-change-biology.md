@@ -308,49 +308,49 @@ Temperature influences life because it changes the likelihood of those encounter
 
 ## Part IV — Temperature Changes Probability
 
-Imagine watching people leave a football stadium.
+Imagine a busy kitchen.
 
-When everyone walks quickly through wide open spaces, meetings happen constantly.
+Ingredients, cooks and utensils are all present.
 
-Friends recognise one another.
+When everyone can move freely, ingredients reach the correct workstations quickly.
 
-Families regroup.
+Cooks meet the right ingredients.
 
-Conversations begin.
+Preparation continues.
 
-Now imagine the same crowd moving slowly through heavy snow.
+Meals are produced.
 
-The people are still present.
+Now imagine the same kitchen becoming extremely cold.
 
-They can still meet.
+Nothing has disappeared.
 
-But encounters become less frequent.
+The cooks, ingredients and utensils are still present.
 
-Everything simply takes longer.
+But movement becomes slower.
 
-Something remarkably similar happens inside living organisms.
+Ingredients take longer to reach the correct workstation.
 
-Molecules never stop moving completely.
+The right encounters occur less frequently.
 
-Even at low temperatures they continue to vibrate, rotate and drift through their surroundings.
+Food preparation continues, but at a much slower rate.
 
-What changes is not whether they move.
+Something similar happens inside living organisms.
 
-It is how likely they are to meet in ways that allow biology to continue.
+Molecules do not stop moving completely at low temperatures.
 
-As temperature increases, molecules possess more kinetic energy.
+They continue to vibrate, rotate and move through their surroundings.
 
-They move more rapidly.
+What changes is the speed and frequency of molecular encounters.
 
-They collide more frequently.
+As temperature rises, molecules gain kinetic energy.
 
-A greater proportion of these collisions contain enough energy for chemical reactions to proceed.
+They move faster and collide more often.
 
-The probability of successful biological encounters increases.
+A larger proportion of these collisions also contain enough energy for chemical reactions to proceed.
 
-As temperature decreases, molecular motion slows.
+As temperature falls, molecules move more slowly.
 
-Collisions become less frequent.
+Collisions become less frequent, and fewer collisions have enough energy to produce a reaction.
 
 Fewer collisions possess enough energy to overcome the barriers required for biological reactions.
 

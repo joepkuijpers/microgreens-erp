@@ -658,10 +658,6 @@ Brief cooking may soften the outer tissues while leaving the centre firm.
 
 Longer cooking allows heat to penetrate more completely, producing a softer texture throughout.
 
-The same principle applies to meat.
-
-Rapid cooking can create a well-browned exterior while preserving a tender interior.
-
 Slow cooking gradually softens connective tissues, transforming tougher cuts into foods that can be separated with little effort.
 
 The relationship between time and temperature also influences food safety.

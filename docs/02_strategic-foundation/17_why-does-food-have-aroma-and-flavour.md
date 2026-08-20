@@ -1,273 +1,257 @@
-# Chapter 17 — Why Does Food Have Aroma and Flavour?
+Chapter 17 — Why Does Food Have Aroma and Flavour?
 
-> *"Colour speaks to the eyes. Aroma speaks to the nose. Flavour speaks to the entire organism. Preservation begins by understanding the language of life."*
+"Colour speaks to the eyes. 
 
-## Introduction
+Aroma speaks to the nose. 
 
-Before taking the first bite, we already know something about our food.
+Flavour speaks to the whole organism. 
 
-Fresh bread fills a room with its aroma.
+Preservation begins with understanding the language of life."
 
-A ripe peach announces itself before it is touched.
+Introduction
 
-Fresh herbs release their characteristic scent when gently crushed.
+Before we take the first bite, food has already communicated information to us.
 
-Coffee reveals its complexity long before it is tasted.
+Fresh bread spreads its aroma through a room.
 
-These experiences are not accidental.
+A ripe peach releases volatile compounds that can be detected even before it is eaten.
 
-Living organisms continuously produce molecules that interact with the senses of other organisms.
+Fresh herbs release aromatic compounds when their tissue is touched or bruised.
 
-Some attract.
+Coffee can release its characteristic aroma before a sip is taken.
 
-Some repel.
+These experiences arise from chemistry.
 
-Some warn.
+Living organisms constantly produce molecules that can be detected by other organisms.
 
-Others invite.
+Some attract, while others repel.
 
-Long before humans existed, these molecules already played essential biological roles.
+Some warn of danger, while others indicate food, ripeness, or a suitable environment.
 
-Flowers attracted pollinators.
+Flowers produce volatile compounds that can attract pollinators.
 
-Fruit signalled ripeness.
+Plants can produce bitter or astringent compounds that discourage herbivores.
 
-Leaves discouraged herbivores.
+Microorganisms use chemical signals to exchange information.
 
-Microorganisms communicated through chemical signals.
+Life therefore communicates not only through colour, but also through molecules.
 
-Life communicates not only through colour, but also through chemistry.
+Many of these molecules are small enough to travel through the air.
 
-Many of the molecules responsible for aroma and flavour are remarkably small.
+Others dissolve in saliva and can then be detected by receptors in the mouth.
 
-They move easily through the air.
+The brain combines these signals into the experience we recognize as flavour.
 
-Others dissolve in saliva, allowing specialised receptors within the mouth to detect them.
+After harvest, this chemical communication does not stop.
 
-Together, these molecules create the experiences we describe as smell and taste.
+Food continues to release, absorb, break down, and form molecules.
 
-After harvest, however, this chemical language continues to evolve.
+As a result, the information received by our senses also changes.
 
-Some aroma compounds disappear.
+To preserve or control aroma and flavour, we must therefore first understand where these signals come from and how they change.
 
-Others are newly formed.
+Part I — Aroma and Flavour Arise from Different Signals
 
-Some become stronger.
+Aroma begins with volatile molecules.
 
-Others gradually fade.
+These compounds can leave the surface of food and spread through the air.
 
-Preservation therefore seeks not merely to maintain flavour.
+The human nose can detect extremely small amounts of some of these compounds.
 
-It seeks to preserve the biological messages carried by these remarkable molecules.
+A ripe strawberry, for example, releases a complex mixture of volatile compounds.
 
-To understand flavour is to understand another language through which life communicates.
+Fresh basil contains aromatic compounds that are released when its leaves are damaged.
 
-## Part I — Chemistry We Can Sense
+Coffee contains a great diversity of compounds that contribute to its characteristic aroma.
 
-Every moment, countless molecules leave the surface of food.
+No single molecule necessarily determines the entire aroma.
 
-Most are far too small to see.
+The recognizable character of food usually arises from a combination of many different compounds.
 
-Yet many can be detected with extraordinary sensitivity by the human nose.
+Their concentrations, relative proportions, and interactions together determine the signal received by the nose.
 
-A single ripe strawberry releases hundreds of different volatile compounds.
+Flavour works differently.
 
-Fresh basil produces aromatic oils.
+Compounds must first dissolve in saliva before they can be detected by taste receptors.
 
-Coffee contains an astonishing diversity of molecules created during roasting.
+Sweetness is primarily associated with sugars, acidity with acids, saltiness with dissolved ions, and umami with compounds such as glutamate.
 
-Together, these compounds create recognisable aromas.
+Bitterness can originate from a wide range of compounds, including substances that plants produce as a form of defence.
 
-Taste follows a different path.
+Smell and taste therefore provide different types of information.
 
-Only molecules dissolved in saliva can interact with taste receptors.
+The nose detects volatile molecules that travel from the food into the air.
 
-Sweetness often reflects the presence of sugars.
+Taste receptors respond to dissolved compounds in the mouth.
 
-Acidity results from organic acids.
+The brain then combines these signals into a much richer experience.
 
-Bitterness may reflect defensive compounds produced by plants, although many other molecules can also taste bitter.
+What we experience as flavour is therefore not the property of a single molecule.
 
-Saltiness reflects dissolved mineral ions.
+It is the result of a complex chemical signal constructed through multiple sensory systems.
 
-Umami reveals the presence of amino acids such as glutamate.
+Part II — Aroma Changes with Environment and Time
 
-Although smell and taste are often experienced together, they provide different kinds of information.
+Aromatic compounds do not exist within a completely closed system.
 
-The nose detects molecules travelling through the air.
+As soon as food is harvested, cut, bruised, heated, or stored, the environment surrounding these molecules changes.
 
-Taste receptors detect molecules dissolved in saliva.
+Some compounds evaporate and leave the food.
 
-The brain combines these signals into what we recognise as flavour.
+Others are broken down by oxygen or light.
 
-Flavour is therefore not produced by a single molecule.
+Enzymes can form new compounds when cells are damaged.
 
-It emerges from the coordinated interpretation of many different chemical signals.
+Microorganisms can also produce new aromatic compounds during growth and fermentation.
 
-Like colour, flavour is an organised form of biological information.
+Temperature has an important influence on these processes.
 
-The molecules responsible for flavour are continually changing.
+Heat can accelerate chemical reactions while also increasing the evaporation of volatile compounds.
 
-Some evaporate.
+Low temperatures can slow certain reactions, but they do not completely stop biological and chemical processes.
 
-Some react with oxygen.
+Water also plays a role.
 
-Others are created by enzymes or microorganisms.
+The amount of available water influences molecular movement, reaction rates, and the way compounds move within the food.
 
-To preserve flavour, we must first understand why this chemical language never remains completely still.
+As a result, the same food can develop a different aroma under different conditions.
 
-## Part II — Aroma Is Always Changing
+A freshly bruised herb, for example, may have a different aroma profile from the same herb before it was damaged.
 
-Many aroma compounds are relatively small and sufficiently volatile to enter the surrounding air.
+A ripening fruit changes its aroma as enzymatic processes and metabolic pathways change.
 
-They escape easily from the surface of food.
+During fermentation, microorganisms can produce compounds that were barely present in the original product.
 
-With every breath taken near a freshly harvested herb, fruit or flower, tiny amounts of these molecules leave the organism and enter the surrounding air.
+Aroma is therefore not a static property.
 
-The aroma compounds originate within the food, but aroma is experienced only when some of them enter the surrounding air.
+It is the result of a dynamic chemical system.
 
-Aroma therefore depends upon a continuous exchange between the food and its environment.
+Within this system, preservation does not simply mean stopping all change.
 
-This exchange never truly stops.
+It means controlling the conditions so that unwanted changes are limited while desired properties are preserved.
 
-Some molecules evaporate.
+That distinction is essential.
 
-Others are created by enzymes as cells are damaged during cutting, crushing or chewing.
+Part III — Change Can Be Part of the Food
 
-Microorganisms produce entirely new aroma compounds as they grow.
+Not every change in aroma or flavour means a loss of quality.
 
-Heat accelerates many chemical reactions, generating molecules that never existed in the fresh product.
+Some foods derive their character precisely from controlled biological and chemical changes.
 
-At the same time, delicate aroma compounds may disappear through evaporation or chemical degradation.
+A green banana develops greater sweetness and a different aroma profile as it ripens.
 
-Every change alters the chemical message reaching our senses.
+Bread develops new aroma and flavour compounds during baking.
 
-This explains why freshly cut grass smells different from living grass.
+Tea leaves can undergo controlled oxidation after harvest.
 
-Why freshly ground coffee differs from roasted coffee beans stored for months.
+Cheese changes during maturation as enzymes and microorganisms gradually transform the original material.
 
-Why a ripe tomato carries a different aroma than one harvested too early.
+Fermentation also depends on change.
 
-The molecules themselves are continually changing.
+Microorganisms use nutrients as an energy source and produce new metabolites in the process.
 
-Our perception changes because the chemistry changes.
+These compounds can contribute to aroma, flavour, acidity, and texture.
 
-Preservation therefore involves more than preventing the loss of aroma.
+The purpose of a process can therefore move in two opposite directions.
 
-It also seeks to control the biological and chemical processes that continuously create, transform and remove these remarkable molecules.
+For a fresh product, it may be desirable to preserve an existing quality for as long as possible.
 
-Every aroma tells the story of molecules in motion.
+In a fermentation, maturation, or baking process, a controlled transformation may instead be desirable.
 
-Aroma changes because molecules continue to move and react.
+The question is therefore not:
 
-Yet not every change reduces quality.
+How do we prevent change?
 
-Some transformations create entirely new flavours.
+The better question is:
 
-Bread develops its characteristic aroma during baking.
+Which changes do we want to preserve, which do we want to slow down, and which do we want to encourage?
 
-Coffee acquires hundreds of new flavour compounds during roasting.
+This makes preservation part of process design.
 
-Cheese matures over months.
+The desired property of the final product determines which conditions are required.
 
-Fermented foods develop remarkable complexity.
+Temperature, oxygen, moisture, time, and microbial activity can then be used to guide the development of the product.
 
-The same biological and chemical principles can therefore preserve flavour—or create it.
+Technology therefore does not determine which flavour is biologically produced.
 
-## Part III — Not Every Flavour Is Meant to Remain the Same
+It primarily determines the conditions under which biological and chemical processes can take place.
 
-When discussing preservation, it is tempting to think that every change in flavour should be prevented.
+Part IV — Aroma and Flavour as Biological Indicators
 
-Biology tells a different story.
+Because aroma and flavour arise from chemical processes, changes in them can provide information about what is happening within a product.
 
-Many of the world's most valued foods owe their character to change itself.
+A change in aroma, for example, may accompany ripening, fermentation, oxidation, enzymatic activity, or the loss of volatile compounds.
 
-A green banana develops sweetness as it ripens.
+Yet sensory perception is not a complete biological measurement.
 
-Coffee acquires its characteristic aroma during roasting.
+What a person smells or tastes is influenced by concentration, temperature, environment, individual sensitivity, and the combination of compounds present.
 
-Bread develops new flavours during baking.
+Two products may differ chemically without the difference being immediately detectable by every person.
 
-Tea leaves undergo controlled oxidation after harvest.
+Sensory assessment can therefore best be combined with other observations.
 
-Cheese matures over months.
+For a biological recording system, the following could be recorded, for example:
 
-Chocolate develops complexity through fermentation and roasting.
+product identification;
+batch;
+harvest time;
+temperature;
+humidity;
+storage conditions;
+process duration;
+visible changes;
+sensory observations.
 
-Wine continues to evolve long after fermentation has ended.
+When these data are connected over time, a process history emerges.
 
-None of these foods exist because chemistry was stopped.
+A change in aroma no longer stands alone.
 
-They exist because chemistry was carefully guided.
+It can be compared with the conditions under which that change occurred.
 
-The objective was never to preserve the original flavour.
+This makes sensory observation valuable without assigning it more meaning than it actually has.
 
-The objective was to create a new one.
+The observation provides a signal.
 
-This distinction is fundamental.
+The process data provide context.
 
-Preservation is not always the prevention of flavour change.
+Chemical or microbiological analysis can then help determine which biological changes lie behind that signal.
 
-Sometimes it is the careful control of flavour development.
+Closing Reflection
 
-The desired outcome determines which changes should be encouraged and which should be slowed.
+Aroma and flavour are not static properties of food.
 
-Fresh basil should retain its delicate aroma.
+They arise from molecules that move, dissolve, evaporate, react, and are formed or broken down.
 
-Coffee beans should develop hundreds of new volatile compounds during roasting.
+After harvest, these processes remain active as long as the conditions allow them to continue.
 
-Cheddar should mature.
+Food therefore changes continuously.
 
-Fresh lettuce should not.
+Sometimes that change means loss.
 
-The same biological and chemical principles remain active.
+Sometimes it means development.
 
-The processes and desired outcomes differ.
+Sometimes it is precisely the purpose of the process.
 
-Successful food engineering therefore begins with a simple question.
+Good preservation and food engineering therefore do not begin with the assumption that food must remain unchanged.
 
-What experience should the final product provide?
+They begin by defining the desired state.
 
-Only then can biology, chemistry and technology be guided towards that outcome.
+What must be preserved?
 
-Technology does not decide what flavour should become.
+What may change?
 
-It creates and controls conditions under which flavour develops.
+What should develop?
 
-Biology and chemistry produce the resulting molecules.
+And under what conditions should this happen?
 
-## Closing Reflection
+By connecting these questions to biological observations, chemical processes, and time, food can not only be preserved, but also better understood.
 
-Flavour is one of biology's richest forms of communication.
+Colour provides information through light.
 
-It reflects countless molecules interacting with one another, with the environment and with our senses.
+Aroma and flavour provide information through chemistry.
 
-Some of these messages are brief.
+But both are only parts of a larger system.
 
-Others develop over months or even years.
-
-Preservation does not silence this language.
-
-It decides which conversations continue, which become quieter and which are allowed to begin.
-
-To preserve flavour is therefore to understand the remarkable dialogue between biology, chemistry and time.
-
-Every molecule we have explored contributes to the quality of food.
-
-Proteins perform the work of life.
-
-Carbohydrates capture and store energy.
-
-Lipids protect and organise living cells.
-
-Pigments communicate through colour.
-
-Aroma and flavour communicate through chemistry.
-
-Yet one important question remains.
-
-How do all of these systems work together over time?
-
-To understand preservation completely, we must now explore the final dimension shared by every biological process.
+To fully understand that system, we must look at the dimension in which all these processes unfold.
 
 Time.

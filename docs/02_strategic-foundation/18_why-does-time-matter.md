@@ -1,192 +1,180 @@
-# Chapter 18 — Why Does Time Matter?
+English | Nederlands
 
-> *"Life changes through time. Preservation begins by changing the pace of that change."*
+Chapter 18 — Why Does Time Matter?
 
-## Introduction
+“Life changes over time. Preservation begins by changing the rate of that change.”
 
-Time itself changes nothing.
+Introduction
 
-A freshly harvested strawberry does not deteriorate because time passes.
+Time itself does not change food.
 
-Bread does not become stale because another day begins.
+A freshly harvested strawberry does not spoil simply because a minute passes. 
 
-Milk does not spoil because the calendar advances.
+Bread does not become old because the calendar shows a new day. 
+
+Milk does not spoil because the clock keeps moving forward.
 
 Something else is happening.
 
 Water continues to move.
 
-Enzymes continue their work.
+Enzymes remain active.
 
 Cells continue to respire.
 
 Microorganisms continue to grow.
 
-Chemical reactions continue to reshape biological molecules.
+Chemical reactions continue to change molecules.
 
-Time merely provides the opportunity for these processes to unfold.
+Time gives these processes the opportunity to unfold.
 
-This distinction is fundamental.
+That distinction is fundamental.
 
-Time is not the cause of deterioration.
+Time is not the direct cause of deterioration. 
 
-It is the dimension in which deterioration occurs.
+It is the dimension in which biological, chemical, and physical processes take place.
 
-Understanding this principle transforms the way we think about preservation.
+Preservation is therefore not a battle against time.
 
-Successful preservation is not a race against time.
+It is about influencing the processes that take place over time.
 
-It is the careful management of the biological, chemical and physical processes that occur within time.
+When these processes are slowed down, a desired state can be maintained for longer. 
 
-When these processes slow, quality remains for longer.
+When they are accelerated, the product changes more rapidly.
 
-When they accelerate, deterioration becomes visible more quickly.
+The core of preservation is therefore not changing time itself, but changing the rate of biological and chemical change.
 
-Preservation therefore does not change time itself.
+Part I — Time Gives Processes the Opportunity to Unfold
 
-It changes the pace at which biology continues.
+We often speak of food “spoiling over time” or “aging over time.” 
 
-## Part I — Time Provides Opportunity
+However, this wording conceals what is actually happening.
 
-Many expressions suggest that time damages food.
+If all relevant biological and chemical processes were to stop completely, food would retain its state for much longer, regardless of how much time passed.
 
-Time spoils.
+Conversely, food can change very rapidly when conditions accelerate these processes.
 
-Time ages.
+Elapsed time is therefore primarily a measure of how much opportunity processes have had to occur.
 
-Time destroys.
+This makes time a fundamental dimension of preservation.
 
-Although familiar, these descriptions are misleading.
+Every preservation method influences the conditions under which change takes place.
 
-If every biological and chemical process could somehow stop completely, food would remain unchanged regardless of how much time passed.
+Refrigeration lowers the rate of many reactions and biological processes.
 
-Conversely, if these processes became much faster, noticeable deterioration could occur within minutes.
+Drying reduces the availability of water and thereby limits processes that depend on it.
 
-The cause is therefore not time.
+Freezing restricts the mobility of water and slows much biological activity.
 
-The cause is continuous biological and chemical activity.
+Packaging changes the environment in which the food is held.
 
-Time simply allows these activities to accumulate.
+Fermentation changes the biological community that is active within the product.
 
-This perspective changes the entire philosophy of preservation.
+The methods differ greatly, but their effects can be understood through the same principle:
 
-Rather than attempting to fight time, preservation seeks to influence the processes unfolding within it.
+they change the conditions under which change takes place.
 
-Every preservation method follows this same principle.
+Part II — Every Process Has Its Own Rate
 
-Lower temperatures reduce molecular movement.
+Not all biological processes occur at the same rate.
 
-Drying limits biological activity by reducing available water.
+Some reactions take place within fractions of a second.
 
-Packaging alters the surrounding environment.
+Others require minutes or hours.
 
-Fermentation changes the biological community.
+Still others develop over days, months, or years.
 
-Each method changes the rate of change.
+A fresh herb may begin losing some of its volatile aromatic compounds shortly after harvest.
 
-None changes time itself.
+Fruit may become softer and change in composition over the course of several days.
 
-## Part II — Every Process Has Its Own Clock
+Hard cheese may mature for years.
 
-Not all biological processes proceed equally quickly.
+Seeds can remain viable for very long periods under suitable conditions.
 
-Some occur within fractions of a second.
+These processes therefore do not share a single “clock.”
 
-Others require hours.
+Each process has its own rate, determined by factors such as temperature, water availability, oxygen, enzyme activity, microbial activity, and the structure of the food.
 
-Days.
+There is therefore no universal rate at which food ages.
 
-Months.
+A temperature that is sufficient to greatly slow change in one product may have a much smaller effect on another.
 
-Even years.
+Preservation therefore requires an understanding of which processes determine quality and how quickly those processes occur under particular conditions.
 
-Fresh herbs may lose delicate aroma compounds within minutes after harvesting.
+The goal is not necessarily to stop all processes.
 
-Fruit may soften over several days.
+A product may contain processes that are desirable.
 
-Hard cheeses may mature for years.
+During ripening, fermentation, or controlled aging, a certain degree of biological development must continue.
 
-Seeds may remain viable for decades under suitable conditions.
+The challenge is to slow undesirable processes without unnecessarily disrupting desirable ones.
 
-Each process follows its own pace.
+Part III — Controlling the Rate of Change
 
-Understanding preservation therefore requires understanding multiple biological clocks rather than a single measure of freshness.
+People cannot add time to a product.
 
-The challenge is rarely to stop every clock.
+Nor can we turn time backward.
 
-It is to slow the clocks that reduce quality while allowing desirable processes to continue whenever appropriate.
+What we can influence are the conditions that determine how quickly change occurs.
 
-This is why preservation is never identical for every product.
+Temperature is one of the most important variables.
 
-Different foods possess different biological priorities.
+Refrigeration can slow many biological and chemical processes.
 
-Successful preservation respects those differences.
+Drying reduces the amount of available water.
 
-## Part III — Engineering the Pace of Change
+Freezing restricts the mobility of water and thereby slows many reactions and forms of biological activity.
 
-Humans cannot create more time.
+Packaging can limit or regulate the exchange of oxygen and moisture.
 
-Neither can we remove it.
+Fermentation can alter the composition of the microbial community and thereby promote new biological processes.
 
-What we can change is the speed at which biological and chemical processes occur.
+These techniques appear very different, but they all act on the same fundamental relationship:
 
-Every preservation technology achieves this in its own way.
+the environment influences the rate at which biological and chemical change occurs.
 
-Cooling reduces molecular motion.
+Technology therefore does not preserve food by itself.
 
-Drying limits water-dependent processes.
+Technology designs the conditions under which food is preserved.
 
-Freezing restricts biological activity.
+The food continues to follow its biological and chemical laws.
 
-Vacuum packaging changes the surrounding atmosphere.
+The environment partly determines how quickly these processes unfold.
 
-Fermentation replaces one biological community with another.
+This is one of the central ideas of preservation technology:
 
-Although these methods appear different, they all pursue the same objective.
+by controlling the environment, we can influence the rate of biological time.
 
-They reshape the environment so that biological change proceeds at a different pace.
+Closing Reflection
 
-This reveals one of the central ideas of preservation engineering.
+Every preserved food carries a history with it.
 
-Technology does not preserve food.
+Not only where it was grown or how it was harvested, but also what happened to it afterward—biologically, chemically, and physically.
 
-Technology engineers time by engineering biology, chemistry and physics.
+After harvest, life does not immediately stop.
 
-The food follows its natural laws.
+Water continues to move.
 
-The environment determines how quickly those laws unfold.
+Enzymes remain active.
 
-## Closing Reflection
+Cells and microorganisms may continue their processes.
 
-Every preserved food carries a history.
+Molecules can be broken down, formed, and rearranged.
 
-Not simply of where it was grown.
+Time gives these processes the opportunity to develop.
 
-Or how it was harvested.
+Preservation does not determine what time is.
 
-But of how biology continued after harvest.
+It influences the conditions under which change occurs and, consequently, the rate at which that change takes place.
 
-Time never acted alone.
+Preserving food therefore does not mean stopping biological time.
 
-Water moved.
+It means learning to understand which processes are occurring, how quickly they proceed, and which of them are desirable.
 
-Cells respired.
+In this book, we have explored the fundamental principles underlying preserved food.
 
-Enzymes worked.
-
-Microorganisms competed.
-
-Molecules reorganised.
-
-The role of preservation is not to stop this story.
-
-It is to guide its pace.
-
-To preserve food is therefore to become an engineer of biological time.
-
-Throughout this book we have explored the universal principles governing preserved food.
-
-Life builds organisation.
+Life builds organization.
 
 Water moves.
 
@@ -196,12 +184,10 @@ Enzymes perform work.
 
 Molecules respond to their environment.
 
-Time allows every process to unfold.
+Time gives these processes the opportunity to unfold.
 
-These principles remain true regardless of the technology used.
+These principles remain valid regardless of which technology is used.
 
 We are now ready to examine the preservation methods themselves.
 
-Not as isolated techniques.
-
-But as different ways of engineering the same biological principles.
+Not as isolated techniques, but as different ways of influencing the same biological principles.

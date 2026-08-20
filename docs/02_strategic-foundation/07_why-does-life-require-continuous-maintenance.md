@@ -3,28 +3,29 @@
 > *Life is organised. Life changes. Life flows. Life moves. Life is sustained through continuous exchange. Yet every living system must continuously maintain its own organisation. Preservation begins by delaying its gradual loss.*
 
 ## Introduction
-
-Imagine leaving a well-maintained garden untouched.
+Imagine that a well-maintained building is no longer cared for.
 
 No storm arrives.
 
-No disease appears.
+No fire breaks out.
 
-No animals disturb it.
+No one causes any damage.
 
 Nothing dramatic happens.
 
-Yet weeks later the paths become overgrown.
+Yet dust slowly gathers.
 
-Leaves accumulate.
+Moisture enters through small cracks.
 
-Plants compete for light.
+Paint begins to peel.
 
-Order slowly gives way to disorder.
+Metal begins to rust.
 
-Not because something attacked the garden.
+The structure gradually loses its condition.
 
-But because maintenance gradually stopped.
+Not because a single event damaged the building,
+
+but because continuous maintenance stopped.
 
 Living organisms face the same challenge.
 

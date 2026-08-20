@@ -842,41 +842,117 @@ Water-soluble vitamins, including the B vitamins and vitamin C, dissolve readily
 
 Because they are not stored extensively, a regular dietary supply is generally required.
 
-Fat-soluble vitamins—A, D, E and K—are absorbed together with dietary fats and can be stored within the body for longer periods.
+Fat-soluble vitamins—A, D, E, and K—are absorbed together with dietary fats and can be stored in the body for longer periods.
+
+Storage also means that excessive intake can pose risks, especially when concentrated supplements are used.
 
 Minerals differ from vitamins because they are inorganic elements.
 
-They originate from rocks and soil, enter plants through their roots and eventually become part of the food chain.
+They originate from rocks and soil, enter plants through their roots, and ultimately become part of the food chain.
 
 Animals obtain these minerals by consuming plants or other animals.
 
-Some minerals are required in relatively large amounts.
+Some minerals are needed in relatively large amounts.
 
-These are known as major minerals and include calcium, phosphorus, potassium, sodium and magnesium.
+These are known as major minerals or macrominerals and include calcium, phosphorus, potassium, sodium, magnesium, chloride, and sulfur.
 
-Others are required only in trace amounts.
+Calcium is best known as a building material for bones and teeth, and rightly so: the vast majority of the calcium in the body is found in the skeleton.
 
-These trace elements, such as iron, zinc, iodine, selenium and copper, are no less important despite their lower concentrations.
+Bone, however, is not a dead storage site.
 
-Minerals contribute to an extraordinary range of biological functions.
+It also serves as a reservoir that the body can draw from when blood calcium levels fall.
 
-Calcium and phosphorus strengthen bones and teeth.
+Because calcium also has direct functions: it is essential for muscle contraction, nerve impulse transmission, blood clotting, and countless processes within cells.
 
-Iron enables red blood cells to transport oxygen.
+However, prolonged excessive intake, particularly from supplements, can cause calcium to accumulate where it does not belong, such as in the kidneys in the form of kidney stones.
 
-Sodium and potassium help generate the electrical signals required for nerve impulses and muscle contraction.
+Phosphorus works closely with calcium in bones and teeth.
 
-Magnesium participates in hundreds of enzymatic reactions.
+It is also a building block of ATP, the cell's energy currency, as well as DNA, RNA, and cell membranes.
 
-Zinc supports immune function, wound healing and protein synthesis.
+Excessive phosphorus intake, particularly from processed foods, can disrupt calcium balance and, over time, place stress on bones and blood vessels.
 
-Iodine is essential for the production of thyroid hormones that regulate metabolism.
+Potassium is the main positively charged ion inside cells.
 
-The body carefully controls the concentration of these minerals.
+It helps maintain fluid and electrolyte balance and is essential for nerve impulses, muscle contraction, and normal heart function.
 
-Both deficiency and excessive intake may interfere with normal physiological function.
+A healthy body regulates potassium levels very tightly; levels that are too high or too low can directly disturb the heart rhythm, making potassium both essential and potentially dangerous when its balance is disrupted.
 
-For this reason, maintaining a varied and balanced diet is generally more effective than focusing on individual nutrients in isolation.
+Sodium is the counterpart to potassium: it is the main positively charged ion outside cells.
+
+This concentration difference across cell membranes forms the basis of the electrical signals that allow nerves and muscles to function.
+
+Sodium is therefore necessary, but chronic excessive intake—especially through table salt in processed foods—is a major risk factor for elevated blood pressure.
+
+Magnesium participates in hundreds of enzymatic reactions, including energy production, protein synthesis, and the maintenance of healthy bones.
+
+A substantial excess from supplements usually manifests relatively harmlessly as diarrhea because the body can eliminate the excess through the intestines.
+
+Chloride is the main negatively charged ion outside cells.
+
+It contributes to fluid balance and the body's acid-base balance and provides the chloride needed to produce stomach acid.
+
+Because chloride is almost always consumed together with sodium as table salt, it also shares the risks associated with excessive salt intake.
+
+Sulfur is part of the amino acids methionine and cysteine and is therefore involved in the structure of proteins.
+
+The body efficiently processes excess sulfur and excretes it through the urine, meaning that excessive sulfur intake from food is rarely a problem.
+
+Other minerals are needed only in trace amounts.
+
+These trace elements, despite their lower concentrations, are no less important.
+
+A deficiency of a trace element can have consequences just as serious as a deficiency of a major mineral.
+
+And precisely because the required amounts are so small, the boundary between enough and too much can sometimes be surprisingly narrow.
+
+Iron enables red blood cells to transport oxygen through hemoglobin and allows muscles to store oxygen through myoglobin.
+
+A deficiency therefore often first manifests as fatigue.
+
+Conversely, excess iron can accumulate in organs such as the liver and cause damage; the body has no active pathway for eliminating large amounts of excess iron.
+
+Zinc supports immune function, wound healing, cell division, and the production of DNA and proteins.
+
+Too much zinc, often from high-dose supplements, can eventually interfere with copper absorption—another example of how closely trace elements interact with one another.
+
+Iodine is essential for the production of the thyroid hormones T3 and T4, which regulate metabolism, growth, and development.
+
+Both too little and too much iodine can disrupt thyroid function, making it one of the clearest examples of a balance that can be disturbed in either direction.
+
+Selenium is incorporated into selenoproteins that help protect cells from oxidative damage.
+
+The safe range for selenium intake is relatively narrow; excessive intake can itself become toxic, with symptoms ranging from brittle nails to nerve damage.
+
+Copper is involved in the formation of red blood cells and connective tissue and in iron metabolism—an example of how closely interconnected trace elements can be.
+
+Chronic excess is uncommon but can lead to accumulation in the liver, while deficiency can sometimes develop indirectly, for example as a result of excessive zinc intake.
+
+Manganese supports energy and amino acid metabolism and contributes to bone formation.
+
+Excess intake through food is uncommon, but prolonged exposure to high concentrations can damage the nervous system.
+
+Fluoride contributes to the mineralization of teeth and bones and helps make tooth enamel more resistant to acids, allowing early damage to be repaired before cavities develop.
+
+However, if children consume too much fluoride while their teeth are still developing, white spots can appear on the enamel—a condition known as fluorosis.
+
+Chromium contributes to the maintenance of normal blood glucose levels, molybdenum is involved in the breakdown of sulfur-containing amino acids, and cobalt, as a component of vitamin B12, is involved in the formation of red blood cells.
+
+For these three, harmful excess from normal dietary intake is not generally a concern; the body can usually eliminate excess amounts relatively effectively.
+
+Not everything that occurs in trace amounts in the body is necessarily essential.
+
+For silicon, boron, nickel, and vanadium, an essential nutritional function in humans has not been conclusively established.
+
+Arsenic, on the other hand, is toxic.
+
+The presence of an element in the body therefore does not automatically mean that it is useful or necessary.
+
+The body regulates the concentrations of all these minerals carefully through intestinal absorption, storage in tissues, and excretion through the kidneys.
+
+Both deficiency and excess can interfere with the functioning of cells, organs, and tissues.
+
+More is therefore not better: minerals function in balance, both with one another and with the rest of the body.
 
 Vitamins and minerals rarely work alone.
 
