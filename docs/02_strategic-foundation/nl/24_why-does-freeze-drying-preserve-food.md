@@ -470,7 +470,7 @@ In deze gevallen bieden de extra kosten en complexiteit van vriesdrogen slechts 
 
 Succesvol behoud gaat daarom niet over het kiezen van de meest geavanceerde technologie.
 
-Het gaat erom de methode te kiezen die het beste past bij de biologie van het voedsel, de beoogde bewaartijd en het doel van conservering.
+Bij vriesdrogen hangt de juiste aanpak daarom af van de biologie van het voedsel, de gewenste bewaartijd en het doel van de conservering.
 
 Technologie zou een biologisch probleem moeten oplossen.
 

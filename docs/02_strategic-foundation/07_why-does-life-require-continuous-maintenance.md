@@ -1,6 +1,6 @@
 # Chapter 7 — Why Does Life Require Continuous Maintenance?
 
-> *Life is organised. Life changes. Life flows. Life moves. Life is sustained through continuous exchange. Yet every living system must continuously maintain its own organisation. Preservation begins by delaying its gradual loss.*
+> *That continuous exchange requires maintenance. Every living system must preserve its organisation, yet after harvest that maintenance can no longer continue indefinitely.*
 
 ## Introduction
 Imagine that a well-maintained building is no longer cared for.

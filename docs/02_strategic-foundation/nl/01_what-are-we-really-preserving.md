@@ -8,7 +8,7 @@ Elke bewaarmethode begint met een simpele vraag:
 
 Wat proberen we eigenlijk te houdbaar te houden?
 
-In eerste instantie lijkt het antwoord voor de hand liggend. Wij bewaren voedsel.
+Wij bewaren voedsel.
 
 Toch wordt dat antwoord al snel onvoldoende.
 

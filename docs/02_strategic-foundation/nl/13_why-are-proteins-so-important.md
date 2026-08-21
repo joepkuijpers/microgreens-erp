@@ -2,7 +2,7 @@
 
 # Hoofdstuk 13 — Waarom zijn eiwitten zo belangrijk?
 
-> *"Elke levende structuur is opgebouwd uit moleculen. Eiwitten geven veel van die moleculen een doel. Behoud begint met het begrijpen van beide."*
+> *"Elk organisme is opgebouwd uit moleculaire bouwstenen. Eiwitten geven veel van die moleculen een doel. Behoud begint met het begrijpen van beide."*
 
 ## Introductie
 
@@ -376,4 +376,4 @@ Ondersteun de groei.
 
 En bepaal veel van de texturen die we elke dag ervaren.
 
-Om deze opmerkelijke moleculen te begrijpen, moeten we ons nu tot koolhydraten wenden.
+Eiwitten vormen echter slechts één deel van deze moleculaire architectuur. De volgende bouwstenen zijn koolhydraten.

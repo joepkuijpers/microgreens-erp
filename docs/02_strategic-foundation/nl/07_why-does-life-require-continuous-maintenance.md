@@ -2,7 +2,7 @@
 
 # Hoofdstuk 7 — Waarom vereist het leven voortdurend onderhoud?
 
-> *Het leven is georganiseerd. Het leven verandert. Het leven stroomt. Het leven beweegt. Het leven wordt in stand gehouden door voortdurende uitwisseling. Toch moet ieder levend systeem voortdurend zijn eigen organisatie in stand houden. Behoud begint met het uitstellen van het geleidelijke verlies ervan.*
+> *Maar uitwisseling alleen is niet genoeg. Ieder levend systeem moet voortdurend zijn eigen organisatie onderhouden. Behoud begint daarom met het uitstellen van het geleidelijke verlies ervan.*
 
 ## Introductie
 
@@ -270,7 +270,7 @@ Na de oogst stopt de groei grotendeels.
 
 Onderhoud niet.
 
-Het geoogste weefsel blijft zijn resterende reserves investeren in het behoud van de organisatie die al bestaat.
+Het geoogste weefsel beschikt nu alleen nog over zijn eigen interne hulpbronnen.
 
 Elk molecuul suiker dat tijdens de ademhaling wordt geconsumeerd, vertegenwoordigt een investering.
 

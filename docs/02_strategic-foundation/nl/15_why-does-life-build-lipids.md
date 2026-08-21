@@ -424,4 +424,4 @@ Toch reageren levende organismen niet alleen op licht.
 
 Ze bouwen moleculen die het opvangen, gebruiken en er door kunnen communiceren.
 
-Om die moleculen te begrijpen, moeten we ons nu tot kleur wenden.
+Naast eiwitten en koolhydraten speelt ook kleur een belangrijke rol in hoe voedsel verandert en wordt waargenomen.

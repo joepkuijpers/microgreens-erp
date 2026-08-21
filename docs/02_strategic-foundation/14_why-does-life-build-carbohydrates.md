@@ -302,31 +302,7 @@ Others become inaccessible.
 
 These changes never occur in isolation.
 
-They are guided by the same biological and physical principles explored throughout this book.
-
 Enzymes continue to reshape carbohydrates.
-
-Respiration consumes sugars to release energy.
-
-Microorganisms compete for available nutrients.
-
-Temperature changes the speed of every reaction.
-
-Water determines how easily molecules encounter one another.
-
-Oxygen influences countless chemical processes.
-
-As these factors interact, the properties of food gradually change.
-
-A green banana becomes sweet as stored starch is converted into simple sugars.
-
-Fresh bread slowly loses its soft texture as starch molecules reorganise, a process known as retrogradation.
-
-Ripening fruit softens as enzymes modify pectin, weakening the connections between neighbouring cells.
-
-Microorganisms consume sugars as an energy source, producing new compounds that may either improve or reduce food quality.
-
-Although these examples appear different, they all reflect the same underlying principle.
 
 Carbohydrates continue to participate in biological and chemical processes long after harvest.
 

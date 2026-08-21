@@ -346,8 +346,6 @@ Dit roept een intrigerende vraag op.
 
 Wat gebeurt er als we de samenstelling van de omringende lucht veranderen?
 
-In eerste instantie lijkt het antwoord voor de hand liggend.
-
 Minder zuurstof zou simpelweg de ademhaling moeten verminderen.
 
 In de praktijk is biologie zelden zo eenvoudig.
@@ -362,7 +360,7 @@ Suikers worden geleidelijker geconsumeerd.
 
 De warmteproductie neemt af.
 
-De biologische klokken die eerder in dit boek zijn geïntroduceerd, lopen langzamer.
+Naarmate de temperatuur verder verandert, vertraagt ook het tempo van deze biologische processen.
 
 Voor veel geoogste gewassen verlengt dit de houdbaarheid aanzienlijk.
 

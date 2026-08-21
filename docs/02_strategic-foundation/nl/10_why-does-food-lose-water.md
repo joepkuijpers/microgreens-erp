@@ -204,7 +204,7 @@ Wanneer de omgevingslucht een lage relatieve luchtvochtigheid heeft, kan deze ge
 
 Water blijft dus het voedsel verlaten.
 
-Naarmate de relatieve vochtigheid toeneemt, wordt de drijvende kracht achter de waterbeweging steeds kleiner.
+Naarmate de relatieve vochtigheid toeneemt, wordt de drijvende kracht achter deze beweging steeds kleiner.
 
 Uiteindelijk wordt een punt bereikt waarop weinig of geen nettobeweging plaatsvindt.
 

@@ -2,7 +2,7 @@
 
 # Hoofdstuk 6 — Wie voert het levenswerk uit?
 
-> *Het leven is georganiseerd. Het leven verandert. Het leven stroomt. Het leven beweegt. Het leven wordt in stand gehouden door voortdurende uitwisseling. Elke verandering is afhankelijk van onzichtbare werkers.*
+> *Deze voortdurende uitwisseling vereist voortdurend werk. Elke verandering is afhankelijk van onzichtbare werkers.*
 
 ## Introductie
 

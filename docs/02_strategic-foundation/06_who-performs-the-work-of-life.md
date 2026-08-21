@@ -1,6 +1,6 @@
 # Chapter 6 — Who Performs the Work of Life?
 
-> *Life is organised. Life changes. Life flows. Life moves. Life is sustained through continuous exchange. Every change depends upon invisible workers.*
+> *Life is sustained through continuous exchange. But who performs this work? Every change depends upon invisible workers.*
 
 ## Introduction
 

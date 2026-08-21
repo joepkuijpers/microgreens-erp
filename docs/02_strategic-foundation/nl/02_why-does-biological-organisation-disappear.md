@@ -118,8 +118,6 @@ Als het leven afhangt van voortdurend onderhoud, volgt onmiddellijk een andere v
 
 Wat verandert er eigenlijk bij de oogst?
 
-In eerste instantie lijkt het antwoord voor de hand liggend.
-
 De plant sterft.
 
 Toch is deze verklaring onvolledig.
