@@ -30,7 +30,7 @@ Engineering documentation explains how technical systems support biological unde
 | Area | Status | Purpose |
 |------|--------|---------|
 | [Project Foundation](01_project-foundation/README.md) | Developed | Defines the project's origin, vision, mission, values, strategies and governance. |
-| [Preservation Energy Architecture](02_strategic-foundation/) | 28 chapters complete | Explains the biological, chemical and physical principles of food preservation. |
+| [Preservation Energy Architecture](02_understanding-how-things-work/) | 28 chapters complete | Explains the biological, chemical and physical principles of food preservation. |
 | [Engineering](03_engineering/README.md) | Developed | Documents monitoring, measurement, racks, power, climate, water, preservation and maintenance. |
 | [Biological Production](<Biological production/>) | Developing | Organises knowledge about pests, diseases, beneficial organisms, indicator plants and biological monitoring. |
 | [Project Reference System](20_project-reference-system.md) | Developed | Provides permanent identifiers and traceability across project knowledge. |
@@ -88,7 +88,7 @@ It connects:
 - logistics;
 - human nutrition.
 
-The chapters are stored in [`docs/02_strategic-foundation/`](02_strategic-foundation/).
+The chapters are stored in [`docs/02_understanding-how-things-work/`](02_understanding-how-things-work/).
 
 Supporting drafts and editorial files in that directory are not automatically part of the approved chapter sequence.
 

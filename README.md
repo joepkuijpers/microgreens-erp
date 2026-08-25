@@ -42,7 +42,7 @@ The documentation explains the project's purpose, scientific foundation and tech
 |---------------|---------|
 | [Documentation Index](docs/README.md) | Central entry point for project documentation. |
 | [Project Foundation](docs/01_project-foundation/README.md) | Defines the project's origin, values, ethics and long-term direction. |
-| [Preservation Energy Architecture](docs/02_strategic-foundation/README.md) | Explains preservation by beginning with biology. |
+| [Preservation Energy Architecture](docs/02_understanding-how-things-work/README.md) | Explains preservation by beginning with biology. |
 | [Engineering](docs/03_engineering/README.md) | Translates biological understanding into practical systems and measurements. |
 | [Glossary](docs/17_glossary.md) | Defines shared project terminology. |
 | [Documentation Style Guide](docs/18_documentation-style-guide.md) | Defines documentation language and formatting standards. |
