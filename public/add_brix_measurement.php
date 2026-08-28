@@ -4,6 +4,7 @@ auth_require_login();
 
 include '../app/db_connect.php';
 include '../app/includes/language.php';
+require_once '../app/includes/audit.php';
 
 $batches = $db->query("
     SELECT
@@ -374,6 +375,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             : null,
                 ]);
             }
+
+              auditLog(
+                  $db,
+                  'BRIX',
+                  'brix_measurement_session',
+                  $sessionId,
+                  'CREATE',
+                  null,
+                  null,
+                  [
+                      'session_id' => $sessionId,
+                      'batch_id' => $batchIdValue,
+                      'measured_at' =>
+                          $measurementDate->format('Y-m-d H:i:s'),
+                      'purpose' => $purpose,
+                      'growth_stage' =>
+                          $growthStage !== '' ? $growthStage : null,
+                      'plant_part' => $plantPart,
+                      'sampling_method' => $samplingMethod,
+                      'instrument_identifier' => $instrumentIdentifier,
+                      'instrument_resolution' =>
+                          $instrumentResolution !== ''
+                              ? (float)$instrumentResolution
+                              : null,
+                      'temperature_compensation' =>
+                          $temperatureCompensation ? 1 : 0,
+                      'calibration_passed' =>
+                          $calibrationPassed ? 1 : 0,
+                      'time_since_irrigation_minutes' =>
+                          $timeSinceIrrigation !== ''
+                              ? (int)$timeSinceIrrigation
+                              : null,
+                      'observer' =>
+                          $observer !== '' ? $observer : null,
+                      'measurement_mode' => $measurementMode,
+                      'notes' => $notes !== '' ? $notes : null,
+                      'readings_count' => count($readings),
+                  ],
+                  'grow_batch',
+                  $batchIdValue
+              );
 
             $db->commit();
 

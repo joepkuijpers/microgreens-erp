@@ -1,8 +1,11 @@
 <?php
+
 require_once '../app/includes/auth.php';
 auth_require_login();
-include '../app/db_connect.php';
-include '../app/includes/language.php';
+
+require_once '../app/db_connect.php';
+require_once '../app/includes/language.php';
+require_once '../app/includes/audit.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: grow_batches.php');
@@ -29,17 +32,27 @@ $sessionId = (int)$sessionIdRaw;
 
 $readingStmt = $db->prepare("
     SELECT
-        r.id,
-        r.session_id,
-        r.is_valid
-    FROM brix_measurement_readings r
-    WHERE r.id = :reading_id
-      AND r.session_id = :session_id
+        id,
+        session_id,
+        replicate_number,
+        sampling_position,
+        sample_size,
+        sample_size_unit,
+        brix_value,
+        sample_temperature,
+        is_valid,
+        invalid_reason,
+        notes,
+        created_at
+    FROM brix_measurement_readings
+    WHERE id = :reading_id
+      AND session_id = :session_id
 ");
 $readingStmt->execute([
     ':reading_id' => $readingId,
     ':session_id' => $sessionId,
 ]);
+
 $reading = $readingStmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$reading) {
@@ -49,6 +62,21 @@ if (!$reading) {
 if ((int)$reading['is_valid'] !== 1) {
     die(__('brix_reading_already_invalid'));
 }
+
+$beforeData = [
+    'id' => (int)$reading['id'],
+    'session_id' => (int)$reading['session_id'],
+    'replicate_number' => (int)$reading['replicate_number'],
+    'sampling_position' => $reading['sampling_position'],
+    'sample_size' => $reading['sample_size'],
+    'sample_size_unit' => $reading['sample_size_unit'],
+    'brix_value' => $reading['brix_value'],
+    'sample_temperature' => $reading['sample_temperature'],
+    'is_valid' => (int)$reading['is_valid'],
+    'invalid_reason' => $reading['invalid_reason'],
+    'notes' => $reading['notes'],
+    'created_at' => $reading['created_at'],
+];
 
 try {
     $db->beginTransaction();
@@ -62,6 +90,7 @@ try {
           AND session_id = :session_id
           AND is_valid = 1
     ");
+
     $updateStmt->execute([
         ':invalid_reason' => $invalidReason,
         ':reading_id' => $readingId,
@@ -73,6 +102,66 @@ try {
             'Brix reading was not invalidated.'
         );
     }
+
+    $afterStmt = $db->prepare("
+        SELECT
+            id,
+            session_id,
+            replicate_number,
+            sampling_position,
+            sample_size,
+            sample_size_unit,
+            brix_value,
+            sample_temperature,
+            is_valid,
+            invalid_reason,
+            notes,
+            created_at
+        FROM brix_measurement_readings
+        WHERE id = :reading_id
+          AND session_id = :session_id
+    ");
+
+    $afterStmt->execute([
+        ':reading_id' => $readingId,
+        ':session_id' => $sessionId,
+    ]);
+
+    $afterReading = $afterStmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$afterReading) {
+        throw new RuntimeException(
+            'Brix reading could not be re-read after invalidation.'
+        );
+    }
+
+    $afterData = [
+        'id' => (int)$afterReading['id'],
+        'session_id' => (int)$afterReading['session_id'],
+        'replicate_number' => (int)$afterReading['replicate_number'],
+        'sampling_position' => $afterReading['sampling_position'],
+        'sample_size' => $afterReading['sample_size'],
+        'sample_size_unit' => $afterReading['sample_size_unit'],
+        'brix_value' => $afterReading['brix_value'],
+        'sample_temperature' => $afterReading['sample_temperature'],
+        'is_valid' => (int)$afterReading['is_valid'],
+        'invalid_reason' => $afterReading['invalid_reason'],
+        'notes' => $afterReading['notes'],
+        'created_at' => $afterReading['created_at'],
+    ];
+
+    auditLog(
+        $db,
+        'DATA_CORRECTION',
+        'brix_measurement_reading',
+        $readingId,
+        'INVALIDATE',
+        $invalidReason,
+        $beforeData,
+        $afterData,
+        'brix_measurement_session',
+        $sessionId
+    );
 
     $db->commit();
 } catch (Throwable $exception) {
