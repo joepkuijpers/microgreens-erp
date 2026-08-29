@@ -49,6 +49,14 @@ for ($index = 0; $index < 3; $index++) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (
+        !auth_verify_csrf(
+            (string)($_POST['csrf_token'] ?? '')
+        )
+    ) {
+        $errors[] = __('invalid_brix_input');
+    }
+
     $batchId = trim((string)($_POST['batch_id'] ?? ''));
     $measuredAt = trim((string)($_POST['measured_at'] ?? ''));
     $purpose = trim((string)($_POST['purpose'] ?? ''));
@@ -475,6 +483,11 @@ include '../app/includes/sidebar.php';
     <?php endif; ?>
 
     <form method="post">
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="<?= htmlspecialchars(auth_csrf_token()) ?>"
+        >
         <div class="card">
             <h2><?= htmlspecialchars(__('brix_quick_entry')) ?></h2>
 
