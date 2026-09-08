@@ -1,184 +1,183 @@
 ﻿<?php
 /**
- * B08 - Freeze-Dry Process Engine
+ * B08: Freeze-Dry Process Engine
  * 
- * Manages specific freeze-drying cycles linked to production outputs.
+ * Beheert de specifieke procesdata voor het vriesdrogen (Layer 3).
+ * Linkt aan een BESTAANDE production_output (type FREEZE_DRY_INPUT) uit B07.
+ * 
+ * Functies:
+ * - b08_start_process: Start een nieuwe cyclus.
+ * - b08_complete_process: Rondt een cyclus af en registreert het eindgewicht.
+ * - b08_get_process_info: Haalt details op van een proces.
  */
-
-require_once __DIR__ . '/includes/audit.php';
-require_once __DIR__ . '/includes/auth.php';
 
 /**
- * Start a new freeze-dry cycle for a specific output.
+ * Start een nieuw vriesdroogproces.
  * 
- * @param PDO $db
- * @param int $outputId ID of the production_output (must be FREEZE_DRY_INPUT)
- * @param string $machineIdentifier
- * @param string|null $cycleCode
- * @param float $inputWeight Weight of the input material
- * @param float|null $targetPressure
- * @param float|null $targetTempC
- * @param string|null $notes
- * 
- * @return int The new process ID
- * @throws InvalidArgumentException
+ * @param PDO $db Database connectie.
+ * @param int $productionOutputId ID van de output uit B07 (moet type FREEZE_DRY_INPUT zijn).
+ * @param string $machineId Identificatie van de machine (bijv. 'FD-01').
+ * @param int|null $operatorId ID van de operator die start.
+ * @param string|null $notes Optionele notities.
+ * @return array ['id' => int, 'cycle_code' => string]
+ * @throws InvalidArgumentException Als de output niet bestaat, niet het juiste type is, of al een proces heeft.
  */
-function b08_start_freeze_dry_cycle(
-    PDO $db,
-    int $outputId,
-    string $machineIdentifier,
-    ?string $cycleCode = null,
-    ?float $inputWeight = null,
-    ?float $targetPressure = null,
-    ?float $targetTempC = null,
-    ?string $notes = null
-): int {
-    // Validatie
-    if (trim($machineIdentifier) === '') throw new InvalidArgumentException("Machine ID required.");
-    
-    // Haal output info op
-    $stmt = $db->prepare("SELECT * FROM production_outputs WHERE id = :id");
-    $stmt->execute([':id' => $outputId]);
+function b08_start_process(PDO $db, int $productionOutputId, string $machineId, ?int $operatorId = null, ?string $notes = null): array {
+    // 1. Validatie: Bestaat de output en is het van het juiste type?
+    $stmt = $db->prepare("SELECT id, quantity, status FROM production_outputs WHERE id = ?");
+    $stmt->execute([$productionOutputId]);
     $output = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    if (!$output) throw new InvalidArgumentException("Output not found.");
-    if ($output['output_type'] !== 'FREEZE_DRY_INPUT') {
-        throw new InvalidArgumentException("Output must be of type FREEZE_DRY_INPUT, got: " . $output['output_type']);
+    if (!$output) {
+        throw new InvalidArgumentException("Production output ID $productionOutputId niet gevonden.");
     }
     
-    // Check of er niet al een proces aan deze output hangt (UNIQUE constraint)
-    $stmt = $db->prepare("SELECT id FROM freeze_dry_processes WHERE output_id = :id");
-    $stmt->execute([':id' => $outputId]);
+    if ($output['status'] !== 'ALLOCATED') {
+        // We verwachten dat de output gereserveerd is voor dit proces.
+        // Afhankelijk van de workflow kan dit 'REGISTERED' of 'ALLOCATED' zijn.
+        // Voor nu checken we vooral op het type.
+    }
+    
+    // Check type (impliciet via logica, of we kunnen een kolom 'output_type' checken als die bestaat)
+    // In B07 hebben we 'output_type' gebruikt. Laten we die checken.
+    $stmt = $db->prepare("SELECT output_type FROM production_outputs WHERE id = ?");
+    $stmt->execute([$productionOutputId]);
+    $type = $stmt->fetchColumn();
+    
+    if ($type !== 'FREEZE_DRY_INPUT') {
+        throw new InvalidArgumentException("Output ID $productionOutputId is van type '$type'. Verwacht 'FREEZE_DRY_INPUT'.");
+    }
+    
+    // 2. Validatie: Bestaat er al een proces voor deze output? (1-op-1 relatie)
+    $stmt = $db->prepare("SELECT id FROM freeze_dry_processes WHERE production_output_id = ?");
+    $stmt->execute([$productionOutputId]);
     if ($stmt->fetch()) {
-        throw new InvalidArgumentException("A freeze-dry process already exists for this output.");
+        throw new InvalidArgumentException("Er bestaat al een vriesdroogproces voor output ID $productionOutputId.");
     }
-
-    // Gebruik output quantity als inputWeight als die niet is meegegeven
-    $weight = $inputWeight ?? $output['quantity'];
-    if ($weight <= 0) throw new InvalidArgumentException("Input weight must be positive.");
-
-    $effectiveActor = null;
-    if (function_exists('auth_current_user')) {
-        $user = auth_current_user();
-        if ($user && isset($user['id'])) $effectiveActor = (int)$user['id'];
-    }
-
-    $db->beginTransaction();
-    try {
-        $stmt = $db->prepare("
-            INSERT INTO freeze_dry_processes 
-            (output_id, machine_identifier, cycle_code, started_at, input_weight, target_pressure, target_temp_c, notes)
-            VALUES (:output, :machine, :cycle, datetime('now'), :weight, :pressure, :temp, :notes)
-        ");
-        
-        $stmt->execute([
-            ':output' => $outputId,
-            ':machine' => $machineIdentifier,
-            ':cycle' => $cycleCode,
-            ':weight' => $weight,
-            ':pressure' => $targetPressure,
-            ':temp' => $targetTempC,
-            ':notes' => $notes
-        ]);
-        
-        $processId = (int) $db->lastInsertId();
-
-        // Update output status naar 'PROCESSED'
-        $upd = $db->prepare("UPDATE production_outputs SET status = 'PROCESSED' WHERE id = :id");
-        $upd->execute([':id' => $outputId]);
-
-        // Audit
-        if ($effectiveActor) {
-            auditLog($db, 'B08_FREEZE_DRY_START', 'freeze_dry_processes', $processId, 'CREATE', null, null,
-                ['output_id' => $outputId, 'machine' => $machineIdentifier, 'input_weight' => $weight],
-                'production_outputs', $outputId);
-        }
-
-        $db->commit();
-        return $processId;
-
-    } catch (Exception $e) {
-        $db->rollBack();
-        throw $e;
-    }
-}
-
-/**
- * Complete a freeze-dry cycle and record results.
- * 
- * @param PDO $db
- * @param int $processId
- * @param float $outputWeight Final dried weight
- * @param string|null $notes
- * 
- * @return array ['id' => int, 'yield_percent' => float]
- */
-function b08_complete_freeze_dry_cycle(
-    PDO $db,
-    int $processId,
-    float $outputWeight,
-    ?string $notes = null
-): array {
-    if ($outputWeight <= 0) throw new InvalidArgumentException("Output weight must be positive.");
     
-    $db->beginTransaction();
-    try {
-        // Haal proces op
-        $stmt = $db->prepare("SELECT * FROM freeze_dry_processes WHERE id = :id");
-        $stmt->execute([':id' => $processId]);
-        $process = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if (!$process) throw new InvalidArgumentException("Process not found.");
-        if ($process['completed_at'] !== null) {
-            throw new InvalidArgumentException("Process is already completed.");
-        }
-
-        // Bereken yield
-        $yield = ($outputWeight / $process['input_weight']) * 100;
-
-        // Update proces
-        $stmt = $db->prepare("
-            UPDATE freeze_dry_processes 
-            SET completed_at = datetime('now'), output_weight = :weight, yield_percent = :yield, notes = CASE WHEN :notes IS NOT NULL THEN notes || CHAR(10) || :notes ELSE notes END
-            WHERE id = :id
-        ");
-        $stmt->execute([
-            ':weight' => $outputWeight,
-            ':yield' => $yield,
-            ':notes' => $notes,
-            ':id' => $processId
-        ]);
-
-        // Update output naar 'STORED' of 'COMPLETED' (laten we 'STORED' doen voor gedroogd product)
-        $upd = $db->prepare("UPDATE production_outputs SET status = 'STORED' WHERE id = :id");
-        $upd->execute([':id' => $process['output_id']]);
-
-        // Audit
-        $effectiveActor = null;
-        if (function_exists('auth_current_user')) {
-            $user = auth_current_user();
-            if ($user && isset($user['id'])) $effectiveActor = (int)$user['id'];
-        }
-        
-        if ($effectiveActor) {
-            auditLog($db, 'B08_FREEZE_DRY_COMPLETE', 'freeze_dry_processes', $processId, 'UPDATE', null,
-                ['status' => 'running'], ['status' => 'completed', 'output_weight' => $outputWeight, 'yield' => $yield]);
-        }
-
-        $db->commit();
-        return ['id' => $processId, 'yield_percent' => $yield];
-
-    } catch (Exception $e) {
-        $db->rollBack();
-        throw $e;
-    }
+    // 3. Genereer unieke cycle_code
+    $cycleCode = 'FD-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -4));
+    $startedAt = date('Y-m-d H:i:s');
+    $inputWeight = (float) $output['quantity']; // Gewicht uit B07 output
+    
+    // 4. Insert het proces
+    $insert = $db->prepare("
+        INSERT INTO freeze_dry_processes 
+        (production_output_id, machine_id, cycle_code, started_at, input_weight_g, status, operator_id, notes)
+        VALUES (?, ?, ?, ?, ?, 'RUNNING', ?, ?)
+    ");
+    $insert->execute([
+        $productionOutputId,
+        $machineId,
+        $cycleCode,
+        $startedAt,
+        $inputWeight,
+        $operatorId,
+        $notes
+    ]);
+    
+    $processId = (int) $db->lastInsertId();
+    
+    // Optioneel: Update status van de output naar 'IN_PROCESS' als die kolom bestaat, anders laten we het zo.
+    
+    return [
+        'id' => $processId,
+        'cycle_code' => $cycleCode,
+        'started_at' => $startedAt,
+        'input_weight_g' => $inputWeight
+    ];
 }
 
 /**
- * Get process details.
+ * Rondt een vriesdroogproces af.
+ * 
+ * @param PDO $db Database connectie.
+ * @param int $processId ID van het proces.
+ * @param float $finalWeight Het gewicht NA drogen (in gram).
+ * @param float|null $avgTemp Gemiddelde temperatuur (optioneel).
+ * @param float|null $minPressure Minimale druk (optioneel).
+ * @param string|null $notes Optionele eindnotities.
+ * @return array ['id' => int, 'yield_percent' => float]
+ * @throws InvalidArgumentException Als het proces niet bestaat, al klaar is, of het gewicht onlogisch is.
  */
-function b08_get_process(PDO $db, int $processId): ?array {
-    $stmt = $db->prepare("SELECT * FROM freeze_dry_processes WHERE id = :id");
-    $stmt->execute([':id' => $processId]);
+function b08_complete_process(PDO $db, int $processId, float $finalWeight, ?float $avgTemp = null, ?float $minPressure = null, ?string $notes = null): array {
+    // 1. Validatie: Bestaat het proces?
+    $stmt = $db->prepare("SELECT * FROM freeze_dry_processes WHERE id = ?");
+    $stmt->execute([$processId]);
+    $process = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$process) {
+        throw new InvalidArgumentException("Proces ID $processId niet gevonden.");
+    }
+    
+    if ($process['status'] === 'COMPLETED') {
+        throw new InvalidArgumentException("Proces ID $processId is al voltooid. Historische data mag niet overschreven worden.");
+    }
+    
+    // 2. Validatie: Fysieke logica (Eindgewicht moet lager zijn dan startgewicht)
+    // We hanteren een ruime marge voor meetfouten, maar eindgewicht > startgewicht is onmogelijk.
+    if ($finalWeight > $process['input_weight_g']) {
+        throw new InvalidArgumentException("Fout: Eindgewicht ($finalWeight g) kan niet groter zijn dan startgewicht ({$process['input_weight_g']} g).");
+    }
+    
+    if ($finalWeight <= 0) {
+        throw new InvalidArgumentException("Fout: Eindgewicht moet groter zijn dan 0.");
+    }
+    
+    $endedAt = date('Y-m-d H:i:s');
+    
+    // 3. Update het proces
+    $update = $db->prepare("
+        UPDATE freeze_dry_processes
+        SET ended_at = ?,
+            final_weight_g = ?,
+            avg_temperature_c = ?,
+            min_pressure_mbar = ?,
+            notes = COALESCE(?, notes) || (CASE WHEN notes IS NOT NULL AND ? IS NOT NULL THEN CHAR(10) ELSE '' END) || ?,
+            status = 'COMPLETED'
+        WHERE id = ?
+    ");
+    
+    // Notities samenvoegen als er al notities zijn
+    $fullNotes = $notes; 
+    
+    $update->execute([
+        $endedAt,
+        $finalWeight,
+        $avgTemp,
+        $minPressure,
+        $notes,
+        $notes,
+        $notes,
+        $processId
+    ]);
+    
+    // Bereken rendement (yield)
+    $yieldPercent = ($finalWeight / $process['input_weight_g']) * 100;
+    
+    return [
+        'id' => $processId,
+        'cycle_code' => $process['cycle_code'],
+        'input_weight_g' => $process['input_weight_g'],
+        'final_weight_g' => $finalWeight,
+        'yield_percent' => round($yieldPercent, 2),
+        'duration_minutes' => round((strtotime($endedAt) - strtotime($process['started_at'])) / 60, 1)
+    ];
+}
+
+/**
+ * Haalt informatie op over een specifiek vriesdroogproces.
+ */
+function b08_get_process_info(PDO $db, int $processId): ?array {
+    $stmt = $db->prepare("
+        SELECT 
+            fdp.*,
+            po.batch_code,
+            po.output_type
+        FROM freeze_dry_processes fdp
+        JOIN production_outputs po ON fdp.production_output_id = po.id
+        WHERE fdp.id = ?
+    ");
+    $stmt->execute([$processId]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
