@@ -1,63 +1,43 @@
-# Live database
-database/MicrogreensERP_Live.sqlite
-
-# Template database
-!database/MicrogreensERP_Template.sqlite
-
-# Local development databases
+# --- DATABASES ---
+# Specifieke live databases in de database map
+database/MicrogreensERP_Live*.sqlite
 database/MicrogreensERP_Development.sqlite
 database/MicrogreensERP_Backup_*.sqlite
 
-# Sensor logs
-sensors/logs/*.log
+# Algemene regel: negeer ALLE .sqlite bestanden overal, BEHALVE de template
+*.sqlite
+!database/MicrogreensERP_Template.sqlite
 
-# Backups
+# Database backups
+database/backups/
 *.backup
 *.bak
 
-# Editor swap files
-*.swp
+# --- SENSOR & DATA BESTANDEN ---
+sensors/*.db
+sensors/logs/*.log
 
-# OS files
+# --- HARDWARE RUNTIME (Alle state en logs) ---
+hardware/**/*.log
+hardware/**/*.json
+!hardware/**/*.md
+
+# --- PYTHON & SYSTEM ---
+__pycache__/
+*.py[cod]
+*.pyo
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
 
-# GPIO runtime files
-hardware/gpio/gpio_actions.log
-hardware/gpio/simulation_state.json
+# --- TEST & TEMP FILES ---
+test.php
+test_*.php
+*_test.php
+temp_*.txt
+temp_html.txt
 
-# Scheduler runtime files
-hardware/scheduler/schedules.json
-hardware/scheduler/scheduler.log
-
-# Scheduler cron runtime
-hardware/scheduler/cron.log
-
-# Safety runtime files
-hardware/safety/state.json
-hardware/safety/safety.log
-
-# Manual override runtime
-hardware/override/state.json
-hardware/override/override.log
-
-# Watchdog runtime files
-hardware/watchdog/state.json
-hardware/watchdog/watchdog.log
-
-# Relay runtime
-hardware/relay/state.json
-hardware/relay/relay.log
-
-# Priority runtime
-hardware/priority/state.json
-hardware/priority/priority.log
-
-# Hardware health runtime
-hardware/health/state.json
-hardware/health/health.log
-# Python cache
-__pycache__/
-*.py[cod]docs/Templates/unsaved files dont know path of/
-
-/docs/Templates/unsaved files dont know path of/
+# --- OVERIGE ---
+# Verwijderd: de ongeldige 'docs/Templates/unsaved...' regels
