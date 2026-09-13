@@ -49,7 +49,7 @@ $modules_map = [
 if (array_key_exists($module_id, $modules_map)) {
     $module_info = $modules_map[$module_id];
     // Let op: pad wijst naar de nieuwe map app/modules/
-    $module_file = __DIR__ . '/app/modules/' . $module_info['file'];
+    $module_file = __DIR__ . '/../app/modules/' . $module_info['file'];
     $module_title = $module_info['title'];
 }
 ?>
