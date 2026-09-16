@@ -2,7 +2,6 @@
 /**
  * Microgreens ERP - Centrale Router
  * Gebruik: jouwdomein.nl/?module=naam_van_module
- * Voorbeeld: jouwdomein.nl/?module=b01_batch_queue
  */
 
 // Foutmeldingen tonen (zet op 0 in productie)
@@ -10,13 +9,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // 1. Bepaal welke module gevraagd wordt
-\ = \['module'] ?? 'home';
+$module = $_GET['module'] ?? 'home';
 
-// 2. Veiligheid: Alleen letters, cijfers en underscores toestaan (voorkomt hacks)
-\ = preg_replace('/[^a-z0-9_]/', '', \);
+// 2. Veiligheid: Alleen letters, cijfers en underscores toestaan
+$module = preg_replace('/[^a-z0-9_]/', '', $module);
 
 // 3. Als er geen module is, toon een welkomstpagina
-if (\ === 'home' || \ === '') {
+if ($module === 'home' || $module === '') {
     header('Content-Type: text/html; charset=utf-8');
     echo "<h1>🌱 Microgreens ERP Systeem</h1>";
     echo "<p>Systeem is actief. Kies een module:</p>";
@@ -26,24 +25,24 @@ if (\ === 'home' || \ === '') {
     echo "<li><a href='?module=b03_growth_stage'>B03: Growth Stage</a></li>";
     echo "<li><a href='?module=b04_rack_capacity'>B04: Rack Capacity</a></li>";
     echo "<li><a href='?module=b05_seed_planning'>B05: Seed Planning</a></li>";
-    echo "<li><a href='?module=b06_production_actions'>B06: Production Actions (Rotatie)</a></li>";
+    echo "<li><a href='?module=b06_production_actions'>B06: Production Actions</a></li>";
     echo "</ul>";
     exit;
 }
 
-// 4. Bouw het pad naar de module
-\ = __DIR__ . '/../app/modules/' . \ . '.php';
+// 4. Bouw het pad naar de module (gebruik DIRECTORY_SEPARATOR voor cross-platform)
+$filePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module . '.php';
 
 // 5. Laad de module als deze bestaat
-if (file_exists(\)) {
-    require_once \;
+if (file_exists($filePath)) {
+    require_once $filePath;
 } else {
     // Module niet gevonden
     http_response_code(404);
     header('Content-Type: application/json');
     echo json_encode([
         'error' => 'Module niet gevonden',
-        'requested_module' => \,
-        'hint' => 'Controleer of het bestand bestaat in app/modules/'
+        'requested_module' => $module,
+        'file_checked' => $filePath
     ]);
 }

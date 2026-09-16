@@ -1,33 +1,40 @@
 ﻿<?php
 /**
  * Database Connectie voor Microgreens ERP
- * Maakt een PDO verbinding met de SQLite database
+ * Versie 4: Hardcoded absoluut pad (Garantie voor Windows)
  */
 
 function getDbConnection() {
-    // Pad naar de database (relatief aan dit bestand)
-    \ = __DIR__ . '/../database/MicrogreensERP_Development.sqlite';
+    // We gebruiken het absolute pad dat we weten dat werkt
+    $rootDir = 'C:/Users/joepk/Downloads/microgreens-erp';
+    
+    // Bouw het pad naar de database
+    $dbPath = $rootDir . '/database/MicrogreensERP_Development.sqlite';
 
-    // Controleer of het bestand bestaat
-    if (!file_exists(\)) {
-        throw new Exception("Database bestand niet gevonden op: " . \);
+    // Normaliseer slashes voor Windows
+    $dbPath = str_replace('/', DIRECTORY_SEPARATOR, $dbPath);
+
+    // Debug: (Optioneel)
+    // error_log("DB Path: " . $dbPath);
+
+    if (!file_exists($dbPath)) {
+        throw new Exception("Database bestand niet gevonden op: " . $dbPath);
+    }
+    
+    if (!is_readable($dbPath)) {
+        throw new Exception("Database bestand is niet leesbaar: " . $dbPath);
     }
 
-    // Maak de verbinding
     try {
-        \ = new PDO("sqlite:" . \);
+        $dsn = "sqlite:" . $dbPath;
+        $db = new PDO($dsn);
         
-        // Zet error mode op Exception (belangrijk voor debugging)
-        \->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $db->exec("PRAGMA foreign_keys = ON");
         
-        // Zet default fetch mode op Associative Array
-        \->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        
-        // Zet Foreign Keys aan (standaard uit in SQLite!)
-        \->exec("PRAGMA foreign_keys = ON");
-        
-        return \;
-    } catch (PDOException \) {
-        throw new Exception("Database verbinding mislukt: " . \->getMessage());
+        return $db;
+    } catch (PDOException $e) {
+        throw new Exception("Database verbinding mislukt: " . $e->getMessage());
     }
 }
