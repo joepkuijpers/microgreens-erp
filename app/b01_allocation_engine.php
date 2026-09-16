@@ -94,13 +94,32 @@ class B01AllocationEngine {
         return (int)$this->db->lastInsertId();
     }
 
-    private function updateInventory(int $inventoryId, float $amount, int $batchId, array $itemData): void {
-        $newQty = $itemData['quantity'] - $amount;
-        $this->db->prepare("UPDATE inventory SET quantity = :q WHERE id = :i")->execute([':q' => $newQty, ':i' => $inventoryId]);
-        $this->db->prepare("INSERT INTO inventory_transactions (inventory_id, type, quantity_change, quantity_before, quantity_after, unit, note, reference_type, reference_id) VALUES (:inv, 'VERBRUIK', :ch, :bef, :aft, :u, :n, 'grow_batch', :bid)")
-            ->execute([':inv' => $inventoryId, ':ch' => -$amount, ':bef' => $itemData['quantity'], ':aft' => $newQty, ':u' => $itemData['unit'], ':n' => "Zaadgebruik batch", ':bid' => $batchId]);
-    }
+    private function allocateSpatialCells(int $batchId, array $data): int {
+        // 1. Creëer eerst de Physical Unit (indien niet expliciet meegegeven)
+        // Dit zorgt voor unieke traceability per tray/bak (Regel 15 & 18)
+        if (empty($data['physical_unit_id'])) {
+            $unitCode = 'UNIT-' . strtoupper(uniqid()); // Genereer unieke code
+            $stmt = $this->db->prepare("
+                INSERT INTO physical_units (batch_id, unit_code, container_type, status) 
+                VALUES (:bid, :code, :type, 'ACTIVE')
+            ");
+            $stmt->execute([
+                ':bid' => $batchId,
+                ':code' => $unitCode,
+                ':type' => $data['tray_type'] ?? '1020'
+            ]);
+            $unitId = (int)$this->db->lastInsertId();
+        } else {
+            $unitId = (int)$data['physical_unit_id'];
+        }
 
+        // 2. Koppel de batch aan deze unit (Spatial Allocation)
+        $sql = "INSERT INTO spatial_allocations (physical_unit_id, batch_id, allocation_type, status, area_fraction, created_at) 
+                VALUES (:uid, :bid, 'CROP', 'ACTIVE', 1.0, CURRENT_TIMESTAMP)";
+        $this->db->prepare($sql)->execute([':uid' => $unitId, ':bid' => $batchId]);
+        
+        return (int)$this->db->lastInsertId();
+    }
     private function allocateSpatialCells(int $batchId, array $data): int {
         $unitId = $data['physical_unit_id'] ?? 1;
         $sql = "INSERT INTO spatial_allocations (physical_unit_id, batch_id, allocation_type, status, area_fraction, created_at) VALUES (:uid, :bid, 'CROP', 'ACTIVE', 1.0, CURRENT_TIMESTAMP)";
