@@ -44,7 +44,7 @@ try {
     </style>
 </head>
 <body>
-<?php include 'menu.php'; ?>
+<?php include '/var/www/html/menu.php'; ?>
 
 <div class="container">
     <a href="/" class="back-link">&#8592; Terug naar Dashboard</a>
