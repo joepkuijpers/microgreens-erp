@@ -1,40 +1,35 @@
-﻿<?php
+<?php
 /**
- * Database Connectie voor Microgreens ERP
- * Versie 4: Hardcoded absoluut pad (Garantie voor Windows)
+ * Database Connection - Universal (Windows & Linux)
+ * Kiest automatisch het juiste pad op basis van het besturingssysteem.
  */
 
 function getDbConnection() {
-    // We gebruiken het absolute pad dat we weten dat werkt
-    $rootDir = 'C:/Users/joepk/Downloads/microgreens-erp';
-    
-    // Bouw het pad naar de database
-    $dbPath = $rootDir . '/database/MicrogreensERP_Development.sqlite';
+    // Bepaal het basispad
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        // Windows Development
+        $baseDir = 'C:/Users/joepk/Downloads/microgreens-erp/database';
+        $dbName = 'MicrogreensERP_Development.sqlite';
+    } else {
+        // Linux Production (Raspberry Pi)
+        $baseDir = '/var/www/html/microgreens/PHP/database';
+        $dbName = 'MicrogreensERP_Live.sqlite';
+    }
 
-    // Normaliseer slashes voor Windows
-    $dbPath = str_replace('/', DIRECTORY_SEPARATOR, $dbPath);
-
-    // Debug: (Optioneel)
-    // error_log("DB Path: " . $dbPath);
+    $dbPath = $baseDir . '/' . $dbName;
 
     if (!file_exists($dbPath)) {
-        throw new Exception("Database bestand niet gevonden op: " . $dbPath);
-    }
-    
-    if (!is_readable($dbPath)) {
-        throw new Exception("Database bestand is niet leesbaar: " . $dbPath);
+        // Uitgebreide foutmelding voor debugging
+        throw new Exception("Database bestand niet gevonden op: $dbPath\nBestaande bestanden in map: " . print_r(scandir($baseDir), true));
     }
 
     try {
-        $dsn = "sqlite:" . $dbPath;
-        $db = new PDO($dsn);
-        
+        $db = new PDO("sqlite:$dbPath");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        $db->exec("PRAGMA foreign_keys = ON");
-        
         return $db;
     } catch (PDOException $e) {
-        throw new Exception("Database verbinding mislukt: " . $e->getMessage());
+        throw new Exception("Database connectie mislukt: " . $e->getMessage());
     }
 }
+?>
