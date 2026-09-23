@@ -1,173 +1,158 @@
 <?php
-/**
- * B02 - Germination & Seeding (AANGEPAST AAN ECHTE SCHEMA)
- * Kolommen: stock_grams, crop_type, physical_units.batch_id
- */
-ini_set('display_errors', 1);
+ini_set("display_errors", 1);
 error_reporting(E_ALL);
 session_start();
 
-$dbPath = __DIR__ . '/../database/MicrogreensERP_Live.sqlite';
-if (!file_exists($dbPath)) { die("DB niet gevonden"); }
+$dbPath = __DIR__ . "/../database/MicrogreensERP_Live.sqlite";
+if (!file_exists($dbPath)) { die("Database niet gevonden: " . $dbPath); }
 try {
     $pdo = new PDO("sqlite:" . $dbPath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) { die("DB Fout: " . $e->getMessage()); }
 
-$errors = [];
-$success_msg = '';
+$message = "";
+$messageType = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_POST['action'] ?? '';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $seedInvId = $_POST["seed_inventory_id"] ?? null;
+    $trayId = $_POST["tray_id"] ?? null;
+    $quantity = $_POST["quantity_seeds"] ?? 0;
+    $operator = "Joep"; 
+    
+    if (!$seedInvId || !$trayId || $quantity <= 0) {
+        $message = "🚫 Fout: Vul alle velden correct in.";
+        $messageType = "error";
+    } else {
+        // Check voorraad
+        $stmt = $pdo->prepare("SELECT stock_grams FROM seed_inventory WHERE id = ?");
+        $stmt->execute([$seedInvId]);
+        $currentStock = $stmt->fetchColumn();
 
-    if ($action === 'register_seeding') {
-        $batch_id = intval($_POST['batch_id'] ?? 0);
-        $seed_id = intval($_POST['seed_id'] ?? 0); // seed_inventory ID
-        $rack_id = trim($_POST['rack_id'] ?? 'RACK-A');
-        $position = intval($_POST['rack_position'] ?? 0);
-        $seed_weight_g = floatval($_POST['seed_weight_g'] ?? 0);
-        $unit_code = 'TRAY-' . strtoupper(substr(md5(uniqid()), 0, 8)); // Genereer unieke tray code
+        if ($currentStock === false || $currentStock < $quantity) {
+            $message = "🚫 Onvoldoende voorraad. Beschikbaar: " . ($currentStock ?: 0) . "g";
+            $messageType = "error";
+        } else {
+            $harvestDate = date("Y-m-d", strtotime("+7 days"));
+            $now = date("Y-m-d H:i:s");
 
-        // Validatie
-        if ($batch_id <= 0) $errors[] = "Geen batch geselecteerd.";
-        if ($seed_id <= 0) $errors[] = "Geen zaad geselecteerd.";
-        if ($seed_weight_g <= 0) $errors[] = "Zaadhoeveelheid moet > 0 zijn.";
-
-        if (empty($errors)) {
+            // Transactie starten
+            $pdo->beginTransaction();
             try {
-                $pdo->beginTransaction();
+                // 1. Update voorraad
+                $pdo->prepare("UPDATE seed_inventory SET stock_grams = stock_grams - ? WHERE id = ?")
+                    ->execute([$quantity, $seedInvId]);
 
-                // 1. Update Seed Inventory (Gebruik stock_grams)
-                $stmt = $pdo->prepare("UPDATE seed_inventory SET stock_grams = stock_grams - ?, updated_at = datetime('now') WHERE id = ?");
-                $stmt->execute([$seed_weight_g, $seed_id]);
+                // 2. Update Tray
+                $pdo->prepare("UPDATE trays SET status = ? WHERE id = ?")
+                    ->execute(["GERMINATING", $trayId]);
 
-                // 2. Maak Physical Unit (Moet batch_id hebben!)
-                $stmt = $pdo->prepare("
-                    INSERT INTO physical_units (batch_id, unit_code, container_type, status, created_at)
-                    VALUES (?, ?, '1020', 'ACTIVE', datetime('now'))
-                ");
-                $stmt->execute([$batch_id, $unit_code]);
-                $unit_id = $pdo->lastInsertId();
-
-                // 3. Maak Spatial Allocation
-                $stmt = $pdo->prepare("
-                    INSERT INTO spatial_allocations (physical_unit_id, batch_id, rack_id, rack_position, allocation_type, status, created_at)
-                    VALUES (?, ?, ?, ?, 'CROP', 'ACTIVE', datetime('now'))
-                ");
-                $stmt->execute([$unit_id, $batch_id, $rack_id, $position]);
-
-                // 4. Update Batch Status
-                $stmt = $pdo->prepare("UPDATE production_batches SET status = 'GERMINATING' WHERE id = ?");
-                $stmt->execute([$batch_id]);
+                // 3. Insert Record
+                $pdo->prepare("INSERT INTO germination_records (seed_inventory_id, tray_id, quantity_seeds, start_date, expected_harvest_date, operator) VALUES (?, ?, ?, ?, ?, ?)")
+                    ->execute([$seedInvId, $trayId, $quantity, $now, $harvestDate, $operator]);
 
                 $pdo->commit();
-                $success_msg = "✅ Zaai-actie geregistreerd! Tray $unit_code geplaatst op $rack_id pos. $position.";
-
+                $message = "✅ Zaaien gelukt! Oogst verwacht: " . $harvestDate;
+                $messageType = "success";
             } catch (Exception $e) {
                 $pdo->rollBack();
-                $errors[] = "Fout: " . $e->getMessage();
+                $message = "Fout: " . $e->getMessage();
+                $messageType = "error";
             }
         }
     }
 }
 
-// Data ophalen
-$batches = [];
-$seeds = [];
+// --- DATA OPHALEN (ROBUUSTE METHODE ZONDER COMPLEXE JOIN IN SQL) ---
 
-try {
-    // Batches die nog niet geoogst/completed zijn
-    $stmt = $pdo->query("SELECT id, batch_code, crop_type, status FROM production_batches WHERE status NOT IN ('HARVESTED', 'COMPLETED') ORDER BY id DESC LIMIT 20");
-    $batches = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 1. Haal ALLE racks op
+$racks = $pdo->query("SELECT id, name FROM racks ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 
-    // Seeds met voorraad > 0 (Gebruik stock_grams en crop_type)
-    $stmt = $pdo->query("SELECT id, crop_type, stock_grams, organic_status FROM seed_inventory WHERE stock_grams > 0 ORDER BY id DESC LIMIT 20");
-    $seeds = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 2. Haal ALLE trays op (geen WHERE clause, dus geen quote issues)
+$allTrays = $pdo->query("SELECT id, tray_code, rack_id, status FROM trays ORDER BY tray_code")->fetchAll(PDO::FETCH_ASSOC);
 
-} catch (Exception $e) { die("Query fout: " . $e->getMessage()); }
+// 3. Filter in PHP naar alleen EMPTY trays
+$emptyTrays = [];
+foreach ($allTrays as $tray) {
+    if ($tray["status"] === "EMPTY") {
+        // Zoek de rack naam erbij uit de al geladen $racks array
+        $rackName = "Onbekend";
+        foreach ($racks as $r) {
+            if ($r["id"] == $tray["rack_id"]) {
+                $rackName = $r["name"];
+                break;
+            }
+        }
+        $tray["rack_name"] = $rackName;
+        $emptyTrays[] = $tray;
+    }
+}
+
+// 4. Haal zaad op
+$seedInventory = $pdo->query("SELECT si.id, sl.variety, si.stock_grams, s.name as supplier FROM seed_inventory si JOIN seed_lots sl ON si.seed_lot_id = sl.id JOIN suppliers s ON si.supplier_id = s.id WHERE si.stock_grams > 0 ORDER BY sl.variety")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>B02 Germination</title>
+    <title>B02 - Germination</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: sans-serif; margin: 2rem; background: #f4f4f4; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 8px; }
-        h1 { border-bottom: 2px solid #0056b3; padding-bottom: 0.5rem; }
-        .alert { padding: 1rem; margin-bottom: 1rem; border-radius: 4px; }
-        .alert-danger { background: #f8d7da; color: #721c24; }
-        .alert-success { background: #d4edda; color: #155724; }
-        .form-group { margin-bottom: 1rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-        select, input { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background: #0056b3; color: white; border: none; padding: 1rem; width: 100%; font-size: 1.1rem; border-radius: 4px; cursor: pointer; }
-        .row { display: flex; gap: 1rem; } .col { flex: 1; }
+        body { font-family: sans-serif; background: #f4f6f9; margin: 0; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #27ae60; padding-bottom: 0.5rem; }
+        .alert { padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; font-weight: bold; }
+        .alert.error { background: #f8d7da; color: #721c24; }
+        .alert.success { background: #d4edda; color: #155724; }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #555; }
+        select, input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; box-sizing: border-box; }
+        button { background: #27ae60; color: white; border: none; padding: 1rem 2rem; font-size: 1rem; border-radius: 4px; cursor: pointer; width: 100%; }
+        button:hover { background: #219150; }
+        a { display: inline-block; margin-top: 1rem; color: #555; text-decoration: none; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🌱 B02: Zaai & Kiem Registratie</h1>
-    <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger"><strong>Fout:</strong><ul><?php foreach($errors as $e): ?><li><?=htmlspecialchars($e)?></li><?php endforeach; ?></ul></div>
-    <?php endif; ?>
-    <?php if ($success_msg): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($success_msg) ?></div>
+    <h1>🌱 B02: Start Kieming</h1>
+    <?php if ($message): ?>
+        <div class="alert <?= $messageType ?>"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
     <form method="POST">
-        <input type="hidden" name="action" value="register_seeding">
-        
         <div class="form-group">
-            <label>Productie Batch:</label>
-            <select name="batch_id" required>
-                <option value="">-- Selecteer Batch --</option>
-                <?php foreach ($batches as $b): ?>
-                    <option value="<?= $b['id'] ?>"><?= htmlspecialchars($b['crop_type']) ?> - <?= htmlspecialchars($b['batch_code']) ?> (<?= $b['status'] ?>)</option>
+            <label>Zaad (Voorraad > 0)</label>
+            <select name="seed_inventory_id" required>
+                <option value="">-- Kies --</option>
+                <?php foreach ($seedInventory as $si): ?>
+                    <option value="<?= $si["id"] ?>"><?= htmlspecialchars($si["variety"]) ?> (<?= $si["stock_grams"] ?>g)</option>
                 <?php endforeach; ?>
-                <?php if (empty($batches)): ?><option>Geen batches gevonden</option><?php endif; ?>
             </select>
         </div>
 
         <div class="form-group">
-            <label>Zaad Voorraad (Seed Inventory):</label>
-            <select name="seed_id" required>
-                <option value="">-- Selecteer Zaad --</option>
-                <?php foreach ($seeds as $s): ?>
-                    <option value="<?= $s['id'] ?>">
-                        <?= htmlspecialchars($s['crop_type']) ?> (<?= number_format($s['stock_grams'], 1) ?>g) - <?= htmlspecialchars($s['organic_status']) ?>
-                    </option>
+            <label>Tray (Alleen lege)</label>
+            <select name="tray_id" required>
+                <option value="">-- Kies Tray --</option>
+                <?php foreach ($emptyTrays as $t): ?>
+                    <option value="<?= $t["id"] ?>"><?= htmlspecialchars($t["tray_code"]) ?> (in <?= htmlspecialchars($t["rack_name"]) ?>)</option>
                 <?php endforeach; ?>
-                <?php if (empty($seeds)): ?><option>Geen zaadvoorraad gevonden</option><?php endif; ?>
+                <?php if (empty($emptyTrays)): ?>
+                    <option disabled>Geen lege trays gevonden!</option>
+                <?php endif; ?>
             </select>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label>Rack:</label>
-                    <select name="rack_id">
-                        <option value="RACK-A">RACK A</option>
-                        <option value="RACK-B">RACK B</option>
-                        <option value="RACK-C">RACK C</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label>Positie:</label>
-                    <input type="number" name="rack_position" value="1" required>
-                </div>
-            </div>
+            <?php if (empty($emptyTrays)): ?>
+                <small style="color:red;">⚠️ Er zijn geen trays met status EMPTY. Controleer de database.</small>
+            <?php endif; ?>
         </div>
 
         <div class="form-group">
-            <label>Gebruikte Zaadhoeveelheid (g):</label>
-            <input type="number" step="0.1" name="seed_weight_g" value="5.0" required>
+            <label>Hoeveelheid (gram)</label>
+            <input type="number" name="quantity_seeds" step="0.1" required placeholder="Bijv. 20">
         </div>
 
-        <button type="submit">🌱 Registreer Zaai-actie</button>
+        <button type="submit">🚀 Start Kieming</button>
     </form>
+    <a href="dashboard.php">← Terug</a>
 </div>
 </body>
 </html>
