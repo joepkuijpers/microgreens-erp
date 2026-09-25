@@ -68,6 +68,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 $suppliers = $db->query("SELECT * FROM suppliers ORDER BY is_skal_validated ASC, certificate_expiry ASC")->fetchAll(PDO::FETCH_ASSOC);
+
+// --- TOEVOEGEN LOGICA suppliers ---
+if (isset($_GET['action']) && $_GET['action'] == 'add_new' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    try {
+        $cols_suppliers = [];
+        $vals_suppliers = [];
+        $bind_suppliers = [];
+
+        if (isset($_POST['name']) && $_POST['name'] != '') {
+            $cols_suppliers[] = "name";
+            $vals_suppliers[] = "?";
+            $bind_suppliers[] = $_POST['name'];
+        }
+
+        if (isset($_POST['contact_email']) && $_POST['contact_email'] != '') {
+            $cols_suppliers[] = "contact_email";
+            $vals_suppliers[] = "?";
+            $bind_suppliers[] = $_POST['contact_email'];
+        }
+
+        if (isset($_POST['certificate_code']) && $_POST['certificate_code'] != '') {
+            $cols_suppliers[] = "certificate_code";
+            $vals_suppliers[] = "?";
+            $bind_suppliers[] = $_POST['certificate_code'];
+        }
+
+        if (isset($_POST['certificate_expiry']) && $_POST['certificate_expiry'] != '') {
+            $cols_suppliers[] = "certificate_expiry";
+            $vals_suppliers[] = "?";
+            $bind_suppliers[] = $_POST['certificate_expiry'];
+        }
+
+        if (isset($_POST['organic_status']) && $_POST['organic_status'] != '') {
+            $cols_suppliers[] = "organic_status";
+            $vals_suppliers[] = "?";
+            $bind_suppliers[] = $_POST['organic_status'];
+        }
+
+        if (!empty($cols_suppliers)) {
+            $sql = "INSERT INTO suppliers (" . implode(",", $cols_suppliers) . ") VALUES (" . implode(",", $vals_suppliers) . ")";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($bind_suppliers);
+            $success_msg_suppliers = "✅ Leveranciers succesvol toegevoegd!";
+        }
+    } catch (Exception $e) {
+        $error_msg_suppliers = "Fout: " . $e->getMessage();
+    }
+}
+// --- EINDE TOEVOEGEN LOGICA ---
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -106,6 +156,12 @@ $suppliers = $db->query("SELECT * FROM suppliers ORDER BY is_skal_validated ASC,
 <div style="padding:20px;"><a href="dashboard.php" style="background:#2c3e50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">← Terug naar Dashboard</a></div>
 <div class="container">
     <h1>🏭 B18: Leveranciers & Certificaten</h1>
+    <div style="margin: 20px 0; padding: 15px; background: #e8f5e9; border-radius: 5px; border-left: 5px solid #27ae60;">
+        <a href="?action=add_new" style="text-decoration: none; color: #27ae60; font-weight: bold; font-size: 1.1em;">
+            ➕ Nieuwe Leverancier
+        </a>
+    </div>
+    <div style="margin-bottom:20px;"><a href="?action=add" style="background:#27ae60;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;">➕ Nieuwe Leverancier</a></div><div style="margin-bottom:20px;"><a href="?action=add" style="background:#27ae60;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;">➕ Nieuwe Leverancier</a></div>
     
     <?php if ($msg): ?>
         <div class="alert alert-<?= $msgType ?>"><?= $msg ?></div>
@@ -206,5 +262,25 @@ function deleteSupplier(id, name) {
     }
 }
 </script>
+
+<!-- FORMULIER suppliers -->
+<?php if (isset($_GET['action']) && $_GET['action'] == 'add_new'): ?>
+<div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px; border: 1px solid #ddd;">
+    <h2>➕ Nieuwe Leverancier</h2>
+    <?php if (isset($success_msg_suppliers)): ?><div style="color: green; margin-bottom: 10px; font-weight:bold;"><?php echo $success_msg_suppliers; ?></div><?php endif; ?>
+    <?php if (isset($error_msg_suppliers)): ?><div style="color: red; margin-bottom: 10px; font-weight:bold;"><?php echo $error_msg_suppliers; ?></div><?php endif; ?>
+    
+    <form method="POST">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+<div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Naam Bedrijf</label><input type='text' name='name' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Contact Email</label><input type='email' name='contact_email' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Certificaat Code (SKAL)</label><input type='text' name='certificate_code' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Certificaat Geldig Tot</label><input type='date' name='certificate_expiry' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Status</label><select name='organic_status' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;'><option value='VALID'>VALID</option><option value='PENDING'>PENDING</option><option value='EXPIRED'>EXPIRED</option></select></div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button type="submit" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">💾 Opslaan</button>
+            <a href="?" style="margin-left: 10px; text-decoration: none; color: #555;">Annuleren</a>
+        </div>
+    </form>
+</div>
+<?php endif; ?>
+
 </body>
 </html>

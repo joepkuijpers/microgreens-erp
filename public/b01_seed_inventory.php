@@ -54,6 +54,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $suppliers = $pdo->query("SELECT id, name FROM suppliers ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 $seedLots = $pdo->query("SELECT id, variety, organic_status, certificate_valid_until FROM seed_lots ORDER BY variety")->fetchAll(PDO::FETCH_ASSOC);
+
+// --- TOEVOEGEN LOGICA seed_inventory ---
+if (isset($_GET['action']) && $_GET['action'] == 'add_new' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    try {
+        $cols_seed_inventory = [];
+        $vals_seed_inventory = [];
+        $bind_seed_inventory = [];
+
+        if (isset($_POST['variety']) && $_POST['variety'] != '') {
+            $cols_seed_inventory[] = "variety";
+            $vals_seed_inventory[] = "?";
+            $bind_seed_inventory[] = $_POST['variety'];
+        }
+
+        if (isset($_POST['supplier_id']) && $_POST['supplier_id'] != '') {
+            $cols_seed_inventory[] = "supplier_id";
+            $vals_seed_inventory[] = "?";
+            $bind_seed_inventory[] = $_POST['supplier_id'];
+        }
+
+        if (isset($_POST['lot_number']) && $_POST['lot_number'] != '') {
+            $cols_seed_inventory[] = "lot_number";
+            $vals_seed_inventory[] = "?";
+            $bind_seed_inventory[] = $_POST['lot_number'];
+        }
+
+        if (isset($_POST['weight_grams']) && $_POST['weight_grams'] != '') {
+            $cols_seed_inventory[] = "weight_grams";
+            $vals_seed_inventory[] = "?";
+            $bind_seed_inventory[] = $_POST['weight_grams'];
+        }
+
+        if (isset($_POST['purchase_date']) && $_POST['purchase_date'] != '') {
+            $cols_seed_inventory[] = "purchase_date";
+            $vals_seed_inventory[] = "?";
+            $bind_seed_inventory[] = $_POST['purchase_date'];
+        }
+
+        if (isset($_POST['is_organic']) && $_POST['is_organic'] != '') {
+            $cols_seed_inventory[] = "is_organic";
+            $vals_seed_inventory[] = "?";
+            $bind_seed_inventory[] = $_POST['is_organic'];
+        }
+
+        if (!empty($cols_seed_inventory)) {
+            $sql = "INSERT INTO seed_inventory (" . implode(",", $cols_seed_inventory) . ") VALUES (" . implode(",", $vals_seed_inventory) . ")";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($bind_seed_inventory);
+            $success_msg_seed_inventory = "✅ Seed Inventory succesvol toegevoegd!";
+        }
+    } catch (Exception $e) {
+        $error_msg_seed_inventory = "Fout: " . $e->getMessage();
+    }
+}
+// --- EINDE TOEVOEGEN LOGICA ---
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -104,6 +160,12 @@ $seedLots = $pdo->query("SELECT id, variety, organic_status, certificate_valid_u
 <body>
 <div class="container">
     <h1>🌱 B01: Seed Inventory & Organic Gate</h1>
+    <div style="margin: 20px 0; padding: 15px; background: #e8f5e9; border-radius: 5px; border-left: 5px solid #27ae60;">
+        <a href="?action=add_new" style="text-decoration: none; color: #27ae60; font-weight: bold; font-size: 1.1em;">
+            ➕ Nieuw Zaadlot
+        </a>
+    </div>
+    
     
     <?php if ($message): ?>
         <div class="alert <?= $messageType ?>"><?= htmlspecialchars($message) ?></div>
@@ -145,5 +207,25 @@ $seedLots = $pdo->query("SELECT id, variety, organic_status, certificate_valid_u
 
     <a href="dashboard.php">← Terug naar Dashboard</a>
 </div>
+
+<!-- FORMULIER seed_inventory -->
+<?php if (isset($_GET['action']) && $_GET['action'] == 'add_new'): ?>
+<div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px; border: 1px solid #ddd;">
+    <h2>➕ Nieuw Zaadlot</h2>
+    <?php if (isset($success_msg_seed_inventory)): ?><div style="color: green; margin-bottom: 10px; font-weight:bold;"><?php echo $success_msg_seed_inventory; ?></div><?php endif; ?>
+    <?php if (isset($error_msg_seed_inventory)): ?><div style="color: red; margin-bottom: 10px; font-weight:bold;"><?php echo $error_msg_seed_inventory; ?></div><?php endif; ?>
+    
+    <form method="POST">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+<div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Variëteit / Gewas</label><input type='text' name='variety' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Leverancier ID</label><input type='number' name='supplier_id' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Lot Nummer</label><input type='text' name='lot_number' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Gewicht (gram)</label><input type='number' name='weight_grams' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Aankoopdatum</label><input type='date' name='purchase_date' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Biologisch?</label><select name='is_organic' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;'><option value='1'>1</option><option value='0'>0</option></select></div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button type="submit" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">💾 Opslaan</button>
+            <a href="?" style="margin-left: 10px; text-decoration: none; color: #555;">Annuleren</a>
+        </div>
+    </form>
+</div>
+<?php endif; ?>
+
 </body>
 </html>

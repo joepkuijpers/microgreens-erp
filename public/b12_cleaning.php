@@ -37,6 +37,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $agents = $db->query("SELECT id, name, brand, is_organic_approved, certificate_ref FROM cleaning_agents ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 $logs = $db->query("SELECT cl.*, ca.is_organic_approved as agent_approved FROM cleaning_logs cl LEFT JOIN cleaning_agents ca ON cl.supplier_id = ca.id ORDER BY cl.cleaned_at DESC LIMIT 10")->fetchAll(PDO::FETCH_ASSOC);
+
+// --- TOEVOEGEN LOGICA cleaning_logs ---
+if (isset($_GET['action']) && $_GET['action'] == 'add_new' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    try {
+        $cols_cleaning_logs = [];
+        $vals_cleaning_logs = [];
+        $bind_cleaning_logs = [];
+
+        if (isset($_POST['object_name']) && $_POST['object_name'] != '') {
+            $cols_cleaning_logs[] = "object_name";
+            $vals_cleaning_logs[] = "?";
+            $bind_cleaning_logs[] = $_POST['object_name'];
+        }
+
+        if (isset($_POST['product_name']) && $_POST['product_name'] != '') {
+            $cols_cleaning_logs[] = "product_name";
+            $vals_cleaning_logs[] = "?";
+            $bind_cleaning_logs[] = $_POST['product_name'];
+        }
+
+        if (isset($_POST['method']) && $_POST['method'] != '') {
+            $cols_cleaning_logs[] = "method";
+            $vals_cleaning_logs[] = "?";
+            $bind_cleaning_logs[] = $_POST['method'];
+        }
+
+        if (isset($_POST['cleaned_at']) && $_POST['cleaned_at'] != '') {
+            $cols_cleaning_logs[] = "cleaned_at";
+            $vals_cleaning_logs[] = "?";
+            $bind_cleaning_logs[] = $_POST['cleaned_at'];
+        }
+
+        if (isset($_POST['operator_name']) && $_POST['operator_name'] != '') {
+            $cols_cleaning_logs[] = "operator_name";
+            $vals_cleaning_logs[] = "?";
+            $bind_cleaning_logs[] = $_POST['operator_name'];
+        }
+
+        if (isset($_POST['is_validated']) && $_POST['is_validated'] != '') {
+            $cols_cleaning_logs[] = "is_validated";
+            $vals_cleaning_logs[] = "?";
+            $bind_cleaning_logs[] = $_POST['is_validated'];
+        }
+
+        if (!empty($cols_cleaning_logs)) {
+            $sql = "INSERT INTO cleaning_logs (" . implode(",", $cols_cleaning_logs) . ") VALUES (" . implode(",", $vals_cleaning_logs) . ")";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($bind_cleaning_logs);
+            $success_msg_cleaning_logs = "✅ Reiniging succesvol toegevoegd!";
+        }
+    } catch (Exception $e) {
+        $error_msg_cleaning_logs = "Fout: " . $e->getMessage();
+    }
+}
+// --- EINDE TOEVOEGEN LOGICA ---
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -63,6 +119,12 @@ $logs = $db->query("SELECT cl.*, ca.is_organic_approved as agent_approved FROM c
 <div style="padding:20px;"><a href="dashboard.php" style="background:#2c3e50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">← Terug naar Dashboard</a></div>
 <div class="container">
     <h1>🧼 B12: Reiniging & Hygiëne</h1>
+    <div style="margin: 20px 0; padding: 15px; background: #e8f5e9; border-radius: 5px; border-left: 5px solid #27ae60;">
+        <a href="?action=add_new" style="text-decoration: none; color: #27ae60; font-weight: bold; font-size: 1.1em;">
+            ➕ Nieuwe Reiniging
+        </a>
+    </div>
+    
     <?= $msg ?>
     
     <form method="POST">
@@ -126,5 +188,25 @@ function updateAgentInfo() {
     else { infoDiv.innerHTML = ""; }
 }
 </script>
+
+<!-- FORMULIER cleaning_logs -->
+<?php if (isset($_GET['action']) && $_GET['action'] == 'add_new'): ?>
+<div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px; border: 1px solid #ddd;">
+    <h2>➕ Nieuwe Reiniging</h2>
+    <?php if (isset($success_msg_cleaning_logs)): ?><div style="color: green; margin-bottom: 10px; font-weight:bold;"><?php echo $success_msg_cleaning_logs; ?></div><?php endif; ?>
+    <?php if (isset($error_msg_cleaning_logs)): ?><div style="color: red; margin-bottom: 10px; font-weight:bold;"><?php echo $error_msg_cleaning_logs; ?></div><?php endif; ?>
+    
+    <form method="POST">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+<div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Object / Ruimte</label><input type='text' name='object_name' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Gebruikt Middel</label><input type='text' name='product_name' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Methode</label><input type='text' name='method' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Datum/Tijd</label><input type='datetime-local' name='cleaned_at' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Uitvoerder</label><input type='text' name='operator_name' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;' required></div><div><label style='display:block; margin-bottom:5px; font-weight:bold;'>Gevalideerd?</label><select name='is_validated' style='width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;'><option value='1'>1</option><option value='0'>0</option></select></div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button type="submit" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">💾 Opslaan</button>
+            <a href="?" style="margin-left: 10px; text-decoration: none; color: #555;">Annuleren</a>
+        </div>
+    </form>
+</div>
+<?php endif; ?>
+
 </body>
 </html>
