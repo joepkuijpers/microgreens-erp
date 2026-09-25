@@ -1,0 +1,58 @@
+<?php
+ini_set("display_errors", 1); error_reporting(E_ALL);
+$db_path = "/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite";
+if (!file_exists($db_path)) { die("DB niet gevonden: $db_path"); }
+try { $db = new PDO("sqlite:$db_path"); $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); } 
+catch (Exception $e) { die("DB Fout: " . $e->getMessage()); }
+
+if (isset($_GET["load_pdf"])) {
+    $pid = (int)$_GET["load_pdf"];
+    $stmt = $db->prepare("SELECT pu.*, fi.product_name FROM packaging_units pu JOIN finished_inventory fi ON pu.finished_inventory_id = fi.id WHERE pu.id = ?");
+    $stmt->execute([$pid]); $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        header("Content-Type: text/html; charset=utf-8");
+        echo "<!DOCTYPE html><html><head><title>Pakbon {$row['package_code']}</title><style>body{font-family:sans-serif;padding:40px;} .box{border:2px solid #333;padding:30px;} table{width:100%;} th,td{padding:10px;border-bottom:1px solid #ccc;text-align:left;}</style></head><body>
+</body></html>";
+        exit;
+    }
+}
+
+$msg = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $fid = (int)($_POST["fid"] ?? 0); $kg = (float)($_POST["kg"] ?? 0);
+    if ($fid > 0 && $kg > 0) {
+        try {
+            $grams = $kg * 1000; $code = "PKG-" . date("YmdHis") . "-" . $fid . "-" . rand(100,999);
+            $db->prepare("INSERT INTO packaging_units (finished_inventory_id, package_code, total_weight_g, packaging_date, qr_data, status) VALUES (?, ?, ?, datetime('now'), ?, 'AVAILABLE')")->execute([$fid, $code, $grams, $_POST["notes"] ?? "Joep"]);
+            $msg = "<div style='color:green;font-weight:bold'>✅ SUCCES: $kg kg verpakt!</div>";
+        } catch (Exception $e) { $msg = "<div style='color:red'>❌ " . $e->getMessage() . "</div>"; }
+    }
+}
+$items = $db->query("SELECT id, product_name, weight_grams FROM finished_inventory ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+$logs = $db->query("SELECT id, total_weight_g, package_code, packaging_date, status FROM packaging_units ORDER BY packaging_date DESC LIMIT 10")->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>B09 Verpakking</title>
+<style>body{font-family:sans-serif;background:#f4f4f4;padding:20px;} .box{max-width:600px;margin:0 auto;background:#fff;padding:20px;border-radius:8px;} select,input,button{width:100%;padding:10px;margin:10px 0;box-sizing:border-box;} button{background:#007bff;color:white;border:none;font-size:18px;} .log{background:#f9f9f9;padding:10px;margin:5px 0;display:flex;justify-content:space-between;align-items:center;} .pdf{background:#28a745;color:white;padding:5px 10px;text-decoration:none;border-radius:4px;font-size:12px;}</style>
+</head><body>
+<div style="padding:20px;"><a href="dashboard.php" style="background:#2c3e50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">← Terug naar Dashboard</a></div>
+<div class='box'>
+<h1>📦 B09 Verpakking</h1>
+<?= $msg ?>
+<form method='POST'>
+<label>Kies Oogst:</label><select name='fid' required><option value=''>-- Kies --</option><?php foreach($items as $i): ?><option value='<?= $i["id"] ?>'><?= htmlspecialchars($i["product_name"]) ?> (<?= $i["weight_grams"] ?>g)</option><?php endforeach; ?></select>
+<label>Gewicht (kg):</label><input type='number' step='0.001' name='kg' required>
+<label>Notitie:</label><input type='text' name='notes' value='Joep'>
+<button type='submit'>VERPAKKEN</button>
+</form>
+<h3>Recent:</h3>
+<?php foreach($logs as $l): ?>
+<div class='log'><span><strong><?= $l["package_code"] ?></strong> (<?= $l["total_weight_g"] ?>g)</span><a href='?load_pdf=<?= $l["id"] ?>' class='pdf'>📄 PDF</a></div>
+<?php endforeach; ?>
+</div>
+
+<div style="padding:20px;text-align:center;margin-top:20px;">
+    <button onclick="window.print()" style="background:#27ae60;color:white;border:none;padding:15px 30px;font-size:16px;border-radius:5px;cursor:pointer;">🖨️ Print Pakbon / Label</button>
+</div>
+<style>@media print{button,no-print{display:none}}</style>
+

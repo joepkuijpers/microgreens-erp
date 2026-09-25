@@ -112,6 +112,7 @@ $seedInventory = $pdo->query("SELECT si.id, sl.variety, si.stock_grams, s.name a
     </style>
 </head>
 <body>
+<div style="padding:20px;"><a href="dashboard.php" style="background:#2c3e50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">← Terug naar Dashboard</a></div>
 <div class="container">
     <h1>🌱 B02: Start Kieming</h1>
     <?php if ($message): ?>
@@ -154,5 +155,32 @@ $seedInventory = $pdo->query("SELECT si.id, sl.variety, si.stock_grams, s.name a
     </form>
     <a href="dashboard.php">← Terug</a>
 </div>
-</body>
-</html>
+
+    <div class="no-print" style="margin-top:30px;">
+        <h2>🌱 Tray Overzicht (Hokjes)</h2>
+        <p>Klik op een hokje om de status te wijzigen.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(60px, 1fr)); gap:10px;">
+            <?php for($i=1; $i<=20; $i++): ?>
+                <div onclick="toggleTray(<?= $i ?>)" id="tray-<?= $i ?>" style="height:60px; background:#eee; border:2px solid #ccc; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:bold; border-radius:5px;">
+                    T-<?= $i ?>
+                </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+    <script>
+    function toggleTray(id) {
+        var el = document.getElementById('tray-'+id);
+        if (el.style.background === 'lightgreen') {
+            el.style.background = '#eee';
+            el.style.borderColor = '#ccc';
+            el.innerText = 'T-'+id;
+        } else {
+            el.style.background = 'lightgreen';
+            el.style.borderColor = 'green';
+            el.innerText = '✓';
+        }
+        // Hier zou je een AJAX call doen om het op te slaan in de DB
+        console.log('Tray '+id+' toggled');
+    }
+    </script>
+    </body>

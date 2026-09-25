@@ -1,0 +1,142 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$dbPath = '/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite';
+
+try {
+    $db = new PDO('sqlite:' . $dbPath);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    $cols = $db->query("PRAGMA table_info(finished_inventory)")->fetchAll(PDO::FETCH_COLUMN, 1);
+    
+    $idCol = 'id';
+    $qtyCol = 'weight_grams'; // We weten nu dat het grams zijn
+    if (!in_array($qtyCol, $cols)) {
+        foreach(['weight', 'quantity', 'amount', 'qty'] as $c) { if(in_array($c, $cols)) { $qtyCol = $c; break; } }
+    }
+    if (!in_array($qtyCol, $cols) && count($cols) > 3) { $qtyCol = $cols[3]; }
+    
+    $refCol = 'harvest_id';
+    if (!in_array($refCol, $cols)) {
+        foreach(['batch_id', 'product_id'] as $c) { if(in_array($c, $cols)) { $refCol = $c; break; } }
+    }
+    if (!in_array($refCol, $cols) && count($cols) > 1) { $refCol = $cols[1]; }
+
+} catch (PDOException $e) {
+    die("DB Fout: " . $e->getMessage());
+}
+
+$msg = "";
+$msgType = "";
+$items = [];
+
+try {
+    $sql = "SELECT \"$idCol\" as id, \"$qtyCol\" as q, \"$refCol\" as ref FROM finished_inventory WHERE \"$qtyCol\" > 0";
+    $items = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $msg = "Fout: " . $e->getMessage();
+    $msgType = "error";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        $db->beginTransaction();
+        $fid = intval($_POST['finished_inventory_id']);
+        // Let op: input is in KG, maar DB is in GRAMS. We moeten converteren!
+        $kgInput = floatval($_POST['weight']);
+        $w = $kgInput * 1000; // Omrekenen naar grams voor de DB
+        $p = floatval($_POST['sale_price_eur']);
+        $pn = $_POST['product_name'] ?? 'Microgreens';
+        
+        $stmt = $db->prepare("SELECT \"$qtyCol\" as q, \"$refCol\" as r FROM finished_inventory WHERE \"$idCol\" = :id");
+        $stmt->execute(['id' => $fid]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$row) throw new Exception("Niet gevonden");
+        if (floatval($row['q']) < $w) throw new Exception("Te weinig voorraad (Beschikbaar: " . round($row['q']/1000, 2) . " kg)");
+        
+        $ins = $db->prepare("INSERT INTO packaging_units (finished_inventory_id, batch_id, product_name, weight, sale_price_eur, status, packaged_date) VALUES (:f, :b, :p, :w, :s, 'PACKAGED', datetime('now'))");
+        // We slaan het gewicht in KG op in packaging_units (standaard), maar trekken grams af van voorraad
+        $ins->execute(['f' => $fid, 'b' => $row['r'], 'p' => $pn, 'w' => $kgInput, 's' => $p]);
+        
+        $upd = $db->prepare("UPDATE finished_inventory SET \"$qtyCol\" = \"$qtyCol\" - :w WHERE \"$idCol\" = :id");
+        $upd->execute(['w' => $w, 'id' => $fid]);
+        
+        $db->commit();
+        $msg = "✅ Succes verpakt!";
+        $msgType = "success";
+        
+        $u = $_SESSION['user_id'] ?? 'guest';
+        $d = microtime(true) - ($_SERVER['REQUEST_TIME_FLOAT'] ?? time());
+        $l = $db->prepare("INSERT INTO user_activity_log (user_id, module, action, duration_seconds, timestamp) VALUES (:u,'B09','pack',:d,datetime('now'))");
+        $l->execute(['u'=>$u,'d'=>round($d,3)]);
+    } catch (Exception $e) {
+        $db->rollBack();
+        $msg = "❌ " . $e->getMessage();
+        $msgType = "error";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>B09 Verpakking</title>
+<style>
+body{font-family:sans-serif;padding:20px;background:#f4f4f4;}
+.box{background:#fff;padding:20px;max-width:500px;margin:0 auto;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+h1{margin-top:0;color:#333;}
+label{font-weight:bold;display:block;margin-top:15px;color:#555;}
+input,select{width:100%;padding:12px;margin-top:5px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;font-size:16px;}
+button{width:100%;padding:15px;margin-top:20px;background:#28a745;color:#fff;border:none;border-radius:4px;font-size:18px;font-weight:bold;cursor:pointer;}
+button:hover{background:#218838;}
+.ok{background:#d4edda;color:#155724;padding:15px;border-radius:4px;margin-bottom:15px;border:1px solid #c3e6cb;}
+.err{background:#f8d7da;color:#721c24;padding:15px;border-radius:4px;margin-bottom:15px;border:1px solid #f5c6cb;}
+.dbg{background:#e9ecef;padding:10px;font-size:0.85em;margin-bottom:15px;border-radius:4px;color:#495057;}
+.small{font-size:0.85em;color:#666;margin-top:2px;}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>📦 B09 Verpakking</h1>
+
+<div class="dbg">
+    <strong>Debug Info:</strong><br>
+    Kolommen: <?= implode(", ", $cols) ?><br>
+    Gebruikt: ID=<?= $idCol ?>, Qty=<?= $qtyCol ?> (waarde in grams), Ref=<?= $refCol ?>
+</div>
+
+<?php if($msg): ?><div class="<?= $msgType ?>"><?= htmlspecialchars($msg) ?></div><?php endif; ?>
+
+<form method="POST">
+    <label for="batch">Kies Oogstpartij:</label>
+    <select name="finished_inventory_id" id="batch" required>
+        <option value="">-- Selecteer een partij --</option>
+        <?php foreach($items as $i): ?>
+        <option value="<?= $i['id'] ?>">
+            Partij #<?= $i['ref'] ?> - Beschikbaar: <?= number_format($i['q']/1000, 2) ?> kg
+        </option>
+        <?php endforeach; ?>
+    </select>
+
+    <label for="pname">Product Naam (voor op label):</label>
+    <input type="text" id="pname" name="product_name" value="Microgreens Mix" placeholder="Bijv. Broccoli Microgreens" required>
+
+    <label for="weight">Gewicht te verpakken (in kg):</label>
+    <input type="number" id="weight" step="0.01" name="weight" placeholder="0.00" required>
+    <div class="small">Voer het gewicht in kilogrammen in (bijv. 0.25 voor 250g).</div>
+
+    <label for="price">Verkoopprijs per kg (€):</label>
+    <input type="number" id="price" step="0.01" name="sale_price_eur" value="25.00" placeholder="0.00" required>
+
+    <button type="submit">Verpakken & Opslaan</button>
+</form>
+
+<div style="margin-top:20px; text-align:center;">
+    <a href="dashboard.php" style="color:#007bff;text-decoration:none;">&larr; Terug naar Dashboard</a>
+</div>
+</div>
+</body>
+</html>

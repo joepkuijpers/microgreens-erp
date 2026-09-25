@@ -98,6 +98,7 @@ $allRecords = $pdo->query("SELECT gr.id, sl.variety, t.tray_code, r.name as rack
     </style>
 </head>
 <body>
+<div style="padding:20px;"><a href="dashboard.php" style="background:#2c3e50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">← Terug naar Dashboard</a></div>
 <div class="container">
     <h1>🧺 B07: Oogst Registratie</h1>
     <?php if ($message): ?>
