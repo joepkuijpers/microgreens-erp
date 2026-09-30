@@ -3,7 +3,7 @@ error_reporting(0);
 ini_set('display_errors', 0);
 session_start();
 
-$DB_PATH = '/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite';
+$DB_PATH = '/var/www/html/goeiegroenedatatest/PHP/database/goeiegroenedatatest.sqlite';
 
 // Language Setup
 if (isset($_GET['lang'])) $_SESSION['lang'] = $_GET['lang'];
@@ -168,7 +168,7 @@ li{margin-bottom:5px;}
         </a>
         
         <!-- Card 2: Harvest -->
-        <a href="b07_harvest_readiness.php">
+        <a href="b07_harvest.php">
         <div class="card" style="border-top-color:#27ae60;"><h3><?= $t['o'] ?></h3><div class="val"><?= $stats['o'] ?></div></div>
         </a>
         
