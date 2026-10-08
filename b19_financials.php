@@ -3,7 +3,7 @@ ini_set("display_errors", 1);
 error_reporting(E_ALL);
 session_start();
 
-$dbPath = __DIR__ . "/../database/MicrogreensERP_Live.sqlite";
+$dbPath = __DIR__ . "/database/MicrogreensERP_Live.sqlite";
 if (!file_exists($dbPath)) { die("Database niet gevonden"); }
 
 try {

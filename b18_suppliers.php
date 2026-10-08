@@ -2,7 +2,7 @@
 // B18 Supplier Management - FINAL FIX (Null Safety + Delete + Date Click)
 ini_set("display_errors", 1); error_reporting(E_ALL);
 
-$db_path = "/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite";
+$db_path = "/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite";
 if (!file_exists($db_path)) { die("DB niet gevonden"); }
 
 try {

@@ -3,7 +3,7 @@
 $dbPath = __DIR__ . '/../database/MicrogreensERP_Live.sqlite';
 if (!file_exists($dbPath)) {
     // Fallback als pad anders is
-    $dbPath = '/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite';
+    $dbPath = '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
 }
 
 try {

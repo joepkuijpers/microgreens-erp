@@ -6,7 +6,7 @@
  */
 
 // Database pad
-$DB_PATH = '/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite';
+$DB_PATH = '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
 
 // Controleer op POST actie (Print status update)
 $message = '';

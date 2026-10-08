@@ -2,7 +2,7 @@
 error_reporting(0);
 ini_set('display_errors', 0);
 session_start();
-$DB_PATH = '/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite';
+$DB_PATH = '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
 $db = new SQLite3($DB_PATH);
 
 if (isset($_GET['lang'])) $_SESSION['lang'] = $_GET['lang'];

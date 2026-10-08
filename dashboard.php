@@ -1,7 +1,7 @@
 <?php
 ini_set("display_errors", 1); error_reporting(E_ALL);
-include __DIR__ . "/../includes/language.php";
-$db = __DIR__ . "/../database/MicrogreensERP_Live.sqlite";
+include __DIR__ . "/includes/language.php";
+$db = __DIR__ . "/database/MicrogreensERP_Live.sqlite";
 if (!file_exists($db)) die("DB niet gevonden");
 try { $pdo = new PDO("sqlite:$db"); $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); } 
 catch (PDOException $e) { die("DB Fout: " . $e->getMessage()); }
