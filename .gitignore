@@ -9,3 +9,4 @@ backups/
 logs/
 .DS_Store
 Thumbs.db
+public_DEPRECATED_DO_NOT_USE/
