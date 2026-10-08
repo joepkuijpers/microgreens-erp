@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/app/includes/auth.php';
+require_once __DIR__ . '/app/includes/language.php';
 require_once __DIR__ . '/app/includes/sidebar.php'; // Zorg dat dit pad klopt in jouw structuur
 // Fallback als sidebar niet direct laadt:
 // echo "<html><body><h1>B10 Lighting Status</h1>";
