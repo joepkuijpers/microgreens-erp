@@ -65,7 +65,7 @@ $modules = [
 ['id'=>'B11','file'=>'b11_packaging.php','key'=>'module_b11'],
 ['id'=>'B12','file'=>'b12_cleaning.php','key'=>'module_b12'],
 ['id'=>'B13','file'=>'b13_energy.php','key'=>'module_b13'],
-['id'=>'B14','file'=>'b14_water_usage.php','key'=>'module_b14'],
+['id'=>'B14','file'=>'b14_water_irrigation.php','key'=>'module_b14'],
 ['id'=>'B15','file'=>'b15_substrate.php','key'=>'module_b15'],
 ['id'=>'B16','file'=>'b16_task_scheduler.php','key'=>'module_b16'],
 ['id'=>'B17','file'=>'b17_staff.php','key'=>'module_b17'],
