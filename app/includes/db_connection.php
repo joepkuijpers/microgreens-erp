@@ -12,7 +12,7 @@ function getDbConnection() {
         $dbName = 'MicrogreensERP_Development.sqlite';
     } else {
         // Linux Production (Raspberry Pi)
-        $baseDir = '/var/www/html/microgreens/PHP/database';
+        $baseDir = '/var/www/html/microgreens/database';
         $dbName = 'MicrogreensERP_Live.sqlite';
     }
 
