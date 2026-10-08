@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../app/db_connect.php";
+require_once __DIR__ . "/app/db_connect.php";
 
 $batches = $db->query("SELECT * FROM grow_batches ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>

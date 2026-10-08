@@ -1,6 +1,6 @@
 ﻿<?php
-require_once __DIR__ . '/../app/includes/db_connect.php';
-require_once __DIR__ . '/../app/includes/layout_start.php';
+require_once __DIR__ . '/app/includes/db_connect.php';
+require_once __DIR__ . '/app/includes/layout_start.php';
 $batches = $db->query("SELECT * FROM production_batches ORDER BY completed_at DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="container" style="max-width: 1200px; margin: 20px auto; font-family: sans-serif;">
@@ -30,4 +30,4 @@ $batches = $db->query("SELECT * FROM production_batches ORDER BY completed_at DE
         </tbody>
     </table>
 </div>
-<?php require_once __DIR__ . '/../app/includes/layout_end.php'; ?>
+<?php require_once __DIR__ . '/app/includes/layout_end.php'; ?>
