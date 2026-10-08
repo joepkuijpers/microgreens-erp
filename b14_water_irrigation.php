@@ -21,7 +21,7 @@ $ph_min = 5.5; $ph_max = 6.5; $ec_max = 1.5;
 // --- VERWERKEN FORMULIER ---
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if($_POST['type']=='water'){
-        $stmt=$db->prepare("INSERT INTO water_measurements (log_date,log_time,source_type,ph_value,ec_value,temperature,operator_name,notes) VALUES (:d,time('now','localtime'),:s,:p,:e,:t,:o,:n)");
+        $stmt=$db->prepare("INSERT INTO water_measurements (log_date,log_time,source_type,ph_value,ec_value,temperature,operator_name,notes,rack_id) VALUES (:d,time('now','localtime'),:s,:p,:e,:t,:o,:n,:r)");
         $stmt->bindValue(':d',$_POST['date'],SQLITE3_TEXT); 
         $stmt->bindValue(':s',$_POST['source'],SQLITE3_TEXT);
         $stmt->bindValue(':p',$_POST['ph'],SQLITE3_FLOAT); 
@@ -29,16 +29,18 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $stmt->bindValue(':t',$_POST['temp'],SQLITE3_FLOAT);
         $stmt->bindValue(':o',$_POST['operator'],SQLITE3_TEXT);
         $stmt->bindValue(':n',$_POST['notes'],SQLITE3_TEXT);
-        if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
+        $stmt->bindValue(':r', $_POST['rack'] ?? '', SQLITE3_TEXT);
+if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
     } elseif($_POST['type']=='irrigation'){
-        $stmt=$db->prepare("INSERT INTO irrigation_logs (log_date,log_time,zone_name,duration_min,volume_liters,operator_name,notes) VALUES (:d,time('now','localtime'),:z,:dur,:v,:o,:n)");
+        $stmt=$db->prepare("INSERT INTO irrigation_logs (log_date,log_time,zone_name,duration_min,volume_liters,operator_name,notes,rack_id) VALUES (:d,time('now','localtime'),:z,:dur,:v,:o,:n,:r)");
         $stmt->bindValue(':d',$_POST['date'],SQLITE3_TEXT);
         $stmt->bindValue(':z',$_POST['zone'],SQLITE3_TEXT);
         $stmt->bindValue(':dur',$_POST['duration'],SQLITE3_INTEGER);
         $stmt->bindValue(':v',$_POST['volume'],SQLITE3_FLOAT);
         $stmt->bindValue(':o',$_POST['operator'],SQLITE3_TEXT);
         $stmt->bindValue(':n',$_POST['notes'],SQLITE3_TEXT);
-        if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
+        $stmt->bindValue(':r', $_POST['rack'] ?? '', SQLITE3_TEXT);
+if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
     }
 }
 ?>
