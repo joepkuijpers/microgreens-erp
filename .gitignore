@@ -9,3 +9,4 @@
 # Uitgefaseerd werk / backups — niet in Git
 archive/
 *.bak
+*.bak[0-9]
