@@ -5,3 +5,7 @@
 *.sqlite-journal
 *.backup
 *.log
+
+# Uitgefaseerd werk / backups — niet in Git
+archive/
+*.bak
