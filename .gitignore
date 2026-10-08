@@ -1,12 +1,7 @@
-database/*.sqlite
-database/*.sqlite-journal
-database/*.sqlite-wal
-*.bak*
+# SQLite runtime-state — nooit committen
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
 *.backup
-*.old
-backups/
 *.log
-logs/
-.DS_Store
-Thumbs.db
-public_DEPRECATED_DO_NOT_USE/
