@@ -1,5 +1,5 @@
 <?php
-$dbPath = '/var/www/html/database/MicrogreensERP_Live.sqlite';
+$dbPath = '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
 if (!file_exists($dbPath)) { http_response_code(500); echo json_encode(['error' => 'DB niet gevonden']); exit; }
 try {
     $db = new PDO("sqlite:$dbPath");
