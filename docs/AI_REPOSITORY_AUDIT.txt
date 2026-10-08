@@ -1,0 +1,544 @@
+=== REPOSITORY ===
+C:\Users\joepk\Downloads\microgreens-erp
+
+=== GIT STATUS ===
+?? Desktop.ini
+?? docs/02_strategic-foundation/00_0engineering-rules.md
+?? docs/02_strategic-foundation/00_intruct-new-chat.md
+?? docs/02_strategic-foundation/00_project-standard.md
+?? docs/02_strategic-foundation/Authors-note.md
+?? docs/02_strategic-foundation/Introduction_-_Rethinking_Preservation.md
+?? docs/02_strategic-foundation/Preface_-_Preservation_Energy_Architecture.md
+?? docs/02_strategic-foundation/engineering-extensions/01_freeze-drying-as-controlled-water-transport.md
+?? docs/02_strategic-foundation/engineering-extensions/02_packaging-as-an-engineering-system.md
+?? docs/02_strategic-foundation/writing_style_guide.md
+?? docs/Ai/microgreens-erp-ai-context/AI_CONTEXT.md
+?? docs/Ai/microgreens-erp-ai-context/AI_CONTEXT.zip
+?? docs/Writing-philosophy.md
+
+=== BRANCH ===
+* feature/dashboard-professional 36bdf5c [origin/feature/dashboard-professional] Edit chapters 1-28 NL and EN
+
+=== RECENT COMMITS ===
+36bdf5c Edit chapters 1-28 NL and EN
+d34a8d1 Add Dutch strategic foundation and update English documents
+0d39a45 Add Dutch strategic foundation index
+2178fff Require login for interactive ERP access
+d9e24b3 Add secure ERP login foundation
+f8cb715 Add ERP user account schema
+ae9941b Allow safe Brix reading invalidation
+e682189 Add Brix measurement history and details
+d87f6f4 Add optional Brix measurement interface
+61fbe56 Add Brix measurement schema
+
+=== TRACKED DOCS ===
+docs/00_aproject-handbook.md
+docs/00_project_handbook.md
+docs/01_daily-wokflow.md
+docs/01_project-foundation/00_project-journey.md
+docs/01_project-foundation/01_vision.md
+docs/01_project-foundation/02_mission.md
+docs/01_project-foundation/03_core-values.md
+docs/01_project-foundation/04_thinking-framework.md
+docs/01_project-foundation/05_design-philosophy.md
+docs/01_project-foundation/06_founders-notes.md
+docs/01_project-foundation/07_ethics.md
+docs/01_project-foundation/08_guiding-principles.md
+docs/01_project-foundation/09_sustainability.md
+docs/01_project-foundation/10_long-term-strategy.md
+docs/01_project-foundation/11_operations-scalability.md
+docs/01_project-foundation/12_food-chain-strategy.md
+docs/01_project-foundation/13_safety-and-resilience-strategy.md
+docs/01_project-foundation/14_sensor-strategy.md
+docs/01_project-foundation/15_freeze-drying-strategy.md
+docs/01_project-foundation/16_automation-strategy.md
+docs/01_project-foundation/17_data-strategy.md
+docs/01_project-foundation/18_research-strategy.md
+docs/01_project-foundation/19-energy-strategy.md
+docs/01_project-foundation/20_ai-strategy.md
+docs/01_project-foundation/21_project-knowledge-repository.md
+docs/01_project-foundation/22_risk-strategy.md
+docs/01_project-foundation/23_future-technologies.md
+docs/01_project-foundation/24_human-flourishing-strategy.md
+docs/01_project-foundation/25-stewardship-and-governance.md
+docs/01_project-foundation/README.md
+docs/02_new-chat-prompt.md
+docs/02_strategic-foundation/01_what-are-we-really-preserving.md
+docs/02_strategic-foundation/02_why-does-biological-organisation-disappear.md
+docs/02_strategic-foundation/03_what-controls-the-speed-of-biological-change.md
+docs/02_strategic-foundation/04_why-does-temperature-change-biology.md
+docs/02_strategic-foundation/05_why-does-harvested-food-continue-to-breathe.md
+docs/02_strategic-foundation/06_who-performs-the-work-of-life.md
+docs/02_strategic-foundation/07_why-does-life-require-continuous-maintenance.md
+docs/02_strategic-foundation/08_why-does-oxidation-change-life.md
+docs/02_strategic-foundation/09_why-do-microorganisms-grow.md
+docs/02_strategic-foundation/10_why-does-food-lose-water.md
+docs/02_strategic-foundation/11_why-does-food-change-its-structure.md
+docs/02_strategic-foundation/12_why-do-molecules-change.md
+docs/02_strategic-foundation/13_why-are-proteins-so-important.md
+docs/02_strategic-foundation/14_why-does-life-build-carbohydrates.md
+docs/02_strategic-foundation/15_why-does-life-build-lipids.md
+docs/02_strategic-foundation/16_why-does-life-produce-colour.md
+docs/02_strategic-foundation/17_why-does-food-have-aroma-and-flavour.md
+docs/02_strategic-foundation/18_why-does-time-matter.md
+docs/02_strategic-foundation/19_how-does-preservation-work.md
+docs/02_strategic-foundation/20_why-does-drying-preserve-food.md
+docs/02_strategic-foundation/21_why-does-cooling-preserve-food.md
+docs/02_strategic-foundation/22_why-does-freezing-preserve-food.md
+docs/02_strategic-foundation/23_what-happens-when-food-thaws.md
+docs/02_strategic-foundation/24_why-does-freeze-drying-preserve-food.md
+docs/02_strategic-foundation/25_why-does-packaging-matter.md
+docs/02_strategic-foundation/26_why-does-food-quality-depend-on-logistics.md
+docs/02_strategic-foundation/27_what-happens-to-food-after-it-reaches-the-consumer.md
+docs/02_strategic-foundation/28_how-does-the-human-body-use-food.md
+docs/02_strategic-foundation/README.md
+docs/02_strategic-foundation/nl/01_what-are-we-really-preserving.md
+docs/02_strategic-foundation/nl/02_why-does-biological-organisation-disappear.md
+docs/02_strategic-foundation/nl/03_what-controls-the-speed-of-biological-change.md
+docs/02_strategic-foundation/nl/04_why-does-temperature-change-biology.md
+docs/02_strategic-foundation/nl/05_why-does-harvested-food-continue-to-breathe.md
+docs/02_strategic-foundation/nl/06_who-performs-the-work-of-life.md
+docs/02_strategic-foundation/nl/07_why-does-life-require-continuous-maintenance.md
+docs/02_strategic-foundation/nl/08_why-does-oxidation-change-life.md
+docs/02_strategic-foundation/nl/09_why-do-microorganisms-grow.md
+docs/02_strategic-foundation/nl/10_why-does-food-lose-water.md
+docs/02_strategic-foundation/nl/11_why-does-food-change-its-structure.md
+docs/02_strategic-foundation/nl/12_why-do-molecules-change.md
+docs/02_strategic-foundation/nl/13_why-are-proteins-so-important.md
+docs/02_strategic-foundation/nl/14_why-does-life-build-carbohydrates.md
+docs/02_strategic-foundation/nl/15_why-does-life-build-lipids.md
+docs/02_strategic-foundation/nl/16_why-does-life-produce-colour.md
+docs/02_strategic-foundation/nl/17_why-does-food-have-aroma-and-flavour.md
+docs/02_strategic-foundation/nl/18_why-does-time-matter.md
+docs/02_strategic-foundation/nl/19_how-does-preservation-work.md
+docs/02_strategic-foundation/nl/20_why-does-drying-preserve-food.md
+docs/02_strategic-foundation/nl/21_why-does-cooling-preserve-food.md
+docs/02_strategic-foundation/nl/22_why-does-freezing-preserve-food.md
+docs/02_strategic-foundation/nl/23_what-happens-when-food-thaws.md
+docs/02_strategic-foundation/nl/24_why-does-freeze-drying-preserve-food.md
+docs/02_strategic-foundation/nl/25_why-does-packaging-matter.md
+docs/02_strategic-foundation/nl/26_why-does-food-quality-depend-on-logistics.md
+docs/02_strategic-foundation/nl/27_what-happens-to-food-after-it-reaches-the-consumer.md
+docs/02_strategic-foundation/nl/28_how-does-the-human-body-use-food.md
+docs/02_strategic-foundation/nl/README.md
+docs/03_engineering/01_monitoring-architecture.md
+docs/03_engineering/02_measurement-strategy.md
+docs/03_engineering/03_sensor-selection.md
+docs/03_engineering/04_strategic-monitoring.md
+docs/03_engineering/05_portable-biological-laboratory.md
+docs/03_engineering/06_rack-architecture.md
+docs/03_engineering/07_connectors-and-cabling.md
+docs/03_engineering/08_power-distribution.md
+docs/03_engineering/09_sensor-network.md
+docs/03_engineering/10_climate-control.md
+docs/03_engineering/11_lighting.md
+docs/03_engineering/12_water-systems.md
+docs/03_engineering/13_experimental-inputs.md
+docs/03_engineering/14_freeze-dryer.md
+docs/03_engineering/15_energy.md
+docs/03_engineering/16_maintenance.md
+docs/03_engineering/17_future-technologies.md
+docs/03_engineering/18_humanitarian-nutrition-and-local-resilience.md
+docs/03_engineering/README.md
+docs/03_project-operating-manual.md
+docs/04_project-knowledge-base.md
+docs/05_software-architecture.md
+docs/06_database-planning.md
+docs/07_configuration-management.md
+docs/08_programming-standards.md
+docs/09_raspberry-pi.md
+docs/10_erp-modules.md
+docs/11_roadmap.md
+docs/12_changelog.md
+docs/13_known-issues.md
+docs/14_freeze-dryer.md
+docs/15_ai-automation.md
+docs/16_decisions.md
+docs/17_glossary.md
+docs/18_documentation-style-guide.md
+docs/19_foundation-audit.md
+docs/20_project-reference-system.md
+docs/21_project-status.md
+docs/22_documentation-standards.md
+docs/23_decision-framework.md
+docs/24_decision-records.md
+docs/25_stewardship-and-governance.md
+docs/26_knowledge-management.md
+docs/Biological production/01_integrated-pest-management-overview.md
+docs/Biological production/02_beneficial-organisms.md
+docs/Biological production/03_carnivorous-plants.md
+docs/Biological production/04_companion-and-indicator-plants.md
+docs/Biological production/05_pest-library.md.md
+docs/Biological production/06_disease-library.md
+docs/Biological production/07_environmental-correlations.md
+docs/Biological production/08_biological-monitoring.md
+docs/Biological production/09_species-library.md
+docs/Biological production/10_beneficial-microorganisms.md
+docs/Biological production/11_root-zone-health.md
+docs/Biological production/12_seed-health.md
+docs/Biological production/13_biodiversity.md
+docs/Biological production/14_integrated-crop-health.md
+docs/Biological production/READ-ME.md
+docs/README.md
+docs/Sops-and-operations/01_brix-measurement.md
+docs/archive/legacy-roadmap.txt
+docs/data-strategy.md
+docs/diagrams/README.md
+docs/images/README.md
+docs/references/README.md
+docs/templates/README.md
+docs/templates/bug_report_template.md
+docs/templates/changelog_template.md
+docs/templates/checklists/01_DEVELOPMENT_CHECKLIST.md
+docs/templates/checklists/02_TESTING_CHECKLIST.md
+docs/templates/checklists/03_DEPLOYMENT_CHECKLIST.md
+docs/templates/checklists/04_RELEASE_CHECKLIST.md
+docs/templates/checklists/05_BACKUP_CHECKLIST.md
+docs/templates/checklists/06_HARDWARE_CHECKLIST.md
+docs/templates/checklists/07_DATABASE_CHECKLIST.md
+docs/templates/checklists/08_SECURITY_CHECKLIST.md
+docs/templates/checklists/README.md
+docs/templates/decision_template.md
+docs/templates/markdown_templates/README.md
+docs/templates/markdown_templates/changelog_template.md
+docs/templates/markdown_templates/decision_template.md
+docs/templates/markdown_templates/feature_template.md
+docs/templates/markdown_templates/meeting_note_template.md
+docs/templates/markdown_templates/research_template.md
+docs/templates/markdown_templates/sop_template.md
+docs/templates/meeting_note_template.md
+docs/templates/sop_template.md
+docs/templates/sql_migration_template.sql
+
+=== ALL DOC FILES ===
+docs\00_aproject-handbook.md | 17409 bytes
+docs\00_project_handbook.md | 53366 bytes
+docs\01_daily-wokflow.md | 0 bytes
+docs\02_new-chat-prompt.md | 0 bytes
+docs\03_project-operating-manual.md | 0 bytes
+docs\04_project-knowledge-base.md | 0 bytes
+docs\05_software-architecture.md | 0 bytes
+docs\06_database-planning.md | 2708 bytes
+docs\07_configuration-management.md | 1476 bytes
+docs\08_programming-standards.md | 0 bytes
+docs\09_raspberry-pi.md | 7 bytes
+docs\10_erp-modules.md | 0 bytes
+docs\11_roadmap.md | 9217 bytes
+docs\12_changelog.md | 7 bytes
+docs\13_known-issues.md | 0 bytes
+docs\14_freeze-dryer.md | 7 bytes
+docs\15_ai-automation.md | 7 bytes
+docs\16_decisions.md | 0 bytes
+docs\17_glossary.md | 12652 bytes
+docs\18_documentation-style-guide.md | 11715 bytes
+docs\19_foundation-audit.md | 7 bytes
+docs\20_project-reference-system.md | 14939 bytes
+docs\21_project-status.md | 11859 bytes
+docs\22_documentation-standards.md | 4172 bytes
+docs\23_decision-framework.md | 2632 bytes
+docs\24_decision-records.md | 7486 bytes
+docs\25_stewardship-and-governance.md | 0 bytes
+docs\26_knowledge-management.md | 0 bytes
+docs\data-strategy.md | 4406 bytes
+docs\README.md | 7292 bytes
+docs\Writing-philosophy.md | 5074 bytes
+docs\01_project-foundation\00_project-journey.md | 9021 bytes
+docs\01_project-foundation\01_vision.md | 1562 bytes
+docs\01_project-foundation\02_mission.md | 2907 bytes
+docs\01_project-foundation\03_core-values.md | 9814 bytes
+docs\01_project-foundation\04_thinking-framework.md | 3160 bytes
+docs\01_project-foundation\05_design-philosophy.md | 6015 bytes
+docs\01_project-foundation\06_founders-notes.md | 4745 bytes
+docs\01_project-foundation\07_ethics.md | 8949 bytes
+docs\01_project-foundation\08_guiding-principles.md | 5405 bytes
+docs\01_project-foundation\09_sustainability.md | 10114 bytes
+docs\01_project-foundation\10_long-term-strategy.md | 9591 bytes
+docs\01_project-foundation\11_operations-scalability.md | 8796 bytes
+docs\01_project-foundation\12_food-chain-strategy.md | 7158 bytes
+docs\01_project-foundation\13_safety-and-resilience-strategy.md | 20857 bytes
+docs\01_project-foundation\14_sensor-strategy.md | 6609 bytes
+docs\01_project-foundation\15_freeze-drying-strategy.md | 8462 bytes
+docs\01_project-foundation\16_automation-strategy.md | 8739 bytes
+docs\01_project-foundation\17_data-strategy.md | 4714 bytes
+docs\01_project-foundation\18_research-strategy.md | 5028 bytes
+docs\01_project-foundation\19-energy-strategy.md | 11620 bytes
+docs\01_project-foundation\20_ai-strategy.md | 2790 bytes
+docs\01_project-foundation\21_project-knowledge-repository.md | 5178 bytes
+docs\01_project-foundation\22_risk-strategy.md | 14941 bytes
+docs\01_project-foundation\23_future-technologies.md | 16592 bytes
+docs\01_project-foundation\24_human-flourishing-strategy.md | 21036 bytes
+docs\01_project-foundation\25-stewardship-and-governance.md | 20950 bytes
+docs\01_project-foundation\README.md | 6820 bytes
+docs\02_strategic-foundation\00_0engineering-rules.md | 281 bytes
+docs\02_strategic-foundation\00_intruct-new-chat.md | 9828 bytes
+docs\02_strategic-foundation\00_project-standard.md | 39778 bytes
+docs\02_strategic-foundation\01_what-are-we-really-preserving.md | 14483 bytes
+docs\02_strategic-foundation\02_why-does-biological-organisation-disappear.md | 17841 bytes
+docs\02_strategic-foundation\03_what-controls-the-speed-of-biological-change.md | 15689 bytes
+docs\02_strategic-foundation\04_why-does-temperature-change-biology.md | 16187 bytes
+docs\02_strategic-foundation\05_why-does-harvested-food-continue-to-breathe.md | 15323 bytes
+docs\02_strategic-foundation\06_who-performs-the-work-of-life.md | 11665 bytes
+docs\02_strategic-foundation\07_why-does-life-require-continuous-maintenance.md | 10192 bytes
+docs\02_strategic-foundation\08_why-does-oxidation-change-life.md | 15981 bytes
+docs\02_strategic-foundation\09_why-do-microorganisms-grow.md | 14902 bytes
+docs\02_strategic-foundation\10_why-does-food-lose-water.md | 11440 bytes
+docs\02_strategic-foundation\11_why-does-food-change-its-structure.md | 7049 bytes
+docs\02_strategic-foundation\12_why-do-molecules-change.md | 7953 bytes
+docs\02_strategic-foundation\13_why-are-proteins-so-important.md | 10351 bytes
+docs\02_strategic-foundation\14_why-does-life-build-carbohydrates.md | 10881 bytes
+docs\02_strategic-foundation\15_why-does-life-build-lipids.md | 13039 bytes
+docs\02_strategic-foundation\16_why-does-life-produce-colour.md | 8174 bytes
+docs\02_strategic-foundation\17_why-does-food-have-aroma-and-flavour.md | 9326 bytes
+docs\02_strategic-foundation\18_why-does-time-matter.md | 6586 bytes
+docs\02_strategic-foundation\19_how-does-preservation-work.md | 4717 bytes
+docs\02_strategic-foundation\20_why-does-drying-preserve-food.md | 13382 bytes
+docs\02_strategic-foundation\21_why-does-cooling-preserve-food.md | 20964 bytes
+docs\02_strategic-foundation\22_why-does-freezing-preserve-food.md | 12447 bytes
+docs\02_strategic-foundation\23_what-happens-when-food-thaws.md | 16995 bytes
+docs\02_strategic-foundation\24_why-does-freeze-drying-preserve-food.md | 18804 bytes
+docs\02_strategic-foundation\25_why-does-packaging-matter.md | 26594 bytes
+docs\02_strategic-foundation\26_why-does-food-quality-depend-on-logistics.md | 19269 bytes
+docs\02_strategic-foundation\27_what-happens-to-food-after-it-reaches-the-consumer.md | 29089 bytes
+docs\02_strategic-foundation\28_how-does-the-human-body-use-food.md | 49614 bytes
+docs\02_strategic-foundation\Authors-note.md | 1874 bytes
+docs\02_strategic-foundation\Introduction_-_Rethinking_Preservation.md | 3680 bytes
+docs\02_strategic-foundation\Preface_-_Preservation_Energy_Architecture.md | 2655 bytes
+docs\02_strategic-foundation\README.md | 5680 bytes
+docs\02_strategic-foundation\writing_style_guide.md | 3416 bytes
+docs\02_strategic-foundation\engineering-extensions\01_freeze-drying-as-controlled-water-transport.md | 22884 bytes
+docs\02_strategic-foundation\engineering-extensions\02_packaging-as-an-engineering-system.md | 24769 bytes
+docs\02_strategic-foundation\nl\01_what-are-we-really-preserving.md | 15584 bytes
+docs\02_strategic-foundation\nl\02_why-does-biological-organisation-disappear.md | 19338 bytes
+docs\02_strategic-foundation\nl\03_what-controls-the-speed-of-biological-change.md | 17376 bytes
+docs\02_strategic-foundation\nl\04_why-does-temperature-change-biology.md | 17259 bytes
+docs\02_strategic-foundation\nl\05_why-does-harvested-food-continue-to-breathe.md | 17015 bytes
+docs\02_strategic-foundation\nl\06_who-performs-the-work-of-life.md | 12435 bytes
+docs\02_strategic-foundation\nl\07_why-does-life-require-continuous-maintenance.md | 11152 bytes
+docs\02_strategic-foundation\nl\08_why-does-oxidation-change-life.md | 17886 bytes
+docs\02_strategic-foundation\nl\09_why-do-microorganisms-grow.md | 16008 bytes
+docs\02_strategic-foundation\nl\10_why-does-food-lose-water.md | 12251 bytes
+docs\02_strategic-foundation\nl\11_why-does-food-change-its-structure.md | 7644 bytes
+docs\02_strategic-foundation\nl\12_why-do-molecules-change.md | 8502 bytes
+docs\02_strategic-foundation\nl\13_why-are-proteins-so-important.md | 10978 bytes
+docs\02_strategic-foundation\nl\14_why-does-life-build-carbohydrates.md | 12978 bytes
+docs\02_strategic-foundation\nl\15_why-does-life-build-lipids.md | 14391 bytes
+docs\02_strategic-foundation\nl\16_why-does-life-produce-colour.md | 8937 bytes
+docs\02_strategic-foundation\nl\17_why-does-food-have-aroma-and-flavour.md | 9837 bytes
+docs\02_strategic-foundation\nl\18_why-does-time-matter.md | 6827 bytes
+docs\02_strategic-foundation\nl\19_how-does-preservation-work.md | 5036 bytes
+docs\02_strategic-foundation\nl\20_why-does-drying-preserve-food.md | 14356 bytes
+docs\02_strategic-foundation\nl\21_why-does-cooling-preserve-food.md | 21346 bytes
+docs\02_strategic-foundation\nl\22_why-does-freezing-preserve-food.md | 13278 bytes
+docs\02_strategic-foundation\nl\23_what-happens-when-food-thaws.md | 18405 bytes
+docs\02_strategic-foundation\nl\24_why-does-freeze-drying-preserve-food.md | 19661 bytes
+docs\02_strategic-foundation\nl\25_why-does-packaging-matter.md | 28983 bytes
+docs\02_strategic-foundation\nl\26_why-does-food-quality-depend-on-logistics.md | 20427 bytes
+docs\02_strategic-foundation\nl\27_what-happens-to-food-after-it-reaches-the-consumer.md | 31578 bytes
+docs\02_strategic-foundation\nl\28_how-does-the-human-body-use-food.md | 53414 bytes
+docs\02_strategic-foundation\nl\README.md | 6434 bytes
+docs\03_engineering\01_monitoring-architecture.md | 3791 bytes
+docs\03_engineering\02_measurement-strategy.md | 4253 bytes
+docs\03_engineering\03_sensor-selection.md | 3567 bytes
+docs\03_engineering\04_strategic-monitoring.md | 3075 bytes
+docs\03_engineering\05_portable-biological-laboratory.md | 3429 bytes
+docs\03_engineering\06_rack-architecture.md | 3332 bytes
+docs\03_engineering\07_connectors-and-cabling.md | 2645 bytes
+docs\03_engineering\08_power-distribution.md | 2917 bytes
+docs\03_engineering\09_sensor-network.md | 2926 bytes
+docs\03_engineering\10_climate-control.md | 2677 bytes
+docs\03_engineering\11_lighting.md | 2829 bytes
+docs\03_engineering\12_water-systems.md | 2570 bytes
+docs\03_engineering\13_experimental-inputs.md | 2861 bytes
+docs\03_engineering\14_freeze-dryer.md | 3019 bytes
+docs\03_engineering\15_energy.md | 2436 bytes
+docs\03_engineering\16_maintenance.md | 2448 bytes
+docs\03_engineering\17_future-technologies.md | 2333 bytes
+docs\03_engineering\18_humanitarian-nutrition-and-local-resilience.md | 3574 bytes
+docs\03_engineering\README.md | 4875 bytes
+docs\Ai\microgreens-erp-ai-context\AI_CONTEXT.md | 2179 bytes
+docs\Ai\microgreens-erp-ai-context\AI_CONTEXT.zip | 1275 bytes
+docs\archive\legacy-roadmap.txt | 488 bytes
+docs\Biological production\01_integrated-pest-management-overview.md | 0 bytes
+docs\Biological production\02_beneficial-organisms.md | 4045 bytes
+docs\Biological production\03_carnivorous-plants.md | 4416 bytes
+docs\Biological production\04_companion-and-indicator-plants.md | 4237 bytes
+docs\Biological production\05_pest-library.md.md | 4294 bytes
+docs\Biological production\06_disease-library.md | 5238 bytes
+docs\Biological production\07_environmental-correlations.md | 5468 bytes
+docs\Biological production\08_biological-monitoring.md | 5286 bytes
+docs\Biological production\09_species-library.md | 4939 bytes
+docs\Biological production\10_beneficial-microorganisms.md | 4784 bytes
+docs\Biological production\11_root-zone-health.md | 5094 bytes
+docs\Biological production\12_seed-health.md | 4842 bytes
+docs\Biological production\13_biodiversity.md | 4838 bytes
+docs\Biological production\14_integrated-crop-health.md | 5228 bytes
+docs\Biological production\READ-ME.md | 1928 bytes
+docs\Diagrams\README.md | 0 bytes
+docs\Images\README.md | 471 bytes
+docs\references\README.md | 291 bytes
+docs\Sops-and-operations\01_brix-measurement.md | 8982 bytes
+docs\Templates\bug_report_template.md | 0 bytes
+docs\Templates\changelog_template.md | 7 bytes
+docs\Templates\decision_template.md | 7 bytes
+docs\Templates\meeting_note_template.md | 0 bytes
+docs\Templates\README.md | 214 bytes
+docs\Templates\sop_template.md | 0 bytes
+docs\Templates\sql_migration_template.sql | 0 bytes
+docs\Templates\checklists\01_DEVELOPMENT_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\02_TESTING_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\03_DEPLOYMENT_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\04_RELEASE_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\05_BACKUP_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\06_HARDWARE_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\07_DATABASE_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\08_SECURITY_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\README.md | 1043 bytes
+docs\Templates\markdown_templates\changelog_template.md | 0 bytes
+docs\Templates\markdown_templates\decision_template.md | 0 bytes
+docs\Templates\markdown_templates\feature_template.md | 7 bytes
+docs\Templates\markdown_templates\meeting_note_template.md | 0 bytes
+docs\Templates\markdown_templates\README.md | 2398 bytes
+docs\Templates\markdown_templates\research_template.md | 7 bytes
+docs\Templates\markdown_templates\sop_template.md | 0 bytes
+docs\Templates\unsaved files dont know path of\README.md | 222 bytes
+
+=== EMPTY MARKDOWN FILES ===
+C:\Users\joepk\Downloads\microgreens-erp\docs\01_daily-wokflow.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\02_new-chat-prompt.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\03_project-operating-manual.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\04_project-knowledge-base.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\05_software-architecture.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\08_programming-standards.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\10_erp-modules.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\13_known-issues.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\16_decisions.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\25_stewardship-and-governance.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\26_knowledge-management.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Biological production\01_integrated-pest-management-overview.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Diagrams\README.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\bug_report_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\meeting_note_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\sop_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\01_DEVELOPMENT_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\02_TESTING_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\03_DEPLOYMENT_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\04_RELEASE_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\05_BACKUP_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\06_HARDWARE_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\07_DATABASE_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\checklists\08_SECURITY_CHECKLIST.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\markdown_templates\changelog_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\markdown_templates\decision_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\markdown_templates\meeting_note_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\markdown_templates\sop_template.md
+
+=== RTF MARKDOWN FILES ===
+C:\Users\joepk\Downloads\microgreens-erp\docs\09_raspberry-pi.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\12_changelog.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\14_freeze-dryer.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\15_ai-automation.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\19_foundation-audit.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Ai\microgreens-erp-ai-context\AI_CONTEXT.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\changelog_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\decision_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\markdown_templates\feature_template.md
+C:\Users\joepk\Downloads\microgreens-erp\docs\Templates\markdown_templates\research_template.md
+
+=== STRATEGIC FOUNDATION ===
+docs\02_strategic-foundation\00_0engineering-rules.md | 281 bytes
+docs\02_strategic-foundation\00_intruct-new-chat.md | 9828 bytes
+docs\02_strategic-foundation\00_project-standard.md | 39778 bytes
+docs\02_strategic-foundation\01_what-are-we-really-preserving.md | 14483 bytes
+docs\02_strategic-foundation\02_why-does-biological-organisation-disappear.md | 17841 bytes
+docs\02_strategic-foundation\03_what-controls-the-speed-of-biological-change.md | 15689 bytes
+docs\02_strategic-foundation\04_why-does-temperature-change-biology.md | 16187 bytes
+docs\02_strategic-foundation\05_why-does-harvested-food-continue-to-breathe.md | 15323 bytes
+docs\02_strategic-foundation\06_who-performs-the-work-of-life.md | 11665 bytes
+docs\02_strategic-foundation\07_why-does-life-require-continuous-maintenance.md | 10192 bytes
+docs\02_strategic-foundation\08_why-does-oxidation-change-life.md | 15981 bytes
+docs\02_strategic-foundation\09_why-do-microorganisms-grow.md | 14902 bytes
+docs\02_strategic-foundation\10_why-does-food-lose-water.md | 11440 bytes
+docs\02_strategic-foundation\11_why-does-food-change-its-structure.md | 7049 bytes
+docs\02_strategic-foundation\12_why-do-molecules-change.md | 7953 bytes
+docs\02_strategic-foundation\13_why-are-proteins-so-important.md | 10351 bytes
+docs\02_strategic-foundation\14_why-does-life-build-carbohydrates.md | 10881 bytes
+docs\02_strategic-foundation\15_why-does-life-build-lipids.md | 13039 bytes
+docs\02_strategic-foundation\16_why-does-life-produce-colour.md | 8174 bytes
+docs\02_strategic-foundation\17_why-does-food-have-aroma-and-flavour.md | 9326 bytes
+docs\02_strategic-foundation\18_why-does-time-matter.md | 6586 bytes
+docs\02_strategic-foundation\19_how-does-preservation-work.md | 4717 bytes
+docs\02_strategic-foundation\20_why-does-drying-preserve-food.md | 13382 bytes
+docs\02_strategic-foundation\21_why-does-cooling-preserve-food.md | 20964 bytes
+docs\02_strategic-foundation\22_why-does-freezing-preserve-food.md | 12447 bytes
+docs\02_strategic-foundation\23_what-happens-when-food-thaws.md | 16995 bytes
+docs\02_strategic-foundation\24_why-does-freeze-drying-preserve-food.md | 18804 bytes
+docs\02_strategic-foundation\25_why-does-packaging-matter.md | 26594 bytes
+docs\02_strategic-foundation\26_why-does-food-quality-depend-on-logistics.md | 19269 bytes
+docs\02_strategic-foundation\27_what-happens-to-food-after-it-reaches-the-consumer.md | 29089 bytes
+docs\02_strategic-foundation\28_how-does-the-human-body-use-food.md | 49614 bytes
+docs\02_strategic-foundation\Authors-note.md | 1874 bytes
+docs\02_strategic-foundation\Introduction_-_Rethinking_Preservation.md | 3680 bytes
+docs\02_strategic-foundation\Preface_-_Preservation_Energy_Architecture.md | 2655 bytes
+docs\02_strategic-foundation\README.md | 5680 bytes
+docs\02_strategic-foundation\writing_style_guide.md | 3416 bytes
+docs\02_strategic-foundation\engineering-extensions\01_freeze-drying-as-controlled-water-transport.md | 22884 bytes
+docs\02_strategic-foundation\engineering-extensions\02_packaging-as-an-engineering-system.md | 24769 bytes
+docs\02_strategic-foundation\nl\01_what-are-we-really-preserving.md | 15584 bytes
+docs\02_strategic-foundation\nl\02_why-does-biological-organisation-disappear.md | 19338 bytes
+docs\02_strategic-foundation\nl\03_what-controls-the-speed-of-biological-change.md | 17376 bytes
+docs\02_strategic-foundation\nl\04_why-does-temperature-change-biology.md | 17259 bytes
+docs\02_strategic-foundation\nl\05_why-does-harvested-food-continue-to-breathe.md | 17015 bytes
+docs\02_strategic-foundation\nl\06_who-performs-the-work-of-life.md | 12435 bytes
+docs\02_strategic-foundation\nl\07_why-does-life-require-continuous-maintenance.md | 11152 bytes
+docs\02_strategic-foundation\nl\08_why-does-oxidation-change-life.md | 17886 bytes
+docs\02_strategic-foundation\nl\09_why-do-microorganisms-grow.md | 16008 bytes
+docs\02_strategic-foundation\nl\10_why-does-food-lose-water.md | 12251 bytes
+docs\02_strategic-foundation\nl\11_why-does-food-change-its-structure.md | 7644 bytes
+docs\02_strategic-foundation\nl\12_why-do-molecules-change.md | 8502 bytes
+docs\02_strategic-foundation\nl\13_why-are-proteins-so-important.md | 10978 bytes
+docs\02_strategic-foundation\nl\14_why-does-life-build-carbohydrates.md | 12978 bytes
+docs\02_strategic-foundation\nl\15_why-does-life-build-lipids.md | 14391 bytes
+docs\02_strategic-foundation\nl\16_why-does-life-produce-colour.md | 8937 bytes
+docs\02_strategic-foundation\nl\17_why-does-food-have-aroma-and-flavour.md | 9837 bytes
+docs\02_strategic-foundation\nl\18_why-does-time-matter.md | 6827 bytes
+docs\02_strategic-foundation\nl\19_how-does-preservation-work.md | 5036 bytes
+docs\02_strategic-foundation\nl\20_why-does-drying-preserve-food.md | 14356 bytes
+docs\02_strategic-foundation\nl\21_why-does-cooling-preserve-food.md | 21346 bytes
+docs\02_strategic-foundation\nl\22_why-does-freezing-preserve-food.md | 13278 bytes
+docs\02_strategic-foundation\nl\23_what-happens-when-food-thaws.md | 18405 bytes
+docs\02_strategic-foundation\nl\24_why-does-freeze-drying-preserve-food.md | 19661 bytes
+docs\02_strategic-foundation\nl\25_why-does-packaging-matter.md | 28983 bytes
+docs\02_strategic-foundation\nl\26_why-does-food-quality-depend-on-logistics.md | 20427 bytes
+docs\02_strategic-foundation\nl\27_what-happens-to-food-after-it-reaches-the-consumer.md | 31578 bytes
+docs\02_strategic-foundation\nl\28_how-does-the-human-body-use-food.md | 53414 bytes
+docs\02_strategic-foundation\nl\README.md | 6434 bytes
+
+=== AI CONTEXT ===
+docs\Ai\microgreens-erp-ai-context\AI_CONTEXT.md | 2179 bytes
+docs\Ai\microgreens-erp-ai-context\AI_CONTEXT.zip | 1275 bytes
+
+=== TEMPLATES ===
+docs\Templates\bug_report_template.md | 0 bytes
+docs\Templates\changelog_template.md | 7 bytes
+docs\Templates\decision_template.md | 7 bytes
+docs\Templates\meeting_note_template.md | 0 bytes
+docs\Templates\README.md | 214 bytes
+docs\Templates\sop_template.md | 0 bytes
+docs\Templates\sql_migration_template.sql | 0 bytes
+docs\Templates\checklists\01_DEVELOPMENT_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\02_TESTING_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\03_DEPLOYMENT_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\04_RELEASE_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\05_BACKUP_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\06_HARDWARE_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\07_DATABASE_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\08_SECURITY_CHECKLIST.md | 0 bytes
+docs\Templates\checklists\README.md | 1043 bytes
+docs\Templates\markdown_templates\changelog_template.md | 0 bytes
+docs\Templates\markdown_templates\decision_template.md | 0 bytes
+docs\Templates\markdown_templates\feature_template.md | 7 bytes
+docs\Templates\markdown_templates\meeting_note_template.md | 0 bytes
+docs\Templates\markdown_templates\README.md | 2398 bytes
+docs\Templates\markdown_templates\research_template.md | 7 bytes
+docs\Templates\markdown_templates\sop_template.md | 0 bytes
+docs\Templates\unsaved files dont know path of\README.md | 222 bytes

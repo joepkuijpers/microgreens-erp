@@ -1,0 +1,40 @@
+{
+    "outputs": {
+        "water_pump": {
+            "state": false,
+            "state_text": "UIT",
+            "last_changed_ts": 1785102901,
+            "last_changed_at": "2026-07-26 21:55:01"
+        },
+        "grow_light": {
+            "state": true,
+            "state_text": "AAN",
+            "last_changed_ts": 1785102901,
+            "last_changed_at": "2026-07-26 21:55:01"
+        },
+        "heater": {
+            "state": true,
+            "state_text": "AAN",
+            "last_changed_ts": 1785102901,
+            "last_changed_at": "2026-07-26 21:55:01"
+        },
+        "cooler": {
+            "state": false,
+            "state_text": "UIT",
+            "last_changed_ts": 1785102901,
+            "last_changed_at": "2026-07-26 21:55:01"
+        },
+        "fan": {
+            "state": false,
+            "state_text": "UIT",
+            "last_changed_ts": 1785102901,
+            "last_changed_at": "2026-07-26 21:55:01"
+        },
+        "humidifier": {
+            "state": true,
+            "state_text": "AAN",
+            "last_changed_ts": 1785102901,
+            "last_changed_at": "2026-07-26 21:55:01"
+        }
+    }
+}

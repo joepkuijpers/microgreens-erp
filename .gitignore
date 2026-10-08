@@ -1,0 +1,11 @@
+database/*.sqlite
+database/*.sqlite-journal
+database/*.sqlite-wal
+*.bak*
+*.backup
+*.old
+backups/
+*.log
+logs/
+.DS_Store
+Thumbs.db
