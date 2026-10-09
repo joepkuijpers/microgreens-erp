@@ -24,7 +24,7 @@ if ($module === 'home' || $module === '') {
     echo "<li><a href='?module=b02_crop_profile'>B02: Crop Profile</a></li>";
     echo "<li><a href='?module=b03_growth_stage'>B03: Growth Stage</a></li>";
     echo "<li><a href='?module=b04_rack_capacity'>B04: Rack Capacity</a></li>";
-    echo "<li><a href='?module=b05_seed_planning'>B05: Seed Planning</a></li>";
+echo "<li><a href='b14_water_irrigation.php'>B05: Water &amp; Irrigatie</a></li>";
     echo "<li><a href='?module=b06_production_actions'>B06: Production Actions</a></li>";
     echo "</ul>";
     exit;
