@@ -1,46 +1,82 @@
 <?php
-error_reporting(E_ALL); ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Pi-regel: errors niet tonen, wel loggen
+ini_set('log_errors', 1);
 session_start();
+
 $DB_PATH = '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
 $db = new SQLite3($DB_PATH);
 
-// Taalondersteuning
+// Actor uit auth (B17), fallback op sessie
+$actor = $_SESSION['user_name'] ?? 'Joep';
+
+// Taal
 $lang = $_SESSION['lang'] ?? 'nl';
-if(isset($_GET['lang'])) { $_SESSION['lang'] = $_GET['lang']; $lang = $_GET['lang']; }
+if (isset($_GET['lang'])) { $_SESSION['lang'] = $_GET['lang']; $lang = $_GET['lang']; }
 $T = [
-    'nl'=>['t'=>'Water & Irrigatie (B14)','tab1'=>'Waterkwaliteit','tab2'=>'Irrigatie Log','ph'=>'pH','ec'=>'EC (mS)','temp'=>'°C','src'=>'Bron','save'=>'Opslaan','hist'=>'Geschiedenis','back'=>'Terug','zone'=>'Zone','dur'=>'Duur (min)','vol'=>'Volume (L)','ok'=>'Opgeslagen!','date'=>'Datum','time'=>'Tijd','op'=>'Uitvoerder','note'=>'Notities'],
-    'en'=>['t'=>'Water & Irrigation (B14)','tab1'=>'Water Quality','tab2'=>'Irrigation Log','ph'=>'pH','ec'=>'EC (mS)','temp'=>'°C','src'=>'Source','save'=>'Save','hist'=>'History','back'=>'Back','zone'=>'Zone','dur'=>'Duration (min)','vol'=>'Volume (L)','ok'=>'Saved!','date'=>'Date','time'=>'Time','op'=>'Operator','note'=>'Notes']
+    'nl'=>['t'=>'Water & Irrigatie (B14)','tab1'=>'Waterkwaliteit','tab2'=>'Irrigatie Log','ph'=>'pH','ec'=>'EC (mS)','temp'=>'°C','src'=>'Bron','save'=>'Opslaan','hist'=>'Geschiedenis','back'=>'Terug','zone'=>'Zone','dur'=>'Duur (min)','vol'=>'Volume (L)','ok'=>'Opgeslagen!','date'=>'Datum','time'=>'Tijd','op'=>'Uitvoerder','note'=>'Notities','rack'=>'Rack','batch'=>'Batch','none'=>'Geen','warn'=>'Buiten band','err'=>'Check'],
+    'en'=>['t'=>'Water & Irrigation (B14)','tab1'=>'Water Quality','tab2'=>'Irrigation Log','ph'=>'pH','ec'=>'EC (mS)','temp'=>'°C','src'=>'Source','save'=>'Save','hist'=>'History','back'=>'Back','zone'=>'Zone','dur'=>'Duration (min)','vol'=>'Volume (L)','ok'=>'Saved!','date'=>'Date','time'=>'Time','op'=>'Operator','note'=>'Notes','rack'=>'Rack','batch'=>'Batch','none'=>'None','warn'=>'Out of range','err'=>'Check'],
 ];
-$t = $T[$lang]; 
-$msg = ""; 
+$t = $T[$lang];
+$msg = "";
 $activeTab = $_GET['tab'] ?? 'water';
 
-// Standaard grenswaarden (fallback als config tabel ontbreekt)
+// Grenswaarden
 $ph_min = 5.5; $ph_max = 6.5; $ec_max = 1.5;
 
+// Racklijst voor dropdowns (naam = waarde, consistent met production_batches.rack_id)
+$racks = [];
+$res = $db->query("SELECT name FROM racks ORDER BY name");
+while ($row = $res->fetchArray(SQLITE3_ASSOC)) { $racks[] = $row['name']; }
+
+// Batch-afleiding: rack + tijdstip -> production_batches (B03-brug)
+function derive_batch($db, $rack_id, $log_date, $log_time) {
+    if (empty($rack_id)) return ['code'=>'', 'multi'=>false];
+    $ts = trim($log_date . ' ' . $log_time);
+    $stmt = $db->prepare(
+        "SELECT pb.batch_code FROM production_batches pb
+         WHERE pb.rack_id = :rack
+           AND :ts BETWEEN pb.started_at AND COALESCE(pb.completed_at, datetime('now','localtime'))
+         ORDER BY pb.started_at DESC LIMIT 2"
+    );
+    $stmt->bindValue(':rack', $rack_id, SQLITE3_TEXT);
+    $stmt->bindValue(':ts', $ts, SQLITE3_TEXT);
+    $codes = [];
+    $r = $stmt->execute();
+    while ($row = $r->fetchArray(SQLITE3_ASSOC)) { $codes[] = $row['batch_code']; }
+    if (empty($codes)) return ['code'=>'', 'multi'=>false];
+    return ['code'=>$codes[0], 'multi'=>count($codes) > 1];
+}
+
 // --- VERWERKEN FORMULIER ---
-if($_SERVER['REQUEST_METHOD']==='POST'){
-    if($_POST['type']=='water'){
-        $stmt=$db->prepare("INSERT INTO water_measurements (log_date,log_time,source_type,ph_value,ec_value,temperature,operator_name,notes,rack_id) VALUES (:d,time('now','localtime'),:s,:p,:e,:t,:o,:n,:r)");
-        $stmt->bindValue(':d',$_POST['date'],SQLITE3_TEXT); 
-        $stmt->bindValue(':s',$_POST['source'],SQLITE3_TEXT);
-        $stmt->bindValue(':p',$_POST['ph'],SQLITE3_FLOAT); 
-        $stmt->bindValue(':e',$_POST['ec'],SQLITE3_FLOAT);
-        $stmt->bindValue(':t',$_POST['temp'],SQLITE3_FLOAT);
-        $stmt->bindValue(':o',$_POST['operator'],SQLITE3_TEXT);
-        $stmt->bindValue(':n',$_POST['notes'],SQLITE3_TEXT);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['type'] === 'water') {
+        $stmt = $db->prepare("INSERT INTO water_measurements
+            (log_date,log_time,source_type,ph_value,ec_value,temperature,operator_name,notes,rack_id)
+            VALUES (:d,time('now','localtime'),:s,:p,:e,:t,:o,:n,:r)");
+        $stmt->bindValue(':d', $_POST['date'], SQLITE3_TEXT);
+        $stmt->bindValue(':s', $_POST['source'], SQLITE3_TEXT);
+        $stmt->bindValue(':p', $_POST['ph'], SQLITE3_FLOAT);
+        $stmt->bindValue(':e', $_POST['ec'], SQLITE3_FLOAT);
+        $stmt->bindValue(':t', $_POST['temp'], SQLITE3_FLOAT);
+        $stmt->bindValue(':o', $actor, SQLITE3_TEXT);
+        $stmt->bindValue(':n', $_POST['notes'], SQLITE3_TEXT);
         $stmt->bindValue(':r', $_POST['rack'] ?? '', SQLITE3_TEXT);
-if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
-    } elseif($_POST['type']=='irrigation'){
-        $stmt=$db->prepare("INSERT INTO irrigation_logs (log_date,log_time,zone_name,duration_min,volume_liters,operator_name,notes,rack_id) VALUES (:d,time('now','localtime'),:z,:dur,:v,:o,:n,:r)");
-        $stmt->bindValue(':d',$_POST['date'],SQLITE3_TEXT);
-        $stmt->bindValue(':z',$_POST['zone'],SQLITE3_TEXT);
-        $stmt->bindValue(':dur',$_POST['duration'],SQLITE3_INTEGER);
-        $stmt->bindValue(':v',$_POST['volume'],SQLITE3_FLOAT);
-        $stmt->bindValue(':o',$_POST['operator'],SQLITE3_TEXT);
-        $stmt->bindValue(':n',$_POST['notes'],SQLITE3_TEXT);
+        if ($stmt->execute()) { $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
+        else { $msg = "<div class='alert alert-danger'>Fout bij opslaan.</div>"; }
+    } elseif ($_POST['type'] === 'irrigation') {
+        $stmt = $db->prepare("INSERT INTO irrigation_logs
+            (log_date,log_time,zone_name,duration_min,volume_liters,operator_name,notes,rack_id)
+            VALUES (:d,time('now','localtime'),:z,:dur,:v,:o,:n,:r)");
+        $stmt->bindValue(':d', $_POST['date'], SQLITE3_TEXT);
+        $stmt->bindValue(':z', $_POST['zone'], SQLITE3_TEXT);
+        $stmt->bindValue(':dur', $_POST['duration'], SQLITE3_INTEGER);
+        $stmt->bindValue(':v', $_POST['volume'], SQLITE3_FLOAT);
+        $stmt->bindValue(':o', $actor, SQLITE3_TEXT);
+        $stmt->bindValue(':n', $_POST['notes'], SQLITE3_TEXT);
         $stmt->bindValue(':r', $_POST['rack'] ?? '', SQLITE3_TEXT);
-if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
+        if ($stmt->execute()) { $msg = "<div class='alert alert-success'>".$t['ok']."</div>"; }
+        else { $msg = "<div class='alert alert-danger'>Fout bij opslaan.</div>"; }
     }
 }
 ?>
@@ -58,6 +94,7 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
         .status-ok { color: green; font-weight: bold; }
         .status-warn { color: orange; font-weight: bold; }
         .status-err { color: red; font-weight: bold; }
+        thead th { position: sticky; top: 0; background: #fff; z-index: 1; }
     </style>
 </head>
 <body>
@@ -66,15 +103,15 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
         <h2>💧 <?=$t['t']?></h2>
         <a href="index.php" class="btn btn-outline-secondary"><?=$t['back']?></a>
     </div>
-    
+
     <?=$msg?>
 
-    <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+    <ul class="nav nav-tabs mb-3">
         <li class="nav-item"><a class="nav-link <?=$activeTab=='water'?'active':''?>" href="?tab=water"><?=$t['tab1']?></a></li>
         <li class="nav-item"><a class="nav-link <?=$activeTab=='irrigation'?'active':''?>" href="?tab=irrigation"><?=$t['tab2']?></a></li>
     </ul>
 
-    <?php if($activeTab=='water'): ?>
+    <?php if ($activeTab=='water'): ?>
     <div class="card">
         <div class="card-body">
             <form method="POST">
@@ -85,6 +122,15 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
                         <input type="date" name="date" class="form-control" value="<?=date('Y-m-d')?>" required>
                     </div>
                     <div class="col-md-3">
+                        <label class="form-label"><?=$t['rack']?></label>
+                        <select name="rack" class="form-select">
+                            <option value=""><?=$t['none']?></option>
+                            <?php foreach ($racks as $rk): ?>
+                            <option value="<?=htmlspecialchars($rk)?>"><?=htmlspecialchars($rk)?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
                         <label class="form-label"><?=$t['src']?></label>
                         <select name="source" class="form-select">
                             <option value="TAP">Kraanwater</option>
@@ -106,7 +152,7 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
                     </div>
                     <div class="col-md-12">
                         <label class="form-label"><?=$t['op']?></label>
-                        <input type="text" name="operator" class="form-control" value="<?=htmlspecialchars($_SESSION['user_name'] ?? 'Joep')?>">
+                        <input type="text" class="form-control" value="<?=htmlspecialchars($actor)?>" readonly>
                     </div>
                     <div class="col-md-12">
                         <label class="form-label"><?=$t['note']?></label>
@@ -122,23 +168,31 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
 
     <div class="card">
         <div class="card-header"><h5><?=$t['hist']?></h5></div>
-        <div class="card-body table-responsive">
+        <div class="card-body table-responsive" style="max-height:420px;overflow:auto;">
             <table class="table table-striped table-hover">
-                <thead><tr><th>Datum</th><th>Bron</th><th>pH</th><th>EC</th><th>Temp</th><th>Uitvoerder</th><th>Status</th></tr></thead>
+                <thead><tr><th>Datum</th><th>Tijd</th><th>Rack</th><th>Batch</th><th>Bron</th><th>pH</th><th>EC</th><th>Temp</th><th>Uitvoerder</th><th>Status</th></tr></thead>
                 <tbody>
                 <?php
-                $res = $db->query("SELECT * FROM water_measurements ORDER BY log_date DESC, log_time DESC LIMIT 20");
-                while($r = $res->fetchArray()){
+                $res = $db->query("SELECT id,log_date,log_time,source_type,ph_value,ec_value,temperature,operator_name,rack_id FROM water_measurements ORDER BY log_date DESC, log_time DESC LIMIT 20");
+                while ($r = $res->fetchArray(SQLITE3_ASSOC)) {
                     $status = 'status-ok';
-                    if($r['ph_value'] < $ph_min || $r['ph_value'] > $ph_max) $status = 'status-warn';
-                    if($r['ec_value'] > $ec_max) $status = 'status-err';
+                    if (!is_null($r['ph_value']) && ($r['ph_value'] < $ph_min || $r['ph_value'] > $ph_max)) $status = 'status-warn';
+                    if (!is_null($r['ec_value']) && $r['ec_value'] > $ec_max) $status = 'status-err';
+                    $b = derive_batch($db, $r['rack_id'], $r['log_date'], $r['log_time']);
+                    $batchHtml = $b['code'] === ''
+                        ? '<span class="text-muted">—</span>'
+                        : htmlspecialchars($b['code']) . ($b['multi'] ? ' <span title="meerdere mogelijk">⚠️</span>' : '');
                     echo "<tr>";
-                    echo "<td>{$r['log_date']}</td><td>{$r['source_type']}</td>";
-                    echo "<td class='$status'>{$r['ph_value']}</td>";
-                    echo "<td class='$status'>{$r['ec_value']}</td>";
-                    echo "<td>{$r['temperature']}</td>";
-                    echo "<td>{$r['operator_name']}</td>";
-                    echo "<td><span class='$status'>".($status=='status-ok'?'OK':'Check')."</span></td>";
+                    echo "<td>".htmlspecialchars($r['log_date'])."</td>";
+                    echo "<td>".htmlspecialchars($r['log_time'])."</td>";
+                    echo "<td>".htmlspecialchars($r['rack_id'] ?: '—')."</td>";
+                    echo "<td>".$batchHtml."</td>";
+                    echo "<td>".htmlspecialchars($r['source_type'])."</td>";
+                    echo "<td class='$status'>".htmlspecialchars($r['ph_value'])."</td>";
+                    echo "<td class='$status'>".htmlspecialchars($r['ec_value'])."</td>";
+                    echo "<td>".htmlspecialchars($r['temperature'])."</td>";
+                    echo "<td>".htmlspecialchars($r['operator_name'])."</td>";
+                    echo "<td><span class='$status'>".($status=='status-ok'?'OK':($status=='status-warn'?$t['warn']:$t['err']))."</span></td>";
                     echo "</tr>";
                 }
                 ?>
@@ -148,7 +202,7 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
     </div>
     <?php endif; ?>
 
-    <?php if($activeTab=='irrigation'): ?>
+    <?php if ($activeTab=='irrigation'): ?>
     <div class="card">
         <div class="card-body">
             <form method="POST">
@@ -166,6 +220,15 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
                             <option value="Room 1">Room 1</option>
                         </select>
                     </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><?=$t['rack']?></label>
+                        <select name="rack" class="form-select">
+                            <option value=""><?=$t['none']?></option>
+                            <?php foreach ($racks as $rk): ?>
+                            <option value="<?=htmlspecialchars($rk)?>"><?=htmlspecialchars($rk)?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="col-md-2">
                         <label class="form-label"><?=$t['dur']?></label>
                         <input type="number" name="duration" class="form-control" placeholder="5">
@@ -176,7 +239,7 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
                     </div>
                     <div class="col-md-12">
                         <label class="form-label"><?=$t['op']?></label>
-                        <input type="text" name="operator" class="form-control" value="<?=htmlspecialchars($_SESSION['user_name'] ?? 'Joep')?>">
+                        <input type="text" class="form-control" value="<?=htmlspecialchars($actor)?>" readonly>
                     </div>
                     <div class="col-md-12">
                         <label class="form-label"><?=$t['note']?></label>
@@ -192,16 +255,26 @@ if($stmt->execute()){ $msg = "<div class='alert alert-success'>".$t['ok']."</div
 
     <div class="card">
         <div class="card-header"><h5><?=$t['hist']?></h5></div>
-        <div class="card-body table-responsive">
+        <div class="card-body table-responsive" style="max-height:420px;overflow:auto;">
             <table class="table table-striped table-hover">
-                <thead><tr><th>Datum</th><th>Zone</th><th>Duur</th><th>Volume</th><th>Uitvoerder</th></tr></thead>
+                <thead><tr><th>Datum</th><th>Tijd</th><th>Rack</th><th>Batch</th><th>Zone</th><th>Duur</th><th>Volume</th><th>Uitvoerder</th></tr></thead>
                 <tbody>
                 <?php
-                $res = $db->query("SELECT * FROM irrigation_logs ORDER BY log_date DESC, log_time DESC LIMIT 20");
-                while($r = $res->fetchArray()){
+                $res = $db->query("SELECT id,log_date,log_time,zone_name,duration_min,volume_liters,operator_name,rack_id FROM irrigation_logs ORDER BY log_date DESC, log_time DESC LIMIT 20");
+                while ($r = $res->fetchArray(SQLITE3_ASSOC)) {
+                    $b = derive_batch($db, $r['rack_id'], $r['log_date'], $r['log_time']);
+                    $batchHtml = $b['code'] === ''
+                        ? '<span class="text-muted">—</span>'
+                        : htmlspecialchars($b['code']) . ($b['multi'] ? ' <span title="meerdere mogelijk">⚠️</span>' : '');
                     echo "<tr>";
-                    echo "<td>{$r['log_date']}</td><td>{$r['zone_name']}</td>";
-                    echo "<td>{$r['duration_min']} min</td><td>{$r['volume_liters']} L</td><td>{$r['operator_name']}</td>";
+                    echo "<td>".htmlspecialchars($r['log_date'])."</td>";
+                    echo "<td>".htmlspecialchars($r['log_time'])."</td>";
+                    echo "<td>".htmlspecialchars($r['rack_id'] ?: '—')."</td>";
+                    echo "<td>".$batchHtml."</td>";
+                    echo "<td>".htmlspecialchars($r['zone_name'])."</td>";
+                    echo "<td>".htmlspecialchars($r['duration_min'])." min</td>";
+                    echo "<td>".htmlspecialchars($r['volume_liters'])." L</td>";
+                    echo "<td>".htmlspecialchars($r['operator_name'])."</td>";
                     echo "</tr>";
                 }
                 ?>
