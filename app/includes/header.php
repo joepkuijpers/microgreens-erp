@@ -1,20 +1,28 @@
 <?php
-// FOUTEN TONEN (voor debug)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// GEEN CACHE: toon altijd de actuele pagina (belangrijk voor taalwissel)
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 
-// SESSIE STARTEN (veilig checken of die al loopt)
+// FOUTEN ONDERTKUIPT (productie)
+ini_set('display_errors', 0);
+error_reporting(0);
+
+// SESSIE STARTEN
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// TAAL WISSEL LOGICA (MOET ALLEREERST GEBEUREN, VOOR ELKE OUTPUT!)
-if (isset($_GET['lang']) && in_array($_GET['lang'], ['nl', 'en', 'de', 'fr', 'es', 'it'])) {
+// TAAL WISSEL LOGICA (moet allereerst, vóór elke output)
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['nl', 'en', 'de', 'fr', 'es', 'it'], true)) {
     $_SESSION['erp_language'] = $_GET['lang'];
-    // URL schoonmaken en redirecten
-    $cleanUrl = strtok($_SERVER["REQUEST_URI"], '?');
+    // behoud alle parameters BEHALVE lang (dus mode=planned blijft), en lang weg (geen lus)
+    $q = $_GET;
+    unset($q['lang']);
+    $qs = http_build_query($q);
+    $cleanUrl = strtok($_SERVER["REQUEST_URI"], '?') . ($qs !== '' ? '?' . $qs : '');
     header("Location: " . $cleanUrl);
-    exit; // BELANGRIJK: stop direct na redirect!
+    exit;
 }
 
 // TAAL BEPALEN
@@ -37,15 +45,15 @@ try {
 } catch (PDOException $e) { die("DB Error: " . $e->getMessage()); }
 
 // WATCHDOG DATA
-$wdStatus = 'ok'; 
+$wdStatus = 'ok';
 $wdMsg = '';
 try {
     $stmt = $db->prepare("SELECT status, message FROM system_alerts WHERE acknowledged = 0 ORDER BY created_at DESC LIMIT 1");
-    $stmt->execute(); 
+    $stmt->execute();
     $alert = $stmt->fetch();
-    if ($alert) { 
-        $wdStatus = $alert['status']; 
-        $wdMsg = htmlspecialchars($alert['message']); 
+    if ($alert) {
+        $wdStatus = $alert['status'];
+        $wdMsg = htmlspecialchars($alert['message']);
     }
 } catch (Exception $e) {}
 
@@ -105,7 +113,24 @@ body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f
 .next-step-bar{background:#e8f4fd;padding:15px 30px;margin-top:30px;border-top:2px solid #3498db;display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:10px;}
 .next-step-bar a{background:#3498db;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;}
 .next-step-bar a:hover{background:#2980b9;}
-</style></head><body>
+input[type="date"]{cursor:pointer;}
+input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
+</style>
+<script>
+(function(){
+  function bind(el){
+    if(el.dataset.dpBound) return;
+    el.dataset.dpBound="1";
+    el.addEventListener("click", function(){
+      if(typeof this.showPicker==="function"){ try{ this.showPicker(); }catch(e){} }
+    });
+  }
+  function bindAll(){ document.querySelectorAll('input[type="date"]').forEach(bind); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", bindAll); }
+  else { bindAll(); }
+})();
+</script>
+</head><body>
 <nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><ul class="nav-links">
 <?php foreach($modules as $m): $active=(basename($_SERVER['PHP_SELF'])===$m['file'])?'active':''; ?>
 <li><a href="<?php echo $m['file']; ?>" class="<?php echo $active; ?>"><?php echo $m['id']; ?> - <?php echo __($m['key']); ?></a></li>

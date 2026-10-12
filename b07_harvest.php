@@ -1,169 +1,187 @@
 <?php
-require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/auth.php';
+require_once __DIR__ . '/app/includes/header.php';
+require_once __DIR__ . '/app/includes/audit.php';
+require_once __DIR__ . '/app/includes/organic_gate.php';
 
-// Initialiseer variabelen
 $message = '';
-$error = '';
-$available_batches = [];
+$errors = [];
+$registrationTime = null;
 
-// --- VERWERKING FORMULIER ---
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "harvest") {
-    $batch_id = intval($_POST["batch_id"] ?? 0);
-    $weight = floatval($_POST["weight"] ?? 0);
-    $output_type = $_POST['output_type'] ?? 'FRESH'; // NIEUW: Vers of Vriesdrogen
-    $notes = trim($_POST["notes"] ?? '');
-    
-    if ($batch_id > 0 && $weight > 0) {
+// --- OUTPUT-TAKEN (centraal, hergebruikt) ---
+$branchLabels = [
+    'FRESH'        => __('b07_branch_fresh'),
+    'FREEZE_DRY'   => __('b07_branch_freeze'),
+];
+$branchOutputType = [
+    'FRESH'      => 'FRESH',
+    'FREEZE_DRY' => 'FREEZE_DRY_INPUT',
+];
+$branchInvStatus = [
+    'FRESH'      => 'AVAILABLE',
+    'FREEZE_DRY' => 'PENDING_FREEZE',
+];
+
+// --- VERWERKING ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harvest') {
+    $t0 = microtime(true);
+    $batch_id    = intval($_POST['batch_id'] ?? 0);
+    $branch      = $_POST['branch'] ?? 'FRESH';
+    $w_fresh     = floatval($_POST['weight_fresh'] ?? 0);
+    $w_freeze    = floatval($_POST['weight_freeze'] ?? 0);
+    $notes       = trim($_POST['notes'] ?? '');
+    $confirmedConventional = isset($_POST['confirm_conventional']);
+
+    if ($batch_id <= 0) { $errors[] = __('b07_err_no_batch'); }
+    if (!isset($branchLabels[$branch]) && $branch !== 'BOTH') { $errors[] = __('b07_err_branch'); }
+
+    // Gewichten per tak samenstellen
+    $alloc = [];
+    if ($branch === 'FRESH')        { $alloc['FRESH'] = $w_fresh; }
+    elseif ($branch === 'FREEZE_DRY'){ $alloc['FREEZE_DRY'] = $w_freeze; }
+    elseif ($branch === 'BOTH')     { $alloc['FRESH'] = $w_fresh; $alloc['FREEZE_DRY'] = $w_freeze; }
+
+    $total = array_sum($alloc);
+    foreach ($alloc as $k => $v) {
+        if ($v <= 0) { $errors[] = $branchLabels[$k] . ': ' . __('b07_err_weight'); }
+    }
+    if ($total <= 0) { $errors[] = __('b07_err_total'); }
+
+    if (empty($errors)) {
         try {
-            // 1. Check batch status
-            $stmt = $db->prepare("SELECT status, crop_type FROM production_batches WHERE id = ?");
+            $db->beginTransaction();
+
+            // 1. Batch laden + statuscheck
+            $stmt = $db->prepare("SELECT id, batch_code, crop_type, status, rack_id FROM production_batches WHERE id = ?");
             $stmt->execute([$batch_id]);
             $batch = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if ($batch) {
-                if ($batch['status'] === 'HARVESTED') {
-                    $error = "Deze batch is al geoogst.";
-                } else {
-                    // 2. Bepaal status voor voorraad
-                    // FRESH -> AVAILABLE (voor B09)
-                    // FREEZE_DRY -> PENDING_FREEZE (moet eerst naar B08)
-                    $output_status = ($output_type === 'FRESH') ? 'AVAILABLE' : 'PENDING_FREEZE';
-                    
-                    // 3. Update batch status
-                    $stmt = $db->prepare("UPDATE production_batches SET status = 'HARVESTED', actual_quantity = ?, completed_at = datetime('now') WHERE id = ?");
-                    $stmt->execute([$weight, $batch_id]);
-                    
-                    // 4. Maak record in production_outputs (Traceability)
-                    $stmt = $db->prepare("INSERT INTO production_outputs (batch_id, output_type, quantity, unit, status, notes) VALUES (?, ?, ?, 'g', ?, ?)");
-                    $stmt->execute([$batch_id, $output_type, $weight, $output_status, $notes]);
-                    
-                    // 5. Maak record in finished_inventory (Voorraad)
-                    // We gebruiken crop_type als productnaam voor nu
-                    $stmt = $db->prepare("INSERT INTO finished_inventory (product_name, weight_grams, status, output_type, production_date) VALUES (?, ?, ?, ?, date('now'))");
-                    $stmt->execute([$batch['crop_type'], $weight, $inventory_status, $output_type]);
-                    
-                    $type_label = ($output_type === 'FRESH') ? 'Vers' : 'Vriesdroog';
-                    $message = "✅ Oogst geregistreerd! ($type_label) - $weight gram.";
-                }
-            } else {
-                $error = "Batch niet gevonden.";
+            if (!$batch) { throw new Exception(__('b07_err_not_found')); }
+            if ($batch['status'] === 'HARVESTED') { throw new Exception(__('b07_err_already')); }
+
+            // 2. Organic-gate: gevalideerde seed-input vereist voor deze batch
+            $seedStmt = $db->prepare("
+                SELECT sl.organic_status, sl.certificate_valid_until
+                FROM batch_materials bm
+                JOIN seed_inventory si ON si.id = bm.inventory_id
+                JOIN seed_lots sl ON sl.id = si.seed_lot_id
+                WHERE bm.batch_id = ?
+                LIMIT 1
+            ");
+            $seedStmt->execute([$batch_id]);
+            $seed = $seedStmt->fetch(PDO::FETCH_ASSOC);
+            if (!$seed) { throw new Exception(__('b07_err_no_input')); }
+            $gate = organicGateEvaluate($seed, $confirmedConventional);
+            if (empty($gate['allowed'])) { throw new Exception(__('b07_err_gate')); }
+
+            // 3. Kiemrecord afleiden (traceability-keten intact houden)
+            $germStmt = $db->prepare("SELECT id FROM germination_records WHERE production_batch_id = ? ORDER BY id DESC LIMIT 1");
+            $germStmt->execute([$batch_id]);
+            $germId = $germStmt->fetchColumn();
+            if (!$germId) { throw new Exception(__('b07_err_no_germination')); }
+
+            $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
+
+            // 4. Eén oogstrecord (totaal)
+            $hStmt = $db->prepare("INSERT INTO harvests (germination_record_id, harvest_date, weight_grams, quality_status, operator, notes) VALUES (?, datetime('now'), ?, 'GOOD', ?, ?)");
+            $hStmt->execute([$germId, $total, $operator, $notes]);
+            $harvestId = (int)$db->lastInsertId();
+
+            // 5. Per tak: production_output + finished_inventory
+            foreach ($alloc as $key => $grams) {
+                $otype = $branchOutputType[$key];
+                $istat = $branchInvStatus[$key];
+
+                $po = $db->prepare("INSERT INTO production_outputs (batch_id, output_type, quantity, unit, status, notes) VALUES (?, ?, ?, 'g', 'REGISTERED', ?)");
+                $po->execute([$batch_id, $otype, $grams, $notes]);
+
+                $fi = $db->prepare("INSERT INTO finished_inventory (harvest_id, product_name, weight_grams, harvest_date, status, output_type) VALUES (?, ?, ?, date('now'), ?, ?)");
+                $fi->execute([$harvestId, $batch['crop_type'], $grams, $istat, $otype]);
             }
-        } catch (Exception $e) {
-            $error = "Fout bij opslaan: " . $e->getMessage();
+
+            // 6. Batchstatus
+            $db->prepare("UPDATE production_batches SET status = 'HARVESTED', actual_quantity = ?, completed_at = datetime('now') WHERE id = ?")
+               ->execute([$total, $batch_id]);
+
+            $registrationTime = round(microtime(true) - $t0, 3);
+
+            // 7. Audit (bewijs in 'reason'-kolom)
+            auditLog($db, 'B07_HARVEST', 'harvests', $harvestId, 'REGISTER_HARVEST',
+                sprintf(__('b07_audit'), $batch['batch_code'], $total, implode(' + ', array_keys($alloc))),
+                null, ['operator' => $operator, 'reg_time' => $registrationTime]);
+
+            $db->commit();
+            $message = sprintf(__('b07_success'), $batch['batch_code'], $total, $registrationTime);
+
+        } catch (Throwable $e) {
+            $errors[] = $e->getMessage();
         }
-    } else {
-        $error = "Vul batch en gewicht in.";
     }
 }
 
-// --- OPHALEN ACTIEVE BATCHES ---
+// --- ACTIEVE BATCHES ---
+$available_batches = [];
 try {
-    // Alleen batches die klaar zijn om te oogsten (GROWING of READY_TO_HARVEST)
-    $stmt = $db->query("SELECT id, batch_code, crop_type, started_at, rack_position FROM production_batches WHERE status IN ('GROWING', 'READY_TO_HARVEST') ORDER BY started_at DESC");
+    $stmt = $db->query("SELECT id, batch_code, crop_type, started_at, rack_id FROM production_batches WHERE status IN ('GROWING','READY_TO_HARVEST') ORDER BY started_at DESC");
     $available_batches = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (Exception $e) {
-    $error = "Fout bij laden batches: " . $e->getMessage();
-}
+} catch (Exception $e) { /* leeg */ }
 ?>
 
-<!DOCTYPE html>
-<html lang="<?php echo $_SESSION['lang'] ?? 'nl'; ?>">
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo $lang['module_b07'] ?? 'Oogst'; ?> - Microgreens ERP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: 'Liberation Sans', sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; }
-        select, input[type="number"], textarea { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
-        .radio-group { display: flex; gap: 20px; margin-top: 10px; }
-        .radio-option { display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; flex: 1; transition: background 0.2s; }
-        .radio-option:hover { background: #f0f8ff; }
-        .radio-option input { margin: 0; }
-        .btn { padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; text-decoration: none; display: inline-block; }
-        .btn-success { background: #2ecc71; color: white; width: 100%; }
-        .btn-secondary { background: #95a5a6; color: white; margin-bottom: 20px; }
-        .alert { padding: 15px; margin-bottom: 20px; border-radius: 4px; }
-        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .info-box { background: #e3f2fd; padding: 15px; border-radius: 4px; border-left: 4px solid #2196f3; margin-bottom: 20px; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <a href="dashboard.php" class="btn btn-secondary">&larr; <?php echo $lang['back'] ?? 'Terug'; ?></a>
-    
-    <h1>🌱 <?php echo $lang['module_b07'] ?? 'Oogst Registratie'; ?></h1>
+<div style="max-width:800px; margin:0 auto;">
+    <h2>🌾 <?php echo __('b07_title'); ?></h2>
 
     <?php if ($message): ?>
-        <div class="alert alert-success"><?php echo htmlspecialchars($message); ?></div>
+        <div style="background:#d4edda; color:#155724; padding:15px; border-radius:5px; margin-bottom:20px; border-left:5px solid #28a745;">✅ <?php echo htmlspecialchars($message); ?></div>
+    <?php endif; ?>
+    <?php if ($errors): ?>
+        <div style="background:#f8d7da; color:#721c24; padding:15px; border-radius:5px; margin-bottom:20px; border-left:5px solid #dc3545;">❌ <?php echo htmlspecialchars(implode('<br>', $errors)); ?></div>
     <?php endif; ?>
 
-    <?php if ($error): ?>
-        <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
-    <?php endif; ?>
-
-    <div class="info-box">
-        <strong>ℹ️ Workflow:</strong><br>
-        Kies <b>Vers</b> voor directe verpakking (B09).<br>
-        Kies <b>Vriesdrogen</b> als de batch eerst naar de vriesdroger (B08) moet.
-    </div>
-
-    <form method="POST">
+    <?php if (empty($available_batches)): ?>
+        <div style="background:#e3f2fd; padding:15px; border-radius:5px; border-left:4px solid #2196f3;">ℹ️ <?php echo __('b07_no_batches'); ?></div>
+    <?php else: ?>
+    <form method="POST" style="background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
         <input type="hidden" name="action" value="harvest">
-        
-        <div class="form-group">
-            <label><?php echo $lang['choose_batch'] ?? 'Selecteer Batch'; ?></label>
-            <select name="batch_id" required>
-                <option value="">-- Kies een actieve batch --</option>
-                <?php foreach ($available_batches as $batch): ?>
-                    <option value="<?php echo $batch['id']; ?>">
-                        <?php echo htmlspecialchars($batch['batch_code']); ?> - <?php echo htmlspecialchars($batch['crop_type']); ?> 
-                        (Rack: <?php echo $batch['rack_position'] ?? '?'; ?>)
-                    </option>
+        <div style="margin-bottom:20px;">
+            <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_batch'); ?></label>
+            <select name="batch_id" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
+                <option value="">-- <?php echo __('b07_choose_batch'); ?> --</option>
+                <?php foreach ($available_batches as $b): ?>
+                    <option value="<?php echo (int)$b['id']; ?>"><?php echo htmlspecialchars($b['batch_code']); ?> — <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>)</option>
                 <?php endforeach; ?>
             </select>
         </div>
-
-        <div class="form-group">
-            <label><?php echo $lang['weight_grams'] ?? 'Oogst Gewicht (gram)'; ?></label>
-            <input type="number" name="weight" step="0.1" min="1" required placeholder="Bijv. 450">
-        </div>
-
-        <!-- NIEUW: TYPE OUTPUT KEUZE -->
-        <div class="form-group">
-            <label><?php echo $lang['output_type'] ?? 'Type Output'; ?></label>
-            <div class="radio-group">
-                <label class="radio-option">
-                    <input type="radio" name="output_type" value="FRESH" checked>
-                    <div>
-                        <strong>🥬 Vers</strong><br>
-                        <small>Direct naar verpakking (B09)</small>
-                    </div>
-                </label>
-                <label class="radio-option">
-                    <input type="radio" name="output_type" value="FREEZE_DRY">
-                    <div>
-                        <strong>❄️ Vriesdrogen</strong><br>
-                        <small>Naar vriesdroger proces (B08)</small>
-                    </div>
-                </label>
+        <div style="margin-bottom:20px;">
+            <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_output_type'); ?></label>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <label style="flex:1; min-width:140px; border:1px solid #ddd; border-radius:6px; padding:12px; cursor:pointer;"><input type="radio" name="branch" value="FRESH" checked onchange="toggleBranch()"> 🥬 <?php echo __('b07_branch_fresh'); ?></label>
+                <label style="flex:1; min-width:140px; border:1px solid #ddd; border-radius:6px; padding:12px; cursor:pointer;"><input type="radio" name="branch" value="FREEZE_DRY" onchange="toggleBranch()"> ❄️ <?php echo __('b07_branch_freeze'); ?></label>
+                <label style="flex:1; min-width:140px; border:1px solid #ddd; border-radius:6px; padding:12px; cursor:pointer;"><input type="radio" name="branch" value="BOTH" onchange="toggleBranch()"> 🔀 <?php echo __('b07_branch_both'); ?></label>
             </div>
         </div>
-
-        <div class="form-group">
-            <label><?php echo $lang['notes'] ?? 'Notities (Optioneel)'; ?></label>
-            <textarea name="notes" rows="3" placeholder="Bijv. kwaliteit, bijzonderheden..."></textarea>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+            <div id="wrap_fresh">
+                <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_weight_fresh'); ?></label>
+                <input type="number" step="0.1" min="0" name="weight_fresh" placeholder="0" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div id="wrap_freeze" style="display:none;">
+                <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_weight_freeze'); ?></label>
+                <input type="number" step="0.1" min="0" name="weight_freeze" placeholder="0" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-success">✅ <?php echo $lang['register_harvest'] ?? 'Registreer Oogst'; ?></button>
+        <div style="margin-bottom:20px;">
+            <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_notes'); ?></label>
+            <textarea name="notes" rows="2" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;"></textarea>
+            <label style="display:block; margin-top:12px; font-weight:normal;"><input type="checkbox" name="confirm_conventional" value="1"> 🌿 <?php echo __('b07_confirm_conv'); ?></label>
+        </div>
+        <button type="submit" style="background:#27ae60; color:#fff; border:none; padding:14px 24px; font-size:16px; border-radius:5px; cursor:pointer; width:100%; font-weight:bold;">✅ <?php echo __('b07_submit'); ?></button>
     </form>
+    <?php endif; ?>
 </div>
-
-</body>
-</html>
+<script>
+function toggleBranch() {
+    var b = document.querySelector('input[name=branch]:checked').value;
+    document.getElementById('wrap_fresh').style.display  = (b === 'FREEZE_DRY') ? 'none' : 'block';
+    document.getElementById('wrap_freeze').style.display = (b === 'FRESH')      ? 'none' : 'block';
+}
+</script>
+<?php require_once __DIR__ . '/app/includes/footer.php'; ?>
