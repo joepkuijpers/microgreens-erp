@@ -130,6 +130,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
   else { bindAll(); }
 })();
 </script>
+<?php require_once __DIR__ . "/registration_timer.php"; ?>
 </head><body>
 <nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><ul class="nav-links">
 <?php foreach($modules as $m): $active=(basename($_SERVER['PHP_SELF'])===$m['file'])?'active':''; ?>

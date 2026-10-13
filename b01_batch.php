@@ -188,7 +188,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-require_once __DIR__ . '/app/includes/layout_start.php';
 ?>
 
 <div style="max-width:640px;margin:20px auto;font-family:sans-serif;">

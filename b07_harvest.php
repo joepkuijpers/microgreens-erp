@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harve
     $w_freeze    = floatval($_POST['weight_freeze'] ?? 0);
     $notes       = trim($_POST['notes'] ?? '');
     $confirmedConventional = isset($_POST['confirm_conventional']);
+    $activeInteraction = isset($_POST['active_interaction_ms']) ? intval($_POST['active_interaction_ms']) : null;
+    $screenAvailability = isset($_POST['screen_availability_ms']) ? intval($_POST['screen_availability_ms']) : null;
 
     if ($batch_id <= 0) { $errors[] = __('b07_err_no_batch'); }
     if (!isset($branchLabels[$branch]) && $branch !== 'BOTH') { $errors[] = __('b07_err_branch'); }
@@ -107,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harve
             // 7. Audit (bewijs in 'reason'-kolom)
             auditLog($db, 'B07_HARVEST', 'harvests', $harvestId, 'REGISTER_HARVEST',
                 sprintf(__('b07_audit'), $batch['batch_code'], $total, implode(' + ', array_keys($alloc))),
-                null, ['operator' => $operator, 'reg_time' => $registrationTime]);
+                null, ['operator' => $operator, 'reg_time' => $registrationTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
 
             $db->commit();
             $message = sprintf(__('b07_success'), $batch['batch_code'], $total, $registrationTime);
