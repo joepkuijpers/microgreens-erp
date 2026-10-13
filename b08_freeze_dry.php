@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $water_removed = ($final_weight && $input_weight) ? ($input_weight - $final_weight) : 0;
             $operator_id = $_SESSION['user_id'] ?? 1;
             $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
-            $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
 
             // Organic-gate: bio-status afleiden van de bron-batch (zelfde brug als B07)
             $seedStmt = $db->prepare("
@@ -86,9 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ");
             $stmt->execute([$output_id, $batch_id, $machineName, $cycle_code, $input_weight, $final_weight, $water_removed, $notes, $operator_id, $organicSnapshot]);
 
-            $processId = (int)$db->lastInsertId();
-            $registrationTime = round(microtime(true) - $t0, 3);
-            auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $processId, 'START_CYCLE', 'Vriesdroogcyclus gestart: ' . $cycle_code, null, ['operator' => $operator, 'cycle_code' => $cycle_code, 'input_weight_g' => $input_weight, 'organic_status_snapshot' => $organicSnapshot, 'reg_time' => $registrationTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
             $processId = (int)$db->lastInsertId();
             $registrationTime = round(microtime(true) - $t0, 3);
             auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $processId, 'START_CYCLE', 'Vriesdroogcyclus gestart: ' . $cycle_code, null, ['operator' => $operator, 'cycle_code' => $cycle_code, 'input_weight_g' => $input_weight, 'organic_status_snapshot' => $organicSnapshot, 'reg_time' => $registrationTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
