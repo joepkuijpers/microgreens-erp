@@ -1,12 +1,17 @@
-﻿<?php
+<?php
 /**
  * Microgreens ERP - Centrale Router
  * Gebruik: jouwdomein.nl/?module=naam_van_module
  */
 
-// Foutmeldingen tonen (zet op 0 in productie)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// GEEN CACHE: toon altijd de actuele pagina
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+
+// Foutmeldingen tonen (productie: uit)
+error_reporting(0);
+ini_set('display_errors', 0);
 
 // 1. Bepaal welke module gevraagd wordt
 $module = $_GET['module'] ?? 'home';
