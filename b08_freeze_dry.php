@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/auth.php';
+require_once __DIR__ . '/app/includes/auth.php';
 $pageTitle = __('module_b08');
 $message = ''; $error = ''; $watchdogWarning = '';
 
@@ -34,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'start_cycle') {
         try {
             $db->beginTransaction();
+            $t0 = microtime(true);
+            $activeInteraction = isset($_POST['active_interaction_ms']) ? intval($_POST['active_interaction_ms']) : null;
+            $screenAvailability = isset($_POST['screen_availability_ms']) ? intval($_POST['screen_availability_ms']) : null;
             $output_id = filter_input(INPUT_POST, 'output_id', FILTER_VALIDATE_INT);
             $batch_id = filter_input(INPUT_POST, 'batch_id', FILTER_VALIDATE_INT);
             $machine_id = filter_input(INPUT_POST, 'machine_id', FILTER_VALIDATE_INT);
@@ -55,6 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $cycle_code = 'FD-' . date('Ymd') . '-' . strtoupper(substr(md5(uniqid()), 0, 6));
             $water_removed = ($final_weight && $input_weight) ? ($input_weight - $final_weight) : 0;
             $operator_id = $_SESSION['user_id'] ?? 1;
+            $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
+            $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
 
             // Organic-gate: bio-status afleiden van de bron-batch (zelfde brug als B07)
             $seedStmt = $db->prepare("
@@ -79,6 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ");
             $stmt->execute([$output_id, $batch_id, $machineName, $cycle_code, $input_weight, $final_weight, $water_removed, $notes, $operator_id, $organicSnapshot]);
 
+            $processId = (int)$db->lastInsertId();
+            $registrationTime = round(microtime(true) - $t0, 3);
+            auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $processId, 'START_CYCLE', 'Vriesdroogcyclus gestart: ' . $cycle_code, null, ['operator' => $operator, 'cycle_code' => $cycle_code, 'input_weight_g' => $input_weight, 'organic_status_snapshot' => $organicSnapshot, 'reg_time' => $registrationTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
+            $processId = (int)$db->lastInsertId();
+            $registrationTime = round(microtime(true) - $t0, 3);
+            auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $processId, 'START_CYCLE', 'Vriesdroogcyclus gestart: ' . $cycle_code, null, ['operator' => $operator, 'cycle_code' => $cycle_code, 'input_weight_g' => $input_weight, 'organic_status_snapshot' => $organicSnapshot, 'reg_time' => $registrationTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
             $upd = $db->prepare("UPDATE production_outputs SET status = 'FREEZE_DRY_PROCESSING' WHERE id = ?");
             $upd->execute([$output_id]);
 
