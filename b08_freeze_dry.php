@@ -1,12 +1,13 @@
 <?php
 require_once __DIR__ . '/app/includes/header.php';
+require_once __DIR__ . '/app/includes/organic_gate.php';
 $pageTitle = __('module_b08');
 $message = ''; $error = ''; $watchdogWarning = '';
 
 // --- ACTIES VERWERKEN ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
-    
+
     // ACTIE: Nieuwe Machine Toevoegen
     if ($action === 'add_machine') {
         try {
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = __('machine_added');
         } catch (Exception $e) { $error = $e->getMessage(); }
     }
-    
+
     // ACTIE: Machine Verwijderen
     if ($action === 'delete_machine') {
         try {
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = __('machine_deleted');
         } catch (Exception $e) { $error = $e->getMessage(); }
     }
-    
+
     // ACTIE: Vriesdroog Cyclus Starten
     if ($action === 'start_cycle') {
         try {
@@ -55,12 +56,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $water_removed = ($final_weight && $input_weight) ? ($input_weight - $final_weight) : 0;
             $operator_id = $_SESSION['user_id'] ?? 1;
 
-            $stmt = $db->prepare("
-                INSERT INTO freeze_dry_processes 
-                (production_output_id, batch_id, machine_id, cycle_code, started_at, input_weight_g, final_weight_g, water_removed_g, notes, operator_id, organic_status_snapshot, created_at)
-                VALUES (?, ?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, 'organic', datetime('now'))
+            // Organic-gate: bio-status afleiden van de bron-batch (zelfde brug als B07)
+            $seedStmt = $db->prepare("
+                SELECT sl.organic_status, sl.certificate_valid_until
+                FROM batch_materials bm
+                JOIN seed_inventory si ON si.id = bm.inventory_id
+                JOIN seed_lots sl ON sl.id = si.seed_lot_id
+                WHERE bm.batch_id = ? LIMIT 1
             ");
-            $stmt->execute([$output_id, $batch_id, $machineName, $cycle_code, $input_weight, $final_weight, $water_removed, $notes, $operator_id]);
+            $seedStmt->execute([$batch_id]);
+            $seed = $seedStmt->fetch(PDO::FETCH_ASSOC);
+            if (!$seed) { throw new Exception(__('b07_err_no_input')); }
+            $confirmedConventional = !empty($_POST['confirmed_conventional']);
+            $gate = organicGateEvaluate($seed, $confirmedConventional);
+            if (empty($gate['allowed'])) { throw new Exception($gate['reason']); }
+            $organicSnapshot = $gate['conventional'] ? 'conventional' : 'organic';
+
+            $stmt = $db->prepare("
+                INSERT INTO freeze_dry_processes
+                (production_output_id, batch_id, machine_id, cycle_code, started_at, input_weight_g, final_weight_g, water_removed_g, notes, operator_id, organic_status_snapshot, created_at)
+                VALUES (?, ?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, ?, datetime('now'))
+            ");
+            $stmt->execute([$output_id, $batch_id, $machineName, $cycle_code, $input_weight, $final_weight, $water_removed, $notes, $operator_id, $organicSnapshot]);
 
             $upd = $db->prepare("UPDATE production_outputs SET status = 'FREEZE_DRY_PROCESSING' WHERE id = ?");
             $upd->execute([$output_id]);
@@ -114,7 +131,7 @@ try {
 ?>
 
 <div style="max-width: 1000px; margin: 0 auto;">
-    
+
     <?php if($watchdogWarning): ?>
         <div style="background:#fff3cd; color:#856404; padding:15px; border-radius:5px; margin-bottom:20px; border-left:5px solid #ffc107;">
             ⚠️ <strong><?php echo __('watchdog_warning'); ?>:</strong> <?php echo $watchdogWarning; ?>
@@ -135,7 +152,7 @@ try {
         <form method="POST" id="freezeDryForm" autocomplete="off">
             <input type="hidden" name="action" value="start_cycle">
             <input type="hidden" name="batch_id" id="batch_id">
-            
+
             <div style="margin-bottom:20px;">
                 <label style="display:block; font-weight:bold; margin-bottom:5px;">1. <?php echo __('select_fresh_batch'); ?></label>
                 <select name="output_id" id="output_id" required onchange="updateBatchId()" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:4px; font-size:16px;">
@@ -194,6 +211,10 @@ try {
                 <textarea name="notes" rows="2" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;"></textarea>
             </div>
 
+            <label style="display:block; margin-bottom:15px; padding:10px; background:#fff8e1; border-radius:5px; border:1px solid #ffe082;">
+                <input type="checkbox" name="confirmed_conventional" value="1"> <?php echo __('b01_confirm_conventional'); ?>
+            </label>
+
             <button type="submit" style="background:#27ae60; color:#fff; border:none; padding:15px 30px; font-size:18px; border-radius:5px; cursor:pointer; width:100%; font-weight:bold;">
                 🚀 <?php echo __('start_cycle'); ?>
             </button>
@@ -204,7 +225,7 @@ try {
     <!-- Machine Beheer -->
     <div class="card" style="background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
         <h2 style="margin-top:0; color:#2c3e50;">⚙️ <?php echo __('machine_management'); ?></h2>
-        
+
         <!-- Machine Lijst -->
         <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
             <thead>
