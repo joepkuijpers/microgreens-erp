@@ -46,8 +46,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
     }
 }
 
+// ── Status opvoeren (kiemfase voltooid / klaar voor oogst) ──
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["advance_id"])) {
+    $advId = (int)$_POST["advance_id"];
+    $advTo = $_POST["advance_to"] ?? '';
+    $allowed = ['GERMINATING'=>'GROWING', 'GROWING'=>'READY_TO_HARVEST'];
+    try {
+        $db->beginTransaction();
+        $st = $db->prepare("SELECT status FROM production_batches WHERE id = ?");
+        $st->execute([$advId]);
+        $cur = $st->fetchColumn();
+        if ($cur === false || ($allowed[$cur] ?? '') !== $advTo) { throw new Exception(__('b02_advance_invalid')); }
+        $db->prepare("UPDATE production_batches SET status = ? WHERE id = ?")->execute([$advTo, $advId]);
+        auditLog($db, 'B02_BATCH_ADVANCED', 'production_batches', $advId, 'CORRECTION', "Batchstatus: {$cur} -> {$advTo}", ['status'=>$cur], ['status'=>$advTo]);
+        $db->commit();
+        $message = __('b02_advance_ok');
+        $messageType = "success";
+    } catch (Exception $e) {
+        if ($db->inTransaction()) $db->rollBack();
+        $message = $e->getMessage(); $messageType = "error";
+    }
+}
+
 // ── Nieuwe kiemactie ──
-if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !isset($_POST["advance_id"])) {
     $seedInvId = (int)($_POST["seed_inventory_id"] ?? 0);
     $trayId    = (int)($_POST["tray_id"] ?? 0);
     $batchId   = (int)($_POST["production_batch_id"] ?? 0);
@@ -111,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"])) {
         }
     }
 }
-$germStmt = $db->prepare("SELECT gr.id, gr.status, gr.quantity_seeds, gr.start_date, t.tray_code, pb.batch_code FROM germination_records gr LEFT JOIN trays t ON t.id = gr.tray_id LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id WHERE gr.status = 'GERMINATING' ORDER BY gr.id DESC");
+$germStmt = $db->prepare("SELECT gr.id, gr.status, gr.quantity_seeds, gr.start_date, t.tray_code, pb.batch_code, pb.id AS production_batch_id, pb.status AS batch_status FROM germination_records gr LEFT JOIN trays t ON t.id = gr.tray_id LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id WHERE gr.status = 'GERMINATING' ORDER BY gr.id DESC");
 $germStmt->execute();
 $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -175,6 +197,7 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_grams')); ?></th>
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_started')); ?></th>
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_action')); ?></th>
+                <th style="padding:8px;">Statusactie</th>
             </tr></thead>
             <tbody>
             <?php foreach ($activeGerminations as $g): ?>
@@ -188,6 +211,23 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
                             <input type="hidden" name="cancel_id" value="<?php echo (int)$g['id']; ?>">
                             <button type="submit" style="background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;"><?php echo htmlspecialchars(__('b02_cancel')); ?></button>
                         </form>
+                    </td>
+                    <td style="padding:8px;">
+                        <?php if(($g['batch_status'] ?? '') === 'GERMINATING'): ?>
+                        <form method="POST" style="display:inline;" onsubmit="return confirm('<?php echo htmlspecialchars(__('b02_advance_germinating')); ?>');">
+                            <input type="hidden" name="advance_id" value="<?php echo (int)$g['production_batch_id']; ?>">
+                            <input type="hidden" name="advance_to" value="GROWING">
+                            <button type="submit" style="background:#1976d2;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;"><?php echo htmlspecialchars(__('b02_advance_germinating')); ?></button>
+                        </form>
+                        <?php elseif(($g['batch_status'] ?? '') === 'GROWING'): ?>
+                        <form method="POST" style="display:inline;" onsubmit="return confirm('<?php echo htmlspecialchars(__('b02_advance_ready')); ?>');">
+                            <input type="hidden" name="advance_id" value="<?php echo (int)$g['production_batch_id']; ?>">
+                            <input type="hidden" name="advance_to" value="READY_TO_HARVEST">
+                            <button type="submit" style="background:#f57c00;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;"><?php echo htmlspecialchars(__('b02_advance_ready')); ?></button>
+                        </form>
+                        <?php else: ?>
+                        <span style="color:#999;">—</span>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
