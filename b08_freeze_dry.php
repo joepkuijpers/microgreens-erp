@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
-require_once __DIR__ . '/app/includes/auth.php';
+require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/auth.php';
 $pageTitle = __('module_b08');
 $message = ''; $error = ''; $watchdogWarning = '';
