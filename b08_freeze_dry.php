@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/app/includes/header.php';
-require_once __DIR__ . '/app/includes/organic_gate.php';
 require_once __DIR__ . '/app/includes/audit.php';
+require_once __DIR__ . '/app/includes/organic_gate.php';
 require_once __DIR__ . '/app/includes/auth.php';
 $pageTitle = __('module_b08');
 $message = ''; $error = ''; $watchdogWarning = '';
@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $batch_id = filter_input(INPUT_POST, 'batch_id', FILTER_VALIDATE_INT);
             $machine_id = filter_input(INPUT_POST, 'machine_id', FILTER_VALIDATE_INT);
             $input_weight = filter_input(INPUT_POST, 'input_weight', FILTER_VALIDATE_FLOAT);
-            $final_weight = filter_input(INPUT_POST, 'final_weight', FILTER_VALIDATE_FLOAT);
             $energy_kwh = filter_input(INPUT_POST, 'energy_kwh', FILTER_VALIDATE_FLOAT) ?: 0;
             $energy_price = filter_input(INPUT_POST, 'energy_price', FILTER_VALIDATE_FLOAT) ?: 0;
             $notes = trim($_POST['notes'] ?? '');
@@ -51,14 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$output_id) throw new Exception(__('error_select_batch'));
             if (!$machine_id) throw new Exception(__('error_machine_id_required'));
             if (!$input_weight || $input_weight <= 0) throw new Exception(__('error_invalid_input_weight'));
-            if ($final_weight && $final_weight > $input_weight) throw new Exception(__('error_final_weight_exceeds_input'));
 
             $machineStmt = $db->prepare("SELECT name FROM freeze_dry_machines WHERE id = ?");
             $machineStmt->execute([$machine_id]);
             $machineName = $machineStmt->fetchColumn() ?: 'Unknown';
 
             $cycle_code = 'FD-' . date('Ymd') . '-' . strtoupper(substr(md5(uniqid()), 0, 6));
-            $water_removed = ($final_weight && $input_weight) ? ($input_weight - $final_weight) : 0;
+            $water_removed = 0;
             $operator_id = $_SESSION['user_id'] ?? 1;
             $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
 
@@ -80,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt = $db->prepare("
                 INSERT INTO freeze_dry_processes
-                (production_output_id, batch_id, machine_id, cycle_code, started_at, input_weight_g, final_weight_g, water_removed_g, notes, operator_id, organic_status_snapshot, created_at)
-                VALUES (?, ?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, ?, datetime('now'))
+                (production_output_id, batch_id, machine_id, cycle_code, started_at, input_weight_g, water_removed_g, notes, operator_id, organic_status_snapshot, created_at)
+                VALUES (?, ?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, datetime('now'))
             ");
-            $stmt->execute([$output_id, $batch_id, $machineName, $cycle_code, $input_weight, $final_weight, $water_removed, $notes, $operator_id, $organicSnapshot]);
+            $stmt->execute([$output_id, $batch_id, $machineName, $cycle_code, $input_weight, $water_removed, $notes, $operator_id, $organicSnapshot]);
 
             $processId = (int)$db->lastInsertId();
             $registrationTime = round(microtime(true) - $t0, 3);
@@ -101,7 +99,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
     // Include complete_cycle actie
-
+if (($_POST['action'] ?? '') === 'complete_cycle') {
+        $t0 = microtime(true);
+        $activeInteraction = isset($_POST['active_interaction_ms']) ? intval($_POST['active_interaction_ms']) : null;
+        $screenAvailability = isset($_POST['screen_availability_ms']) ? intval($_POST['screen_availability_ms']) : null;
+        $process_id = filter_input(INPUT_POST, 'process_id', FILTER_VALIDATE_INT);
+        $final_weight = filter_input(INPUT_POST, 'final_weight', FILTER_VALIDATE_FLOAT);
+        if (!$process_id) throw new Exception(__('error_general'));
+        if (!$final_weight || $final_weight <= 0) throw new Exception(__('error_invalid_input_weight'));
+        $db->beginTransaction();
+        $ps = $db->prepare("SELECT id, production_output_id, input_weight_g, status FROM freeze_dry_processes WHERE id = ?");
+        $ps->execute([$process_id]);
+        $proc = $ps->fetch(PDO::FETCH_ASSOC);
+        if (!$proc) throw new Exception(__('error_general'));
+        if ($proc['status'] !== 'RUNNING') throw new Exception(__('error_general'));
+        if ($final_weight > $proc['input_weight_g']) throw new Exception(__('error_final_weight_exceeds_input'));
+        $water = $proc['input_weight_g'] - $final_weight;
+        $u = auth_current_user(); $operator = $u['display_name'] ?? 'system';
+        $upd = $db->prepare("UPDATE freeze_dry_processes SET final_weight_g = ?, water_removed_g = ?, ended_at = datetime('now'), status = 'COMPLETED' WHERE id = ? AND status = 'RUNNING'");
+        $upd->execute([$final_weight, $water, $process_id]);
+        $out = $db->prepare("UPDATE production_outputs SET status = 'FREEZE_DRY_DONE' WHERE id = ?");
+        $out->execute([$proc['production_output_id']]);
+        $regTime = round(microtime(true) - $t0, 3);
+        auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $process_id, 'COMPLETE_CYCLE', 'Vriesdroogcyclus voltooid', null, ['operator' => $operator, 'final_weight_g' => $final_weight, 'water_removed_g' => $water, 'reg_time' => $regTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
+        $db->commit();
+        $message = __('success_cycle_completed');
+    }
     // Include complete_cycle actie
 
 // --- DATA OPHALEN ---
@@ -192,7 +215,6 @@ try {
                 </div>
                 <div>
                     <label style="display:block; font-weight:bold; margin-bottom:5px;">4. <?php echo __('final_weight_g'); ?></label>
-                    <input type="number" step="1" name="final_weight" id="final_weight" placeholder="0.00" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
                     <small style="color:#666;"><?php echo __('leave_empty_if_running'); ?></small>
                 </div>
             </div>
@@ -202,15 +224,12 @@ try {
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:15px;">
                     <div>
                         <label style="font-size:0.9em; font-weight:bold;"><?php echo __('energy_kwh'); ?></label>
-                        <input type="number" step="1" name="energy_kwh" id="energy_kwh" placeholder="0.00" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
                     </div>
                     <div>
                         <label style="font-size:0.9em; font-weight:bold;"><?php echo __('price_per_kwh'); ?></label>
-                        <input type="number" step="0.001" name="energy_price" id="energy_price" value="<?php echo $defaultEnergyPrice; ?>" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
                     </div>
                     <div>
                         <label style="font-size:0.9em; font-weight:bold;"><?php echo __('estimated_cost'); ?></label>
-                        <div id="cost_display" style="padding:8px; background:#fff; border:1px solid #ddd; border-radius:4px; font-weight:bold; color:#27ae60;">€ 0.00</div>
                     </div>
                 </div>
             </div>

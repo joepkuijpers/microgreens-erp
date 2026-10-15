@@ -659,4 +659,7 @@ return array (
   'b02_advance_ready' => 'Ready for harvest',
   'b02_advance_ok' => 'Batch status updated',
   'b02_advance_invalid' => 'Invalid status transition',
+  'running_processes' => 'Running Processes',
+  'started' => 'Started',
+  'complete_cycle' => 'Complete',
 );

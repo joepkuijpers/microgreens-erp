@@ -659,4 +659,7 @@ return array (
   'b02_advance_ready' => 'Klaar voor oogst',
   'b02_advance_ok' => 'Batchstatus bijgewerkt',
   'b02_advance_invalid' => 'Ongeldige statusovergang',
+  'running_processes' => 'Lopende Processen',
+  'started' => 'Gestart',
+  'complete_cycle' => 'Voltooien',
 );
