@@ -67,16 +67,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 
 // --- OPHALEN BESCHIKBARE OOGST ---
 try {
-    $stmt = $db->query("SELECT id, product_name, SUM(weight_grams) as total_weight FROM finished_inventory WHERE status = 'AVAILABLE' GROUP BY product_name HAVING total_weight > 0");
-    // FRESH + FREEZE_DRY PRODUCTEN (NULL = backward compatibility als FRESH)
-$stmt = $db->query("
-    SELECT id, product_name, SUM(weight_grams) as total_weight, output_type 
-    FROM finished_inventory 
-    WHERE status = 'AVAILABLE' 
-      AND (output_type IN ('FRESH', 'FREEZE_DRY') OR output_type IS NULL) 
-    GROUP BY product_name 
-    HAVING total_weight > 0
-");
+    $stmt = $db->query("
+        SELECT fi.id, fi.product_name, fi.weight_grams AS total_weight, fi.output_type, pb.batch_code
+        FROM finished_inventory fi
+        LEFT JOIN harvests h ON h.id = fi.harvest_id
+        LEFT JOIN germination_records gr ON gr.id = h.germination_record_id
+        LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id
+        WHERE fi.status = 'AVAILABLE'
+          AND fi.weight_grams > 0
+          AND (fi.output_type IN ('FRESH', 'FREEZE_DRY') OR fi.output_type IS NULL)
+        ORDER BY fi.id DESC
+    ");
 $available_harvest = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     $error = "Fout bij laden voorraad: " . $e->getMessage();
@@ -143,12 +144,12 @@ $available_harvest = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <input type="hidden" name="action" value="package">
             
             <div class="form-group">
-                <label><?php echo $lang['choose_product'] ?? 'Kies Product (Beschikbare Oogst)'; ?></label>
+                <label><?php echo __("b09_choose_product"); ?></label>
                 <select name="inventory_id" required>
                     <option value="">-- Selecteer --</option>
                     <?php foreach ($available_harvest as $item): ?>
                         <option value="<?php echo $item['id']; ?>">
-                            [<?php echo $item["output_type"] === "FREEZE_DRY" ? "🔵 GEDROOGD" : "🟢 VERS"; ?>] <?php echo htmlspecialchars($item["product_name"]); ?> (<?php echo number_format($item["total_weight"], 0); ?>g beschikbaar)
+                            [<?php echo $item["output_type"] === "FREEZE_DRY" ? "🔵 GEDROOGD" : "🟢 VERS"; ?>] <?php echo htmlspecialchars($item["product_name"]); ?> · <?= htmlspecialchars($item["batch_code"] ?? "—") ?> (<?= number_format($item["total_weight"], 0); ?>g <?= __("b09_avail") ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -156,7 +157,7 @@ $available_harvest = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="form-group">
-                <label><?php echo $lang['weight_grams'] ?? 'Gewicht (gram)'; ?></label>
+                <label><?php echo __("b09_weight_pack"); ?></label>
                 <input type="number" name="weight" min="1" required placeholder="Bijv. 50">
             </div>
 

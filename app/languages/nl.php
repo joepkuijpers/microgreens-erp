@@ -1,5 +1,5 @@
 <?php
-return array (
+return [
   'energy_dashboard' => 'Energie dashboard',
   'equipment' => 'Apparatuur',
   'add_equipment' => 'Apparatuur toevoegen',
@@ -450,7 +450,7 @@ return array (
   'module_b06' => 'Productie Acties',
   'module_b07' => 'Oogst',
   'module_b08' => 'Vriesdrogen',
-  'module_b09' => 'Verpakking',
+  'module_b09' => 'Verkoop',
   'module_b10' => 'Klimaat IoT',
   'module_b11' => 'Verpakking & Labels',
   'module_b12' => 'Reiniging',
@@ -694,7 +694,7 @@ return array (
   'b09_err_sale_not_found' => 'Verkoop niet gevonden.',
   'b09_sale' => 'Verkoop',
   'b09_harvest' => 'Oogst',
-  'b09_batch' => 'Productiebatch',
+  'b09_batch' => 'Batch',
   'b09_weight_g' => 'Gewicht',
   'b09_status' => 'Status',
   'b09_date' => 'Datum',
@@ -707,4 +707,10 @@ return array (
   'b09_started' => 'Gestart',
   'b09_completed' => 'Voltooid',
   'b09_back' => 'Terug naar verkopen',
-);
+  'b07_weight_hint' => 'Vul het vers geoogste (natte) kiemgewicht in — dit is de invoer, niet het eindgewicht.',
+  'b07_weight_invoer' => 'Invoer: vers geoogst (nat) kiemgewicht',
+  'b09_choose_product' => 'Kies voorraadrecord (één batch per bakje)',
+  'b09_weight_pack' => 'Te verpakken gewicht (g)',
+  'b09_avail' => 'beschikbaar',
+  'b09_no_stock' => 'Geen beschikbare oogst om te verpakken.',
+];

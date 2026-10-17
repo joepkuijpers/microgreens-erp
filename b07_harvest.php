@@ -163,10 +163,12 @@ try {
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
             <div id="wrap_fresh">
                 <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_weight_fresh'); ?></label>
+                <div style="font-size:0.8em; color:#888; margin-bottom:4px;"><?= __("b07_weight_invoer") ?></div>
                 <input type="number" step="0.1" min="0" name="weight_fresh" placeholder="0" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
             </div>
             <div id="wrap_freeze" style="display:none;">
                 <label style="display:block; font-weight:bold; margin-bottom:6px;"><?php echo __('b07_weight_freeze'); ?></label>
+                <div style="font-size:0.8em; color:#888; margin-bottom:4px;"><?= __("b07_weight_invoer") ?></div>
                 <input type="number" step="0.1" min="0" name="weight_freeze" placeholder="0" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
             </div>
         </div>

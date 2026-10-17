@@ -1,5 +1,5 @@
 <?php
-return array (
+return [
   'energy_dashboard' => 'Energy dashboard',
   'equipment' => 'Equipment',
   'add_equipment' => 'Add equipment',
@@ -694,7 +694,7 @@ return array (
   'b09_err_sale_not_found' => 'Sale not found.',
   'b09_sale' => 'Sale',
   'b09_harvest' => 'Harvest',
-  'b09_batch' => 'Production batch',
+  'b09_batch' => 'Batch',
   'b09_weight_g' => 'Weight',
   'b09_status' => 'Status',
   'b09_date' => 'Date',
@@ -707,4 +707,10 @@ return array (
   'b09_started' => 'Started',
   'b09_completed' => 'Completed',
   'b09_back' => 'Back to sales',
-);
+  'b07_weight_hint' => 'Enter the freshly harvested (wet) seedling weight — this is the input, not the final weight.',
+  'b07_weight_invoer' => 'Input: freshly harvested (wet) seedling weight',
+  'b09_choose_product' => 'Choose stock record (one batch per unit)',
+  'b09_weight_pack' => 'Weight to pack (g)',
+  'b09_avail' => 'available',
+  'b09_no_stock' => 'No available harvest to pack.',
+];
