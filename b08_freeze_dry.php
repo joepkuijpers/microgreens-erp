@@ -123,7 +123,7 @@ if (($_POST['action'] ?? '') === 'complete_cycle') {
         $regTime = round(microtime(true) - $t0, 3);
         auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $process_id, 'COMPLETE_CYCLE', 'Vriesdroogcyclus voltooid', null, ['operator' => $operator, 'final_weight_g' => $final_weight, 'water_removed_g' => $water, 'reg_time' => $regTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
         $db->commit();
-        $message = __('success_cycle_completed');
+        $message = sprintf(__('success_cycle_completed'), $process_id);
     }
     // Include complete_cycle actie
 
