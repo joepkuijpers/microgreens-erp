@@ -1,10 +1,36 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
-if (isset($_GET["lang"])) { $_SESSION["lang"] = $_GET["lang"]; }
-$lang = $_SESSION["lang"] ?? "nl";
-if (!in_array($lang, ["nl", "en"])) { $lang = "nl"; }
-$f = __DIR__ . "/" . $lang . ".json";
-$t = file_exists($f) ? json_decode(file_get_contents($f), true) : [];
-function __($k) { global $t; return $t[$k] ?? $k; }
-function lang_url($l) { $u = preg_replace("/[?&]lang=[a-z]{2}/", "", $_SERVER["PHP_SELF"]); return $u . (strpos($u,"?")?"&":"?") . "lang=" . $l; }
-?>
+// Language Loader
+// Verwacht dat $languageCode al is ingesteld door header.php (via sessie)
+
+if (!isset($languageCode)) {
+    $languageCode = 'nl';
+    if (isset($_SESSION['erp_language'])) {
+        $languageCode = $_SESSION['erp_language'];
+    }
+}
+
+$allowedLanguages = ['nl', 'en', 'de', 'fr', 'es', 'it'];
+if (!in_array($languageCode, $allowedLanguages, true)) {
+    $languageCode = 'nl';
+}
+
+$languageFile = __DIR__ . "/../app/languages/{$languageCode}.php";
+if (!file_exists($languageFile)) {
+    $languageFile = __DIR__ . '/../app/languages/nl.php';
+}
+
+$translations = require $languageFile;
+
+// Optioneel module-fragment samenvoegen (bv. nl_b01_b02.php)
+$extFile = preg_replace('/\.php$/', '_b01_b02.php', $languageFile);
+if (file_exists($extFile)) {
+    $translations = array_merge($translations, require $extFile);
+}
+
+function __(string $key): string {
+    global $translations;
+    if (isset($translations[$key])) {
+        return $translations[$key];
+    }
+    return "[[" . $key . "]]";
+}
