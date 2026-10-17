@@ -25,12 +25,12 @@ if ($module === 'home' || $module === '') {
     echo "<h1>🌱 Microgreens ERP Systeem</h1>";
     echo "<p>Systeem is actief. Kies een module:</p>";
     echo "<ul>";
-    echo "<li><a href='?module=b01_batch_queue'>B01: Batch Queue</a></li>";
-    echo "<li><a href='?module=b02_crop_profile'>B02: Crop Profile</a></li>";
-    echo "<li><a href='?module=b03_growth_stage'>B03: Growth Stage</a></li>";
-    echo "<li><a href='?module=b04_rack_capacity'>B04: Rack Capacity</a></li>";
-echo "<li><a href='b14_water_irrigation.php'>B05: Water &amp; Irrigatie</a></li>";
-    echo "<li><a href='?module=b06_production_actions'>B06: Production Actions</a></li>";
+    echo "<li><a href='?module=b01_batch_queue'>Batch Queue</a></li>";
+    echo "<li><a href='?module=b02_crop_profile'>Crop Profile</a></li>";
+    echo "<li><a href='?module=b03_growth_stage'>Growth Stage</a></li>";
+    echo "<li><a href='?module=b04_rack_capacity'>Rack Capacity</a></li>";
+echo "<li><a href='b14_water_irrigation.php'>Water &amp; Irrigatie</a></li>";
+    echo "<li><a href='?module=b06_production_actions'>Production Actions</a></li>";
     echo "</ul>";
     exit;
 }
