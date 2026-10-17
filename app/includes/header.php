@@ -64,7 +64,7 @@ $modules = [
 ['id'=>'B02','file'=>'b02_germination.php','key'=>'module_b02'],
 ['id'=>'B03','file'=>'b03_growth_stage.php','key'=>'module_b03'],
 ['id'=>'B04','file'=>'b04_tray_management.php','key'=>'module_b04'],
-['id'=>'B05','file'=>'b05_seed_planning.php','key'=>'module_b05'],
+['id'=>'B05','file'=>'b14.php','key'=>'module_b05'],
 ['id'=>'B06','file'=>'b06_production_actions.php','key'=>'module_b06'],
 ['id'=>'B07','file'=>'b07_harvest.php','key'=>'module_b07'],
 ['id'=>'B08','file'=>'b08_freeze_dry.php','key'=>'module_b08'],
