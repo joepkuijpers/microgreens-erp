@@ -15,6 +15,15 @@ function trackSwatch(?string $main, ?string $sub = null): string {
     }
     return $out;
 }
+// Emoji-versie voor <option>-tekst (HTML-spans werken NIET in <option>).
+function trackEmoji(?string $main, ?string $sub = null): string {
+    $map = ['#7c3aed'=>'🟪','#2563eb'=>'🟦','#16a34a'=>'🟩','#ea580c'=>'🟧',
+            '#dc2626'=>'🟥','#db2777'=>'🟪','#0891b2'=>'🟦','#ca8a04'=>'🟨'];
+    $out = '';
+    if ($main !== null && $main !== '' && isset($map[$main])) $out .= $map[$main];
+    if ($sub !== null && $sub !== '' && isset($map[$sub]))     $out .= $map[$sub];
+    return $out;
+}
 function batchColor(PDO $db, int $batchId): ?string {
     $st = $db->prepare("SELECT track_color FROM production_batches WHERE id=:id");
     $st->execute([':id' => $batchId]);

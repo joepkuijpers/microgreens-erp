@@ -149,7 +149,7 @@ try {
             <select name="batch_id" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
                 <option value="">-- <?php echo __('b07_choose_batch'); ?> --</option>
                 <?php foreach ($available_batches as $b): ?>
-                    <option value="<?php echo (int)$b['id']; ?>"><?php echo trackSwatch($b['track_color'] ?? null); ?><?php echo htmlspecialchars($b['batch_code']); ?> — <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>)</option>
+                    <option value="<?php echo (int)$b['id']; ?>"><?php echo trackEmoji($b['track_color'] ?? null); ?><?php echo htmlspecialchars($b['batch_code']); ?> — <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>)</option>
                 <?php endforeach; ?>
             </select>
         </div>

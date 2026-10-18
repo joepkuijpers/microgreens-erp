@@ -2,9 +2,10 @@
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/track_color.php';
 $message = ""; $messageType = "";
 $startTime = microtime(true);
-$batchStmt = $db->prepare("SELECT id, batch_code, crop_type, rack_id, status FROM production_batches WHERE status IN ('PLANNED','SOWN','GERMINATING') ORDER BY id DESC");
+$batchStmt = $db->prepare("SELECT id, batch_code, crop_type, rack_id, status, track_color FROM production_batches WHERE status IN ('PLANNED','SOWN','GERMINATING') ORDER BY id DESC");
 $batchStmt->execute();
 $openBatches = $batchStmt->fetchAll(PDO::FETCH_ASSOC);
 $allTrays = $db->query("SELECT id, tray_code, rack_id, status FROM trays ORDER BY tray_code")->fetchAll(PDO::FETCH_ASSOC);
@@ -133,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !iss
         }
     }
 }
-$germStmt = $db->prepare("SELECT gr.id, gr.status, gr.quantity_seeds, gr.start_date, t.tray_code, pb.batch_code, pb.id AS production_batch_id, pb.status AS batch_status FROM germination_records gr LEFT JOIN trays t ON t.id = gr.tray_id LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id WHERE gr.status = 'GERMINATING' ORDER BY gr.id DESC");
+$germStmt = $db->prepare("SELECT gr.id, gr.status, gr.quantity_seeds, gr.start_date, t.tray_code, pb.batch_code, pb.track_color, pb.id AS production_batch_id, pb.status AS batch_status FROM germination_records gr LEFT JOIN trays t ON t.id = gr.tray_id LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id WHERE gr.status = 'GERMINATING' ORDER BY gr.id DESC");
 $germStmt->execute();
 $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -151,7 +152,7 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
                 <select name="production_batch_id" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
                     <option value=""><?php echo htmlspecialchars(__('b02_batch_placeholder')); ?></option>
                     <?php foreach($openBatches as $b): ?>
-                        <option value="<?php echo (int)$b['id']; ?>"><?php echo htmlspecialchars($b['batch_code']); ?> - <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>, <?php echo htmlspecialchars($b['status']); ?>)</option>
+                        <option value="<?php echo (int)$b['id']; ?>"><?php echo trackEmoji($b['track_color'] ?? null); ?><?php echo htmlspecialchars($b['batch_code']); ?> - <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>, <?php echo htmlspecialchars($b['status']); ?>)</option>
                     <?php endforeach; ?>
                 </select>
                 <?php if(empty($openBatches)): ?><small style="color:red;"><?php echo htmlspecialchars(__('b02_no_batches')); ?></small><?php endif; ?>
@@ -203,7 +204,7 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($activeGerminations as $g): ?>
                 <tr style="border-bottom:1px solid #eee;">
                     <td style="padding:8px;"><?php echo htmlspecialchars($g['tray_code'] ?? '-'); ?></td>
-                    <td style="padding:8px;"><?php echo htmlspecialchars($g['batch_code'] ?? '-'); ?></td>
+                    <td style="padding:8px;"><?php echo trackSwatch($g['track_color'] ?? null); ?><?php echo htmlspecialchars($g['batch_code'] ?? '-'); ?></td>
                     <td style="padding:8px;"><?php echo htmlspecialchars((string)$g['quantity_seeds']); ?>g</td>
                     <td style="padding:8px;"><?php echo htmlspecialchars((string)$g['start_date']); ?></td>
                     <td style="padding:8px;">
