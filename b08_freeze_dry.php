@@ -2,6 +2,7 @@
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/track_color.php';
 require_once __DIR__ . '/app/includes/auth.php';
 $pageTitle = __('module_b08');
 $message = ''; $error = ''; $watchdogWarning = '';
@@ -142,7 +143,7 @@ try {
 
 try {
     $batchesStmt = $db->query("
-        SELECT po.id, po.batch_id, pb.crop_type as product_name, po.quantity, po.produced_at
+        SELECT po.id, po.batch_id, pb.crop_type as product_name, po.quantity, po.produced_at, pb.track_color
         FROM production_outputs po JOIN production_batches pb ON po.batch_id = pb.id
         WHERE po.output_type = 'FREEZE_DRY_INPUT' AND po.id NOT IN (SELECT production_output_id FROM freeze_dry_processes WHERE production_output_id IS NOT NULL)
         ORDER BY po.produced_at DESC LIMIT 50
@@ -191,7 +192,7 @@ try {
                     <option value="">-- <?php echo __('choose_batch'); ?> --</option>
                     <?php foreach($availableBatches as $b): ?>
                         <option value="<?php echo $b['id']; ?>" data-batch="<?php echo $b['batch_id']; ?>">
-                            <?php echo htmlspecialchars($b['product_name']); ?> - <?php echo number_format($b['quantity'], 1); ?>g (Batch #<?php echo $b['batch_id']; ?>)
+                            <?php echo trackEmoji($b['track_color'] ?? null); ?> <?php echo htmlspecialchars($b['product_name']); ?> - <?php echo number_format($b['quantity'], 1); ?>g (Batch #<?php echo $b['batch_id']; ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
