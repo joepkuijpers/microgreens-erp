@@ -25,12 +25,12 @@ if ($module === 'home' || $module === '') {
     echo "<h1>🌱 Microgreens ERP Systeem</h1>";
     echo "<p>Systeem is actief. Kies een module:</p>";
     echo "<ul>";
-    echo "<li><a href='?module=b01_batch_queue'>Batch Queue</a></li>";
-    echo "<li><a href='?module=b02_crop_profile'>Crop Profile</a></li>";
-    echo "<li><a href='?module=b03_growth_stage'>Growth Stage</a></li>";
-    echo "<li><a href='?module=b04_rack_capacity'>Rack Capacity</a></li>";
+    echo "<li><a href='b01_batch.php'>Batch aanmaken</a></li>";
+    echo "<li><a href='b02_germination.php'>Kiemen</a></li>";
+    echo "<li><a href='b03_growth_chamber.php'>Klimaat</a></li>";
+    echo "<li><a href='b04_tray_management.php'>Trays</a></li>";
 echo "<li><a href='b14_water_irrigation.php'>Water &amp; Irrigatie</a></li>";
-    echo "<li><a href='?module=b06_production_actions'>Production Actions</a></li>";
+    echo "";
     echo "</ul>";
     exit;
 }
