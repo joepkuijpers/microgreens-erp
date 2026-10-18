@@ -62,7 +62,7 @@ $modules = [
 ['id'=>'DASH','file'=>'index.php','key'=>'dashboard_home'],
 ['id'=>'B01','file'=>'b01_seed_inventory.php','key'=>'module_b01'],
 ['id'=>'B02','file'=>'b02_germination.php','key'=>'module_b02'],
-['id'=>'B03','file'=>'b03_growth_stage.php','key'=>'module_b03'],
+['id'=>'B03','file'=>'b03_growth_chamber.php','key'=>'module_b03'],
 ['id'=>'B04','file'=>'b04_tray_management.php','key'=>'module_b04'],
 ['id'=>'B06','file'=>'b06_climate_monitoring.php','key'=>'module_b06'],
 ['id'=>'B07','file'=>'b07_harvest.php','key'=>'module_b07'],
