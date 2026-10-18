@@ -164,7 +164,7 @@ try {
 </div>
 
 <div class="next-step-bar">
-    <a href="b03_growth_stage.php">← <?php echo __('module_b03'); ?></a>
+    <a href="b03_growth_chamber.php">← <?php echo __('module_b03'); ?></a>
     <a href="b05_seed_planning.php"><?php echo __('module_b05'); ?> →</a>
 </div>
 
