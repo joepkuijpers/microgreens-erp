@@ -2,6 +2,7 @@
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/track_color.php';
 require_once __DIR__ . '/app/includes/auth.php';
 $pageTitle = __('module_b09');
 
@@ -87,7 +88,7 @@ if (($_POST['action'] ?? '') === 'register_sale') {
 
 $customers = $db->query("SELECT id, name FROM customers ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 $units = $db->query("
-    SELECT pu.id, pu.package_code, pu.total_weight_g, pu.sale_price_eur, fi.product_name, pb.batch_code
+    SELECT pu.id, pu.package_code, pu.total_weight_g, pu.sale_price_eur, fi.product_name, pb.batch_code, pb.track_color
     FROM packaging_units pu
     JOIN finished_inventory fi ON fi.id = pu.finished_inventory_id
     JOIN harvests h ON h.id = fi.harvest_id
@@ -122,7 +123,7 @@ $units = $db->query("
                 <label style="display:block;font-weight:bold;margin-bottom:5px;">2. <?php echo __('b09_package'); ?></label>
                 <select name="packaging_unit_id" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:4px;">
                     <option value="">-- <?php echo __('b09_choose_unit'); ?> --</option>
-                    <?php foreach ($units as $un): ?><option value="<?php echo (int)$un['id']; ?>"><?php echo htmlspecialchars($un['package_code']); ?> — <?php echo htmlspecialchars($un['product_name']); ?> (<?php echo htmlspecialchars($un['batch_code']); ?>) · <?php echo number_format((float)$un['total_weight_g'],0,',','.'); ?> g · €<?php echo number_format((float)$un['sale_price_eur'],2,',','.'); ?></option><?php endforeach; ?>
+                    <?php foreach ($units as $un): ?><option value="<?php echo (int)$un['id']; ?>"><?php echo trackEmoji($un['track_color'] ?? null); ?><?php echo htmlspecialchars($un['package_code']); ?> — <?php echo htmlspecialchars($un['product_name']); ?> (<?php echo htmlspecialchars($un['batch_code']); ?>) · <?php echo number_format((float)$un['total_weight_g'],0,',','.'); ?> g · €<?php echo number_format((float)$un['sale_price_eur'],2,',','.'); ?></option><?php endforeach; ?>
                 </select>
             </div>
             <div style="margin-bottom:15px;">
