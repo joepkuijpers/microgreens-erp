@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/auth.php';
+require_once __DIR__ . '/app/includes/track_color.php';
 
 // Initialiseer variabelen om warnings te voorkomen
 $message = '';
@@ -68,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 // --- OPHALEN BESCHIKBARE OOGST ---
 try {
     $stmt = $db->query("
-        SELECT fi.id, fi.product_name, fi.weight_grams AS total_weight, fi.output_type, pb.batch_code
+        SELECT fi.id, fi.product_name, fi.weight_grams AS total_weight, fi.output_type, pb.batch_code, pb.track_color
         FROM finished_inventory fi
         LEFT JOIN harvests h ON h.id = fi.harvest_id
         LEFT JOIN germination_records gr ON gr.id = h.germination_record_id
@@ -149,7 +150,7 @@ $available_harvest = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <option value="">-- Selecteer --</option>
                     <?php foreach ($available_harvest as $item): ?>
                         <option value="<?php echo $item['id']; ?>">
-                            [<?php echo $item["output_type"] === "FREEZE_DRY" ? "🔵 GEDROOGD" : "🟢 VERS"; ?>] <?php echo htmlspecialchars($item["product_name"]); ?> · <?= htmlspecialchars($item["batch_code"] ?? "—") ?> (<?= number_format($item["total_weight"], 0); ?>g <?= __("b09_avail") ?>)
+                            [<?php echo $item["output_type"] === "FREEZE_DRY" ? "🔵 GEDROOGD" : "🟢 VERS"; ?>] <?php echo trackEmoji($item["track_color"] ?? null); ?><?php echo htmlspecialchars($item["product_name"]); ?> · <?= htmlspecialchars($item["batch_code"] ?? "—") ?> (<?= number_format($item["total_weight"], 0); ?>g <?= __("b09_avail") ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>
