@@ -227,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div style="flex:1;">
                 <div style="margin-bottom:14px;">
                 <label style="display:block;font-weight:bold;margin-bottom:6px;">Volgkleur (optioneel)</label>
-                <input type="color" name="track_color" value="#7c3aed" style="width:60px;height:38px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">
+                <select name="track_color" style="width:100%;padding:10px;font-size:16px;border:1px solid #ddd;border-radius:6px;"><option value="">Geen kleur</option><option value="#7c3aed">🟪 Paars</option><option value="#2563eb">🟦 Blauw</option><option value="#16a34a">🟩 Groen</option><option value="#ea580c">🟧 Oranje</option><option value="#dc2626">🟥 Rood</option><option value="#db2777">🟪 Roze</option><option value="#0891b2">🟦 Cyaan</option><option value="#ca8a04">🟨 Amber</option></select>
                 <span style="font-size:12px;color:#888;">kleur die bij deze batch blijft</span>
             </div>
             <div>
