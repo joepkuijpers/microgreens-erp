@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 // --- OPHALEN BESCHIKBARE OOGST ---
 try {
     $stmt = $db->query("
-        SELECT fi.id, fi.product_name, fi.weight_grams AS total_weight, fi.output_type, pb.batch_code, pb.track_color
+        SELECT fi.id, fi.product_name, fi.weight_grams AS total_weight, fi.output_type, pb.batch_code, CASE WHEN fi.output_type = 'FREEZE_DRY' THEN '#2563eb' ELSE pb.track_color END AS track_color
         FROM finished_inventory fi
         LEFT JOIN harvests h ON h.id = fi.harvest_id
         LEFT JOIN germination_records gr ON gr.id = h.germination_record_id

@@ -88,7 +88,7 @@ if (($_POST['action'] ?? '') === 'register_sale') {
 
 $customers = $db->query("SELECT id, name FROM customers ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 $units = $db->query("
-    SELECT pu.id, pu.package_code, pu.total_weight_g, pu.sale_price_eur, fi.product_name, pb.batch_code, pb.track_color
+    SELECT pu.id, pu.package_code, pu.total_weight_g, pu.sale_price_eur, fi.output_type, fi.product_name, pb.batch_code, CASE WHEN fi.output_type = 'FREEZE_DRY' THEN '#2563eb' ELSE pb.track_color END AS track_color
     FROM packaging_units pu
     JOIN finished_inventory fi ON fi.id = pu.finished_inventory_id
     JOIN harvests h ON h.id = fi.harvest_id
