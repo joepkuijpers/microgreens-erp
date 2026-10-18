@@ -71,11 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["advance_id"])) {
 
 // ── Nieuwe kiemactie ──
 if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !isset($_POST["advance_id"])) {
-    $seedInvId = (int)($_POST["seed_inventory_id"] ?? 0);
+    $seedInvId = 0; // afgeleid uit batch_materials
     $trayId    = (int)($_POST["tray_id"] ?? 0);
     $batchId   = (int)($_POST["production_batch_id"] ?? 0);
     $errors = [];
-    if ($seedInvId <= 0) $errors[] = __('err_choose_seed');
+    // zaad uit batch afgeleid
     if ($trayId <= 0)    $errors[] = __('err_choose_tray');
     if ($batchId <= 0)   $errors[] = __('err_choose_batch');
     if (!empty($errors)) {
@@ -84,6 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !iss
         try {
             $db->beginTransaction();
             $gate = $db->prepare("SELECT sl.variety, sl.organic_status, sl.certificate_valid_until, s.name AS supplier FROM seed_inventory si JOIN seed_lots sl ON sl.id = si.seed_lot_id JOIN suppliers s ON s.id = si.supplier_id WHERE si.id = :id");
+            if ($seedInvId <= 0) {
+                $bm = $db->prepare("SELECT inventory_id FROM batch_materials WHERE batch_id = :b LIMIT 1");
+                $bm->execute([':b' => $batchId]);
+                $seedInvId = (int)$bm->fetchColumn();
+            }
             $gate->execute([':id' => $seedInvId]);
             $seed = $gate->fetch(PDO::FETCH_ASSOC);
             $gateResult = ['allowed'=>false, 'conventional'=>false, 'reason'=>''];
@@ -159,7 +164,8 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div style="margin-bottom:15px;">
                 <label style="display:block; font-weight:bold; margin-bottom:5px;"><?php echo htmlspecialchars(__('b02_seed_label')); ?></label>
-                <select name="seed_inventory_id" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
+                <div style="padding:8px 10px;margin-bottom:6px;background:#eef6ff;border:1px solid #cfe3ff;border-radius:4px;color:#345;font-size:13px;">Zaad wordt automatisch uit de gekozen batch gehaald — hier niets kiezen.</div>
+                <select name="seed_inventory_id" disabled style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px; opacity:.55;">
                     <option value=""><?php echo htmlspecialchars(__('b02_seed_placeholder')); ?></option>
                     <?php foreach($seedInventory as $s): ?>
                         <option value="<?php echo (int)$s['id']; ?>"><?php echo htmlspecialchars($s['variety']); ?> - <?php echo htmlspecialchars($s['supplier']); ?> (<?php echo htmlspecialchars($s['organic_status']); ?>, <?php echo number_format($s['stock_grams'],1); ?>g)</option>
