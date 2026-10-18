@@ -2,6 +2,7 @@
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/track_color.php';
 
 $flash = "";
 $flashType = "";
@@ -117,15 +118,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $notes = "⚠ CONVENTIONEEL ZAAD GEBRUIKT: " . $gateResult["reason"];
                 }
 
+                $track = (isset($_POST['track_color']) && preg_match('/^#[0-9a-fA-F]{6}$/', $_POST['track_color'])) ? $_POST['track_color'] : null;
                 $ins = $db->prepare("
                     INSERT INTO production_batches
                         (batch_code, status, crop_type, rack_id, tray_count, tray_type,
-                         expected_harvest_date, planned_sow_date, started_at, notes)
+                         expected_harvest_date, planned_sow_date, started_at, notes, track_color)
                     VALUES
                         (:code, :status, :crop, :rack, :tray_count, :tray_type,
-                         :expected, :planned, :started, :notes)
+                         :expected, :planned, :started, :notes, :track)
                 ");
                 $ins->execute([
+                    ':track'      => $track,
                     ':code'       => $batch_code,
                     ':status'     => $status,
                     ':crop'       => $crop_type,
@@ -222,7 +225,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <div style="display:flex;gap:12px;margin-bottom:16px;">
             <div style="flex:1;">
-                <label style="display:block;font-weight:bold;margin-bottom:6px;"><?= htmlspecialchars(__('b01_rack')) ?></label>
+                <div style="margin-bottom:14px;">
+                <label style="display:block;font-weight:bold;margin-bottom:6px;">Volgkleur (optioneel)</label>
+                <input type="color" name="track_color" value="#7c3aed" style="width:60px;height:38px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">
+                <span style="font-size:12px;color:#888;">kleur die bij deze batch blijft</span>
+            </div>
+            <div>
+            <label style="display:block;font-weight:bold;margin-bottom:6px;"><?= htmlspecialchars(__('b01_rack')) ?></label>
                 <select name="rack_id" required style="width:100%;padding:12px;font-size:16px;border:1px solid #ddd;border-radius:6px;">
                     <option value=""><?= htmlspecialchars(__('b01_rack_placeholder')) ?></option>
                     <?php foreach ($racks as $r): ?>

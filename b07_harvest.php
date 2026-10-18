@@ -3,6 +3,7 @@ require_once __DIR__ . '/app/includes/auth.php';
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/track_color.php';
 
 $message = '';
 $errors = [];
@@ -123,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harve
 // --- ACTIEVE BATCHES ---
 $available_batches = [];
 try {
-    $stmt = $db->query("SELECT id, batch_code, crop_type, started_at, rack_id FROM production_batches WHERE status IN ('GROWING','READY_TO_HARVEST') ORDER BY started_at DESC");
+    $stmt = $db->query("SELECT id, batch_code, crop_type, started_at, rack_id, track_color FROM production_batches WHERE status IN ('GROWING','READY_TO_HARVEST') ORDER BY started_at DESC");
     $available_batches = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) { /* leeg */ }
 ?>
@@ -148,7 +149,7 @@ try {
             <select name="batch_id" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
                 <option value="">-- <?php echo __('b07_choose_batch'); ?> --</option>
                 <?php foreach ($available_batches as $b): ?>
-                    <option value="<?php echo (int)$b['id']; ?>"><?php echo htmlspecialchars($b['batch_code']); ?> — <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>)</option>
+                    <option value="<?php echo (int)$b['id']; ?>"><?php echo trackSwatch($b['track_color'] ?? null); ?><?php echo htmlspecialchars($b['batch_code']); ?> — <?php echo htmlspecialchars($b['crop_type']); ?> (<?php echo htmlspecialchars($b['rack_id']); ?>)</option>
                 <?php endforeach; ?>
             </select>
         </div>
