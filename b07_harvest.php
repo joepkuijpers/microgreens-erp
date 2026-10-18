@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harve
             $db->beginTransaction();
 
             // 1. Batch laden + statuscheck
-            $stmt = $db->prepare("SELECT id, batch_code, crop_type, status, rack_id FROM production_batches WHERE id = ?");
+            $stmt = $db->prepare("SELECT id, batch_code, crop_type, status, rack_id, track_color FROM production_batches WHERE id = ?");
             $stmt->execute([$batch_id]);
             $batch = $stmt->fetch(PDO::FETCH_ASSOC);
             if (!$batch) { throw new Exception(__('b07_err_not_found')); }
@@ -94,8 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harve
                 $otype = $branchOutputType[$key];
                 $istat = $branchInvStatus[$key];
 
-                $po = $db->prepare("INSERT INTO production_outputs (batch_id, output_type, quantity, unit, status, notes) VALUES (?, ?, ?, 'g', 'REGISTERED', ?)");
-                $po->execute([$batch_id, $otype, $grams, $notes]);
+                $outColor = ($key === 'FREEZE_DRY') ? '#2563eb' : ($batch['track_color'] ?? null);
+                $po = $db->prepare("INSERT INTO production_outputs (batch_id, output_type, quantity, unit, status, notes, track_color) VALUES (?, ?, ?, 'g', 'REGISTERED', ?, ?)");
+                $po->execute([$batch_id, $otype, $grams, $notes, $outColor]);
 
                 $fi = $db->prepare("INSERT INTO finished_inventory (harvest_id, product_name, weight_grams, harvest_date, status, output_type) VALUES (?, ?, ?, date('now'), ?, ?)");
                 $fi->execute([$harvestId, $batch['crop_type'], $grams, $istat, $otype]);
