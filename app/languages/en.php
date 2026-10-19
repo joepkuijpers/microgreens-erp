@@ -713,4 +713,13 @@ return [
   'b09_weight_pack' => 'Weight to pack (g)',
   'b09_avail' => 'available',
   'b09_no_stock' => 'No available harvest to pack.',
+  'b13_title' => 'Smart Energy Usage',
+  'b13_meter' => 'Meter',
+  'b13_val' => 'Reading',
+  'b13_submit' => 'Save',
+  'b13_total_cost' => 'Total Cost (Month)',
+  'b13_chart' => 'Usage Last 7 Days',
+  'b13_success' => 'Saved! Cost: €%s',
+  'b13_alert' => '⚠️ %s usage (%s) above threshold (%s)!',
+  'b13_invalid_input' => '❌ Select a meter and enter a valid reading.',
 ];
