@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/app/db_connect.php';
+require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/auth.php';
 
 $flash = "";
@@ -54,7 +54,7 @@ $rows = $db->query("SELECT id, timestamp, temperature, humidity, rack_id FROM cl
 $batchStmt = $db->prepare("SELECT pb.batch_code FROM production_batches pb WHERE pb.rack_id = :r AND :ts BETWEEN pb.started_at AND COALESCE(pb.completed_at, datetime('now')) ORDER BY pb.started_at DESC LIMIT 1");
 $countStmt = $db->prepare("SELECT COUNT(*) FROM production_batches pb WHERE pb.rack_id = :r AND :ts BETWEEN pb.started_at AND COALESCE(pb.completed_at, datetime('now'))");
 
-require_once __DIR__ . '/app/includes/layout_start.php';
+
 ?>
 
 <div style="max-width:1000px;margin:20px auto;font-family:sans-serif;">
