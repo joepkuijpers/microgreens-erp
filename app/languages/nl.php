@@ -713,4 +713,13 @@ return [
   'b09_weight_pack' => 'Te verpakken gewicht (g)',
   'b09_avail' => 'beschikbaar',
   'b09_no_stock' => 'Geen beschikbare oogst om te verpakken.',
+  'b13_title' => 'Slim Energieverbruik',
+  'b13_meter' => 'Meter',
+  'b13_val' => 'Stand',
+  'b13_submit' => 'Opslaan',
+  'b13_total_cost' => 'Totale Kosten (Maand)',
+  'b13_chart' => 'Verbruik Laatste 7 Dagen',
+  'b13_success' => 'Opgeslagen! Kosten: €%s',
+  'b13_alert' => '⚠️ %s verbruik (%s) boven drempel (%s)!',
+  'b13_invalid_input' => '❌ Kies een meter en voer een geldige stand in.',
 ];
