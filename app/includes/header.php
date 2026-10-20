@@ -68,7 +68,7 @@ $modules = [
 ['id'=>'B07','file'=>'b07_harvest.php','key'=>'module_b07'],
 ['id'=>'B08','file'=>'b08_freeze_dry.php','key'=>'module_b08'],
 ['id'=>'B09','file'=>'b09_sale.php','key'=>'module_b09'],
-['id'=>'B10','file'=>'b10_iot_climate.php','key'=>'module_b10'],
+['id'=>'B10','file'=>'b10_sensor_sync.php','key'=>'module_b10'],
 ['id'=>'B11','file'=>'b09_packaging.php','key'=>'module_b11'],
 ['id'=>'B12','file'=>'b12_cleaning.php','key'=>'module_b12'],
 ['id'=>'B13','file'=>'b13_energy.php','key'=>'module_b13'],
