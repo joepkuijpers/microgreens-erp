@@ -130,6 +130,13 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 })();
 </script>
 <?php require_once __DIR__ . "/registration_timer.php"; ?>
+<style>
+.flash { padding: 12px 16px; margin: 12px 0; border-radius: 6px; border-left: 4px solid; font-weight: 600; }
+.flash-success { background: #e7f6ec; color: #1a7f37; border-color: #1a7f37; }
+.flash-warning { background: #fff4e5; color: #b45309; border-color: #b45309; }
+.flash-error   { background: #fdecec; color: #b42318; border-color: #b42318; }
+.flash-info    { background: #eaf2fb; color: #1d4ed8; border-color: #1d4ed8; }
+</style>
 </head><body>
 <nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><ul class="nav-links">
 <?php foreach($modules as $m): $active=(basename($_SERVER['PHP_SELF'])===$m['file'])?'active':''; ?>
