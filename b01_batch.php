@@ -2,10 +2,12 @@
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/auth.php';
 require_once __DIR__ . '/app/includes/track_color.php';
 
 $flash = "";
 $flashType = "";
+$u = auth_current_user(); $operator = is_array($u) ? ($u['display_name'] ?? 'system') : 'system';
 $startTime = microtime(true);
 $mode = ($_GET["mode"] ?? "now") === "planned" ? "planned" : "now";
 
@@ -172,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         'organic_status' => $seed['organic_status'], 'conventional' => !empty($gateResult["conventional"]),
                         'mode' => $post_mode, 'planned_sow_date' => $planned, 'expected_harvest_date' => $exp_val,
                         'days_now_to_harvest' => $dNowToHarvest, 'days_now_to_sow' => $dNowToSow,
-                        'days_sow_to_harvest' => $dSowToHarvest, 'registration_time_seconds' => $regTime,
+                        'days_sow_to_harvest' => $dSowToHarvest, 'registration_time_seconds' => $regTime, 'operator' => $operator,
                     ],
                     'seed_lot', (int)$seed["lot_id"]
                 );

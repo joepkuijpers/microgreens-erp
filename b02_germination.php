@@ -2,8 +2,10 @@
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/auth.php';
 require_once __DIR__ . '/app/includes/track_color.php';
 $message = ""; $messageType = "";
+$u = auth_current_user(); $operator = is_array($u) ? ($u['display_name'] ?? 'system') : 'system';
 $startTime = microtime(true);
 $batchStmt = $db->prepare("SELECT id, batch_code, crop_type, rack_id, status, track_color FROM production_batches WHERE status IN ('PLANNED','SOWN','GERMINATING') ORDER BY id DESC");
 $batchStmt->execute();
@@ -37,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
         $db->prepare("UPDATE germination_records SET status = 'GEANNULEERD', notes = COALESCE(notes,'') || ' | GEANNULEERD ' || datetime('now','localtime') WHERE id = :id")->execute([':id' => $cancelId]);
         if (!empty($row["tray_id"])) { $db->prepare("UPDATE trays SET status = 'EMPTY' WHERE id = :id")->execute([':id' => $row["tray_id"]]); }
         if (!empty($row["production_batch_id"])) { $db->prepare("UPDATE production_batches SET status = 'SOWN' WHERE id = :id AND status = 'GERMINATING'")->execute([':id' => $row["production_batch_id"]]); }
-        auditLog($db, 'B02_GERMINATION_CANCELLED', 'germination_records', $cancelId, 'CORRECTION', "Kiemactie #{$cancelId} geannuleerd. Tray teruggezet naar EMPTY.", ['status' => $row["status"]], ['status' => 'GEANNULEERD'], 'production_batch', $row["production_batch_id"] ? (int)$row["production_batch_id"] : null);
+        auditLog($db, 'B02_GERMINATION_CANCELLED', 'germination_records', $cancelId, 'CORRECTION', "Kiemactie #{$cancelId} geannuleerd. Tray teruggezet naar EMPTY.", ['status' => $row["status"]], ['status' => 'GEANNULEERD', 'operator' => $operator], 'production_batch', $row["production_batch_id"] ? (int)$row["production_batch_id"] : null);
         $db->commit();
         $message = sprintf(__('msg_germ_cancelled'), $cancelId);
         $messageType = "success";
@@ -59,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["advance_id"])) {
         $cur = $st->fetchColumn();
         if ($cur === false || ($allowed[$cur] ?? '') !== $advTo) { throw new Exception(__('b02_advance_invalid')); }
         $db->prepare("UPDATE production_batches SET status = ? WHERE id = ?")->execute([$advTo, $advId]);
-        auditLog($db, 'B02_BATCH_ADVANCED', 'production_batches', $advId, 'CORRECTION', "Batchstatus: {$cur} -> {$advTo}", ['status'=>$cur], ['status'=>$advTo]);
+        auditLog($db, 'B02_BATCH_ADVANCED', 'production_batches', $advId, 'CORRECTION', "Batchstatus: {$cur} -> {$advTo}", ['status'=>$cur], ['status'=>$advTo, 'operator' => $operator]);
         $db->commit();
         $message = __('b02_advance_ok');
         $messageType = "success";
@@ -128,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !iss
                 $db->prepare("UPDATE trays SET status = 'GERMINATING' WHERE id = :id")->execute([':id' => $trayId]);
                 $db->prepare("UPDATE production_batches SET status = 'GERMINATING' WHERE id = :id")->execute([':id' => $batchId]);
                 $regTime = round(microtime(true) - $startTime, 2);
-                auditLog($db, 'B02_GERMINATION_STARTED', 'germination_records', $recId, 'CREATE', "Kiemactie: tray {$tray['tray_code']} voor batch {$batch['batch_code']} ({$seed['variety']}, {$quantity}g). Oogst {$harvestDate}." . (!empty($gateResult["conventional"]) ? " CONVENTIONEEL ZAAD: {$gateResult['reason']}" : "") . " Registratietijd {$regTime}s.", null, ['tray_code' => $tray['tray_code'], 'batch_code' => $batch['batch_code'], 'variety' => $seed['variety'], 'quantity_seeds' => $quantity, 'organic_status' => $seed['organic_status'], 'conventional' => !empty($gateResult["conventional"]), 'expected_harvest_date' => $harvestDate, 'registration_time_seconds' => $regTime], 'production_batch', $batchId);
+                auditLog($db, 'B02_GERMINATION_STARTED', 'germination_records', $recId, 'CREATE', "Kiemactie: tray {$tray['tray_code']} voor batch {$batch['batch_code']} ({$seed['variety']}, {$quantity}g). Oogst {$harvestDate}." . (!empty($gateResult["conventional"]) ? " CONVENTIONEEL ZAAD: {$gateResult['reason']}" : "") . " Registratietijd {$regTime}s.", null, ['tray_code' => $tray['tray_code'], 'batch_code' => $batch['batch_code'], 'variety' => $seed['variety'], 'quantity_seeds' => $quantity, 'organic_status' => $seed['organic_status'], 'conventional' => !empty($gateResult["conventional"]), 'expected_harvest_date' => $harvestDate, 'registration_time_seconds' => $regTime, 'operator' => $operator], 'production_batch', $batchId);
                 $db->commit();
                 $message = sprintf(__('msg_germ_saved'), $tray['tray_code'], $batch['batch_code'], $regTime) . (!empty($gateResult["conventional"]) ? __('msg_conventional') : "");
                 $messageType = "success";
