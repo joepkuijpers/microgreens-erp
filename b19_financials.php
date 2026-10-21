@@ -1,184 +1,97 @@
 <?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
-session_start();
-
-$dbPath = __DIR__ . "/database/MicrogreensERP_Live.sqlite";
-if (!file_exists($dbPath)) { die("Database niet gevonden"); }
-
-try {
-    $pdo = new PDO("sqlite:" . $dbPath);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) { die("DB Fout: " . $e->getMessage()); }
-
-$message = "";
-$error = "";
-
-// --- VERWERKING FORMULIER ---
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $type = $_POST["transaction_type"] ?? "";
-    $category = $_POST["category"] ?? "";
-    $amount = floatval($_POST["amount"] ?? 0);
-    $desc = $_POST["description"] ?? "";
-    $date = $_POST["transaction_date"] ?? date("Y-m-d");
-    $entity_id = $_POST["related_entity_id"] ?? null;
-    $entity_type = $_POST["related_entity_type"] ?? null;
-
-    if ($type && $category && $amount > 0) {
-        try {
-            $stmt = $pdo->prepare("INSERT INTO financial_transactions (transaction_type, category, amount, description, transaction_date, related_entity_id, related_entity_type, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$type, $category, $amount, $desc, $date, $entity_id, $entity_type, $_SESSION["user"] ?? "admin"]);
-            $message = "Transactie succesvol toegevoegd!";
-        } catch (Exception $e) {
-            $error = "Fout bij opslaan: " . $e->getMessage();
+require_once __DIR__ . '/app/includes/header.php';
+require_once __DIR__ . '/app/includes/audit.php';
+require_once __DIR__ . '/app/includes/organic_gate.php';
+require_once __DIR__ . '/app/includes/auth.php';
+$t0 = microtime(true);
+$u = auth_current_user();
+$operator = is_array($u) ? ($u['display_name'] ?? 'system') : 'system';
+$flash = '';
+$flashClass = 'flash-info';
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
+    if ($action === 'save') {
+        $type = $_POST['transaction_type'] ?? 'EXPENSE';
+        $cat = trim($_POST['category'] ?? '');
+        $amount = (float)($_POST['amount'] ?? 0);
+        $date = trim($_POST['transaction_date'] ?? '');
+        $desc = trim($_POST['description'] ?? '');
+        $bid = (int)($_POST['related_entity_id'] ?? 0);
+        $skal = isset($_POST['is_skal_relevant']) ? 1 : 0;
+        if ($cat === '') { $errors[] = __('b19_cat_required'); }
+        if ($amount <= 0) { $errors[] = __('b19_amount_invalid'); }
+        if (!in_array($type, ['INCOME','EXPENSE'], true)) { $type = 'EXPENSE'; }
+        if (empty($errors)) {
+            $stmt = $db->prepare("INSERT INTO financial_transactions (transaction_type, category, amount, description, transaction_date, related_entity_id, related_entity_type, created_by, is_skal_relevant) VALUES (:t, :c, :a, :d, :dt, :ri, :rt, :cb, :sk)");
+            $stmt->bindValue(':t', $type, PDO::PARAM_STR);
+            $stmt->bindValue(':c', $cat, PDO::PARAM_STR);
+            $stmt->bindValue(':a', $amount, PDO::PARAM_STR);
+            $stmt->bindValue(':d', $desc, PDO::PARAM_STR);
+            $stmt->bindValue(':dt', ($date !== '') ? $date : date('Y-m-d H:i:s'), PDO::PARAM_STR);
+            $stmt->bindValue(':ri', $bid > 0 ? $bid : null, $bid > 0 ? PDO::PARAM_INT : PDO::PARAM_NULL);
+            $stmt->bindValue(':rt', $bid > 0 ? 'batch' : null, $bid > 0 ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $stmt->bindValue(':cb', $operator, PDO::PARAM_STR);
+            $stmt->bindValue(':sk', $skal, PDO::PARAM_INT);
+            $stmt->execute();
+            $nid = (int)$db->lastInsertId();
+            $reg_ms = (int)round((microtime(true) - $t0) * 1000);
+            auditLog($db, 'B19_TRANS_SAVE', 'financial_transaction', $nid, 'CREATE', 'Financiële transactie', null, ['type' => $type, 'category' => $cat, 'amount' => $amount, 'batch_id' => $bid, 'operator' => $operator, 'reg_ms' => $reg_ms]);
+            $flash = __('b19_saved');
+            $flashClass = 'flash-success';
+        } else {
+            $flash = implode(' · ', $errors);
+            $flashClass = 'flash-error';
         }
-    } else {
-        $error = "Vul alle verplichte velden in (Type, Categorie, Bedrag).";
     }
 }
-
-// --- OPHALEN DATA ---
-// Totaal Inkomsten
-$stmt = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM financial_transactions WHERE transaction_type = 'INCOME'");
-$total_income = $stmt->fetchColumn();
-
-// Totaal Kosten
-$stmt = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM financial_transactions WHERE transaction_type = 'EXPENSE'");
-$total_expense = $stmt->fetchColumn();
-
-// Winst
-$profit = $total_income - $total_expense;
-
-// Recentste transacties
-$stmt = $pdo->query("SELECT * FROM financial_transactions ORDER BY transaction_date DESC LIMIT 20");
-$transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$income = (float)$db->query("SELECT COALESCE(SUM(amount),0) FROM financial_transactions WHERE transaction_type='INCOME'")->fetchColumn();
+$expense = (float)$db->query("SELECT COALESCE(SUM(amount),0) FROM financial_transactions WHERE transaction_type='EXPENSE'")->fetchColumn();
+$result = $income - $expense;
+$rows = $db->query("SELECT ft.*, pb.batch_code FROM financial_transactions ft LEFT JOIN production_batches pb ON ft.related_entity_type='batch' AND pb.id=ft.related_entity_id ORDER BY ft.transaction_date DESC, ft.id DESC LIMIT 30")->fetchAll(PDO::FETCH_ASSOC);
+$batches = $db->query("SELECT id, batch_code FROM production_batches ORDER BY id DESC LIMIT 50")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>B19 - Financials</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>input[type="date"] { width: 100%; padding: 10px; cursor: pointer; box-sizing: border-box; } 
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        h1, h2 { color: #2c3e50; }
-        .kpi-row { display: flex; gap: 20px; margin-bottom: 20px; }
-        .kpi-box { flex: 1; padding: 20px; text-align: center; border-radius: 8px; color: white; }
-        .bg-income { background: #27ae60; }
-        .bg-expense { background: #c0392b; }
-        .bg-profit { background: #2980b9; }
-        .kpi-value { font-size: 2em; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background: #ecf0f1; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { background: #2c3e50; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button:hover { background: #34495e; }
-        .alert { padding: 15px; border-radius: 4px; margin-bottom: 20px; }
-        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .nav-link { display: inline-block; margin-bottom: 20px; color: #2c3e50; text-decoration: none; font-weight: bold; }
-        .nav-link:hover { text-decoration: underline; }
-    </style>
-</head>
-<body>
-<div style="padding:20px;"><a href="dashboard.php" style="background:#2c3e50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">← Terug naar Dashboard</a></div>
-<div class="container">
-    <a href="dashboard.php" class="nav-link">← Terug naar Dashboard</a>
-    <h1>💰 B19 - Financials & Kostenbeheer</h1>
-
-    <?php if ($message): ?><div class="alert alert-success"><?= htmlspecialchars($message) ?></div><?php endif; ?>
-    <?php if ($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-
-    <!-- KPIs -->
-    <div class="kpi-row">
-        <div class="kpi-box bg-income">
-            <div>Inkomsten</div>
-            <div class="kpi-value">€ <?= number_format($total_income, 2) ?></div>
-        </div>
-        <div class="kpi-box bg-expense">
-            <div>Kosten</div>
-            <div class="kpi-value">€ <?= number_format($total_expense, 2) ?></div>
-        </div>
-        <div class="kpi-box bg-profit">
-            <div>Winst/Verlies</div>
-            <div class="kpi-value">€ <?= number_format($profit, 2) ?></div>
-        </div>
+<div style="padding:24px">
+    <div style="background:linear-gradient(135deg,#0f766e,#7c3aed);color:#fff;border-radius:18px;padding:24px;margin-bottom:20px">
+        <h1 style="margin:0"><?php echo htmlspecialchars(__('b19_title')); ?></h1>
+        <p style="margin:6px 0 0;opacity:.9"><?php echo htmlspecialchars(__('b19_subtitle')); ?></p>
     </div>
-
-    <!-- Formulier -->
-    <div class="card">
-        <h2>Nieuwe Transactie Toevoegen</h2>
-        <form method="POST" style="background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-    <div style="margin-bottom:15px;">
-        <label style="display:block;margin-bottom:5px;font-weight:bold;">Type Transactie</label>
-        <select name="transaction_type" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;">
-            <option value="INCOME">📈 Inkomst (Verkoop)</option>
-            <option value="EXPENSE">📉 Uitgave (Kosten)</option>
-        </select>
+    <?php if ($flash !== ''): ?>
+        <div class="<?php echo $flashClass; ?>"><?php echo htmlspecialchars($flash); ?></div>
+    <?php endif; ?>
+    <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:140px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px"><div style="font-size:26px;font-weight:800;color:#16a34a">€ <?php echo number_format($income,2); ?></div><div><?php echo htmlspecialchars(__('b19_income')); ?></div></div>
+        <div style="flex:1;min-width:140px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px"><div style="font-size:26px;font-weight:800;color:#dc2626">€ <?php echo number_format($expense,2); ?></div><div><?php echo htmlspecialchars(__('b19_expense')); ?></div></div>
+        <div style="flex:1;min-width:140px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px"><div style="font-size:26px;font-weight:800;color:<?php echo $result>=0?'#0f766e':'#dc2626'; ?>">€ <?php echo number_format($result,2); ?></div><div><?php echo htmlspecialchars(__('b19_result')); ?></div></div>
     </div>
-    <div style="margin-bottom:15px;">
-        <label style="display:block;margin-bottom:5px;font-weight:bold;">Categorie</label>
-        <select name="category" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;">
-            <option value="SALES">Verkoop</option>
-            <option value="SEED">Zaad / Input</option>
-            <option value="SUPPLIER">Leverancier</option>
-            <option value="ENERGY">Energie</option>
-            <option value="WATER">Water</option>
-            <option value="PACKAGING">Verpakking</option>
-            <option value="OTHER">Overig</option>
-        </select>
-    </div>
-    <div style="margin-bottom:15px;">
-        <label style="display:block;margin-bottom:5px;font-weight:bold;">Bedrag (€)</label>
-        <input type="number" step="0.01" name="amount" required placeholder="0.00" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;box-sizing:border-box;">
-    </div>
-    <div style="margin-bottom:15px;">
-        <label style="display:block;margin-bottom:5px;font-weight:bold;">Datum</label>
-        <input type="date" name="transaction_date" value="<?php echo date("Y-m-d"); ?>" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;box-sizing:border-box;">
-    </div>
-    <div style="margin-bottom:15px;">
-        <label style="display:block;margin-bottom:5px;font-weight:bold;">Omschrijving</label>
-        <textarea name="description" rows="3" placeholder="Bijv. Aankoop zaden Broccoli" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;box-sizing:border-box;"></textarea>
-    </div>
-    <button type="submit" style="background:#2c3e50;color:white;padding:12px 20px;border:none;border-radius:4px;cursor:pointer;font-size:16px;width:100%;">💾 Opslaan Transactie</button>
-</form>
-    </div>
-
-    <!-- Overzicht -->
-    <div class="card">
-        <h2>Recente Transacties</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Type</th>
-                    <th>Categorie</th>
-                    <th>Omschrijving</th>
-                    <th>Bedrag</th>
-                </tr>
-            </thead>
+    <form method="post" style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px;margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:end">
+        <input type="hidden" name="action" value="save">
+        <div style="flex:1;min-width:120px"><label><?php echo htmlspecialchars(__('b19_type')); ?></label><select name="transaction_type" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"><option value="EXPENSE"><?php echo htmlspecialchars(__('b19_expense')); ?></option><option value="INCOME"><?php echo htmlspecialchars(__('b19_income')); ?></option></select></div>
+        <div style="flex:2;min-width:140px"><label><?php echo htmlspecialchars(__('b19_category')); ?></label><input name="category" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
+        <div style="flex:1;min-width:110px"><label><?php echo htmlspecialchars(__('b19_amount')); ?></label><input type="number" step="0.01" min="0" name="amount" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
+        <div style="flex:1;min-width:140px"><label><?php echo htmlspecialchars(__('b19_date')); ?></label><input type="date" name="transaction_date" value="<?php echo date('Y-m-d'); ?>" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
+        <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b19_batch')); ?></label><select name="related_entity_id" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"><option value="0"><?php echo htmlspecialchars(__('b19_no_batch')); ?></option><?php foreach ($batches as $b): ?><option value="<?php echo (int)$b['id']; ?>"><?php echo htmlspecialchars($b['batch_code']); ?></option><?php endforeach; ?></select></div>
+        <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b19_desc')); ?></label><input name="description" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
+        <label style="display:flex;align-items:center;gap:6px;padding-bottom:8px"><input type="checkbox" name="is_skal_relevant" checked style="transform:scale(1.25)"><?php echo htmlspecialchars(__('b19_skal')); ?></label>
+        <button type="submit" style="background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer"><?php echo htmlspecialchars(__('b19_save')); ?></button>
+    </form>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:8px 16px">
+        <table style="width:100%;border-collapse:collapse">
+            <thead><tr style="text-align:left;color:#6b7280"><th style="padding:10px"><?php echo htmlspecialchars(__('b19_date')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b19_category')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b19_amount')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b19_batch')); ?></th><th style="padding:10px">Skal</th></tr></thead>
             <tbody>
-                <?php foreach ($transactions as $t): ?>
-                <tr>
-                    <td><?= htmlspecialchars($t[transaction_date]) ?></td>
-                    <td>
-                        <span style="color: <?= $t[transaction_type] == 'INCOME' ? 'green' : 'red' ?>; font-weight:bold;">
-                            <?= $t[transaction_type] == 'INCOME' ? '📈 IN' : '📉 UIT' ?>
-                        </span>
-                    </td>
-                    <td><?= htmlspecialchars($t[category]) ?></td>
-                    <td><?= htmlspecialchars($t[description]) ?></td>
-                    <td>€ <?= number_format($t[amount], 2) ?></td>
+            <?php if (empty($rows)): ?>
+                <tr><td colspan="5" style="padding:16px;color:#6b7280"><?php echo htmlspecialchars(__('b19_no_rows')); ?></td></tr>
+            <?php else: foreach ($rows as $r): ?>
+                <tr style="border-top:1px solid #e5e7eb">
+                    <td style="padding:10px"><?php echo htmlspecialchars(substr($r['transaction_date'],0,10)); ?></td>
+                    <td style="padding:10px"><strong><?php echo htmlspecialchars($r['category']); ?></strong><?php if (!empty($r['description'])): ?><div style="color:#6b7280;font-size:13px"><?php echo htmlspecialchars($r['description']); ?></div><?php endif; ?></td>
+                    <td style="padding:10px;font-weight:700;color:<?php echo $r['transaction_type']==='INCOME'?'#16a34a':'#dc2626'; ?>"><?php echo ($r['transaction_type']==='INCOME'?'+':'-'); ?> € <?php echo number_format((float)$r['amount'],2); ?></td>
+                    <td style="padding:10px;color:#6b7280"><?php echo htmlspecialchars($r['batch_code'] ?? '—'); ?></td>
+                    <td style="padding:10px"><?php echo $r['is_skal_relevant'] ? '✅' : '—'; ?></td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; endif; ?>
             </tbody>
         </table>
     </div>
 </div>
-</body>
-</html>
+<?php require_once __DIR__ . '/app/includes/footer.php'; ?>
