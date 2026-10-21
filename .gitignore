@@ -10,3 +10,7 @@
 archive/
 *.bak
 *.bak[0-9]
+
+# B23 uploads: runtime-bestanden negeren, .htaccess (veiligheid) behouden
+app/uploads/*
+!app/uploads/.htaccess
