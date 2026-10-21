@@ -77,7 +77,7 @@ $modules = [
 ['id'=>'B15','file'=>'b15_substrate.php','key'=>'module_b15'],
 ['id'=>'B16','file'=>'b16_task_scheduler.php','key'=>'module_b16'],
 ['id'=>'B17','file'=>'b17_staff.php','key'=>'module_b17'],
-['id'=>'B18','file'=>'b18_supplier.php','key'=>'module_b18'],
+['id'=>'B18','file'=>'b18_suppliers.php','key'=>'module_b18'],
 ['id'=>'B19','file'=>'b19_financials.php','key'=>'module_b19'],
 ['id'=>'B20','file'=>'b20_waste.php','key'=>'module_b20'],
 ['id'=>'B21','file'=>'b21_logistics.php','key'=>'module_b21'],
