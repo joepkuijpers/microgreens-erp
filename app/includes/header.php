@@ -10,6 +10,7 @@ error_reporting(0);
 
 // SESSIE STARTEN
 if (session_status() === PHP_SESSION_NONE) {
+    require_once __DIR__ . '/no_cache.php';
     session_start();
 }
 
