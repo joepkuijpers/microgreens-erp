@@ -59,9 +59,10 @@ try {
 } catch (Exception $e) {}
 
 // MODULES
+$wf_steps = ['b01_batch.php'=>1,'b02_germination.php'=>2,'b07_harvest.php'=>3,'b09_packaging.php'=>4,'b09_sale.php'=>5,'b21_logistics.php'=>6,'b25_customer_feedback.php'=>7];
 $modules = [
 ['id'=>'DASH','file'=>'index.php','key'=>'dashboard_home'],
-['id'=>'B01','file'=>'b01_seed_inventory.php','key'=>'module_b01'],
+['id'=>'B01','file'=>'b01_batch.php','key'=>'module_b01'],
 ['id'=>'B02','file'=>'b02_germination.php','key'=>'module_b02'],
 ['id'=>'B03','file'=>'b03_growth_chamber.php','key'=>'module_b03'],
 ['id'=>'B04','file'=>'b04_lighting.php','key'=>'module_b04'],
@@ -111,6 +112,14 @@ body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f
 .lang-switch a{margin:0 5px;text-decoration:none;color:#2980b9;font-weight:bold}
 .lang-switch a.active{color:#2c3e50;text-decoration:underline;}
 .next-step-bar{background:#e8f4fd;padding:15px 30px;margin-top:30px;border-top:2px solid #3498db;display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:10px;}
+.sidebar{resize:horizontal;min-width:130px;max-width:420px;overflow:auto}
+.nav-links a{white-space:normal;word-break:break-word;line-height:1.3}
+.sidebar-resize-handle{position:absolute;top:0;right:0;width:6px;height:100%;cursor:col-resize;z-index:20}
+@media(max-width:768px){body{flex-direction:column}.sidebar{width:100%;max-width:100%;resize:none;border-bottom:2px solid #34495e}.nav-links{display:flex;overflow-x:auto;flex-wrap:nowrap}.nav-links li{border-bottom:none;border-right:1px solid #34495e;flex-shrink:0}.nav-links a{white-space:nowrap;padding:10px 14px}.content-area{padding:14px}.top-header{padding:12px 16px;flex-wrap:wrap;gap:8px}}
+@media(max-width:480px){.content-area{padding:10px}}
+table{display:block;overflow-x:auto;max-width:100%}
+input,select,textarea,button{max-width:100%}
+
 .next-step-bar a{background:#3498db;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;}
 .next-step-bar a:hover{background:#2980b9;}
 input[type="date"]{cursor:pointer;}
@@ -139,9 +148,9 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 .flash-info    { background: #eaf2fb; color: #1d4ed8; border-color: #1d4ed8; }
 </style>
 </head><body>
-<nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><ul class="nav-links">
+<nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><div class="sidebar-resize-handle" id="sidebarHandle" title="Sleep om breedte te wijzigen"></div><ul class="nav-links">
 <?php foreach($modules as $m): $active=(basename($_SERVER['PHP_SELF'])===$m['file'])?'active':''; ?>
-<li><a href="<?php echo $m['file']; ?>" class="<?php echo $active; ?>"><?php echo __($m['key']); ?></a></li>
+<li><a href="<?php echo $m['file']; ?>" class="<?php echo $active; ?>"><?php echo __($m['key']); ?><?php if (isset($wf_steps[$m['file']])) echo ' <span style=\"opacity:.6;font-size:11px\">'.(int)$wf_steps[$m['file']].'/7</span>'; ?></a></li>
 <?php endforeach; ?>
 </ul></nav>
 <div class="main-content"><header class="top-header">
