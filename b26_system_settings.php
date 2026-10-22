@@ -21,14 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hmax = (float)($_POST['humidity_max'] ?? 0);
         $ref = (int)($_POST['refresh_seconds'] ?? 0);
         $kwh = (float)($_POST['electricity_price_per_kwh'] ?? 0);
-        $lang = ($_POST['language_code'] ?? 'nl') === 'en' ? 'en' : 'nl';
         if ($lmax <= $lmin) { $errors[] = __('b26_light_band'); }
         if ($tmax <= $tmin) { $errors[] = __('b26_temp_band'); }
         if ($hmax <= $hmin) { $errors[] = __('b26_hum_band'); }
         if ($ref < 1) { $errors[] = __('b26_refresh'); }
         if ($kwh <= 0) { $errors[] = __('b26_kwh'); }
         if (empty($errors)) {
-            $stmt = $db->prepare("UPDATE settings SET light_min=:lmin, light_max=:lmax, temp_min=:tmin, temp_max=:tmax, humidity_min=:hmin, humidity_max=:hmax, refresh_seconds=:ref, electricity_price_per_kwh=:kwh, language_code=:lang WHERE id=1");
+            $stmt = $db->prepare("UPDATE settings SET light_min=:lmin, light_max=:lmax, temp_min=:tmin, temp_max=:tmax, humidity_min=:hmin, humidity_max=:hmax, refresh_seconds=:ref, electricity_price_per_kwh=:kwh WHERE id=1");
             $stmt->bindValue(':lmin', $lmin, PDO::PARAM_INT);
             $stmt->bindValue(':lmax', $lmax, PDO::PARAM_INT);
             $stmt->bindValue(':tmin', $tmin);
@@ -37,10 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindValue(':hmax', $hmax);
             $stmt->bindValue(':ref', $ref, PDO::PARAM_INT);
             $stmt->bindValue(':kwh', $kwh);
-            $stmt->bindValue(':lang', $lang, PDO::PARAM_STR);
             $stmt->execute();
             $reg_ms = (int)round((microtime(true) - $t0) * 1000);
-            auditLog($db, 'B26_CONFIG_SAVE', 'settings', 1, 'UPDATE', 'Configuratie opgeslagen', null, ['light_min' => $lmin, 'light_max' => $lmax, 'temp_min' => $tmin, 'temp_max' => $tmax, 'humidity_min' => $hmin, 'humidity_max' => $hmax, 'refresh_seconds' => $ref, 'electricity_price_per_kwh' => $kwh, 'language_code' => $lang, 'operator' => $operator, 'reg_ms' => $reg_ms]);
+            auditLog($db, 'B26_CONFIG_SAVE', 'settings', 1, 'UPDATE', 'Configuratie opgeslagen', null, ['light_min' => $lmin, 'light_max' => $lmax, 'temp_min' => $tmin, 'temp_max' => $tmax, 'humidity_min' => $hmin, 'humidity_max' => $hmax, 'refresh_seconds' => $ref, 'electricity_price_per_kwh' => $kwh, 'operator' => $operator, 'reg_ms' => $reg_ms]);
             $flash = __('b26_cfg_saved'); $flashClass = 'flash-success';
         } else { $flash = implode(' · ', $errors); $flashClass = 'flash-error'; }
     } elseif ($action === 'param') {
@@ -87,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-$cfg = $db->query("SELECT light_min, light_max, temp_min, temp_max, humidity_min, humidity_max, refresh_seconds, electricity_price_per_kwh, language_code FROM settings WHERE id=1")->fetch(PDO::FETCH_ASSOC) ?: [];
+$cfg = $db->query("SELECT light_min, light_max, temp_min, temp_max, humidity_min, humidity_max, refresh_seconds, electricity_price_per_kwh FROM settings WHERE id=1")->fetch(PDO::FETCH_ASSOC) ?: [];
 $params = $db->query("SELECT key, value FROM system_settings ORDER BY key ASC")->fetchAll(PDO::FETCH_ASSOC);
 $users = $db->query("SELECT id, username, display_name, role, is_active, locked_until FROM erp_users ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
 function b26RoleBadge($r) {
@@ -117,7 +115,7 @@ $card = 'background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18p
             <div><label><?php echo htmlspecialchars(__('b26_hum_max')); ?></label><input type="number" step="0.1" name="humidity_max" value="<?php echo htmlspecialchars($cfg['humidity_max'] ?? 0); ?>" style="<?php echo $inp; ?>"></div>
             <div><label><?php echo htmlspecialchars(__('b26_refresh')); ?></label><input type="number" step="1" name="refresh_seconds" value="<?php echo (int)($cfg['refresh_seconds'] ?? 0); ?>" style="<?php echo $inp; ?>"></div>
             <div><label><?php echo htmlspecialchars(__('b26_kwh')); ?></label><input type="number" step="0.01" name="electricity_price_per_kwh" value="<?php echo htmlspecialchars($cfg['electricity_price_per_kwh'] ?? 0); ?>" style="<?php echo $inp; ?>"></div>
-            <div><label><?php echo htmlspecialchars(__('b26_lang')); ?></label><select name="language_code" style="<?php echo $inp; ?>"><option value="nl" <?php echo ($cfg['language_code'] ?? 'nl') === 'nl' ? 'selected' : ''; ?>>Nederlands</option><option value="en" <?php echo ($cfg['language_code'] ?? '') === 'en' ? 'selected' : ''; ?>>English</option></select></div>
+            
             <button type="submit" style="background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer"><?php echo htmlspecialchars(__('b26_save')); ?></button>
         </form>
     </div>
