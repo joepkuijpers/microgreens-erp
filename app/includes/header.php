@@ -87,7 +87,7 @@ $modules = [
 ['id'=>'B25','file'=>'b25_customer_feedback.php','key'=>'module_b25'],
 ['id'=>'B26','file'=>'b26_system_settings.php','key'=>'module_b26'],
 ['id'=>'B27','file'=>'b27_api_integrations.php','key'=>'module_b27'],
-['id'=>'B28','file'=>'b28_watchdog_alerts.php','key'=>'module_b28'],
+['id'=>'B28','file'=>'b28_watchdog.php','key'=>'module_b28'],
 ];
 $pageTitle = $pageTitle ?? 'ERP';
 ?>
@@ -147,8 +147,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 <div class="main-content"><header class="top-header">
 <h1 class="page-title"><?php echo htmlspecialchars($pageTitle); ?></h1>
 <div style="display:flex;align-items:center">
-<?php if($wdStatus==='critical'): ?><a href="b28_watchdog_alerts.php" class="watchdog-indicator wd-critical">🔴 Kritiek</a>
-<?php elseif($wdStatus==='warning'): ?><a href="b28_watchdog_alerts.php" class="watchdog-indicator wd-warning">⚠ Waarschuwing</a>
-<?php else: ?><a href="b28_watchdog_alerts.php" class="watchdog-indicator wd-ok">✓ OK</a><?php endif; ?>
+<?php if($wdStatus==='critical'): ?><a href="b28_watchdog.php" class="watchdog-indicator wd-critical">🔴 Kritiek</a>
+<?php elseif($wdStatus==='warning'): ?><a href="b28_watchdog.php" class="watchdog-indicator wd-warning">⚠ Waarschuwing</a>
+<?php else: ?><a href="b28_watchdog.php" class="watchdog-indicator wd-ok">✓ OK</a><?php endif; ?>
 <div class="lang-switch"><a href="?lang=nl" class="<?php echo $languageCode==='nl'?'active':''; ?>">NL</a>|<a href="?lang=en" class="<?php echo $languageCode==='en'?'active':''; ?>">EN</a></div>
 </div></header><main class="content-area">
