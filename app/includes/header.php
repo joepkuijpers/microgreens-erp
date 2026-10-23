@@ -89,6 +89,7 @@ $modules = [
 ['id'=>'B26','file'=>'b26_system_settings.php','key'=>'module_b26'],
 ['id'=>'B27','file'=>'b27_api_integrations.php','key'=>'module_b27'],
 ['id'=>'B28','file'=>'b28_watchdog.php','key'=>'module_b28'],
+['id'=>'B29','file'=>'b29_quarantine.php','key'=>'module_b29'],
 ];
 $pageTitle = $pageTitle ?? 'ERP';
 ?>
