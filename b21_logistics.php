@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 $reg_ms = (int)round((microtime(true) - $t0) * 1000);
+$drivers = $db->query("SELECT DISTINCT driver FROM delivery_runs WHERE driver IS NOT NULL AND driver != '' ORDER BY driver")->fetchAll(PDO::FETCH_COLUMN);
 $runs = $db->query("SELECT * FROM delivery_runs ORDER BY run_date DESC, id DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
 $allDel = $db->query("SELECT d.*, s.batch_id, pb.batch_code, c.name AS customer_name FROM deliveries d LEFT JOIN sales s ON s.id=d.sale_id LEFT JOIN production_batches pb ON pb.id=s.batch_id LEFT JOIN customers c ON c.id=s.customer_id ORDER BY d.id DESC")->fetchAll(PDO::FETCH_ASSOC);
 $delByRun = [];
@@ -81,8 +82,8 @@ function b21StatusBadge($s) {
     <form method="post" style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px;margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:end">
         <input type="hidden" name="action" value="create_run">
         <div style="flex:1;min-width:140px"><label><?php echo htmlspecialchars(__('b21_run_date')); ?></label><input type="date" name="run_date" value="<?php echo date('Y-m-d'); ?>" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
-        <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b21_driver')); ?></label><input name="driver" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
-        <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b21_notes')); ?></label><input name="notes" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
+        <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b21_driver')); ?></label><input name="driver" list="drivers" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"><datalist id="drivers"><?php foreach ($drivers as $dv): ?><option value="<?php echo htmlspecialchars($dv); ?>"></option><?php endforeach; ?></datalist></div>
+        <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b21_notes')); ?></label><input name="notes" autocomplete="off" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
         <button type="submit" style="background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer"><?php echo htmlspecialchars(__('b21_new_run')); ?></button>
     </form>
     <?php if (empty($runs)): ?>

@@ -15,16 +15,16 @@ try {
     $kpi_w = number_format($inc - $exp, 2);
     $kpi_s = $pdo->query("SELECT COUNT(*) FROM suppliers")->fetchColumn();
     $logs = $pdo->query("SELECT '✅ Gereinigd: ' || object_name as m, cleaned_at as d FROM cleaning_logs UNION ALL SELECT '📦 Verpakt: ' || package_code as m, packaging_date as d FROM packaging_units UNION ALL SELECT '💰 Boeking: ' || description as m, transaction_date as d FROM financial_transactions ORDER BY d DESC LIMIT 10")->fetchAll(PDO::FETCH_ASSOC);
-    if ($pdo->query("SELECT name FROM suppliers WHERE certificate_expiry < date('now') LIMIT 1")->fetchColumn()) $alerts[] = "Certificaat verlopen!";
+    $erow = $pdo->query("SELECT name FROM suppliers WHERE certificate_expiry < date('now') ORDER BY certificate_expiry ASC LIMIT 1")->fetch(PDO::FETCH_ASSOC); if ($erow) $alerts[] = $erow["name"];
 } catch (Exception $e) {}
 ?>
-<!DOCTYPE html><html lang="<?= $lang ?>"><head><meta charset="UTF-8"><title><?= __("dashboard") ?></title>
+<!DOCTYPE html><html lang="nl"><head><meta charset="UTF-8"><title><?= __("dashboard") ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>body{font-family:sans-serif;margin:0;background:#f4f7f6}.header{background:#2c3e50;color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}.container{max-width:1200px;margin:2rem auto;padding:0 1rem}.alerts-box{background:#ffebee;border-left:5px solid #c0392b;padding:1rem;margin-bottom:2rem}.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}.kpi-card{background:#fff;padding:1.5rem;border-radius:8px;text-align:center;border-top:4px solid #27ae60;box-shadow:0 2px 4px rgba(0,0,0,0.1)}.kpi-card h3{margin:0 0 10px;font-size:0.9rem;color:#777}.kpi-card .value{font-size:1.8rem;font-weight:bold;color:#2c3e50}.content-grid{display:grid;grid-template-columns:2fr 1fr;gap:2rem}.card{background:#fff;padding:1.5rem;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1)}.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}.menu-btn{display:block;padding:12px;background:#ecf0f1;color:#2c3e50;text-align:center;text-decoration:none;border-radius:6px;font-weight:bold}.menu-btn:hover{background:#bdc3c7}ul{list-style:none;padding:0}li{padding:8px 0;border-bottom:1px solid #eee;font-size:0.9rem}.lang-switch a{color:#fff;text-decoration:none;margin-left:10px;font-size:0.9rem;opacity:0.8}.lang-switch a:hover{opacity:1}</style></head>
 <body>
-<div class="header"><h1>🌱 Microgreens ERP</h1><div class="lang-switch"><span><?= date('d-m-Y H:i') ?></span><a href="<?= lang_url('nl') ?>">🇳🇱 NL</a><a href="<?= lang_url('en') ?>">🇬🇧 EN</a></div></div>
+<div class="header"><h1>🌱 Microgreens ERP</h1><div class="lang-switch"><span><?= date('d-m-Y H:i') ?></span><a href="?lang=nl">🇳🇱 NL</a><a href="?lang=en">🇬🇧 EN</a></div></div>
 <div class="container">
-<?php if(!empty($alerts)): ?><div class="alerts-box"><strong>⚠️ <?= __("alert") ?>:</strong> <?= htmlspecialchars($alerts[0]) ?></div><?php endif; ?>
+<?php if(!empty($alerts)): ?><div class="alerts-box"><strong>⚠️ <?= __("alert") ?>:</strong> <?= __("alert_cert_expired") ?> <strong><?= htmlspecialchars($alerts[0]) ?></strong> &middot; <a href="b18_suppliers.php"><?= __("alert_check_supplier") ?></a></div><?php endif; ?>
 <div class="kpi-grid">
 <div class="kpi-card"><h3><?= __("active_batches") ?></h3><div class="value"><?= $kpi_b ?></div></div>
 <div class="kpi-card"><h3><?= __("total_harvest") ?></h3><div class="value"><?= $kpi_o ?> kg</div></div>

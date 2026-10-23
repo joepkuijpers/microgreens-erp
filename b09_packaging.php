@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     $inventory_id = intval($_POST["inventory_id"] ?? 0);
     $weight = intval($_POST["weight"] ?? 0);
     $tht_date = $_POST["tht_date"] ?? date("Y-m-d", strtotime("+10 days"));
+    $sale_price = floatval($_POST["sale_price"] ?? 0);
     
     if ($inventory_id > 0 && $weight > 0) {
         try {
@@ -45,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
                     // We slaan de VOLLEDIGE URL op in qr_data voor gemak
                     $trace_url = $base_url . "/trace.php?id=" . $package_code;
                     
-                    $stmt = $db->prepare("INSERT INTO packaging_units (finished_inventory_id, package_code, total_weight_g, packaging_date, qr_data, expiry_date, status) VALUES (?, ?, ?, ?, ?, ?, 'AVAILABLE')");
-                    $stmt->execute([$inventory_id, $package_code, $weight, date("Y-m-d H:i:s"), $trace_url, $tht_date]);
+                    $stmt = $db->prepare("INSERT INTO packaging_units (finished_inventory_id, package_code, total_weight_g, packaging_date, qr_data, expiry_date, sale_price_eur, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'AVAILABLE')");
+                    $stmt->execute([$inventory_id, $package_code, $weight, date("Y-m-d H:i:s"), $trace_url, $tht_date, $sale_price]);
                     
                     $message = "✅ Verpakt! Code: $package_code.";
                     $last_product = $product_name;
@@ -167,6 +168,7 @@ $available_harvest = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="date" name="tht_date" value="<?php echo date('Y-m-d', strtotime('+10 days')); ?>" required>
             </div>
 
+            <div style="margin-top:10px;"><label style="font-size:0.9em;font-weight:bold;">Prijs (&euro;)</label><input type="number" name="sale_price" step="0.01" min="0" value="0" style="width:120px;padding:8px;border:1px solid #ddd;border-radius:4px;"></div>
             <button type="submit" class="btn btn-success">📦 <?php echo $lang['package_generate'] ?? 'Verpak & Genereer Label'; ?></button>
         </form>
     </div>
@@ -215,5 +217,6 @@ window.onclick = function(event) {
 }
 </script>
 
+<?php require_once __DIR__ . '/app/includes/workflow_nav.php'; ?>
 </body>
 </html>

@@ -49,7 +49,7 @@ try {
 $wdStatus = 'ok';
 $wdMsg = '';
 try {
-    $stmt = $db->prepare("SELECT status, message FROM system_alerts WHERE acknowledged = 0 ORDER BY created_at DESC LIMIT 1");
+    $stmt = $db->prepare("SELECT severity, message FROM system_alerts WHERE resolved = 0 ORDER BY created_at DESC LIMIT 1");
     $stmt->execute();
     $alert = $stmt->fetch();
     if ($alert) {

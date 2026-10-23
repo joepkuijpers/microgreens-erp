@@ -10,7 +10,7 @@
                 <th style="padding:10px; border-bottom:2px solid #ddd;"><?php echo __('machine_id'); ?></th>
                 <th style="padding:10px; border-bottom:2px solid #ddd;"><?php echo __('input_weight_g'); ?></th>
                 <th style="padding:10px; border-bottom:2px solid #ddd;"><?php echo __('started'); ?></th>
-                <th style="padding:10px; border-bottom:2px solid #ddd;"><?php echo __('action'); ?></th>
+                <th style="padding:10px; border-bottom:2px solid #ddd;"><?php echo __('b08_final_weight_col'); ?></th>
             </tr>
         </thead>
         <tbody>

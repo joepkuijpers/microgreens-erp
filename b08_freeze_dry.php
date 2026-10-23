@@ -121,6 +121,13 @@ if (($_POST['action'] ?? '') === 'complete_cycle') {
         $upd->execute([$final_weight, $water, $process_id]);
         $out = $db->prepare("UPDATE production_outputs SET status = 'FREEZE_DRY_DONE' WHERE id = ?");
         $out->execute([$proc['production_output_id']]);
+        $hrow = $db->prepare("SELECT pb.crop_type AS product_name, (SELECT h2.id FROM harvests h2 JOIN germination_records gr2 ON gr2.id=h2.germination_record_id WHERE gr2.production_batch_id=:b2 LIMIT 1) AS harvest_id FROM production_outputs po JOIN production_batches pb ON pb.id=po.batch_id WHERE po.id=:pid LIMIT 1");
+        $hrow->execute([':b2' => $proc['batch_id'], ':pid' => $proc['production_output_id']]);
+        $hi = $hrow->fetch(PDO::FETCH_ASSOC);
+        $finame = $hi ? $hi['product_name'] : 'Freeze-dried';
+        $fharv = $hi ? (int)$hi['harvest_id'] : 0;
+        $fins = $db->prepare("INSERT INTO finished_inventory (harvest_id, product_name, weight_grams, status, output_type) VALUES (:h, :p, :w, 'AVAILABLE', 'FREEZE_DRY')");
+        $fins->execute([':h' => $fharv, ':p' => $finame, ':w' => $final_weight]);
         $regTime = round(microtime(true) - $t0, 3);
         auditLog($db, 'B08_FREEZE_DRY', 'freeze_dry_processes', $process_id, 'COMPLETE_CYCLE', 'Vriesdroogcyclus voltooid', null, ['operator' => $operator, 'final_weight_g' => $final_weight, 'water_removed_g' => $water, 'reg_time' => $regTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
         $db->commit();

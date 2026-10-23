@@ -266,3 +266,5 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
     <div><a href="b03_growth_chamber.php">B03</a></div>
 </div>
 <?php require_once __DIR__ . '/app/includes/layout_end.php'; ?>
+<?php require_once __DIR__ . '/app/includes/workflow_nav.php'; ?>
+</main></div></body></html>

@@ -54,6 +54,7 @@ $customers = $db->query("
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div style="max-width: 900px; margin: 0 auto;">
+    <a href="b09_sale.php" style="display:inline-block;margin-bottom:16px;text-decoration:none;background:#e5e7eb;color:#374151;border-radius:10px;padding:8px 14px;font-weight:800">&larr; Terug naar verkoop</a>
     <?php if ($message): ?><div style="background:#d4edda;color:#155724;padding:15px;border-radius:5px;margin-bottom:20px;">✅ <?php echo htmlspecialchars($message); ?></div><?php endif; ?>
     <?php if ($error): ?><div style="background:#f8d7da;color:#721c24;padding:15px;border-radius:5px;margin-bottom:20px;">❌ <?php echo htmlspecialchars($error); ?></div><?php endif; ?>
 
