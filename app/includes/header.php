@@ -91,6 +91,8 @@ $modules = [
 ['id'=>'B28','file'=>'b28_watchdog.php','key'=>'module_b28'],
 ['id'=>'B29','file'=>'b29_quarantine.php','key'=>'module_b29'],
 ];
+$group_map=['index.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch'];
+$group_meta=['prod'=>['📦','Productie / Production'],'teelt'=>['🌱','Teelt & Klimaat / Cultivation'],'kwal'=>['🧼','Kwaliteit & Hygiene / Quality'],'verkoop'=>['💰','Verkoop & Financien / Sales'],'log'=>['🚚','Logistiek & Planning / Logistics'],'bedrijf'=>['🏢','Bedrijf & Systeem / System'],'watch'=>['🔔','Monitoring / Watchdog']];
 $pageTitle = $pageTitle ?? 'ERP';
 ?>
 <!DOCTYPE html><html lang="<?php echo htmlspecialchars($languageCode); ?>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,6 +106,7 @@ body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f
 .nav-links li{border-bottom:1px solid #34495e}
 .nav-links a{display:block;padding:12px 20px;color:#bdc3c7;text-decoration:none}
 .nav-links a:hover,.nav-links a.active{background:#34495e;color:#fff;border-left:4px solid #27ae60}
+.nav-group{border-bottom:1px solid #34495e}.nav-group summary{display:block;padding:12px 20px;color:#ecf0f1;cursor:pointer;font-weight:bold;list-style:none}.nav-group summary::-webkit-details-marker{display:none}.nav-group summary:hover{background:#34495e}.grp-n{opacity:.55;font-size:11px;font-weight:normal}.nav-sub{list-style:none;padding:0;margin:0;background:#26333f}.nav-sub a{padding:9px 20px 9px 34px;font-size:13px}
 .main-content{flex-grow:1;display:flex;flex-direction:column;overflow:hidden}
 .top-header{background:#fff;padding:15px 30px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center}
 .page-title{font-size:1.5rem;color:#2c3e50;margin:0}
@@ -150,9 +153,16 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 </style>
 </head><body>
 <nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><div class="sidebar-resize-handle" id="sidebarHandle" title="Sleep om breedte te wijzigen"></div><ul class="nav-links">
-<?php foreach($modules as $m): $active=(basename($_SERVER['PHP_SELF'])===$m['file'])?'active':''; ?>
-<li><a href="<?php echo $m['file']; ?>" class="<?php echo $active; ?>"><?php echo __($m['key']); ?><?php if (isset($wf_steps[$m['file']])) echo ' <span style=\"opacity:.6;font-size:11px\">'.(int)$wf_steps[$m['file']].'/7</span>'; ?></a></li>
+<?php $cur=basename($_SERVER["PHP_SELF"]); $byGroup=[]; foreach($modules as $m){$g=$group_map[$m["file"]]??"other"; $byGroup[$g][]=$m;} ?>
+<?php if(isset($byGroup["home"])): foreach($byGroup["home"] as $m): ?>
+<li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?></a></li>
+<?php endforeach; endif; ?>
+<?php foreach($group_meta as $gid=>$gm): if(empty($byGroup[$gid])) continue; $open=in_array($cur,array_column($byGroup[$gid],"file"))?"open":""; ?>
+<li class="nav-group"><details <?php echo $open; ?>><summary><span><?php echo $gm[0]; ?></span> <?php echo $gm[1]; ?> <span class="grp-n">(<?php echo count($byGroup[$gid]); ?>)</span></summary><ul class="nav-sub">
+<?php foreach($byGroup[$gid] as $m): ?>
+<li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?><?php if(isset($wf_steps[$m["file"]])) echo ' <span style="opacity:.6;font-size:11px">'.(int)$wf_steps[$m["file"]].'/7</span>'; ?></a></li>
 <?php endforeach; ?>
+</ul></details></li><?php endforeach; ?>
 </ul></nav>
 <div class="main-content"><header class="top-header">
 <h1 class="page-title"><?php echo htmlspecialchars($pageTitle); ?></h1>
