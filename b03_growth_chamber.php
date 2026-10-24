@@ -57,40 +57,40 @@ $countStmt = $db->prepare("SELECT COUNT(*) FROM production_batches pb WHERE pb.r
 
 ?>
 
-<div style="max-width:1000px;margin:20px auto;font-family:sans-serif;">
-  <h1>🌡️ Klimaatmonitoring (B03/B06)</h1>
+<div style="max-width:1000px;margin:0 auto;padding:16px;">
+  <h2>🌡️ <?= __('b03_title') ?></h2>
 
   <?php if ($flash): ?>
     <p style="font-weight:bold;color:<?= $flashType==='ok'?'green':($flashType==='warn'?'#b8860b':'red') ?>;"><?= htmlspecialchars($flash) ?></p>
   <?php endif; ?>
 
   <div style="background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,.1);margin-bottom:20px;">
-    <h2>Nieuwe meting</h2>
+    <h2><?= __('b03_new_measurement') ?></h2>
     <form method="POST">
       <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:end;">
-        <div><label>Rack</label><br>
+        <div><label><?= __('b03_rack') ?></label><br>
           <select name="rack_id" required>
             <?php foreach ($racks as $r): ?>
               <option value="<?= htmlspecialchars($r['name']) ?>"><?= htmlspecialchars($r['name']) ?></option>
             <?php endforeach; ?>
           </select>
         </div>
-        <div><label>Temp (°C)</label><br><input type="number" step="0.1" name="temperature" required></div>
-        <div><label>RV (%)</label><br><input type="number" step="0.1" name="humidity" required></div>
-        <div><button type="submit" style="padding:9px 16px;background:#2e7d32;color:#fff;border:none;border-radius:4px;cursor:pointer;">Opslaan</button></div>
+        <div><label><?= __('b03_temp_label') ?></label><br><input type="number" step="0.1" name="temperature" required></div>
+        <div><label><?= __('b03_rh_label') ?></label><br><input type="number" step="0.1" name="humidity" required></div>
+        <div><button type="submit" style="padding:9px 16px;background:#2e7d32;color:#fff;border:none;border-radius:4px;cursor:pointer;"><?= __('b03_save') ?></button></div>
       </div>
     </form>
   </div>
 
   <div style="background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,.1);">
-    <h2>Laatste metingen</h2>
+    <h2><?= __('b03_last_measurements') ?></h2>
     <table style="width:100%;border-collapse:collapse;">
       <thead><tr style="background:#f0f0f0;text-align:left;">
-        <th style="padding:8px;border:1px solid #ddd;">Tijd</th>
-        <th style="padding:8px;border:1px solid #ddd;">Rack</th>
-        <th style="padding:8px;border:1px solid #ddd;">Temp</th>
-        <th style="padding:8px;border:1px solid #ddd;">RV</th>
-        <th style="padding:8px;border:1px solid #ddd;">Batch (afgeleid)</th>
+        <th style="padding:8px;border:1px solid #ddd;"><?= __('b03_time') ?></th>
+        <th style="padding:8px;border:1px solid #ddd;"><?= __('b03_rack') ?></th>
+        <th style="padding:8px;border:1px solid #ddd;"><?= __('b03_temp') ?></th>
+        <th style="padding:8px;border:1px solid #ddd;"><?= __('b03_rh') ?></th>
+        <th style="padding:8px;border:1px solid #ddd;"><?= __('b03_batch_derived') ?></th>
       </tr></thead>
       <tbody>
       <?php foreach ($rows as $row):
@@ -110,9 +110,9 @@ $countStmt = $db->prepare("SELECT COUNT(*) FROM production_batches pb WHERE pb.r
           <td style="padding:8px;border:1px solid #ddd;"><?= htmlspecialchars((string)$row['humidity']) ?></td>
           <td style="padding:8px;border:1px solid #ddd;">
             <?php if ($batch === null): ?>
-              <span style="color:#999;">geen</span>
+              <span style="color:#999;"><?= __('b03_none') ?></span>
             <?php elseif ($ambiguous): ?>
-              <span style="color:#b8860b;" title="Meerdere batches mogelijk op dit rack/tijdstip"><?= htmlspecialchars($batch) ?> ⚠️</span>
+              <span style="color:#b8860b;" title="<?= __('b03_ambiguous') ?>"><?= htmlspecialchars($batch) ?> ⚠️</span>
             <?php else: ?>
               <?= htmlspecialchars($batch) ?>
             <?php endif; ?>
