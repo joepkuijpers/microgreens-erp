@@ -113,6 +113,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'harve
                 sprintf(__('b07_audit'), $batch['batch_code'], $total, implode(' + ', array_keys($alloc))),
                 null, ['operator' => $operator, 'reg_time' => $registrationTime, 'active_interaction_ms' => $activeInteraction, 'screen_availability_ms' => $screenAvailability]);
 
+            // 5b. Tray automatisch vrijgeven (brug: germination_records.tray_id)
+            $trayId = $db->query("SELECT tray_id FROM germination_records WHERE id = $germId")->fetchColumn();
+            if ($trayId) {
+                $db->prepare("UPDATE trays SET status = 'EMPTY' WHERE id = ?")->execute([$trayId]);
+                auditLog($db, 'B07_TRAY_RELEASE', 'trays', $trayId, 'UPDATE',
+                    'Tray vrijgegeven bij oogst batch ' . $batch['batch_code'],
+                    ['status' => 'GERMINATING'], ['status' => 'EMPTY']);
+            }
             $db->commit();
             $message = sprintf(__('b07_success'), $batch['batch_code'], $total, $registrationTime);
 
