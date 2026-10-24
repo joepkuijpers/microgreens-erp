@@ -128,7 +128,7 @@ input,select,textarea,button{max-width:100%}
 .next-step-bar a:hover{background:#2980b9;}
 input[type="date"]{cursor:pointer;}
 input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
-</style>
+@media(max-width:1023px){.sidebar{position:fixed;top:0;left:0;height:100vh;width:280px;transform:translateX(-100%);transition:transform .25s ease;z-index:1000;resize:none;max-width:85vw}.nav-toggle{display:inline-flex!important}.sidebar-resize-handle{display:none}body.nav-open .sidebar{transform:translateX(0)}body.nav-open::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999}}.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:none;background:#2c3e50;color:#fff;font-size:22px;border-radius:8px;cursor:pointer;margin-right:12px}</style>
 <script>
 (function(){
   function bind(el){
@@ -150,7 +150,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 .flash-warning { background: #fff4e5; color: #b45309; border-color: #b45309; }
 .flash-error   { background: #fdecec; color: #b42318; border-color: #b42318; }
 .flash-info    { background: #eaf2fb; color: #1d4ed8; border-color: #1d4ed8; }
-</style>
+@media(max-width:1023px){.sidebar{position:fixed;top:0;left:0;height:100vh;width:280px;transform:translateX(-100%);transition:transform .25s ease;z-index:1000;resize:none;max-width:85vw}.nav-toggle{display:inline-flex!important}.sidebar-resize-handle{display:none}body.nav-open .sidebar{transform:translateX(0)}body.nav-open::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999}}.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:none;background:#2c3e50;color:#fff;font-size:22px;border-radius:8px;cursor:pointer;margin-right:12px}</style>
 </head><body>
 <nav class="sidebar"><div class="sidebar-header">🌱 Microgreens ERP</div><div class="sidebar-resize-handle" id="sidebarHandle" title="Sleep om breedte te wijzigen"></div><ul class="nav-links">
 <?php $cur=basename($_SERVER["PHP_SELF"]); $byGroup=[]; foreach($modules as $m){$g=$group_map[$m["file"]]??"other"; $byGroup[$g][]=$m;} ?>
