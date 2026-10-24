@@ -1255,4 +1255,5 @@ return array (
   'b03_batch_derived' => 'Batch (derived)',
   'b03_none' => 'none',
   'b03_ambiguous' => 'Multiple batches possible for this rack/time',
+  'module_index' => 'Dashboard / Overview',
 );

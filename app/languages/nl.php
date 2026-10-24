@@ -1255,4 +1255,5 @@ return array (
   'b03_batch_derived' => 'Batch (afgeleid)',
   'b03_none' => 'geen',
   'b03_ambiguous' => 'Meerdere batches mogelijk op dit rack/tijdstip',
+  'module_index' => 'Dashboard / Overzicht',
 );
