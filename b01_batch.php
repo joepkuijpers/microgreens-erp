@@ -197,6 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div style="max-width:640px;margin:20px auto;font-family:sans-serif;">
     <h2><?= htmlspecialchars(__('b01_title')) ?></h2>
+    <div style="margin:0 0 16px;"><a href="add_seed_inventory_form.php" style="display:inline-block;background:#2e7d32;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold;">+ <?= __('seed_register_new') ?></a></div>
 
     <div style="display:flex;gap:8px;margin-bottom:18px;">
         <a href="?mode=now" style="flex:1;text-align:center;padding:12px;border-radius:8px;text-decoration:none;font-weight:bold;<?= $mode==='now' ? 'background:#2e7d32;color:#fff;' : 'background:#eee;color:#333;' ?>"><?= htmlspecialchars(__('b01_tab_now')) ?></a>
@@ -229,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div style="flex:1;">
                 <div style="margin-bottom:14px;">
                 <label style="display:block;font-weight:bold;margin-bottom:6px;">Volgkleur (optioneel)</label>
-                <select name="track_color" style="width:100%;padding:10px;font-size:16px;border:1px solid #ddd;border-radius:6px;"><option value="">Geen kleur</option><option value="#7c3aed">🟪 Paars</option><option value="#2563eb">🟦 Blauw</option><option value="#16a34a">🟩 Groen</option><option value="#ea580c">🟧 Oranje</option><option value="#dc2626">🟥 Rood</option><option value="#db2777">🟪 Roze</option><option value="#0891b2">🟦 Cyaan</option><option value="#ca8a04">🟨 Amber</option></select>
+                <div style="display:flex;align-items:center;gap:10px;"><span id="colorBox" style="width:26px;height:26px;border-radius:5px;border:1px solid #ccc;background:#fff;flex-shrink:0;"></span><select name="track_color" style="width:100%;padding:10px;font-size:16px;border:1px solid #ddd;border-radius:6px;"><option value="">Geen kleur</option><option value="#1e3a8a">Donkerblauw</option><option value="#38bdf8">Lichtblauw</option><option value="#166534">Donkergroen</option><option value="#4ade80">Lichtgroen</option><option value="#ffdd00">Geel</option><option value="#ff8000">Oranje</option><option value="#78350f">Bruin</option><option value="#7c3aed">Paars</option><option value="#ff0000">Rood</option><option value="#6b7280">Grijs</option><option value="#111827">Zwart</option><option value="#ffffff">Wit</option><option value="#ec4899">Roze</option></select></div><script>(function(){var s=document.querySelector('select[name=track_color]');var b=document.getElementById("colorBox");function u(){b.style.background=s.value||"#fff";}s.addEventListener("change",u);u();})();</script>
                 <span style="font-size:12px;color:#888;">kleur die bij deze batch blijft</span>
             </div>
             <div>
