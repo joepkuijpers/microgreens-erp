@@ -1,0 +1,89 @@
+{
+    "last_resolution": "2026-07-11 09:39:02",
+    "outputs": {
+        "heater": {
+            "output": "heater",
+            "final_state": false,
+            "winner": "automation_engine",
+            "priority": 5,
+            "reason": "Automation Engine decision",
+            "requests": [
+                {
+                    "source": "automation_engine",
+                    "state": false,
+                    "reason": "Automation Engine decision"
+                }
+            ]
+        },
+        "cooler": {
+            "output": "cooler",
+            "final_state": true,
+            "winner": "automation_engine",
+            "priority": 5,
+            "reason": "Automation Engine decision",
+            "requests": [
+                {
+                    "source": "automation_engine",
+                    "state": true,
+                    "reason": "Automation Engine decision"
+                }
+            ]
+        },
+        "fan": {
+            "output": "fan",
+            "final_state": false,
+            "winner": "automation_engine",
+            "priority": 5,
+            "reason": "Automation Engine decision",
+            "requests": [
+                {
+                    "source": "automation_engine",
+                    "state": false,
+                    "reason": "Automation Engine decision"
+                }
+            ]
+        },
+        "humidifier": {
+            "output": "humidifier",
+            "final_state": false,
+            "winner": "automation_engine",
+            "priority": 5,
+            "reason": "Automation Engine decision",
+            "requests": [
+                {
+                    "source": "automation_engine",
+                    "state": false,
+                    "reason": "Automation Engine decision"
+                }
+            ]
+        },
+        "grow_light": {
+            "output": "grow_light",
+            "final_state": true,
+            "winner": "automation_engine",
+            "priority": 5,
+            "reason": "Automation Engine decision",
+            "requests": [
+                {
+                    "source": "automation_engine",
+                    "state": true,
+                    "reason": "Automation Engine decision"
+                }
+            ]
+        },
+        "water_pump": {
+            "output": "water_pump",
+            "final_state": false,
+            "winner": "automation_engine",
+            "priority": 5,
+            "reason": "Automation Engine decision",
+            "requests": [
+                {
+                    "source": "automation_engine",
+                    "state": false,
+                    "reason": "Automation Engine decision"
+                }
+            ]
+        }
+    }
+}
