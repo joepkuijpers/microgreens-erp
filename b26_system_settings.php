@@ -5,6 +5,14 @@ require_once __DIR__ . '/app/includes/organic_gate.php';
 require_once __DIR__ . '/app/includes/auth.php';
 $t0 = microtime(true);
 $u = auth_current_user();
+if ($_SERVER['REQUEST_METHOD']==='POST' && ($_POST['action']??'')==='emoji_ui' && $u) {
+    $val = empty($_POST['emoji_on']) ? 0 : 1;
+    $_SESSION['emoji_ui'] = $val;
+    $st = $db->prepare("UPDATE erp_users SET emoji_ui=:e, updated_at=datetime(now) WHERE id=:id");
+    $st->execute([':e'=>$val, ':id'=>$u['id']]);
+    auditLog($db, 'B26_EMOJI_UI', 'erp_users', $u['id'], 'UPDATE', 'Emoji-UI '.($val?'aan':'uit'), null, ['emoji_ui'=>$val]);
+    header('Location: b26_system_settings.php'); exit;
+}
 $operator = is_array($u) ? ($u['display_name'] ?? 'system') : 'system';
 $me = is_array($u) ? (int)($u['id'] ?? 0) : 0;
 $flash = '';
@@ -105,7 +113,8 @@ $card = 'background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18p
 
     <div style="<?php echo $card; ?>">
         <h2 style="margin:0 0 12px"><?php echo htmlspecialchars(__('b26_config')); ?></h2>
-        <form method="post" style="display:flex;gap:10px;flex-wrap:wrap;align-items:end">
+        <div style="margin:10px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;"><strong>Mijn weergave</strong> <form method="post" style="display:inline-flex;gap:8px;align-items:center;margin-left:12px;"><input type="hidden" name="action" value="emoji_ui"><label style="display:inline-flex;gap:6px;align-items:center;"><input type="checkbox" name="emoji_on" value="1" > Iconen in interface tonen</label><button type="submit" style="background:#16a34a;color:#fff;border:none;border-radius:8px;padding:6px 10px;font-weight:700;cursor:pointer;">Opslaan</button></form></div>
+<form method="post" style="display:flex;gap:10px;flex-wrap:wrap;align-items:end">
             <input type="hidden" name="action" value="config">
             <div><label><?php echo htmlspecialchars(__('b26_light_min')); ?></label><input type="number" step="1" name="light_min" value="<?php echo (int)($cfg['light_min'] ?? 0); ?>" style="<?php echo $inp; ?>"></div>
             <div><label><?php echo htmlspecialchars(__('b26_light_max')); ?></label><input type="number" step="1" name="light_max" value="<?php echo (int)($cfg['light_max'] ?? 0); ?>" style="<?php echo $inp; ?>"></div>
