@@ -28,7 +28,7 @@ if ($row["c"] > 0) {
 echo "<hr><h3>Succes! De basis werkt.</h3>";
 ?>
 <div class="next-step-bar">
-    <div><a href="index.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
+    <div><a href="dashboard.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
     <div><a href="b28_watchdog_alerts.php">Watchdog →</a></div>
 </div>
 <?php require_once __DIR__ . '/app/includes/footer.php'; ?>

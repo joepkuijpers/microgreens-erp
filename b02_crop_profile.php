@@ -8,7 +8,7 @@ $pageTitle = __('module_b02');
     echo json_encode(['error' => $e->getMessage()]);
 }
 <div class="next-step-bar">
-    <div><a href="index.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
+    <div><a href="dashboard.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
     <div><a href="b28_watchdog_alerts.php">Watchdog →</a></div>
 </div>
 <?php require_once __DIR__ . '/app/includes/footer.php'; ?>

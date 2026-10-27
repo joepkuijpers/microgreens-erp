@@ -44,4 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 <br>
-<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>
+<a href="dashboard.php"><?= htmlspecialchars(__('menu')) ?></a>

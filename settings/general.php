@@ -9,12 +9,12 @@ $pageTitle = 'Algemene instellingen';
 $pageDescription = 'Beheer algemene ERP-instellingen zoals bedrijfsgegevens, taal, tijdzone en valuta.';
 
 $pageActions = [
-    ['href' => 'index.php', 'icon' => '←', 'label' => 'Terug naar instellingen']
+    ['href' => 'dashboard.php', 'icon' => '←', 'label' => 'Terug naar instellingen']
 ];
 
 $breadcrumbs = [
     ['label' => 'Dashboard', 'href' => '../dashboard.php'],
-    ['label' => 'Instellingen', 'href' => 'index.php'],
+    ['label' => 'Instellingen', 'href' => 'dashboard.php'],
     ['label' => 'Algemeen']
 ];
 

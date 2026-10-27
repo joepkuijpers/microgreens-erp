@@ -50,4 +50,4 @@ Hoeveel gebruikt:<br>
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="dashboard.php">Menu</a>

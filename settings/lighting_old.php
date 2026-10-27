@@ -9,12 +9,12 @@ $pageTitle = 'Verlichting';
 $pageDescription = 'Beheer lichtschema’s, luxgrenzen en toekomstige lampsturing.';
 
 $pageActions = [
-    ['href' => 'index.php', 'icon' => '←', 'label' => 'Terug']
+    ['href' => 'dashboard.php', 'icon' => '←', 'label' => 'Terug']
 ];
 
 $breadcrumbs = [
     ['label' => 'Dashboard', 'href' => '../dashboard.php'],
-    ['label' => 'Instellingen', 'href' => 'index.php'],
+    ['label' => 'Instellingen', 'href' => 'dashboard.php'],
     ['label' => 'Verlichting']
 ];
 

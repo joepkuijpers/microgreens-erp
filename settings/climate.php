@@ -10,7 +10,7 @@ $pageDescription = 'Beheer automatische klimaatregeling voor de teeltruimte.';
 
 $pageActions = [
     [
-        'href' => 'index.php',
+        'href' => 'dashboard.php',
         'icon' => '←',
         'label' => 'Terug'
     ]

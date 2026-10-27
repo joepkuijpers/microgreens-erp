@@ -25,12 +25,12 @@ $pageTitle = 'Sensorinstellingen';
 $pageDescription = 'Professioneel live overzicht van sensoren, grenswaarden en monitoring.';
 
 $pageActions = [
-    ['href' => 'index.php', 'icon' => '←', 'label' => 'Terug']
+    ['href' => 'dashboard.php', 'icon' => '←', 'label' => 'Terug']
 ];
 
 $breadcrumbs = [
     ['label' => 'Dashboard', 'href' => '../dashboard.php'],
-    ['label' => 'Instellingen', 'href' => 'index.php'],
+    ['label' => 'Instellingen', 'href' => 'dashboard.php'],
     ['label' => 'Sensoren']
 ];
 

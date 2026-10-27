@@ -320,7 +320,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </script>
 
 <div class="next-step-bar">
-    <div><a href="index.php">Dashboard</a></div>
+    <div><a href="dashboard.php">Dashboard</a></div>
     <div><a href="b02_germination.php">Volgende: B02</a></div>
 </div>
 

@@ -10,7 +10,7 @@ $pageDescription = 'Beheer irrigatie, pompen en waterreservoirs.';
 
 $pageActions = [
     [
-        'href' => 'index.php',
+        'href' => 'dashboard.php',
         'icon' => '←',
         'label' => 'Terug'
     ]
