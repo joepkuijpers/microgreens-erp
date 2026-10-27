@@ -1,5 +1,4 @@
-<?php
-return array (
+<?php return array (
   'energy_dashboard' => 'Energie dashboard',
   'equipment' => 'Apparatuur',
   'add_equipment' => 'Apparatuur toevoegen',
@@ -1293,4 +1292,14 @@ return array (
   'germ_err' => 'Steekproef en ontkiemd zijn verplicht',
   'germ_none' => '— kies —',
   'germ_new_lot' => 'Nieuw zaadlot registreren',
+  'module_b30' => 'Administratietijd & Belasting',
+  'b30_title' => 'Administratieve belasting',
+  'b30_admin_time' => 'Administratieve tijd',
+  'b30_op_time' => 'Operationele tijd',
+  'b30_load' => 'Belasting',
+  'b30_target' => 'Streefwaarde 3%',
+  'b30_limit' => 'Grens 5%',
+  'b30_no_data' => 'Onvoldoende betrouwbare gegevens voor een percentage.',
+  'b30_module' => 'Module',
+  'b30_seconds' => 'Seconden',
 );
