@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('module_b13');
+$pageTitle = 'Energie & Verbruik';
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
