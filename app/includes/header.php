@@ -75,7 +75,7 @@ $modules = [
 ['id'=>'B10','file'=>'b10_sensor_sync.php','key'=>'module_b10'],
 ['id'=>'B11','file'=>'b09_packaging.php','key'=>'module_b11'],
 ['id'=>'B12','file'=>'b12_cleaning.php','key'=>'module_b12'],
-['id'=>'B13','file'=>'b13_energy.php','key'=>'module_b13'],
+['id'=>'B13','file'=>'b13_energy.php','key'=>'module_b13'],['id'=>'B30','file'=>'b30_admin_time.php','key'=>'module_b30'],
 ['id'=>'B14','file'=>'b14_water_irrigation.php','key'=>'module_b14'],
 ['id'=>'B15','file'=>'b15_substrate.php','key'=>'module_b15'],
 ['id'=>'B16','file'=>'b16_task_scheduler.php','key'=>'module_b16'],
@@ -93,7 +93,7 @@ $modules = [
 ['id'=>'B28','file'=>'b28_watchdog.php','key'=>'module_b28'],
 ['id'=>'B29','file'=>'b29_quarantine.php','key'=>'module_b29'],
 ];
-$group_map=['index.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch'];
+$group_map=['index.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b30_admin_time.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch'];
 $group_meta=['prod'=>[emoji('📦 '),'Productie / Production'],'teelt'=>[emoji('🌱 '),'Teelt & Klimaat / Cultivation'],'kwal'=>[emoji('🧼 '),'Kwaliteit & Hygiene / Quality'],'verkoop'=>[emoji('💰 '),'Verkoop & Financien / Sales'],'log'=>[emoji('🚚 '),'Logistiek & Planning / Logistics'],'bedrijf'=>[emoji('🏢 '),'Bedrijf & Systeem / System'],'watch'=>[emoji('🔔 '),'Monitoring / Watchdog']];
 $pageTitle = $pageTitle ?? 'ERP';
 ?> <!DOCTYPE html><html lang="<?php echo htmlspecialchars($languageCode); ?>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"> <title><?php echo htmlspecialchars($pageTitle); ?></title> <style>
