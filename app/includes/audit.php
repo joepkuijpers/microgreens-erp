@@ -155,6 +155,13 @@ function auditLog(
         ':reference_type' => $referenceType,
         ':reference_id' => $referenceId,
     ]);
+    $regSeconds = null;
+    if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION["active_seconds"])) {
+        $last = $_SESSION["last_audit_active_seconds"] ?? 0;
+        $delta = max(0, (int)$_SESSION["active_seconds"] - $last);
+        $_SESSION["last_audit_active_seconds"] = (int)$_SESSION["active_seconds"];
+        $regSeconds = $delta;
+    }
 
     $newId = (int)$db->lastInsertId();
     if ($regSeconds !== null) {
