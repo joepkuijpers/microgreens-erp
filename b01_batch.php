@@ -197,6 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div style="max-width:640px;margin:20px auto;font-family:sans-serif;">
     <h2><?= htmlspecialchars(__('b01_title')) ?></h2>
+    <div style="margin:0 0 16px;"><a href="germination_test.php" style="display:inline-block;margin-left:8px;background:#0e7490;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold;">+ <?= __('germ_register') ?></a></div>
     <div style="margin:0 0 16px;"><a href="add_seed_inventory_form.php" style="display:inline-block;background:#2e7d32;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold;">+ <?= __('seed_register_new') ?></a></div>
 
     <div style="display:flex;gap:8px;margin-bottom:18px;">
