@@ -156,5 +156,9 @@ function auditLog(
         ':reference_id' => $referenceId,
     ]);
 
-    return (int)$db->lastInsertId();
+    $newId = (int)$db->lastInsertId();
+    if ($regSeconds !== null) {
+        $db->prepare("UPDATE audit_events SET registration_time_seconds = :s WHERE id = :id")->execute([":s" => $regSeconds, ":id" => $newId]);
+    }
+    return $newId;
 }
