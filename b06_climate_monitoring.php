@@ -3,7 +3,6 @@ require_once __DIR__ . '/app/includes/header.php';
 $target_table = "climate_data";
 $pageTitle = __('module_b06');
 ?>
-    </div>
     <h3>Laatste gegevens</h3>
     <table>
         <thead><tr><th>ID</th><th>Waarde</th><th>Datum</th><th>Details</th></tr></thead>

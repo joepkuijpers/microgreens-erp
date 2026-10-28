@@ -39,7 +39,6 @@ $measured = $labSec > 0;
 $pct = $reliable ? ($adminTotal / $opSec * 100) : null;
 $badge = !$measured ? 'geschat' : 'gemeten';
 ?>
-    </div>
     <h3><?= __('b30_title') ?> · <?= (int)$days ?> <?= $languageCode==='nl'?'dagen':'days' ?></h3>
 
     <p><strong><?= __('b30_admin_time') ?>:</strong> <?= number_format($adminTotal,0,',','.') ?> <?= __('b30_seconds') ?>

@@ -63,7 +63,7 @@ try {
 // MODULES
 $wf_steps = ['b01_batch.php'=>1,'b02_germination.php'=>2,'b07_harvest.php'=>3,'b09_packaging.php'=>4,'b09_sale.php'=>5,'b21_logistics.php'=>6,'b25_customer_feedback.php'=>7];
 $modules = [
-['id'=>'DASH','file'=>'index.php','key'=>'dashboard_home'],
+['id'=>'DASH','file'=>'dashboard.php','key'=>'dashboard_home'],
 ['id'=>'B01','file'=>'b01_batch.php','key'=>'module_b01'],
 ['id'=>'B02','file'=>'b02_germination.php','key'=>'module_b02'],
 ['id'=>'B03','file'=>'b03_growth_chamber.php','key'=>'module_b03'],
@@ -93,10 +93,11 @@ $modules = [
 ['id'=>'B28','file'=>'b28_watchdog.php','key'=>'module_b28'],
 ['id'=>'B29','file'=>'b29_quarantine.php','key'=>'module_b29'],
 ];
-$group_map=['index.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b30_admin_time.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch'];
+$group_map=['dashboard.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b30_admin_time.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch'];
 $group_meta=['prod'=>[emoji('📦 '),'Productie / Production'],'teelt'=>[emoji('🌱 '),'Teelt & Klimaat / Cultivation'],'kwal'=>[emoji('🧼 '),'Kwaliteit & Hygiene / Quality'],'verkoop'=>[emoji('💰 '),'Verkoop & Financien / Sales'],'log'=>[emoji('🚚 '),'Logistiek & Planning / Logistics'],'bedrijf'=>[emoji('🏢 '),'Bedrijf & Systeem / System'],'watch'=>[emoji('🔔 '),'Monitoring / Watchdog']];
 $pageTitle = $pageTitle ?? 'ERP';
-?> <!DOCTYPE html><html lang="<?php echo htmlspecialchars($languageCode); ?>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"> <title><?php echo htmlspecialchars($pageTitle); ?></title> <style>
+?> <!DOCTYPE html><html lang="<?php echo htmlspecialchars($languageCode); ?>"><head>
+    <link rel="icon" type="image/png" href="assets/favicon.png"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"> <title><?php echo htmlspecialchars($pageTitle); ?></title> <style>
 *{box-sizing:border-box;}
 body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f9}
 .sidebar{width:250px;background:#2c3e50;color:#ecf0f1;overflow-y:auto;flex-shrink:0}
@@ -148,7 +149,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 .flash-error { background: #fdecec; color: #b42318; border-color: #b42318; }
 .flash-info { background: #eaf2fb; color: #1d4ed8; border-color: #1d4ed8; }
 @media(max-width:1023px){.sidebar{position:fixed;top:0;left:0;height:100vh;width:280px;transform:translateX(-100%);transition:transform .25s ease;z-index:1000;resize:none;max-width:85vw}.nav-toggle{display:inline-flex!important}.sidebar-resize-handle{display:none}body.nav-open .sidebar{transform:translateX(0)}body.nav-open::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999}}.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:none;background:#2c3e50;color:#fff;font-size:22px;border-radius:8px;cursor:pointer;margin-right:12px}.sidebar-header{display:flex;flex-direction:column;align-items:center;gap:8px}.brand-logo{width:90%;max-width:160px;height:auto;background:#fff;border-radius:10px;padding:8px}</style>
-<?php require_once __DIR__ . "/active_time_heartbeat.php"; ?></head><body> <nav class="sidebar"><div class="sidebar-header"> Microgreens ERP</div><div class="sidebar-resize-handle" id="sidebarHandle" title="Sleep om breedte te wijzigen"></div><ul class="nav-links">
+<?php require_once __DIR__ . "/active_time_heartbeat.php"; ?></head><body> <nav class="sidebar"><a href="dashboard.php" class="sidebar-header" style="color:inherit;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px"><img src="assets/logo.png" class="brand-logo" alt="GoGigroen"><span>Microgreens ERP</span></a><div class="sidebar-resize-handle" id="sidebarHandle" title="Sleep om breedte te wijzigen"></div><ul class="nav-links">
 <?php $cur=basename($_SERVER["PHP_SELF"]); $byGroup=[]; foreach($modules as $m){$g=$group_map[$m["file"]]??"other"; $byGroup[$g][]=$m;} ?>
 <?php if(isset($byGroup["home"])): foreach($byGroup["home"] as $m): ?>
 <li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?></a></li>

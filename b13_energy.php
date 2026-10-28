@@ -22,7 +22,6 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $meters = $db->query("SELECT id, meter_type, location, unit FROM meters ORDER BY id")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-    </div>
     <h3><?= __('b13_latest') ?></h3>
 
     <div style="overflow-x:auto;">
