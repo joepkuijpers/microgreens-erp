@@ -1,9 +1,11 @@
 <?php
+require_once '../../app/includes/auth.php';
+auth_require_login();
 $assetPrefix = '../';
 $navPrefix = '../';
 
-include '../db_connect.php';
-require_once __DIR__ . '/../includes/sensor_service.php';
+include '../app/db_connect.php';
+require_once __DIR__ . '/../../app/includes/sensor_service.php';
 
 $settings = $db->query("
     SELECT
@@ -23,18 +25,18 @@ $pageTitle = 'Sensorinstellingen';
 $pageDescription = 'Professioneel live overzicht van sensoren, grenswaarden en monitoring.';
 
 $pageActions = [
-    ['href' => 'index.php', 'icon' => '←', 'label' => 'Terug']
+    ['href' => 'dashboard.php', 'icon' => '←', 'label' => 'Terug']
 ];
 
 $breadcrumbs = [
     ['label' => 'Dashboard', 'href' => '../dashboard.php'],
-    ['label' => 'Instellingen', 'href' => 'index.php'],
+    ['label' => 'Instellingen', 'href' => 'dashboard.php'],
     ['label' => 'Sensoren']
 ];
 
-include '../includes/layout_start.php';
-include '../includes/breadcrumbs.php';
-include '../includes/page_header.php';
+include '../app/includes/layout_start.php';
+include '../app/includes/breadcrumbs.php';
+include '../app/includes/page_header.php';
 ?>
 
 <?php if (isset($_GET['saved'])): ?>
@@ -49,7 +51,7 @@ include '../includes/page_header.php';
 </div>
 <?php endif; ?>
 
-<?php include __DIR__ . '/../includes/cards/live_sensor_status.php'; ?>
+<?php include __DIR__ . '/../../app/includes/cards/live_sensor_status.php'; ?>
 
 <div class="card">
     <h2>Sensorgrenzen</h2>
@@ -103,4 +105,4 @@ include '../includes/page_header.php';
     </form>
 </div>
 
-<?php include '../includes/layout_end.php'; ?>
+<?php include '../app/includes/layout_end.php'; ?>

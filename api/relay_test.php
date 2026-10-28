@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../hardware/gpio/driver.php';
+require_once __DIR__ . '/../../app/hardware/gpio/driver.php';
 
 $config = gpioConfig();
 

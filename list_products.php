@@ -1,8 +1,10 @@
 <?php
-include 'includes/header.php';
-include 'includes/language.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/language.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
 
 $products = $db->query("
     SELECT
@@ -53,4 +55,4 @@ $products = $db->query("
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

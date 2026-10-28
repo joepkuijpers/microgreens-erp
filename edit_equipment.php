@@ -1,7 +1,9 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
 
 $id = (int) ($_GET['id'] ?? 0);
 
@@ -26,7 +28,7 @@ $equipment = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$equipment) {
     echo "<h1>✏️ " . __('edit_equipment') . "</h1>";
     echo "<p>" . htmlspecialchars(__('equipment_not_found')) . "</p>";
-    include 'includes/footer.php';
+    include 'app/includes/footer.php';
     exit;
 }
 
@@ -96,4 +98,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit"><?= __('save') ?></button>
 </form>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

@@ -1,7 +1,9 @@
 <?php
-include 'includes/language.php';
-include 'includes/header.php';
-include 'includes/sidebar.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/language.php';
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 ?>
 
 <style>
@@ -229,4 +231,4 @@ setInterval(loadRelays, 5000);
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

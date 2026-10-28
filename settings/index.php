@@ -1,8 +1,10 @@
 <?php
+require_once '../../app/includes/auth.php';
+auth_require_login();
 $assetPrefix = '../';
 $navPrefix = '../';
 
-include '../includes/layout_start.php';
+include '../app/includes/layout_start.php';
 ?>
 
 <style>
@@ -170,4 +172,4 @@ include '../includes/layout_start.php';
     </div>
 </div>
 
-<?php include '../includes/layout_end.php'; ?>
+<?php include '../app/includes/layout_end.php'; ?>

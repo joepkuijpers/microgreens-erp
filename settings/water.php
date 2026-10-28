@@ -1,4 +1,6 @@
 <?php
+require_once '../../app/includes/auth.php';
+auth_require_login();
 $assetPrefix = '../';
 $navPrefix = '../';
 
@@ -8,7 +10,7 @@ $pageDescription = 'Beheer irrigatie, pompen en waterreservoirs.';
 
 $pageActions = [
     [
-        'href' => 'index.php',
+        'href' => 'dashboard.php',
         'icon' => '←',
         'label' => 'Terug'
     ]
@@ -20,9 +22,9 @@ $breadcrumbs = [
     ['label'=>'Water']
 ];
 
-include '../includes/layout_start.php';
-include '../includes/breadcrumbs.php';
-include '../includes/page_header.php';
+include '../app/includes/layout_start.php';
+include '../app/includes/breadcrumbs.php';
+include '../app/includes/page_header.php';
 ?>
 
 <div class="card">
@@ -60,4 +62,4 @@ include '../includes/page_header.php';
 
 </div>
 
-<?php include '../includes/layout_end.php'; ?>
+<?php include '../app/includes/layout_end.php'; ?>

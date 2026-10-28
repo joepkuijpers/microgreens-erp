@@ -1,8 +1,10 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 
-require_once __DIR__ . '/includes/scheduler_engine.php';
+require_once __DIR__ . '/../app/includes/scheduler_engine.php';
 
 $saved = false;
 
@@ -174,4 +176,4 @@ $allowedOutputs = schedulerAllowedOutputs();
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

@@ -1,8 +1,10 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
-include 'includes/production_engine.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
+include 'app/includes/production_engine.php';
 
 $productionData = getProductionPlanning($db);
 ?>
@@ -11,12 +13,12 @@ $productionData = getProductionPlanning($db);
 
     <h1>📋 Productieplanner</h1>
 
-    <?php include 'includes/cards/capacity_overview.php'; ?>
+    <?php include 'app/includes/cards/capacity_overview.php'; ?>
 
-    <?php include 'includes/cards/production_alerts.php'; ?>
+    <?php include 'app/includes/cards/production_alerts.php'; ?>
 
-    <?php include 'includes/cards/production_schedule.php'; ?>
+    <?php include 'app/includes/cards/production_schedule.php'; ?>
 
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

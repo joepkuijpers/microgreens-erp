@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../includes/hardware_health_engine.php';
+require_once __DIR__ . '/../../app/includes/hardware_health_engine.php';
 
 try {
     echo json_encode(

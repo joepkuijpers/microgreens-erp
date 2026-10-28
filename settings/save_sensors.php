@@ -1,6 +1,8 @@
 <?php
+require_once '../../app/includes/auth.php';
+auth_require_login();
 
-include '../db_connect.php';
+include '../app/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: sensors.php');

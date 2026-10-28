@@ -1,6 +1,8 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 ?>
 
 <style>
@@ -221,4 +223,4 @@ setInterval(updateOperationsDashboard, 5000);
 
 </div></main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

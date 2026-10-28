@@ -1,25 +1,32 @@
 <?php
-include 'includes/header.php';
-include 'includes/language.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/language.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
 
 $items = $db->query("
     SELECT
-        id,
-        item_name,
-        category,
-        quantity,
-        unit,
-        unit_cost,
-        (quantity * unit_cost) AS total_value
-    FROM inventory
-    ORDER BY category ASC, item_name ASC
+        i.id,
+        i.item_name,
+        i.category,
+        i.quantity,
+        i.unit,
+        i.unit_cost,
+        s.name AS supplier_name,
+        (i.quantity * i.unit_cost) AS total_value
+    FROM inventory i
+    LEFT JOIN suppliers s
+        ON s.id = i.supplier_id
+    WHERE i.is_active = 1
+    ORDER BY i.category ASC, i.item_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
 $totalValue = $db->query("
     SELECT COALESCE(SUM(quantity * unit_cost), 0) AS total
     FROM inventory
+    WHERE is_active = 1
 ")->fetch(PDO::FETCH_ASSOC);
 ?>
 
@@ -43,6 +50,7 @@ $totalValue = $db->query("
                     <tr>
                         <th>ID</th>
                         <th><?= htmlspecialchars(__('item')) ?></th>
+                        <th><?= htmlspecialchars(__('supplier')) ?></th>
                         <th><?= htmlspecialchars(__('category')) ?></th>
                         <th><?= htmlspecialchars(__('quantity')) ?></th>
                         <th><?= htmlspecialchars(__('unit')) ?></th>
@@ -56,6 +64,14 @@ $totalValue = $db->query("
                         <tr>
                             <td><?= htmlspecialchars((string)$item['id']) ?></td>
                             <td><?= htmlspecialchars((string)$item['item_name']) ?></td>
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string)(
+                                        $item['supplier_name']
+                                        ?? __('supplier_not_linked')
+                                    )
+                                ) ?>
+                            </td>
                             <td><?= htmlspecialchars((string)($item['category'] ?? '-')) ?></td>
                             <td><?= number_format((float)$item['quantity'], 2, ',', '.') ?></td>
                             <td><?= htmlspecialchars((string)($item['unit'] ?? '-')) ?></td>
@@ -63,7 +79,21 @@ $totalValue = $db->query("
                             <td>€ <?= number_format((float)$item['total_value'], 2, ',', '.') ?></td>
                             <td>
                                 <a class="btn" href="edit_inventory.php?id=<?= urlencode((string)$item['id']) ?>">✏️ <?= htmlspecialchars(__('edit')) ?></a>
-                                <a class="btn" href="delete_inventory.php?id=<?= urlencode((string)$item['id']) ?>" onclick="return confirm('<?= htmlspecialchars(__('confirm_delete_inventory_item')) ?>');">🗑️ <?= htmlspecialchars(__('delete')) ?></a>
+                                <form
+                                    method="post"
+                                    action="delete_inventory.php"
+                                    style="display: inline;"
+                                    onsubmit="return confirm('<?= htmlspecialchars(__('confirm_archive_inventory_item')) ?>');"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="id"
+                                        value="<?= htmlspecialchars((string)$item['id']) ?>"
+                                    >
+                                    <button type="submit" class="btn">
+                                        📦 <?= htmlspecialchars(__('archive')) ?>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -73,4 +103,4 @@ $totalValue = $db->query("
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

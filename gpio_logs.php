@@ -1,8 +1,10 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 
-$logFile = __DIR__ . '/hardware/gpio/gpio_actions.log';
+$logFile = __DIR__ . '/../app/hardware/gpio/gpio_actions.log';
 $entries = [];
 
 if (file_exists($logFile)) {
@@ -136,4 +138,4 @@ if (file_exists($logFile)) {
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

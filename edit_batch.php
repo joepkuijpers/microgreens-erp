@@ -1,6 +1,8 @@
 <?php
-include 'includes/language.php';
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/language.php';
+include 'app/db_connect.php';
 
 $id = (int)($_GET['id'] ?? 0);
 
@@ -187,8 +189,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 ?>
 
 <div class="main">
@@ -265,4 +267,4 @@ include 'includes/sidebar.php';
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

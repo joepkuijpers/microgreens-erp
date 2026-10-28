@@ -2,8 +2,8 @@
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../db_connect.php';
-require_once __DIR__ . '/../includes/sensor_health.php';
+require_once __DIR__ . '/../../app/db_connect.php';
+require_once __DIR__ . '/../../app/includes/sensor_health.php';
 
 try {
     echo json_encode(get_sensor_health($db), JSON_PRETTY_PRINT);

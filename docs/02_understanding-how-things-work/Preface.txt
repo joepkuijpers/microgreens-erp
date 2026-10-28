@@ -1,0 +1,195 @@
+# Preface
+
+This book was created to make complex subjects easier to understand by making the path toward understanding accessible.
+
+Biology, chemistry, physics, food science, preservation, and engineering are often taught as separate fields. In reality, they are closely connected. A change in temperature can influence molecules. Molecules influence cells. Cells influence organisms. Organisms interact with their environment. Engineering then gives us ways to observe, control, preserve, and work with these processes.
+
+Understanding these connections does not always require advanced mathematics or specialist terminology as a starting point.
+
+## Who This Book Is For
+
+This book is written for people who want to understand how biological, physical, chemical, food, preservation, and engineering processes connect without requiring prior academic training in these subjects.
+
+The explanations are intentionally accessible.
+
+A reader who is already familiar with biology, chemistry, physics, food science, or engineering at university level may find parts of the book deliberately simple. That is intentional.
+
+The purpose is not to replace specialised education.
+
+The purpose is to create an accessible starting point from which deeper understanding can develop.
+
+A reader should be able to approach the book with little or no formal background and gradually develop enough understanding to ask meaningful questions about the processes being described.
+
+## What This Book Is
+
+This book is an introduction to understanding.
+
+It is:
+
+* a guided learning journey;
+* an introduction to fundamental biological and physical processes;
+* a way of connecting ideas across different disciplines;
+* a framework for asking questions;
+* a foundation for further study and investigation.
+
+The book does not attempt to contain everything that is known about these subjects.
+
+It does not replace scientific literature, university education, specialist textbooks, laboratory training, or professional engineering practice.
+
+Its purpose is different.
+
+It aims to make the first steps toward understanding easier to take.
+
+## Why the Explanations Are Deliberately Simple
+
+The simplicity of an explanation should not be confused with the simplicity of the subject itself.
+
+A biological process may be extremely complex while still being introduced through a simple explanation.
+
+A molecular process may involve mechanisms that require advanced scientific knowledge to describe completely, while its basic principle can still be introduced in language that is accessible to a beginner.
+
+The objective is therefore not to make science less accurate by removing its complexity.
+
+The objective is to introduce complexity gradually.
+
+In this book, understanding is built layer by layer.
+
+A reader first encounters an observation.
+
+That observation creates a question.
+
+The question leads to an explanation.
+
+The explanation creates another question.
+
+That new question allows the reader to go one step deeper.
+
+In this way, complexity is introduced when the reader has developed the foundation needed to understand it.
+
+## Learning Through Questions
+
+The structure of this book is based on a simple idea:
+
+> A good explanation should lead to a better question.
+
+The book therefore does not treat knowledge as a collection of isolated facts.
+
+Instead, it follows a continuous process:
+
+```text
+Observation
+    ↓
+Question
+    ↓
+First explanation
+    ↓
+New question
+    ↓
+Deeper explanation
+    ↓
+Connection
+    ↓
+Further question
+    ↓
+Deeper understanding
+```
+
+This approach allows the reader to follow the development of an idea rather than simply receiving its conclusion.
+
+The reader is encouraged to remain curious.
+
+Not every question needs to be answered immediately.
+
+Sometimes the most useful result of an explanation is the ability to recognise a better question.
+
+## Accessibility and Scientific Knowledge
+
+The accessibility of an explanation should not be confused with the universality of the knowledge behind it.
+
+A concept may be scientifically established while still requiring substantial education to understand in its full depth.
+
+This book therefore provides introductory explanations rather than claiming to provide complete scientific treatment.
+
+Where greater depth is required, the reader should continue into specialised literature, formal education, experimentation, or professional sources.
+
+The book is a doorway into understanding, not the entire building.
+
+## How to Read This Book
+
+The chapters are designed to build understanding progressively.
+
+Reading the book from beginning to end provides the intended learning journey, because later concepts may depend on ideas introduced earlier.
+
+However, readers with existing knowledge may encounter subjects they already understand.
+
+Those readers may move through familiar sections quickly and concentrate on the connections between subjects.
+
+The book is therefore not intended to measure academic competence.
+
+It is intended to support understanding.
+
+A seven-year-old who can read should be able to follow the basic reasoning in many parts of the book.
+
+An experienced scientist may already know the underlying principles.
+
+Both readers can approach the same subject from different starting points.
+
+The difference is not in the subject itself, but in how much prior understanding the reader brings to it.
+
+## From Understanding to Engineering
+
+The book establishes understanding before moving toward engineering application.
+
+This distinction is important.
+
+The book primarily asks:
+
+> **What is happening, and why?**
+
+The engineering extensions then begin asking:
+
+> **What does this understanding mean when we try to observe, control, preserve, measure, design, or improve a real system?**
+
+This creates a progression:
+
+```text
+Basic understanding
+        ↓
+Biological and physical relationships
+        ↓
+Deeper questions
+        ↓
+Engineering interpretation
+        ↓
+Engineering extensions
+        ↓
+Practical design and implementation
+```
+
+The engineering extensions therefore should not be regarded simply as additional chapters.
+
+They are a bridge between understanding and application.
+
+## A Foundation for Further Learning
+
+The purpose of this book is ultimately not to make the reader dependent upon the book.
+
+It is to make further learning easier.
+
+Once a reader understands the basic relationship between cells, molecules, water, temperature, energy, food, preservation, and engineering, more advanced information becomes easier to place into context.
+
+New knowledge can then be connected to an existing mental model rather than being encountered as an isolated fact.
+
+The goal is therefore not to finish the reader's learning.
+
+The goal is to give the reader a stronger starting point for continuing it.
+
+## The Principle Behind the Book
+
+The central principle of this book can be expressed simply:
+
+> **Understanding begins with a question.
+> A good explanation creates a better question.
+> A better question leads to deeper understanding.**
+
+This is the approach that guides the chapters that follow.

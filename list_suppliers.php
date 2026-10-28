@@ -1,8 +1,10 @@
 <?php
-include 'includes/header.php';
-include 'includes/language.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/language.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
 
 $suppliers = $db->query("
     SELECT
@@ -15,6 +17,18 @@ $suppliers = $db->query("
 
 <div class="main">
     <h1><?= htmlspecialchars(__('suppliers')) ?></h1>
+
+    <p>
+        <a class="btn" href="add_supplier_form.php">
+            <?= htmlspecialchars(__('new_supplier')) ?>
+        </a>
+    </p>
+
+    <?php if (isset($_GET['created'])): ?>
+        <div class="card">
+            <p><?= htmlspecialchars(__('supplier_saved')) ?></p>
+        </div>
+    <?php endif; ?>
 
     <div class="card suppliers-table-card">
         <div class="table-scroll">
@@ -44,4 +58,4 @@ $suppliers = $db->query("
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

@@ -1,5 +1,7 @@
 <?php
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inventory_id = (int)($_POST['inventory_id'] ?? 0);
@@ -82,8 +84,8 @@ $items = $db->query("
     ORDER BY item_name ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 ?>
 
 <div class="main">
@@ -153,4 +155,4 @@ include 'includes/sidebar.php';
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

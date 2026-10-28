@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include '../db_connect.php';
+include '../app/db_connect.php';
 
 $stmt = $db->query("
     SELECT timestamp, temperature, humidity, pressure, light

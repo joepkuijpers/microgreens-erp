@@ -1,7 +1,9 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
 
 $profiles = $db->query("
     SELECT
@@ -90,9 +92,9 @@ $profiles = $db->query("
                         Teeltduur: <strong><?= htmlspecialchars((string)$profile['grow_days_min']) ?>–<?= htmlspecialchars((string)$profile['grow_days_max']) ?> dagen</strong>
                     </div>
 
-                 
+
                         Licht groei: <strong><?= htmlspecialchars((string)$profile['growth_light_hours']) ?> uur/dag</strong>
-                        
+
                     <div class="profile-line">
                         Temperatuur: <strong><?= htmlspecialchars((string)$profile['temp_min']) ?>–<?= htmlspecialchars((string)$profile['temp_max']) ?> °C</strong>
                     </div>
@@ -127,4 +129,4 @@ $profiles = $db->query("
     </div>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

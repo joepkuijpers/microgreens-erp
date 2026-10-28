@@ -1,0 +1,50 @@
+{
+    "grow_light": {
+        "label": "Grow light",
+        "gpio_pin": 24,
+        "active_low": true,
+        "state": true,
+        "state_text": "AAN",
+        "updated_at": "2026-07-11 09:39:02"
+    },
+    "heater": {
+        "label": "Verwarming",
+        "gpio_pin": 17,
+        "active_low": true,
+        "state": false,
+        "state_text": "UIT",
+        "updated_at": "2026-07-11 09:39:02"
+    },
+    "cooler": {
+        "label": "Koeling",
+        "gpio_pin": 27,
+        "active_low": true,
+        "state": true,
+        "state_text": "AAN",
+        "updated_at": "2026-07-11 09:39:02"
+    },
+    "fan": {
+        "label": "Ventilator",
+        "gpio_pin": 22,
+        "active_low": true,
+        "state": false,
+        "state_text": "UIT",
+        "updated_at": "2026-07-11 09:39:02"
+    },
+    "humidifier": {
+        "label": "Bevochtiger",
+        "gpio_pin": 23,
+        "active_low": true,
+        "state": false,
+        "state_text": "UIT",
+        "updated_at": "2026-07-11 09:39:02"
+    },
+    "water_pump": {
+        "label": "Waterpomp",
+        "gpio_pin": 25,
+        "active_low": true,
+        "state": false,
+        "state_text": "UIT",
+        "updated_at": "2026-07-11 09:39:02"
+    }
+}

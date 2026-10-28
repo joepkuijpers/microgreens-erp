@@ -1,6 +1,8 @@
 <?php
-include 'db_connect.php';
-include 'includes/language.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/db_connect.php';
+include 'app/includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -42,4 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 <br>
-<a href="index.php"><?= htmlspecialchars(__('menu')) ?></a>
+<a href="dashboard.php"><?= htmlspecialchars(__('menu')) ?></a>

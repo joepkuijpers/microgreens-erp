@@ -1,60 +1,36 @@
 <?php
+// Language Loader
+// Verwacht dat $languageCode al is ingesteld door header.php (via sessie)
 
-require_once __DIR__ . '/../db_connect.php';
-
-$languageCode = 'nl';
-
-/*
-|--------------------------------------------------------------------------
-| Language debug mode
-|--------------------------------------------------------------------------
-| true  = ontbrekende sleutels tonen als [[translation_key]]
-| false = ontbrekende sleutels tonen als translation_key
-|--------------------------------------------------------------------------
-*/
-$languageDebug = true;
-
-try {
-    $stmt = $db->query("SELECT language_code FROM settings LIMIT 1");
-    $value = $stmt->fetchColumn();
-
-    if (!empty($value)) {
-        $languageCode = strtolower(trim($value));
+if (!isset($languageCode)) {
+    $languageCode = 'nl';
+    if (isset($_SESSION['erp_language'])) {
+        $languageCode = $_SESSION['erp_language'];
     }
-} catch (Throwable $e) {
-    // Fallback blijft Nederlands
 }
 
-$allowedLanguages = [
-    'nl',
-    'en',
-    'de',
-    'fr',
-    'es',
-    'it'
-];
-
+$allowedLanguages = ['nl', 'en', 'de', 'fr', 'es', 'it'];
 if (!in_array($languageCode, $allowedLanguages, true)) {
     $languageCode = 'nl';
 }
 
-$languageFile = __DIR__ . "/../languages/{$languageCode}.php";
-
+$languageFile = __DIR__ . "/../app/languages/{$languageCode}.php";
 if (!file_exists($languageFile)) {
-    $languageFile = __DIR__ . '/../languages/nl.php';
+    $languageFile = __DIR__ . '/../app/languages/nl.php';
 }
 
 $translations = require $languageFile;
 
-function __(string $key): string
-{
-    global $translations, $languageDebug;
+// Optioneel module-fragment samenvoegen (bv. nl_b01_b02.php)
+$extFile = preg_replace('/\.php$/', '_b01_b02.php', $languageFile);
+if (file_exists($extFile)) {
+    $translations = array_merge($translations, require $extFile);
+}
 
+function __(string $key): string {
+    global $translations;
     if (isset($translations[$key])) {
         return $translations[$key];
     }
-
-    return $languageDebug
-        ? "[[{$key}]]"
-        : $key;
+    return "[[" . $key . "]]";
 }

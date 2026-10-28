@@ -1,7 +1,7 @@
 <?php
-include 'includes/header.php';
-include 'db_connect.php';
-include 'includes/sidebar.php';
+include __DIR__ . '/../../app/includes/header.php';
+include __DIR__ . '/../../app/db_connect.php';
+include __DIR__ . '/../../app/includes/sidebar.php';
 
 $producten = $db->query("SELECT count(*) FROM products")->fetchColumn();
 $voorraad = $db->query("SELECT count(*) FROM inventory")->fetchColumn();
@@ -43,32 +43,32 @@ $lage_voorraad = $db->query("SELECT count(*) FROM inventory WHERE quantity <= 1"
 </div>
 
 <div class="grid">
-    <?php include 'includes/cards/sensors.php'; ?>
-    <?php include 'includes/cards/status.php'; ?>
+    <?php include __DIR__ . '/../../app/includes/cards/sensors.php'; ?>
+    <?php include __DIR__ . '/../../app/includes/cards/status.php'; ?>
 </div>
 
 <div class="dashboard-section">
     <h2>📈 Historische sensorgrafieken</h2>
 </div>
 
-<?php include 'includes/cards/charts.php'; ?>
+<?php include __DIR__ . '/../../app/includes/cards/charts.php'; ?>
 
 <div class="dashboard-section">
     <h2>⚠️ Alarmen</h2>
 </div>
 
-<?php include 'includes/cards/alerts.php'; ?>
+<?php include __DIR__ . '/../../app/includes/cards/alerts.php'; ?>
 
 <div class="dashboard-section">
     <h2>💰 Financieel</h2>
 </div>
 
-<?php include 'includes/cards/finance.php'; ?>
+<?php include __DIR__ . '/../../app/includes/cards/finance.php'; ?>
 
 <div class="dashboard-section">
     <h2>⚡ Snelle acties</h2>
 </div>
 
-<?php include 'includes/cards/quickactions.php'; ?>
+<?php include __DIR__ . '/../../app/includes/cards/quickactions.php'; ?>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/../../app/includes/footer.php'; ?>

@@ -1,98 +1,10 @@
-<?php
-include 'includes/header.php';
-include 'db_connect.php';
-include 'includes/language.php';
-
-require_once 'includes/batch_rotation_engine.php';
-
-$batchRotation = rotateActiveBatch($db);
-
-$producten = $db->query("SELECT count(*) FROM products")->fetchColumn();
-$voorraad = $db->query("SELECT count(*) FROM inventory")->fetchColumn();
-$teelten = $db->query("SELECT count(*) FROM grow_batches")->fetchColumn();
-$verkopen = $db->query("SELECT count(*) FROM sales")->fetchColumn();
-$klanten = $db->query("SELECT count(*) FROM customers")->fetchColumn();
-$leveranciers = $db->query("SELECT count(*) FROM suppliers")->fetchColumn();
-$oogsten = $db->query("SELECT count(*) FROM harvests")->fetchColumn();
-
-$omzet = $db->query("SELECT COALESCE(SUM(amount),0) FROM sales")->fetchColumn();
-$kosten_bedrag = $db->query("SELECT COALESCE(SUM(amount),0) FROM expenses")->fetchColumn();
-
-$winst = $omzet - $kosten_bedrag;
-
-$lage_voorraad = $db->query("SELECT count(*) FROM inventory WHERE quantity <= 1")->fetchColumn();
-?>
-
-<h1>🌱 <?= __('dashboard_title') ?></h1>
-<p><?= __('last_page_load') ?>: <?= date('d-m-Y H:i') ?></p>
-
-<?php include 'includes/cards/topstatus.php'; ?>
-
-<div class="dashboard-section">
-    <h2>⚠️ <?= __('alarms') ?></h2>
-</div>
-<?php include 'includes/cards/alerts.php'; ?>
-
-<div class="dashboard-section">
-    <h2>⚡ <?= __('quick_actions') ?></h2>
-</div>
-<?php include 'includes/cards/quickactions.php'; ?>
-
-<?php include 'includes/cards/live_sensor_status.php'; ?>
-<?php include 'includes/cards/climate_status.php'; ?>
-<?php include 'includes/cards/lighting_status.php'; ?>
-<?php include 'includes/cards/water_status.php'; ?>
-<?php include 'includes/cards/automation_status.php'; ?>
-<?php include 'includes/cards/hardware_control_center.php'; ?>
-
-<?php include 'includes/cards/growth_command_center.php'; ?>
-<?php include 'includes/cards/growth_timeline.php'; ?>
-<?php include 'includes/cards/batch_queue.php'; ?>
-<?php include 'includes/cards/production_planner.php'; ?>
-<?php include 'includes/cards/harvest_forecast.php'; ?>
-<?php include 'includes/cards/seed_planning.php'; ?>
-<?php include 'includes/cards/rack_capacity.php'; ?>
-
-<div class="dashboard-section">
-    <h2>📊 <?= __('kpi_overview') ?></h2>
-</div>
-
-<div class="grid">
-    <div class="tile"><h2>🌱 <?= __('batches') ?></h2><p id="batches"><?= $teelten ?></p></div>
-    <div class="tile"><h2>🌾 <?= __('harvests') ?></h2><p id="harvests"><?= $oogsten ?></p></div>
-    <div class="tile"><h2>⚠️ <?= __('low_stock') ?></h2><p><?= $lage_voorraad ?></p></div>
-
-    <div class="tile"><h2>📦 <?= __('inventory') ?></h2><p id="inventory"><?= $voorraad ?></p></div>
-    <div class="tile"><h2>📋 <?= __('products') ?></h2><p id="products"><?= $producten ?></p></div>
-    <div class="tile"><h2>💰 <?= __('sales') ?></h2><p id="sales"><?= $verkopen ?></p></div>
-    <div class="tile"><h2>👥 <?= __('customers') ?></h2><p id="customers"><?= $klanten ?></p></div>
-    <div class="tile"><h2>🚚 <?= __('suppliers') ?></h2><p id="suppliers"><?= $leveranciers ?></p></div>
-
-    <div class="tile"><h2>💶 <?= __('revenue') ?></h2><p id="revenue">€<?= number_format($omzet, 2, ',', '.') ?></p></div>
-    <div class="tile"><h2>📉 <?= __('expenses') ?></h2><p id="expenses">€<?= number_format($kosten_bedrag, 2, ',', '.') ?></p></div>
-    <div class="tile"><h2>📈 <?= __('profit') ?></h2><p id="profit">€<?= number_format($winst, 2, ',', '.') ?></p></div>
-</div>
-
-<div class="dashboard-section">
-    <h2>🌡 <?= __('live_monitoring') ?></h2>
-</div>
-
-<div class="grid">
-    <?php include 'includes/cards/sensors.php'; ?>
-    <?php include 'includes/cards/status.php'; ?>
-</div>
-
-<div class="dashboard-section">
-    <h2>💰 <?= __('financial') ?></h2>
-</div>
-
-<?php include 'includes/cards/finance.php'; ?>
-
-<div class="dashboard-section">
-    <h2>📈 <?= __('historical_sensor_charts') ?></h2>
-</div>
-
-<?php include 'includes/cards/quickoverview.php'; ?>
-<?php include 'includes/cards/charts.php'; ?>
-
-<?php include 'includes/footer.php'; ?>
+<?php require_once __DIR__.'/app/includes/header.php'; ?><?php $cur=basename($_SERVER["PHP_SELF"]); $byGroup=[]; foreach($modules as $m){$g=$group_map[$m["file"]]??"other"; $byGroup[$g][]=$m;} ?>
+<style>.gd-title{margin:0 0 6px;font-size:1.5rem;color:#2c3e50}.gd-sub{margin:0 0 24px;color:#7f8c8d}.gd-group{margin-bottom:28px}.gd-group-head{font-size:1.05rem;color:#2c3e50;margin:0 0 12px;font-weight:bold}.gd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}.gd-card{display:block;background:#fff;border-radius:10px;padding:16px;text-decoration:none;color:#2c3e50;box-shadow:0 2px 6px rgba(0,0,0,.06);border-left:4px solid #27ae60;transition:transform .12s,box-shadow .12s}.gd-card:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.12)}.gd-card-id{font-size:11px;color:#95a5a6;font-weight:bold}.gd-card-name{display:block;margin-top:4px;font-size:14px;line-height:1.3}.gd-other{margin-top:10px}.gd-other a{color:#2c3e50;margin-right:12px;font-size:13px}@media(max-width:600px){.gd-grid{grid-template-columns:repeat(2,1fr)}}</style>
+<h1 class="gd-title">🌱 <?= __('module_index') ?> · <?= htmlspecialchars($languageCode) ?></h1>
+<p class="gd-sub">Overzicht van alle ERP-modules — klik om te openen.</p>
+<?php foreach($group_meta as $gid=>$gm): if(empty($byGroup[$gid])) continue; ?>
+<div class="gd-group"><h2 class="gd-group-head"><span><?= $gm[0] ?></span> <?= htmlspecialchars($gm[1]) ?></h2>
+<div class="gd-grid"><?php foreach($byGroup[$gid] as $m): ?><a class="gd-card" href="<?= htmlspecialchars($m["file"]) ?>"><span class="gd-card-id"><?= htmlspecialchars($m["id"]) ?></span><span class="gd-card-name"><?= __($m["key"]) ?></span></a><?php endforeach; ?></div></div>
+<?php endforeach; ?>
+<?php if(!empty($byGroup["other"])): ?><div class="gd-other"><?php foreach($byGroup["other"] as $m): ?><a href="<?= htmlspecialchars($m["file"]) ?>"><?= __($m["key"]) ?></a><?php endforeach; ?></div><?php endif; ?>
+<?php require_once __DIR__.'/app/includes/footer.php'; ?>

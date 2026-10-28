@@ -1,0 +1,82 @@
+<?php
+// Veiligheidscheck: Alleen laden via index.php
+if (!isset($db)) {
+    exit("Directe toegang niet toegestaan.");
+}
+
+$melding = '';
+// Simpele POST verwerking (kan per module verder uitgebreid worden)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actie'])) {
+    try {
+        // Placeholder actie - pas aan per module
+        $melding = "<p style='color:orange'>ℹ️ Actie '$_POST[actie]' ontvangen. (Logica nog in te vullen)</p>";
+    } catch (Exception $e) {
+        $melding = "<p style='color:red'>Fout: " . htmlspecialchars($e->getMessage()) . "</p>";
+    }
+}
+?>
+
+<div class="card">
+    <h2><?php echo $emoji; ?> <?php echo htmlspecialchars($module_title); ?></h2>
+    <?php echo $melding; ?>
+
+    <div style="margin: 15px 0; padding: 15px; background: #f0f4f8; border-radius: 6px;">
+        <p><strong>Module Status:</strong> Actief</p>
+        <p><strong>Database Tabel:</strong> <code><?php echo "customer_orders"; ?></code></p>
+        <form method="POST" style="margin-top:10px;">
+            <input type="hidden" name="actie" value="test_knop">
+            <button type="submit" style="padding:8px 15px; background:#2980b9; color:white; border:none; border-radius:4px; cursor:pointer;">Test Actie</button>
+        </form>
+    </div>
+
+    <h3>Laatste gegevens uit <?php echo "customer_orders"; ?></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID / Code</th>
+                <th>Status / Waarde</th>
+                <th>Datum / Tijd</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            try {
+                // Probeer data op te halen uit de specifieke tabel voor deze module
+                // LIMIT 5 om de pagina snel te houden
+                $stmt = $db->query("SELECT * FROM <?php echo "customer_orders"; ?> ORDER BY rowid DESC LIMIT 5");
+                $gevonden = false;
+                
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $gevonden = true;
+                    // Toon de eerste 4 kolommen die gevonden worden
+                    $keys = array_keys($row);
+                    $col1 = isset($row[$keys[0]]) ? htmlspecialchars($row[$keys[0]]) : '-';
+                    $col2 = isset($row[$keys[1]]) ? htmlspecialchars($row[$keys[1]]) : '-';
+                    $col3 = isset($row[$keys[2]]) ? htmlspecialchars($row[$keys[2]]) : '-';
+                    $col4 = isset($row[$keys[3]]) ? htmlspecialchars($row[$keys[3]]) : '-';
+
+                    echo "<tr>
+                            <td><strong>{$col1}</strong></td>
+                            <td><span class='badge bg-running'>{$col2}</span></td>
+                            <td>{$col3}</td>
+                            <td>{$col4}</td>
+                          </tr>";
+                }
+
+                if (!$gevonden) {
+                    echo "<tr><td colspan='4' style='text-align:center; color:#7f8c8d; padding:20px;'>
+                            Geen gegevens gevonden in tabel '<strong><?php echo "customer_orders"; ?></strong>'.<br>
+                            <small>Deze tabel is waarschijnlijk nog leeg of bestaat niet in de database.</small>
+                          </td></tr>";
+                }
+            } catch (PDOException $e) {
+                echo "<tr><td colspan='4' style='color:red; padding:10px;'>
+                        ⚠️ Tabel '<strong><?php echo "customer_orders"; ?></strong>' bestaat nog niet of bevat fouten.<br>
+                        <small>Foutmelding: " . htmlspecialchars($e->getMessage()) . "</small>
+                      </td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>

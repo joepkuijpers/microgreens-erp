@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../includes/scheduler_engine.php';
+require_once __DIR__ . '/../../app/includes/scheduler_engine.php';
 
 try {
     echo json_encode(

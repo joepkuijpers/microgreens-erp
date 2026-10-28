@@ -1,4 +1,6 @@
 <?php
+require_once '../../app/includes/auth.php';
+auth_require_login();
 $assetPrefix = '../';
 $navPrefix = '../';
 
@@ -7,18 +9,18 @@ $pageTitle = 'Algemene instellingen';
 $pageDescription = 'Beheer algemene ERP-instellingen zoals bedrijfsgegevens, taal, tijdzone en valuta.';
 
 $pageActions = [
-    ['href' => 'index.php', 'icon' => '←', 'label' => 'Terug naar instellingen']
+    ['href' => 'dashboard.php', 'icon' => '←', 'label' => 'Terug naar instellingen']
 ];
 
 $breadcrumbs = [
     ['label' => 'Dashboard', 'href' => '../dashboard.php'],
-    ['label' => 'Instellingen', 'href' => 'index.php'],
+    ['label' => 'Instellingen', 'href' => 'dashboard.php'],
     ['label' => 'Algemeen']
 ];
 
-include '../includes/layout_start.php';
-include '../includes/breadcrumbs.php';
-include '../includes/page_header.php';
+include '../app/includes/layout_start.php';
+include '../app/includes/breadcrumbs.php';
+include '../app/includes/page_header.php';
 ?>
 
 <div class="card">
@@ -49,4 +51,4 @@ include '../includes/page_header.php';
     </table>
 </div>
 
-<?php include '../includes/layout_end.php'; ?>
+<?php include '../app/includes/layout_end.php'; ?>

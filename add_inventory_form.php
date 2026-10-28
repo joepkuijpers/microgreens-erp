@@ -1,6 +1,17 @@
 <?php
-include 'includes/header.php';
-include 'includes/sidebar.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+require_once '../app/db_connect.php';
+require_once '../app/includes/language.php';
+
+$suppliers = $db->query("
+    SELECT id, name
+    FROM suppliers
+    ORDER BY name COLLATE NOCASE ASC
+")->fetchAll(PDO::FETCH_ASSOC);
+
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
 ?>
 
 <div class="main">
@@ -11,6 +22,22 @@ include 'includes/sidebar.php';
 
             <label><?= htmlspecialchars(__('item_name')) ?></label><br>
             <input type="text" name="item_name" required><br><br>
+
+            <label for="supplier_id">
+                <?= htmlspecialchars(__('supplier')) ?>
+            </label><br>
+
+            <select id="supplier_id" name="supplier_id" required>
+                <option value="">
+                    <?= htmlspecialchars(__('select_supplier')) ?>
+                </option>
+
+                <?php foreach ($suppliers as $supplier): ?>
+                    <option value="<?= htmlspecialchars((string)$supplier['id']) ?>">
+                        <?= htmlspecialchars((string)$supplier['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select><br><br>
 
             <label><?= htmlspecialchars(__('category')) ?></label><br>
             <input
@@ -45,4 +72,4 @@ include 'includes/sidebar.php';
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>

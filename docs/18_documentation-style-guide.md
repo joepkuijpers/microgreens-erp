@@ -213,7 +213,7 @@ Use lowercase kebab-case.
 Examples:
 
 ```text
-project-foundation
+01_project-foundation
 meeting-notes
 freeze-dryer
 markdown-templates
@@ -405,7 +405,7 @@ Use relative Markdown links for documents inside the repository.
 Example:
 
 ```md
-[Vision](project-foundation/01_vision.md)
+[Vision](01_project-foundation/01_vision.md)
 ```
 
 Do not use plain file paths when a clickable link is more useful.
@@ -413,7 +413,7 @@ Do not use plain file paths when a clickable link is more useful.
 Preferred:
 
 ```md
-**See:** [Mission](project-foundation/02_mission.md)
+**See:** [Mission](01_project-foundation/02_mission.md)
 ```
 
 Avoid duplicating complete information from another document.
@@ -481,7 +481,7 @@ Use forward slashes in repository-relative Markdown links.
 Example:
 
 ```text
-project-foundation/01_vision.md
+01_project-foundation/01_vision.md
 ```
 
 ## Dates

@@ -2,8 +2,8 @@
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../db_connect.php';
-require_once __DIR__ . '/../includes/gpio_controller.php';
+require_once __DIR__ . '/../../app/db_connect.php';
+require_once __DIR__ . '/../../app/includes/gpio_controller.php';
 
 try {
     echo json_encode(applyAutomation($db), JSON_PRETTY_PRINT);

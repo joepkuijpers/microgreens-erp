@@ -2,7 +2,7 @@
 date_default_timezone_set("Europe/Amsterdam");
 header("Content-Type: application/json");
 
-include "../db_connect.php";
+include "../../app/db_connect.php";
 
 $settings = $db->query("
     SELECT refresh_seconds

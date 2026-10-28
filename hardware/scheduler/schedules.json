@@ -1,0 +1,26 @@
+[
+    {
+        "id": "light_day_cycle",
+        "name": "Grow light dagcyclus",
+        "output": "grow_light",
+        "enabled": true,
+        "start_time": "07:00",
+        "end_time": "21:00"
+    },
+    {
+        "id": "fan_airflow_cycle",
+        "name": "Ventilator luchtcirculatie",
+        "output": "fan",
+        "enabled": true,
+        "start_time": "00:00",
+        "end_time": "23:59"
+    },
+    {
+        "id": "water_morning_cycle",
+        "name": "Waterpomp ochtend",
+        "output": "water_pump",
+        "enabled": true,
+        "start_time": "08:05",
+        "end_time": "08:07"
+    }
+]

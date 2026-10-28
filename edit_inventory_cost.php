@@ -1,5 +1,7 @@
 <?php
-include 'db_connect.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+include 'app/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $db->prepare("
@@ -41,4 +43,4 @@ Kostprijs per eenheid:<br>
 </form>
 
 <br>
-<a href="index.php">Menu</a>
+<a href="dashboard.php">Menu</a>

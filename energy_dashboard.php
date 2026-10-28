@@ -1,9 +1,11 @@
 <?php
-require_once 'includes/language.php';
-include 'includes/header.php';
-include 'includes/sidebar.php';
-include 'db_connect.php';
-include 'includes/energy_engine.php';
+require_once '../app/includes/auth.php';
+auth_require_login();
+require_once '../app/includes/language.php';
+include 'app/includes/header.php';
+include 'app/includes/sidebar.php';
+include 'app/db_connect.php';
+include 'app/includes/energy_engine.php';
 
 $totalPower = 0;
 $totalDailyKwh = 0;
@@ -76,7 +78,7 @@ $monthlyCost = $monthlyKwh * $electricityPrice;
     <th>Geschatte energiekosten per maand</th>
     <td>€ <?= htmlspecialchars(number_format($monthlyCost, 2, ',', '.')) ?></td>
 </tr>
-  
+
 </table>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'app/includes/footer.php'; ?>
