@@ -106,7 +106,7 @@ body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f
 .nav-links a{display:block;padding:12px 20px;color:#bdc3c7;text-decoration:none}
 .nav-links a:hover,.nav-links a.active{background:#34495e;color:#fff;border-left:4px solid #27ae60}
 .nav-group{border-bottom:1px solid #34495e}.nav-group summary{display:block;padding:12px 20px;color:#ecf0f1;cursor:pointer;font-weight:bold;list-style:none}.nav-group summary::-webkit-details-marker{display:none}.nav-group summary:hover{background:#34495e}.grp-n{opacity:.55;font-size:11px;font-weight:normal}.nav-sub{list-style:none;padding:0;margin:0;background:#26333f}.nav-sub a{padding:9px 20px 9px 34px;font-size:13px}
-.main-content{flex-grow:1;display:flex;flex-direction:column;overflow:hidden}
+.main-content{flex-grow:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .top-header{background:#fff;padding:15px 30px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center}
 .page-title{font-size:1.5rem;color:#2c3e50;margin:0}
 .watchdog-indicator{padding:8px 15px;border-radius:20px;font-weight:bold;text-decoration:none;margin-left:20px}

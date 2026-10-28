@@ -1,7 +1,7 @@
 <?php
+$pageTitle = 'Administratietijd & Belasting';
 require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
-$pageTitle = __('module_b30');
 
 $days = isset($_GET['days']) ? max(1,(int)$_GET['days']) : 30;
 $since = date('Y-m-d H:i:s', strtotime("-$days days"));
