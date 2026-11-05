@@ -37,7 +37,8 @@ if (file_exists(__DIR__ . '/language.php')) {
 }
 
 // DATABASE CONNECTIE
-$dbPath = __DIR__ . '/../../database/MicrogreensERP_Live.sqlite';
+require_once __DIR__ . '/config.php';
+    $dbPath = ERP_DB;
 if (!file_exists($dbPath)) { die("DB niet gevonden: " . $dbPath); }
 try {
     $db = new PDO("sqlite:" . $dbPath);
