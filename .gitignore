@@ -1,16 +1,26 @@
-# SQLite runtime-state — nooit committen
+﻿# databank - alleen de DB-bestanden buiten git, migraties blijven gewoon in git
+database/*.sqlite
+database/*.sqlite-wal
+database/*.sqlite-shm
+database/*.bak
+backups/*.sqlite
 *.sqlite
-*.sqlite-shm
-*.sqlite-wal
-*.sqlite-journal
-*.backup
+
+# tijdelijke diagnose- en testscripts
+_diag*.php
+_write.php
+info.php
+dbcheck.php
+dbtest.php
+_db_test.php
+_migrate.php
+bekijk_*.php
+fix_tray.php
+test_cancel.php
+cancel_check.php
+schema.txt
+schema_real.txt
+Readme_ERP.txt
+Array
 *.log
-
-# Uitgefaseerd werk / backups — niet in Git
-archive/
-*.bak
-*.bak[0-9]
-
-# B23 uploads: runtime-bestanden negeren, .htaccess (veiligheid) behouden
-app/uploads/*
-!app/uploads/.htaccess
+*.backup

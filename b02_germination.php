@@ -23,7 +23,7 @@ $trayStatusLabels = [
     'HARVESTED'   => __('tray_harvested'),
 ];
 function trayStatusLabel($s, $map) { return $map[$s] ?? $s; }
-// ── Annuleren ──
+// â”€â”€ Annuleren â”€â”€
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
     $cancelId = (int)$_POST["cancel_id"];
     try {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
         if ($row["status"] === "GEANNULEERD") { throw new RuntimeException(__('err_germ_already_cancelled')); }
         $harv = $db->prepare("SELECT COUNT(*) FROM harvests WHERE germination_record_id = :id");
         $harv->execute([':id' => $cancelId]);
-        if ((int)$harv->fetchColumn() > 0) { throw new RuntimeException(__('err_germ_has_harvest')); }
+        if ((int)$harv->fetchColumn() > 0) { throw new RuntimeException("Kan niet annuleren: deze kiemactie heeft al een (concept-)oogst. Verwijder die oogst-regel in B07 eerst, of voer de batch op in plaats van te annuleren."); }
         $db->prepare("UPDATE germination_records SET status = 'GEANNULEERD', notes = COALESCE(notes,'') || ' | GEANNULEERD ' || datetime('now','localtime') WHERE id = :id")->execute([':id' => $cancelId]);
         if (!empty($row["tray_id"])) { $db->prepare("UPDATE trays SET status = 'EMPTY' WHERE id = :id")->execute([':id' => $row["tray_id"]]); }
         if (!empty($row["production_batch_id"])) { $db->prepare("UPDATE production_batches SET status = 'SOWN' WHERE id = :id AND status = 'GERMINATING'")->execute([':id' => $row["production_batch_id"]]); }
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
     }
 }
 
-// ── Status opvoeren (kiemfase voltooid / klaar voor oogst) ──
+// â”€â”€ Status opvoeren (kiemfase voltooid / klaar voor oogst) â”€â”€
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["advance_id"])) {
     $advId = (int)$_POST["advance_id"];
     $advTo = $_POST["advance_to"] ?? '';
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["advance_id"])) {
     }
 }
 
-// ── Nieuwe kiemactie ──
+// â”€â”€ Nieuwe kiemactie â”€â”€
 if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !isset($_POST["advance_id"])) {
     $seedInvId = 0; // afgeleid uit batch_materials
     $trayId    = (int)($_POST["tray_id"] ?? 0);
@@ -166,7 +166,7 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div style="margin-bottom:15px;">
                 <label style="display:block; font-weight:bold; margin-bottom:5px;"><?php echo htmlspecialchars(__('b02_seed_label')); ?></label>
-                <div style="padding:8px 10px;margin-bottom:6px;background:#eef6ff;border:1px solid #cfe3ff;border-radius:4px;color:#345;font-size:13px;">Zaad wordt automatisch uit de gekozen batch gehaald — hier niets kiezen.</div>
+                <div style="padding:8px 10px;margin-bottom:6px;background:#eef6ff;border:1px solid #cfe3ff;border-radius:4px;color:#345;font-size:13px;"><?php echo htmlspecialchars(__('b02_seed_hint')); ?></div>
                 <select name="seed_inventory_id" disabled style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px; opacity:.55;">
                     <option value=""><?php echo htmlspecialchars(__('b02_seed_placeholder')); ?></option>
                     <?php foreach($seedInventory as $s): ?>
@@ -235,7 +235,7 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
                             <button type="submit" style="background:#f57c00;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;"><?php echo htmlspecialchars(__('b02_advance_ready')); ?></button>
                         </form>
                         <?php else: ?>
-                        <span style="color:#999;">—</span>
+                        <span style="color:#999;">â€”</span>
                         <?php endif; ?>
                     </td>
                 </tr>

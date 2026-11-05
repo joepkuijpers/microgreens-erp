@@ -615,6 +615,7 @@ return array (
   'b02_cancel' => 'Cancel',
   'b02_cancel_confirm' => 'Cancel germination? The tray will be emptied.',
   'b02_tray_overview' => 'Tray overview',
+  'b02_seed_hint' => 'Taken automatically from the chosen batch - nothing to select here',
   'err_choose_batch' => 'Choose an open production batch.',
   'err_choose_tray' => 'Choose an empty tray.',
   'err_tray_not_found' => 'Tray not found.',
