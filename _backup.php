@@ -1,5 +1,5 @@
 ﻿<?php
-$werk   = "C:/Users/joepk/Downloads/microgreens-erp/database/MicrogreensERP_Development.sqlite";
+$werk   = "C:/Users/joepk/Downloads/microgreens-erp/database/MicrogreensERP_Live.sqlite";
 $lokaal = "C:/Users/joepk/Downloads/microgreens-erp/database/ERP-backup";
 $kdrive = "C:/Users/joepk/kDrive Joep Kuijpers/GoeiGroen/ERP_backup";
 @mkdir($lokaal, 0777, true);

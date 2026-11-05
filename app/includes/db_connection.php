@@ -4,7 +4,7 @@
 
 declare(strict_types=1);
 
-const ERP_DB_PATH = 'C:/Users/joepk/Downloads/microgreens-erp/database/MicrogreensERP_Development.sqlite';
+const ERP_DB_PATH = 'C:/Users/joepk/Downloads/microgreens-erp/database/MicrogreensERP_Live.sqlite';
 
 function db(): PDO
 {
