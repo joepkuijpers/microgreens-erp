@@ -1243,6 +1243,7 @@ return array (
   'b29_msg_release' => 'Package %s released.',
   'b29_msg_reject' => 'Package %s rejected and registered as waste.',
   'module_b29' => 'Quarantine',
+  'module_b30' => 'Project status',
   'B30 · Projectstatus' => 'B30 · Project Status',
 'Laatst bijgewerkt'   => 'Last updated',
   'b03_title' => 'Climate monitoring (B03/B06)',
