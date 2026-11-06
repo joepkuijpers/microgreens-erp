@@ -36,7 +36,7 @@ echo "<li><a href='b14_water_irrigation.php'>Water &amp; Irrigatie</a></li>";
 }
 
 // 4. Bouw het pad naar de module (gebruik DIRECTORY_SEPARATOR voor cross-platform)
-$filePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module . '.php';
+$filePath = __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module . '.php';
 
 // 5. Laad de module als deze bestaat
 if (file_exists($filePath)) {

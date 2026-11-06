@@ -1243,6 +1243,8 @@ return array (
   'b29_msg_release' => 'Bakje %s vrijgegeven.',
   'b29_msg_reject' => 'Bakje %s afgekeurd en als afval geregistreerd.',
   'module_b29' => 'Quarantaine',
+  'B30 · Projectstatus' => 'B30 · Projectstatus',
+'Laatst bijgewerkt'   => 'Laatst bijgewerkt',
   'b03_title' => 'Klimaatmonitoring (B03/B06)',
   'b03_new_measurement' => 'Nieuwe meting',
   'b03_rack' => 'Rack',
