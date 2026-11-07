@@ -25,3 +25,5 @@ Array
 *.log
 *.backup
 *.bak
+
+database/ERP-backup/
