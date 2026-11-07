@@ -16,7 +16,6 @@ if ($zip->open($zipTijdelijk, ZipArchive::CREATE) === true) {
     $zip->addFile($snap, "snap_$st.sqlite");
     $zip->close();
     copy($zipTijdelijk, "$kdrive/$zipNaam");
-    unlink($zipTijdelijk);
-    echo "OK: $zipNaam -> kDrive\n";
+    echo "OK: $zipNaam -> kDrive (en lokaal bewaard)\n";
 }
 unlink($snap);
