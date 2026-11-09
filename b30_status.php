@@ -7,7 +7,25 @@ $q = $db->query("
              WHERE g.production_batch_id = pb.id) AS kiem,
            (SELECT COUNT(*) FROM germination_records g
              JOIN harvests h ON h.germination_record_id = g.id
-             WHERE g.production_batch_id = pb.id) AS oogst
+             WHERE g.production_batch_id = pb.id) AS oogst,
+           (SELECT COUNT(*) FROM freeze_dry_processes fdp
+             JOIN production_outputs po ON po.id = fdp.production_output_id
+             WHERE po.batch_id = pb.id) AS vries,
+           (SELECT COUNT(*) FROM packaging_units pu
+             JOIN finished_inventory fi ON fi.id = pu.finished_inventory_id
+             JOIN harvests h ON h.id = fi.harvest_id
+             JOIN germination_records g ON g.id = h.germination_record_id
+             WHERE g.production_batch_id = pb.id) AS verpak,
+           (SELECT COUNT(*) FROM sales s WHERE s.batch_id = pb.id) AS verkoop,
+           (SELECT MIN(fdp.started_at) FROM freeze_dry_processes fdp
+             JOIN production_outputs po ON po.id = fdp.production_output_id
+             WHERE po.batch_id = pb.id) AS vries_datum,
+           (SELECT MIN(pu.packaging_date) FROM packaging_units pu
+             JOIN finished_inventory fi ON fi.id = pu.finished_inventory_id
+             JOIN harvests h ON h.id = fi.harvest_id
+             JOIN germination_records g ON g.id = h.germination_record_id
+             WHERE g.production_batch_id = pb.id) AS verpak_datum,
+           (SELECT MIN(s.sale_date) FROM sales s WHERE s.batch_id = pb.id) AS verkoop_datum
     FROM production_batches pb
     ORDER BY pb.created_at DESC
 ");
@@ -18,9 +36,9 @@ $fasen = [
     ['naam' => 'b30_phase_2', 'trace' => true],
     ['naam' => 'b30_phase_3', 'trace' => false],
     ['naam' => 'b30_phase_4', 'trace' => true],
-    ['naam' => 'b30_phase_5', 'trace' => false],
-    ['naam' => 'b30_phase_6', 'trace' => false],
-    ['naam' => 'b30_phase_7', 'trace' => false],
+    ['naam' => 'b30_phase_5', 'trace' => true],
+    ['naam' => 'b30_phase_6', 'trace' => true],
+    ['naam' => 'b30_phase_7', 'trace' => true],
 ];
 $kleuren = ['#e53e3e','#ed8936','#ecc94b','#48bb78','#4299e1','#9f7aea','#a0aec0'];
 
@@ -47,12 +65,21 @@ function kortedatum(?string $dt): string {
         <p><?= __('b30_no_batches') ?></p>
     <?php else: foreach ($batches as $b):
         $bereikt = 1;
-        if ($b['kiem']  > 0) $bereikt = 2;
-        if ($b['oogst'] > 0) $bereikt = 4;
+        if ($b['kiem']   > 0) $bereikt = max($bereikt, 2);
+        if ($b['oogst']  > 0) $bereikt = max($bereikt, 4);
+        if ($b['vries']  > 0) $bereikt = max($bereikt, 5);
+        if ($b['verpak'] > 0) $bereikt = max($bereikt, 6);
+        if ($b['verkoop']> 0) $bereikt = max($bereikt, 7);
         $pct = (int) round($bereikt / 7 * 100);
 
         $keur = $keur_map[$b['status']] ?? null;
-        $fase_datum = [1 => kortedatum($b['started_at']), 4 => kortedatum($b['completed_at'])];
+        $fase_datum = [
+            1 => kortedatum($b['started_at']),
+            4 => kortedatum($b['completed_at']),
+            5 => kortedatum($b['vries_datum']),
+            6 => kortedatum($b['verpak_datum']),
+            7 => kortedatum($b['verkoop_datum']),
+        ];
     ?>
         <div style="margin-bottom:1.2rem;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
