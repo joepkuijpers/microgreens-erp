@@ -17,7 +17,6 @@ if (session_status() === PHP_SESSION_NONE) {
 // TAAL WISSEL LOGICA (moet allereerst, vóór elke output)
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['nl', 'en', 'de', 'fr', 'es', 'it'], true)) {
     $_SESSION['erp_language'] = $_GET['lang'];
-    // behoud alle parameters BEHALVE lang (dus mode=planned blijft), en lang weg (geen lus)
     $q = $_GET;
     unset($q['lang']);
     $qs = http_build_query($q);
@@ -54,7 +53,7 @@ try {
     $stmt->execute();
     $alert = $stmt->fetch();
     if ($alert) {
-        $wdStatus = $alert['status'];
+        $wdStatus = strtolower($alert['severity']);
         $wdMsg = htmlspecialchars($alert['message']);
     }
 } catch (Exception $e) {}
@@ -62,7 +61,7 @@ try {
 // MODULES
 $wf_steps = ['b01_batch.php'=>1,'b02_germination.php'=>2,'b07_harvest.php'=>3,'b09_packaging.php'=>4,'b09_sale.php'=>5,'b21_logistics.php'=>6,'b25_customer_feedback.php'=>7];
 $modules = [
-['id'=>'DASH','file'=>'index.php','key'=>'dashboard_home'],
+['id'=>'DASH','file'=>'dashboard.php','key'=>'dashboard_home'],
 ['id'=>'B01','file'=>'b01_batch.php','key'=>'module_b01'],
 ['id'=>'B02','file'=>'b02_germination.php','key'=>'module_b02'],
 ['id'=>'B03','file'=>'b03_growth_chamber.php','key'=>'module_b03'],
@@ -94,7 +93,7 @@ $modules = [
 ['id'=>'B30','file'=>'b30_status.php','key'=>'module_b30'],
 ['id'=>'B31','file'=>'b31_archive.php','key'=>'module_b31'],
 ];
-$group_map=['index.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch','b30_status.php'=>'watch','b31_archive.php'=>'bedrijf',];
+$group_map=['dashboard.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch','b30_status.php'=>'watch','b31_archive.php'=>'bedrijf',];
 $group_meta=['prod'=>['📦','Productie / Production'],'teelt'=>['🌱','Teelt & Klimaat / Cultivation'],'kwal'=>['🧼','Kwaliteit & Hygiene / Quality'],'verkoop'=>['💰','Verkoop & Financien / Sales'],'log'=>['🚚','Logistiek & Planning / Logistics'],'bedrijf'=>['🏢','Bedrijf & Systeem / System'],'watch'=>['🔔','Monitoring / Watchdog']];
 $pageTitle = $pageTitle ?? 'ERP';
 ?>

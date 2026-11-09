@@ -5,6 +5,7 @@ database/*.sqlite-shm
 database/*.bak
 backups/*.sqlite
 *.sqlite
+backup_pass.txt
 
 # tijdelijke diagnose- en testscripts
 _diag*.php
@@ -27,3 +28,7 @@ Array
 *.bak
 
 database/ERP-backup/
+
+*.gpg
+tmp_*.php
+backup_pass.txt
