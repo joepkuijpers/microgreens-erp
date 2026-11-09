@@ -18,6 +18,7 @@ _migrate.php
 bekijk_*.php
 fix_tray.php
 test_cancel.php
+test_*.php
 cancel_check.php
 schema.txt
 schema_real.txt
