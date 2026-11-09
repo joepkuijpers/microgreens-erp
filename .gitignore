@@ -19,11 +19,9 @@ bekijk_*.php
 fix_tray.php
 test_cancel.php
 test_*.php
+!test_b31.php
 cancel_check.php
-schema.txt
 schema_real.txt
-Readme_ERP.txt
-Array
 *.log
 *.backup
 *.bak
@@ -32,4 +30,3 @@ database/ERP-backup/
 
 *.gpg
 tmp_*.php
-backup_pass.txt
