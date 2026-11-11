@@ -30,3 +30,5 @@ database/ERP-backup/
 
 *.gpg
 tmp_*.php
+app/languages/tmp_dubs.php
+app/languages/tmp_missing.php
