@@ -1295,4 +1295,5 @@ return array (
   'pending' => 'Pending',
   'CLEANING' => 'Cleaning',
   'inactive' => 'Inactive',
+  'b30_keur_harvested' => 'Harvested',
 );

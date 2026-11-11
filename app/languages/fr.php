@@ -1349,4 +1349,5 @@ return [
   'inactive' => 'Inactif',
   'pending' => 'En attente',
   'planned' => 'Planifié',
+  'b30_keur_harvested' => 'Récolté',
 ];

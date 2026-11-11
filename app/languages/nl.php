@@ -1296,4 +1296,5 @@ return array (
   'pending' => 'Nog open',
   'CLEANING' => 'Reiniging',
   'inactive' => 'Inactief',
+  'b30_keur_harvested' => 'Geoogst',
 );

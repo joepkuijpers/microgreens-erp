@@ -1298,4 +1298,5 @@ return [
   'pending' => 'Pendiente',
   'CLEANING' => 'Limpieza',
   'inactive' => 'Inactivo',
+  'b30_keur_harvested' => 'Cosechado',
 ];
