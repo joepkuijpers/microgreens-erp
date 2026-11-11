@@ -94,7 +94,7 @@ $modules = [
 ['id'=>'B31','file'=>'b31_archive.php','key'=>'module_b31'],
 ];
 $group_map=['dashboard.php'=>'home','b01_batch.php'=>'prod','b02_germination.php'=>'prod','b07_harvest.php'=>'prod','b08_freeze_dry.php'=>'prod','b09_packaging.php'=>'prod','b20_waste.php'=>'prod','b29_quarantine.php'=>'prod','b03_growth_chamber.php'=>'teelt','b06_climate_monitoring.php'=>'teelt','b04_lighting.php'=>'teelt','b10_sensor_sync.php'=>'teelt','b14_water_irrigation.php'=>'teelt','b15_substrate.php'=>'teelt','b12_cleaning.php'=>'kwal','b22_maintenance.php'=>'kwal','b23_sops.php'=>'kwal','b09_sale.php'=>'verkoop','b19_financials.php'=>'verkoop','b24_sales_analytics.php'=>'verkoop','b25_customer_feedback.php'=>'verkoop','b21_logistics.php'=>'log','b16_task_scheduler.php'=>'log','b17_staff.php'=>'log','b13_energy.php'=>'bedrijf','b18_suppliers.php'=>'bedrijf','b26_system_settings.php'=>'bedrijf','b27_api_integrations.php'=>'bedrijf','b28_watchdog.php'=>'watch','b30_status.php'=>'watch','b31_archive.php'=>'bedrijf',];
-$group_meta=['prod'=>['📦','Productie / Production'],'teelt'=>['🌱','Teelt & Klimaat / Cultivation'],'kwal'=>['🧼','Kwaliteit & Hygiene / Quality'],'verkoop'=>['💰','Verkoop & Financien / Sales'],'log'=>['🚚','Logistiek & Planning / Logistics'],'bedrijf'=>['🏢','Bedrijf & Systeem / System'],'watch'=>['🔔','Monitoring / Watchdog']];
+$group_meta=['prod'=>['📦','grp_prod'],'teelt'=>['🌱','grp_teelt'],'kwal'=>['🧼','grp_kwal'],'verkoop'=>['💰','grp_verkoop'],'log'=>['🚚','grp_log'],'bedrijf'=>['🏢','grp_bedrijf'],'watch'=>['🔔','grp_watch']];
 $pageTitle = $pageTitle ?? 'ERP';
 ?>
 <!DOCTYPE html><html lang="<?php echo htmlspecialchars($languageCode); ?>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -160,7 +160,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 <li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?></a></li>
 <?php endforeach; endif; ?>
 <?php foreach($group_meta as $gid=>$gm): if(empty($byGroup[$gid])) continue; $open=in_array($cur,array_column($byGroup[$gid],"file"))?"open":""; ?>
-<li class="nav-group"><details <?php echo $open; ?>><summary><span><?php echo $gm[0]; ?></span> <?php echo $gm[1]; ?> <span class="grp-n">(<?php echo count($byGroup[$gid]); ?>)</span></summary><ul class="nav-sub">
+<li class="nav-group"><details <?php echo $open; ?>><summary><span><?php echo $gm[0]; ?></span> <?php echo __($gm[1]); ?> <span class="grp-n">(<?php echo count($byGroup[$gid]); ?>)</span></summary><ul class="nav-sub">
 <?php foreach($byGroup[$gid] as $m): ?>
 <li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?><?php if(isset($wf_steps[$m["file"]])) echo ' <span style="opacity:.6;font-size:11px">'.(int)$wf_steps[$m["file"]].'/7</span>'; ?></a></li>
 <?php endforeach; ?>

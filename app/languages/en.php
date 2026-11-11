@@ -1287,4 +1287,12 @@ return array (
   'b03_none' => 'none',
   'b03_ambiguous' => 'Multiple batches possible for this rack/time',
   'module_index' => 'Dashboard / Overview',
+  'grp_prod' => 'Production',
+  'grp_teelt' => 'Cultivation & Climate',
+  'grp_kwal' => 'Quality & Hygiene',
+  'grp_verkoop' => 'Sales & Finance',
+  'grp_log' => 'Logistics & Planning',
+  'grp_bedrijf' => 'Company & System',
+  'grp_watch' => 'Monitoring',
+  'dashboard_subtitle' => 'Overview of all ERP modules — click to open.',
 );
