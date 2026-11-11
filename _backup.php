@@ -1,7 +1,9 @@
-﻿<?php
-$werk   = "C:/Users/joepk/Downloads/microgreens-erp/database/MicrogreensERP_Live.sqlite";
-$lokaal = "C:/Users/joepk/Downloads/microgreens-erp/database/ERP-backup";
-$kdrive = "C:/Users/joepk/kDrive Joep Kuijpers/GoeiGroen/ERP_backup";
+<?php
+require_once __DIR__ . '/app/includes/config.php';
+
+$werk   = ERP_DB;                                  // uit config.php
+$lokaal = ERP_ROOT . '/database/ERP-backup';       // uit config.php
+$kdrive = "C:/Users/joepk/kDrive Joep Kuijpers/GoeiGroen/ERP_backup";  // blijft
 $gpg    = "C:\\Program Files\\GnuPG\\bin\\gpg.exe";
 $bewaarL = 2;   // lokaal bewaren: laatste 48 = 24u bij 30-min ritme
 $passFile = __DIR__ . "/backup_pass.txt";
