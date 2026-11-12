@@ -1350,4 +1350,5 @@ return [
   'pending' => 'En attente',
   'planned' => 'Planifié',
   'b30_keur_harvested' => 'Récolté',
-];
+'b30_groei_rek' => 'mesure du rack · valable pour tous les lots de ce rack, pas un constat propre au lot',
+  ];

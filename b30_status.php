@@ -25,8 +25,18 @@ $q = $db->query("
              JOIN harvests h ON h.id = fi.harvest_id
              JOIN germination_records g ON g.id = h.germination_record_id
              WHERE g.production_batch_id = pb.id) AS verpak_datum,
-           (SELECT MIN(s.sale_date) FROM sales s WHERE s.batch_id = pb.id) AS verkoop_datum
-    FROM production_batches pb
+           (SELECT MIN(s.sale_date) FROM sales s WHERE s.batch_id = pb.id) AS verkoop_datum,
+            (SELECT COUNT(*) FROM sensor_log sl
+             JOIN spatial_allocations sa
+               ON sl.rack_id = sa.rack_id
+              AND sl.timestamp >= sa.created_at
+             WHERE sa.batch_id = pb.id) AS groei,
+           (SELECT MIN(sl.timestamp) FROM sensor_log sl
+             JOIN spatial_allocations sa
+               ON sl.rack_id = sa.rack_id
+              AND sl.timestamp >= sa.created_at
+             WHERE sa.batch_id = pb.id) AS groei_datum    
+           FROM production_batches pb
     ORDER BY pb.created_at DESC
 ");
 $batches = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -34,7 +44,7 @@ $batches = $q->fetchAll(PDO::FETCH_ASSOC);
 $fasen = [
     ['naam' => 'b30_phase_1', 'trace' => true],
     ['naam' => 'b30_phase_2', 'trace' => true],
-    ['naam' => 'b30_phase_3', 'trace' => false],
+    ['naam' => 'b30_phase_3', 'trace' => true],
     ['naam' => 'b30_phase_4', 'trace' => true],
     ['naam' => 'b30_phase_5', 'trace' => true],
     ['naam' => 'b30_phase_6', 'trace' => true],
@@ -66,6 +76,7 @@ function kortedatum(?string $dt): string {
     <?php else: foreach ($batches as $b):
         $bereikt = 1;
         if ($b['kiem']   > 0) $bereikt = max($bereikt, 2);
+        if ($b['groei']  > 0) $bereikt = max($bereikt, 3);
         if ($b['oogst']  > 0) $bereikt = max($bereikt, 4);
         if ($b['vries']  > 0) $bereikt = max($bereikt, 5);
         if ($b['verpak'] > 0) $bereikt = max($bereikt, 6);
@@ -75,6 +86,7 @@ function kortedatum(?string $dt): string {
         $keur = $keur_map[$b['status']] ?? null;
         $fase_datum = [
             1 => kortedatum($b['started_at']),
+            3 => kortedatum($b['groei_datum']),
             4 => kortedatum($b['completed_at']),
             5 => kortedatum($b['vries_datum']),
             6 => kortedatum($b['verpak_datum']),
@@ -101,7 +113,12 @@ function kortedatum(?string $dt): string {
                     $bereiktNu = ($i + 1) <= $bereikt;
                     $achtergrond = !$f['trace'] ? '#e2e8f0'
                                   : ($bereiktNu ? $kleuren[$i] : '#f1f5f9');
-                    $titel = __($f['naam']) . ($f['trace'] ? '' : ' · ' . __('b30_not_linked'));
+                    $titel = __($f['naam']);
+                    if (!$f['trace']) {
+                        $titel .= ' · ' . __('b30_not_linked');
+                    } elseif ($i + 1 === 3) {
+                        $titel .= ' · ' . __('b30_groei_rek');
+                    }
                     $datum = $bereiktNu ? ($fase_datum[$i + 1] ?? '') : '';
                 ?>
                     <div title="<?= htmlspecialchars($titel) ?>"

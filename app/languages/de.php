@@ -1296,4 +1296,5 @@ return [
   'CLEANING' => 'Reinigung',
   'inactive' => 'Inaktiv',
   'b30_keur_harvested' => 'Geerntet',
-];
+'b30_groei_rek' => 'Regal-Messung · gilt für alle Chargen in diesem Regal, keine einzelne Chargen-Feststellung',
+  ];

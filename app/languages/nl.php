@@ -1297,4 +1297,5 @@ return array (
   'CLEANING' => 'Reiniging',
   'inactive' => 'Inactief',
   'b30_keur_harvested' => 'Geoogst',
-);
+'b30_groei_rek' => 'rek-meting · geldt voor alle batches in dit rek, geen individuele batch-bevinding',
+  );

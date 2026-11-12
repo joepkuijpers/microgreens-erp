@@ -1300,4 +1300,5 @@ return [
   'CLEANING' => 'Pulizia',
   'inactive' => 'Inattivo',
   'b30_keur_harvested' => 'Raccolto',
-];
+'b30_groei_rek' => 'misurazione del rack · vale per tutti i lotti in questo rack, non un riscontro del singolo lotto',
+  ];

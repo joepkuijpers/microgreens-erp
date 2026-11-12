@@ -1296,4 +1296,5 @@ return array (
   'CLEANING' => 'Cleaning',
   'inactive' => 'Inactive',
   'b30_keur_harvested' => 'Harvested',
-);
+'b30_groei_rek' => 'rack measurement · applies to all batches in this rack, not an individual batch finding',
+  );

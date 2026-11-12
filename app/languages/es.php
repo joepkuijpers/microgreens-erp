@@ -1299,4 +1299,5 @@ return [
   'CLEANING' => 'Limpieza',
   'inactive' => 'Inactivo',
   'b30_keur_harvested' => 'Cosechado',
-];
+'b30_groei_rek' => 'medición de la estantería · se aplica a todos los lotes de esta estantería, no un hallazgo individual del lote',
+  ];
