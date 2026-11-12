@@ -6,8 +6,7 @@ $lokaal = ERP_ROOT . '/database/ERP-backup';       // uit config.php
 $kdrive = ERP_KDRIVE;                              // uit config.php (verhuis-klaar)
 $gpg    = "C:\\Program Files\\GnuPG\\bin\\gpg.exe";
 $bewaarL = 48;   // lokaal bewaren: laatste 48 = 24u bij 30-min ritme
-$passFile = __DIR__ . "/backup_pass.txt";
-$pass = is_file($passFile) ? trim(file_get_contents($passFile)) : "";
+$pass = getenv('ERP_BACKUP_PASS') ?: "";
 if (!$pass) { echo "ERP_BACKUP_PASS ontbreekt\n"; exit(1); }
 
 @mkdir($lokaal, 0777, true);
