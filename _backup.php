@@ -3,9 +3,9 @@ require_once __DIR__ . '/app/includes/config.php';
 
 $werk   = ERP_DB;                                  // uit config.php
 $lokaal = ERP_ROOT . '/database/ERP-backup';       // uit config.php
-$kdrive = "C:/Users/joepk/kDrive Joep Kuijpers/GoeiGroen/ERP_backup";  // blijft
+$kdrive = ERP_KDRIVE;                              // uit config.php (verhuis-klaar)
 $gpg    = "C:\\Program Files\\GnuPG\\bin\\gpg.exe";
-$bewaarL = 2;   // lokaal bewaren: laatste 48 = 24u bij 30-min ritme
+$bewaarL = 48;   // lokaal bewaren: laatste 48 = 24u bij 30-min ritme
 $passFile = __DIR__ . "/backup_pass.txt";
 $pass = is_file($passFile) ? trim(file_get_contents($passFile)) : "";
 if (!$pass) { echo "ERP_BACKUP_PASS ontbreekt\n"; exit(1); }
