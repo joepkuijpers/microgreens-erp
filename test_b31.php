@@ -169,7 +169,7 @@ try {
     logINFO("Nieuwste backup: " . basename($nieuwste));
 
     // Decrypteren naar tijdelijk bestand
-    $passFile = __DIR__ . '/backup_pass.txt';
+   $pass = getenv('ERP_BACKUP_PASS') ?: "";
     $pass = trim(file_get_contents($passFile));
     $gpg = "C:\\Program Files\\GnuPG\\bin\\gpg.exe";
     $tempDb = sys_get_temp_dir() . '/b31_test_restore.sqlite';
