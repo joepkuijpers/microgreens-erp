@@ -1,10 +1,18 @@
 <?php
 /**
- * Database path - Universal (Windows & Linux)
- * Windows development -> Development DB
- * Linux production (Raspberry Pi) -> Live DB
+ * Database path - OS-onafhankelijk.
+ * Productie vs testbank wordt EXPLICIET gekozen via de
+ * omgevingsvariabele ERP_ENV, niet via het besturingssysteem.
+ *
+ *   ERP_ENV niet gezet of "production" -> Live (productie, de veilige default)
+ *   ERP_ENV = "development"            -> Development (testbank)
+ *
+ * Pad is relatief aan deze map, dus identiek op Windows en Linux.
  */
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    return 'C:/Users/joepk/Downloads/microgreens-erp/database/MicrogreensERP_Development.sqlite';
-}
-return '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
+$env = strtolower((string)(getenv('ERP_ENV') ?: 'production'));
+
+$db = ($env === 'development')
+    ? 'MicrogreensERP_Development.sqlite'
+    : 'MicrogreensERP_Live.sqlite';
+
+return __DIR__ . '/../database/' . $db;

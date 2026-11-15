@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'test') {
         $ep = preg_replace('/[^a-z_]/', '', strtolower($_POST['endpoint'] ?? ''));
         if ($ep !== '' && in_array($ep, $endpoints, true)) {
-            $url = 'https://127.0.0.1/api/' . $ep . '.php';
+            $url = 'http://localhost/microgreens/api/' . $ep . '.php';
             $ctx = stream_context_create(['ssl' => ['verify_peer' => false, 'verify_peer_name' => false], 'http' => ['timeout' => 4]]);
             $body = @file_get_contents($url, false, $ctx);
             $code = 0;
@@ -87,6 +87,12 @@ function b27SyncBadge($s) {
     <div style="<?php echo $card; ?>">
         <h2 style="margin:0 0 12px"><?php echo htmlspecialchars(__('b27_endpoints')); ?> (<?php echo count($endpoints); ?>)</h2>
         <p style="color:#6b7280;margin:0 0 12px"><?php echo htmlspecialchars(__('b27_endpoint_hint')); ?></p>
+       <?php if ($testResult !== null): ?>
+            <div style="margin-top:12px;padding:12px;border-radius:10px;background:<?php echo $testResult['ok'] ? '#f0fdf4' : '#fef2f2'; ?>;border:1px solid <?php echo $testResult['ok'] ? '#bbf7d0' : '#fecaca'; ?>">
+                <strong><?php echo htmlspecialchars(__('b27_test_result')); ?>:</strong> /api/<?php echo htmlspecialchars($testResult['endpoint']); ?>.php → HTTP <?php echo (int)$testResult['code']; ?>
+                <?php if ($testResult['preview'] !== ''): ?><pre style="margin:8px 0 0;font-size:12px;white-space:pre-wrap;word-break:break-all;color:#374151;max-height:160px;overflow:auto"><?php echo htmlspecialchars($testResult['preview']); ?></pre><?php endif; ?>
+            </div>
+        <?php endif; ?>
         <table style="width:100%;border-collapse:collapse">
             <thead><tr style="text-align:left;color:#6b7280"><th style="padding:8px">Endpoint</th><th style="padding:8px"><?php echo htmlspecialchars(__('b27_present')); ?></th><th style="padding:8px"></th></tr></thead>
             <tbody>
@@ -101,12 +107,6 @@ function b27SyncBadge($s) {
             <?php endforeach; ?>
             </tbody>
         </table>
-        <?php if ($testResult !== null): ?>
-            <div style="margin-top:12px;padding:12px;border-radius:10px;background:<?php echo $testResult['ok'] ? '#f0fdf4' : '#fef2f2'; ?>;border:1px solid <?php echo $testResult['ok'] ? '#bbf7d0' : '#fecaca'; ?>">
-                <strong><?php echo htmlspecialchars(__('b27_test_result')); ?>:</strong> /api/<?php echo htmlspecialchars($testResult['endpoint']); ?>.php → HTTP <?php echo (int)$testResult['code']; ?>
-                <?php if ($testResult['preview'] !== ''): ?><pre style="margin:8px 0 0;font-size:12px;white-space:pre-wrap;word-break:break-all;color:#374151;max-height:160px;overflow:auto"><?php echo htmlspecialchars($testResult['preview']); ?></pre><?php endif; ?>
-            </div>
-        <?php endif; ?>
     </div>
 
     <div style="<?php echo $card; ?>">

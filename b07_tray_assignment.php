@@ -67,6 +67,6 @@ $occupiedMap = array_column($occupiedPositions, "batch_code", "rack_position");
 </div>
 <div class="next-step-bar">
     <div><a href="index.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
-    <div><a href="b28_watchdog_alerts.php">Watchdog →</a></div>
+    <div><a href="b28_watchdog.php">Watchdog →</a></div>
 </div>
 <?php require_once __DIR__ . '/app/includes/footer.php'; ?>

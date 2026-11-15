@@ -2,11 +2,11 @@
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../app/includes/watchdog_engine.php';
+require_once __DIR__ . '/../app/includes/watchdog_engine.php';
 
 try {
     echo json_encode(
-        watchdogCheck(180),
+        watchdogCheck(360),
         JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
     );
 } catch (Throwable $e) {

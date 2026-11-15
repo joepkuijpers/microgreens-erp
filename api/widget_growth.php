@@ -1,56 +1,51 @@
 <?php
 header("Content-Type: application/json");
-require_once __DIR__ . "/../../app/includes/db_connection.php";
+require_once __DIR__ . "/../app/db_connect.php";
 
 try {
-    $db = getDbConnection();
-    // Haal alle gestarte batches op
-    $sql = "SELECT batch_code, started_at, crop_type FROM production_batches 
-            WHERE started_at IS NOT NULL 
-            ORDER BY started_at DESC";
-    $stmt = $db->query($sql);
-    $batches = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // 1. Huidige voorraad per gewas (zaadlot.variety = gewasnaam)
+    $stmt = $db->query("SELECT variety, current_stock_grams FROM seed_lots");
+    $stockMap = [];
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $item) {
+        $crop = $item["variety"] ?? "Onbekend";
+        $stockMap[$crop] = ($stockMap[$crop] ?? 0) + (float)$item["current_stock_grams"];
+    }
+
+    // 2. Actieve batches per gewas, behoefte 10g per batch (demo)
+    $stmt = $db->query("SELECT crop_type FROM production_batches WHERE started_at IS NOT NULL");
+    $demandMap = [];
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $b) {
+        $crop = $b["crop_type"] ?? "Onbekend";
+        $demandMap[$crop] = ($demandMap[$crop] ?? 0) + 10;
+    }
+
+    // 3. Vergelijk, match op kleine letters
+    $stockByLower = array_change_key_case($stockMap, CASE_LOWER);
+    $demandByLower = array_change_key_case($demandMap, CASE_LOWER);
+    $allKeys = array_unique(array_merge(array_keys($stockByLower), array_keys($demandByLower)));
 
     $result = [];
-    $now = time();
+    foreach ($allKeys as $key) {
+        $stock = $stockByLower[$key] ?? 0;
+        $demand = $demandByLower[$key] ?? 0;
+        $balance = $stock - $demand;
 
-    foreach ($batches as $b) {
-        $start = strtotime($b["started_at"]);
-        $days = floor(($now - $start) / 86400);
-        
-        $phase = "Onbekend";
-        $next_action = "";
-        $days_left = 0;
-
-        // Faselogica (Standaard: 3d Blackout, 7d Growth, dan Oogst)
-        if ($days < 3) {
-            $phase = "Blackout";
-            $days_left = 3 - $days;
-            $next_action = "Licht aan";
-        } elseif ($days < 10) {
-            $phase = "Groei";
-            $days_left = 10 - $days;
-            $next_action = "Oogsten";
-        } else {
-            $phase = "Oogst Gereed";
-            $days_left = 0;
-            $next_action = "Nu oogsten";
-        }
+        $status = "OK";
+        if ($balance < 0) $status = "TE KOORT";
+        elseif ($balance < 50) $status = "LAAG";
 
         $result[] = [
-            "batch_code" => $b["batch_code"],
-            "crop" => $b["crop_type"] ?? "Niet gespecificeerd",
-            "days_running" => $days,
-            "phase" => $phase,
-            "days_left" => $days_left,
-            "next_action" => $next_action
+            "crop" => $key,
+            "stock" => $stock,
+            "demand" => $demand,
+            "balance" => $balance,
+            "status" => $status
         ];
     }
 
     echo json_encode($result);
 
-} catch (Exception $e) {
+} catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(["error" => $e->getMessage()]);
 }
-?>

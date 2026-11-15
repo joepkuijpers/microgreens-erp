@@ -1,45 +1,41 @@
 <?php
 header("Content-Type: application/json");
-require_once __DIR__ . "/../../app/includes/db_connection.php";
+require_once __DIR__ . "/../app/db_connect.php";
 
 try {
-    $db = getDbConnection();
-    
-    // 1. Haal huidige voorraad op
-    $stmt = $db->query("SELECT crop_type, stock_grams FROM seed_inventory");
-    $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // 1. Huidige voorraad per gewas (zaadlot.variety = gewasnaam)
+    $stmt = $db->query("SELECT variety, current_stock_grams FROM seed_lots");
     $stockMap = [];
-    foreach ($inventory as $item) {
-        $stockMap[$item["crop_type"]] = $item["stock_grams"];
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $item) {
+        $crop = $item["variety"] ?? "Onbekend";
+        $stockMap[$crop] = ($stockMap[$crop] ?? 0) + (float)$item["current_stock_grams"];
     }
 
-    // 2. Haal actieve batches op en bereken behoefte (standaard 10g per batch voor demo)
+    // 2. Actieve batches per gewas, behoefte 10g per batch (demo)
     $stmt = $db->query("SELECT crop_type FROM production_batches WHERE started_at IS NOT NULL");
-    $batches = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
     $demandMap = [];
-    foreach ($batches as $b) {
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $b) {
         $crop = $b["crop_type"] ?? "Onbekend";
-        if (!isset($demandMap[$crop])) $demandMap[$crop] = 0;
-        $demandMap[$crop] += 10; // Standaard behoefte per batch
+        $demandMap[$crop] = ($demandMap[$crop] ?? 0) + 10;
     }
 
-    // 3. Vergelijk en bouw resultaat
-    $result = [];
-    // Combineer alle gewassen uit voorraad én vraag
-    $allCrops = array_unique(array_merge(array_keys($stockMap), array_keys($demandMap)));
+    // 3. Vergelijk, match op kleine letters
+    $stockByLower = array_change_key_case($stockMap, CASE_LOWER);
+    $demandByLower = array_change_key_case($demandMap, CASE_LOWER);
+    $allKeys = array_unique(array_merge(array_keys($stockByLower), array_keys($demandByLower)));
 
-    foreach ($allCrops as $crop) {
-        $stock = $stockMap[$crop] ?? 0;
-        $demand = $demandMap[$crop] ?? 0;
+    $result = [];
+    foreach ($allKeys as $key) {
+        $stock = $stockByLower[$key] ?? 0;
+        $demand = $demandByLower[$key] ?? 0;
         $balance = $stock - $demand;
-        
+
         $status = "OK";
         if ($balance < 0) $status = "TE KOORT";
         elseif ($balance < 50) $status = "LAAG";
 
         $result[] = [
-            "crop" => $crop,
+            "crop" => $key,
             "stock" => $stock,
             "demand" => $demand,
             "balance" => $balance,
@@ -49,8 +45,7 @@ try {
 
     echo json_encode($result);
 
-} catch (Exception $e) {
+} catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(["error" => $e->getMessage()]);
 }
-?>
