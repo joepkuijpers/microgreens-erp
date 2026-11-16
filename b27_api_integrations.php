@@ -9,7 +9,9 @@ $operator = is_array($u) ? ($u['display_name'] ?? 'system') : 'system';
 $flash = '';
 $flashClass = 'flash-info';
 $errors = [];
-$endpoints = ['status','system','dashboard','sensors','sensor_health','climate','lighting','water','automation','scheduler','gpio','relay_test','override','rack_status','history','get_dose','hardware_health','start_freeze_dry','watchdog','widget_growth','widget_seed'];
+$endpoints = [];
+foreach (glob(__DIR__ . '/api/*.php') as $f) { $endpoints[] = basename($f, '.php'); }
+sort($endpoints);
 $testResult = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
