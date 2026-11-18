@@ -3,6 +3,13 @@ require_once __DIR__ . '/app/includes/header.php';
 
 $q = $db->query("
     SELECT pb.id, pb.batch_code, pb.status, pb.started_at, pb.completed_at,
+           (SELECT COALESCE(gr.blackout_days, cp.blackout_days)
+              FROM germination_records gr
+              LEFT JOIN crop_profiles cp ON cp.id = pb.crop_id
+              WHERE gr.production_batch_id = pb.id
+              ORDER BY gr.id DESC LIMIT 1) AS blackout_effectief,
+           (SELECT COUNT(*) FROM germination_records gr
+              WHERE gr.production_batch_id = pb.id AND gr.blackout_days IS NOT NULL) AS blackout_override,
            (SELECT COUNT(*) FROM germination_records g
              WHERE g.production_batch_id = pb.id) AS kiem,
            (SELECT COUNT(*) FROM germination_records g
@@ -35,7 +42,7 @@ $q = $db->query("
              JOIN spatial_allocations sa
                ON sl.rack_id = sa.rack_id
               AND sl.timestamp >= sa.created_at
-             WHERE sa.batch_id = pb.id) AS groei_datum    
+             WHERE sa.batch_id = pb.id) AS groei_datum
            FROM production_batches pb
     ORDER BY pb.created_at DESC
 ");
@@ -97,6 +104,12 @@ function kortedatum(?string $dt): string {
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
                 <span>
                     <strong><?= htmlspecialchars($b['batch_code']) ?></strong>
+                    <?php if ((int)($b['blackout_override'] ?? 0) > 0): ?>
+                        <span style="margin-left:8px; font-size:0.72rem; font-weight:700;
+                                     background:#f57c00; color:#fff; border-radius:10px; padding:2px 9px;">
+                            blackout <?= (int)($b['blackout_effectief'] ?? 0) ?>d aangepast
+                        </span>
+                    <?php endif; ?>
                     <?php if ($keur): ?>
                         <span style="margin-left:8px; font-size:0.72rem; font-weight:700;
                                      background:#0f766e; color:#fff; border-radius:10px; padding:2px 9px;">
@@ -124,8 +137,7 @@ function kortedatum(?string $dt): string {
                     <div title="<?= htmlspecialchars($titel) ?>"
                          style="flex:1; height:30px; border-radius:4px; background:<?= $achtergrond ?>;
                                 display:flex; align-items:center; justify-content:center;
-                                font-size:0.8rem; font-weight:700; color:#fff;
-                                <?= !$f['trace'] ? 'background-image:repeating-linear-gradient(45deg,#e2e8f0,#e2e8f0 4px,#cbd5e0 4px,#cbd5e0 8px);' : '' ?>">
+                                font-size:0.8rem; font-weight:700; color:#fff;">
                         <?= htmlspecialchars($datum) ?>
                     </div>
                 <?php endforeach; ?>
