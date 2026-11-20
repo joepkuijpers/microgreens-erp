@@ -7,12 +7,6 @@ if (!isset($languageCode)) {
     $languageCode = 'nl';
     if (isset($_SESSION['erp_language'])) {
         $languageCode = $_SESSION['erp_language'];
-    } else {
-        // Probeer uit database als fallback
-        try {
-            // Let op: $db is hier misschien nog niet beschikbaar als dit voor header.php wordt geladen
-            // Maar in onze structuur laadt header.php dit bestand NA het instellen van de sessie.
-        } catch (Exception $e) {}
     }
 }
 
@@ -21,17 +15,19 @@ if (!in_array($languageCode, $allowedLanguages, true)) {
     $languageCode = 'nl';
 }
 
+// Eerst het gevraagde taalbestand proberen
 $languageFile = __DIR__ . "/../languages/{$languageCode}.php";
+$translations = file_exists($languageFile) ? require $languageFile : null;
 
-if (!file_exists($languageFile)) {
-    $languageFile = __DIR__ . '/../languages/nl.php';
+// Vangst: leeg of beschadigd bestand (geen array) -> terugval op nl.
+// Dit is de fix: lege 0-byte bestanden (de/es/fr/it) bestaan, maar
+// bevatten geen array. Zonder deze check zou alles [[sleutel]] tonen.
+if (!is_array($translations) || empty($translations)) {
+    $translations = require __DIR__ . '/../languages/nl.php';
 }
-
-$translations = require $languageFile;
 
 function __(string $key): string {
     global $translations;
-    // Debug mode: toon [[key]] als het mist
     if (isset($translations[$key])) {
         return $translations[$key];
     }

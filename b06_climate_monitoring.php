@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/app/includes/header.php';
-$target_table = "climate_data";
 $pageTitle = __('module_b06');
 ?>
+    </div>
     <h3>Laatste gegevens</h3>
     <table>
         <thead><tr><th>ID</th><th>Waarde</th><th>Datum</th><th>Details</th></tr></thead>
@@ -32,7 +32,7 @@ $pageTitle = __('module_b06');
 </div>
 
 <div class="next-step-bar">
-    <div><a href="dashboard.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
-    <div><a href="b28_watchdog_alerts.php">Watchdog →</a></div>
+    <div><a href="index.php" style="color:#666; text-decoration:none;">← Dashboard</a></div>
+    <div><a href="b28_watchdog.php">Watchdog →</a></div>
 </div>
 <?php require_once __DIR__ . '/app/includes/footer.php'; ?>

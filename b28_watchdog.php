@@ -3,6 +3,7 @@ require_once __DIR__ . '/app/includes/header.php';
 require_once __DIR__ . '/app/includes/audit.php';
 require_once __DIR__ . '/app/includes/organic_gate.php';
 require_once __DIR__ . '/app/includes/auth.php';
+require_once __DIR__ . '/app/includes/watchdog_engine.php';
 $t0 = microtime(true);
 $u = auth_current_user();
 $operator = is_array($u) ? ($u['display_name'] ?? 'system') : 'system';
@@ -44,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $alerts = $db->query("SELECT id, alert_type, severity, message, related_id, created_at FROM system_alerts WHERE resolved=" . $target . " ORDER BY CASE severity WHEN 'CRITICAL' THEN 0 ELSE 1 END, id DESC LIMIT 200")->fetchAll(PDO::FETCH_ASSOC);
 $openCount = (int)$db->query("SELECT COUNT(*) FROM system_alerts WHERE resolved=0")->fetchColumn();
 $critCount = (int)$db->query("SELECT COUNT(*) FROM system_alerts WHERE resolved=0 AND severity='CRITICAL'")->fetchColumn();
-$sysOk = false; $sysMsg = __('b28_no_live'); $sysLast = '—';
-if (is_file('/var/www/html/microgreens/app/state/watchdog_state.json')) {
-    $sysOk = true; $sysMsg = __('b28_sys_ok');
-    $sysLast = date('Y-m-d H:i', (int)@filemtime('/var/www/html/microgreens/app/state/watchdog_state.json'));
-}
+$wc = watchdogCheck(360);
+$sysOk = ($wc['status'] === 'ok');
+$sysMsg = $sysOk ? __('b28_sys_ok') : __('b28_no_live');
+$sysLast = !empty($wc['state']['last_heartbeat'])
+    ? date('Y-m-d H:i', strtotime($wc['state']['last_heartbeat'])) : '—';
 $card = 'background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;margin-bottom:20px';
 function b28SevBadge($s) {
     $map = ['CRITICAL' => '#fee2e2:#991b1b', 'WARNING' => '#ffedd5:#9a3412', 'INFO' => '#dbeafe:#1e40af'];
