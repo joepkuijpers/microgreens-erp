@@ -1,4 +1,5 @@
 <?php
+$target_table = 'utility_logs';
 require_once __DIR__ . '/app/includes/header.php';
 $pageTitle = __('module_b13');
 ?>

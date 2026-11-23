@@ -1,5 +1,5 @@
 <?php
-require_once '../app/includes/auth.php';
+require_once __DIR__ . '/app/includes/auth.php';
 
 auth_start_session();
 

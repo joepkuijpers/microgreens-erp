@@ -23,6 +23,7 @@ $trayStatusLabels = [
     'HARVESTED'   => __('tray_harvested'),
 ];
 function trayStatusLabel($s, $map) { return $map[$s] ?? $s; }
+
 // ── Annuleren ──
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
     $cancelId = (int)$_POST["cancel_id"];
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_id"])) {
         if ($row["status"] === "GEANNULEERD") { throw new RuntimeException(__('err_germ_already_cancelled')); }
         $harv = $db->prepare("SELECT COUNT(*) FROM harvests WHERE germination_record_id = :id");
         $harv->execute([':id' => $cancelId]);
-        if ((int)$harv->fetchColumn() > 0) { throw new RuntimeException(__('err_germ_has_harvest')); }
+        if ((int)$harv->fetchColumn() > 0) { throw new RuntimeException("Kan niet annuleren: deze kiemactie heeft al een (concept-)oogst. Verwijder die oogst-regel in B07 eerst, of voer de batch op in plaats van te annuleren."); }
         $db->prepare("UPDATE germination_records SET status = 'GEANNULEERD', notes = COALESCE(notes,'') || ' | GEANNULEERD ' || datetime('now','localtime') WHERE id = :id")->execute([':id' => $cancelId]);
         if (!empty($row["tray_id"])) { $db->prepare("UPDATE trays SET status = 'EMPTY' WHERE id = :id")->execute([':id' => $row["tray_id"]]); }
         if (!empty($row["production_batch_id"])) { $db->prepare("UPDATE production_batches SET status = 'SOWN' WHERE id = :id AND status = 'GERMINATING'")->execute([':id' => $row["production_batch_id"]]); }
@@ -71,8 +72,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["advance_id"])) {
     }
 }
 
+// ── Blackout-override per kiemactie (optioneel; leeg = standaardrecept) ──
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["blackout_id"])) {
+    $blackoutId = (int)$_POST["blackout_id"];
+    try {
+        $db->beginTransaction();
+        $bk = $db->prepare("SELECT id, blackout_days, blackout_light_hours FROM germination_records WHERE id = :id");
+        $bk->execute([':id' => $blackoutId]);
+        $bkRow = $bk->fetch(PDO::FETCH_ASSOC);
+        if (!$bkRow) { throw new RuntimeException(__('err_germ_not_found')); }
+
+        $reset = isset($_POST["reset_blackout"]);
+        $rawDays  = trim($_POST["blackout_days"]        ?? '');
+        $rawLight = trim($_POST["blackout_light_hours"] ?? '');
+
+        if ($reset) {
+            $newDays = null; $newLight = null;
+        } else {
+            $newDays  = $rawDays  === '' ? null : (int)   $rawDays;
+            $newLight = $rawLight === '' ? null : (float) $rawLight;
+            if ($newDays !== null && ($newDays < 0 || $newDays > 30)) { throw new RuntimeException(__('b02_blackout_days_invalid')); }
+        }
+
+        $db->prepare("UPDATE germination_records SET blackout_days = :d, blackout_light_hours = :l WHERE id = :id")
+           ->execute([':d' => $newDays, ':l' => $newLight, ':id' => $blackoutId]);
+
+        auditLog($db, 'B02_BLACKOUT_OVERRIDE', 'germination_records', $blackoutId, 'CORRECTION',
+            "Blackout-override aangepast voor kiemactie #{$blackoutId}." . ($reset ? " Teruggezet naar standaardrecept." : ""),
+            ['blackout_days' => $bkRow['blackout_days'], 'blackout_light_hours' => $bkRow['blackout_light_hours']],
+            ['blackout_days' => $newDays, 'blackout_light_hours' => $newLight, 'operator' => $operator],
+            'germination_record', $blackoutId);
+        $db->commit();
+        $message = __('b02_blackout_saved');
+        $messageType = "success";
+    } catch (Exception $e) {
+        if ($db->inTransaction()) $db->rollBack();
+        $message = $e->getMessage(); $messageType = "error";
+    }
+}
+
 // ── Nieuwe kiemactie ──
-if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !isset($_POST["advance_id"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !isset($_POST["advance_id"]) && !isset($_POST["blackout_id"])) {
     $seedInvId = 0; // afgeleid uit batch_materials
     $trayId    = (int)($_POST["tray_id"] ?? 0);
     $batchId   = (int)($_POST["production_batch_id"] ?? 0);
@@ -141,9 +181,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["cancel_id"]) && !iss
         }
     }
 }
-$germStmt = $db->prepare("SELECT gr.id, gr.status, gr.quantity_seeds, gr.start_date, t.tray_code, pb.batch_code, pb.track_color, pb.id AS production_batch_id, pb.status AS batch_status FROM germination_records gr LEFT JOIN trays t ON t.id = gr.tray_id LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id WHERE gr.status = 'GERMINATING' ORDER BY gr.id DESC");
+// Actieve kiemacties + effectieve blackout (override → lot-standaard → gewas-recept)
+$germStmt = $db->prepare("SELECT gr.id, gr.status, gr.quantity_seeds, gr.start_date,
+                                 gr.blackout_days, gr.blackout_light_hours,
+                                 sl.blackout_days AS lot_days, sl.blackout_light_hours AS lot_light,
+                                 cp.blackout_days AS standaard_days, cp.blackout_light_hours AS standaard_light,
+                                 t.tray_code, pb.batch_code, pb.crop_type, pb.track_color,
+                                 pb.id AS production_batch_id, pb.status AS batch_status
+                          FROM germination_records gr
+                          LEFT JOIN trays t ON t.id = gr.tray_id
+                          LEFT JOIN production_batches pb ON pb.id = gr.production_batch_id
+                          LEFT JOIN crop_profiles cp ON cp.id = pb.crop_id
+                          LEFT JOIN seed_inventory si ON si.id = gr.seed_inventory_id
+                          LEFT JOIN seed_lots sl ON sl.id = si.seed_lot_id
+                          WHERE gr.status = 'GERMINATING' ORDER BY gr.id DESC");
 $germStmt->execute();
 $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Terugval op naam wanneer crop_id geen geldige FK bevat
+foreach ($activeGerminations as $i => $g) {
+    if ($g['standaard_days'] === null && !empty($g['crop_type'])) {
+        $cp = $db->prepare("SELECT blackout_days, blackout_light_hours FROM crop_profiles WHERE crop_name = :c LIMIT 1");
+        $cp->execute([':c' => $g['crop_type']]);
+        if ($cpRow = $cp->fetch(PDO::FETCH_ASSOC)) {
+            $activeGerminations[$i]['standaard_days']  = $cpRow['blackout_days'];
+            $activeGerminations[$i]['standaard_light'] = $cpRow['blackout_light_hours'];
+        }
+    }
+    // Lot-standaard gaat vóór het gewasrecept: lot wint van profiel
+    if ($g['lot_days'] !== null) {
+        $activeGerminations[$i]['standaard_days']  = $g['lot_days'];
+        $activeGerminations[$i]['standaard_light'] = $g['lot_light'];
+    }
+}
 ?>
 <div style="max-width:1000px; margin:0 auto;">
     <?php if($message): ?>
@@ -166,7 +236,7 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div style="margin-bottom:15px;">
                 <label style="display:block; font-weight:bold; margin-bottom:5px;"><?php echo htmlspecialchars(__('b02_seed_label')); ?></label>
-                <div style="padding:8px 10px;margin-bottom:6px;background:#eef6ff;border:1px solid #cfe3ff;border-radius:4px;color:#345;font-size:13px;">Zaad wordt automatisch uit de gekozen batch gehaald — hier niets kiezen.</div>
+                <div style="padding:8px 10px;margin-bottom:6px;background:#eef6ff;border:1px solid #cfe3ff;border-radius:4px;color:#345;font-size:13px;"><?php echo htmlspecialchars(__('b02_seed_hint')); ?></div>
                 <select name="seed_inventory_id" disabled style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px; opacity:.55;">
                     <option value=""><?php echo htmlspecialchars(__('b02_seed_placeholder')); ?></option>
                     <?php foreach($seedInventory as $s): ?>
@@ -205,16 +275,40 @@ $activeGerminations = $germStmt->fetchAll(PDO::FETCH_ASSOC);
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_batch')); ?></th>
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_grams')); ?></th>
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_started')); ?></th>
+                <th style="padding:8px;">Blackout</th>
                 <th style="padding:8px;"><?php echo htmlspecialchars(__('b02_th_action')); ?></th>
                 <th style="padding:8px;">Statusactie</th>
             </tr></thead>
             <tbody>
             <?php foreach ($activeGerminations as $g): ?>
+                <?php
+                    $isOverride = ($g['blackout_days'] !== null);
+                    $effectief  = $isOverride ? (int)$g['blackout_days'] : (int)($g['standaard_days'] ?? 0);
+                ?>
                 <tr style="border-bottom:1px solid #eee;">
                     <td style="padding:8px;"><?php echo htmlspecialchars($g['tray_code'] ?? '-'); ?></td>
                     <td style="padding:8px;"><?php echo trackSwatch($g['track_color'] ?? null); ?><?php echo htmlspecialchars($g['batch_code'] ?? '-'); ?></td>
                     <td style="padding:8px;"><?php echo htmlspecialchars((string)$g['quantity_seeds']); ?>g</td>
                     <td style="padding:8px;"><?php echo htmlspecialchars((string)$g['start_date']); ?></td>
+                    <td style="padding:8px;">
+                        <form method="POST" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                            <input type="hidden" name="blackout_id" value="<?php echo (int)$g['id']; ?>">
+                            <input type="number" name="blackout_days" min="0" max="30" step="1"
+                                   value="<?php echo $isOverride ? (int)$g['blackout_days'] : ''; ?>"
+                                   placeholder="<?= $effectief ?>"
+                                   style="width:70px;padding:4px;border:1px solid #ddd;border-radius:4px;">
+                            <span style="font-size:0.8em;color:#666;">
+                                <?php if ($isOverride): ?>
+                                    <span style="color:#f57c00;font-weight:bold;">aangepast</span>
+                                    <button type="submit" name="reset_blackout" value="1"
+                                            style="background:#eee;color:#333;border:none;padding:3px 8px;border-radius:4px;cursor:pointer;font-size:0.8em;">standaard</button>
+                                <?php else: ?>
+                                    <span style="color:#888;">standaard: <?= $effectief ?>d</span>
+                                <?php endif; ?>
+                            </span>
+                            <button type="submit" style="background:#1976d2;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:0.8em;">opslaan</button>
+                        </form>
+                    </td>
                     <td style="padding:8px;">
                         <form method="POST" style="display:inline;" onsubmit="return confirm('<?php echo htmlspecialchars(__('b02_cancel_confirm')); ?>');">
                             <input type="hidden" name="cancel_id" value="<?php echo (int)$g['id']; ?>">

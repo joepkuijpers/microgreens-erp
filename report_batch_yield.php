@@ -1,20 +1,25 @@
 <?php
-require_once '../app/includes/auth.php';
+require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 include 'app/includes/header.php';
 include 'app/includes/sidebar.php';
 include 'app/db_connect.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 $rows = $db->query("
     SELECT
-        g.id,
-        g.crop,
-        g.tray_count,
+        pb.id,
+        pb.batch_code,
+        pb.crop_type,
+        pb.tray_count,
+        pb.track_color,
         COALESCE(SUM(h.weight_grams), 0) AS total_harvest
-    FROM grow_batches g
-    LEFT JOIN harvests h ON g.id = h.batch_id
-    GROUP BY g.id, g.crop, g.tray_count
-    ORDER BY g.id
+    FROM production_batches pb
+    LEFT JOIN germination_records gr ON gr.production_batch_id = pb.id
+    LEFT JOIN harvests h ON h.germination_record_id = gr.id
+    GROUP BY pb.id, pb.batch_code, pb.crop_type, pb.tray_count, pb.track_color
+    ORDER BY pb.id
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -26,6 +31,7 @@ $rows = $db->query("
     <table>
         <thead>
             <tr>
+                <th>Kleur</th>
                 <th>Batch</th>
                 <th>Gewas</th>
                 <th>Trays</th>
@@ -41,8 +47,9 @@ $rows = $db->query("
                 $perTray = $trayCount > 0 ? $totalHarvest / $trayCount : 0;
                 ?>
                 <tr>
-                    <td><?= htmlspecialchars((string) $row['id']) ?></td>
-                    <td><?= htmlspecialchars((string) $row['crop']) ?></td>
+                    <td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:<?= htmlspecialchars($row['track_color']) ?>"></span></td>
+                    <td><?= htmlspecialchars((string) $row['batch_code']) ?></td>
+                    <td><?= htmlspecialchars((string) $row['crop_type']) ?></td>
                     <td><?= htmlspecialchars((string) $row['tray_count']) ?></td>
                     <td><?= htmlspecialchars((string) round($totalHarvest, 1)) ?> g</td>
                     <td><?= htmlspecialchars((string) round($perTray, 1)) ?> g</td>

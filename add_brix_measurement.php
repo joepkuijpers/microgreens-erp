@@ -1,10 +1,10 @@
 <?php
-require_once '../app/includes/auth.php';
+require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 
 include 'app/db_connect.php';
 include 'app/includes/language.php';
-require_once '../app/includes/audit.php';
+require_once __DIR__ . '/app/includes/audit.php';
 
 $batches = $db->query("
     SELECT

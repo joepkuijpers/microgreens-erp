@@ -1,8 +1,8 @@
 <?php
-require_once '../app/includes/auth.php';
+require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 include 'app/db_connect.php';
-require_once '../app/includes/language.php';
+require_once __DIR__ . '/app/includes/language.php';
 
 // Ophalen van actieve leveranciers
 $suppliersStmt = $db->query("SELECT id, name FROM suppliers WHERE is_active = 1 ORDER BY name ASC");

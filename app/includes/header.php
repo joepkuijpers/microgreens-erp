@@ -1,12 +1,14 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 // GEEN CACHE: toon altijd de actuele pagina (belangrijk voor taalwissel)
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 
 // FOUTEN ONDERTKUIPT (productie)
-ini_set('display_errors', 0);
-error_reporting(0);
+// ini_set('display_errors', 0);
+// error_reporting(0);
 
 // SESSIE STARTEN
 if (session_status() === PHP_SESSION_NONE) {

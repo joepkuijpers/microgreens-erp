@@ -1,11 +1,11 @@
 <?php
 
-require_once '../app/includes/auth.php';
+require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 
 require_once '../app/db_connect.php';
-require_once '../app/includes/language.php';
-require_once '../app/includes/audit.php';
+require_once __DIR__ . '/app/includes/language.php';
+require_once __DIR__ . '/app/includes/audit.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: grow_batches.php');
