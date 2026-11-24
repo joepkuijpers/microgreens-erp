@@ -13,7 +13,7 @@ $error = null; $success = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formData = ['crop'=>trim($_POST['crop']??''), 'sow_date'=>trim($_POST['sow_date']??''), 'expected_harvest_date'=>trim($_POST['expected_harvest_date']??''), 'tray_count'=>(int)($_POST['tray_count']??1), 'tray_type'=>trim($_POST['tray_type']??'1020'), 'inventory_id'=>(int)($_POST['inventory_id']??0), 'seed_amount'=>(float)($_POST['seed_amount']??0), 'status'=>trim($_POST['status']??'Groeiend')];
     try {
-        require_once '../app/b01_allocation_engine.php';
+        require_once 'app/b01_allocation_engine.php';
         $engine = new B01AllocationEngine($db);
         $result = $engine->createBatchWithAllocation($formData);
         header("Location: add_batch.php?success=1"); exit;

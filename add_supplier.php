@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
-require_once '../app/db_connect.php';
+require_once 'app/db_connect.php';
 require_once __DIR__ . '/app/includes/language.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

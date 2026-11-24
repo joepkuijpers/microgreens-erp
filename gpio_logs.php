@@ -4,7 +4,7 @@ auth_require_login();
 include 'app/includes/header.php';
 include 'app/includes/sidebar.php';
 
-$logFile = __DIR__ . '/../app/hardware/gpio/gpio_actions.log';
+$logFile = __DIR__ . '/app/hardware/gpio/gpio_actions.log';
 $entries = [];
 
 if (file_exists($logFile)) {

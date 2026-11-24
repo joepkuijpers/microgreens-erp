@@ -4,7 +4,7 @@ auth_require_login();
 include 'app/includes/header.php';
 include 'app/includes/sidebar.php';
 
-require_once __DIR__ . '/../app/includes/scheduler_engine.php';
+require_once __DIR__ . '/app/includes/scheduler_engine.php';
 
 $saved = false;
 
