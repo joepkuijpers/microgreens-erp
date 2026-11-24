@@ -5,7 +5,7 @@ try {
     $paths = [
         __DIR__ . "/microgreens/PHP/database/MicrogreensERP_Live.sqlite",
         __DIR__ . "/database/MicrogreensERP_Live.sqlite",
-        "/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite"
+        "__DIR__ . '/database/MicrogreensERP_Live.sqlite'"
     ];
     $dbPath = null;
     foreach($paths as $p) { if(file_exists($p)) { $dbPath = $p; break; } }

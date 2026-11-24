@@ -5,7 +5,7 @@ require_once __DIR__ . '/app/includes/sidebar.php'; // Zorg dat dit pad klopt in
 // Fallback als sidebar niet direct laadt:
 // echo "<html><body><h1>B10 Lighting Status</h1>";
 
-$dbPath = '/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
+$dbPath = __DIR__ . '/database/MicrogreensERP_Live.sqlite';
 $db = new PDO("sqlite:$dbPath");
 
 echo "<h2>B10 Lighting Control</h2>";
