@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 ini_set("display_errors", 0);
 
-$db_path = "/var/www/html/microgreens/PHP/app/MicrogreensERP_Live.sqlite";
+$dbPath = dirname(__DIR__) . '/database/MicrogreensERP_Live.sqlite';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => "error", "message" => "Alleen POST verzoeken toegestaan."]);

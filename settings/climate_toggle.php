@@ -1,6 +1,7 @@
 <?php
-$db = new PDO("sqlite:/var/www/html/microgreens/PHP/database/MicrogreensERP_Live.sqlite");
-
+$dbPath = dirname(__DIR__) . '/database/MicrogreensERP_Live.sqlite';
+$db = new PDO("sqlite:" . $dbPath);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["setting_key"])) {
     $stmt = $db->prepare("INSERT OR REPLACE INTO system_settings (key, value) VALUES (?, ?)");
     $stmt->execute([$_POST["setting_key"], $_POST["setting_value"]]);

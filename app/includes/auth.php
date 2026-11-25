@@ -295,11 +295,11 @@ function auth_require_login(): void
 
     $requestUri = (string)(
         $_SERVER['REQUEST_URI'] ??
-        '/microgreens/PHP/'
+        '/microgreens/'
     );
 
     header(
-        'Location: /microgreens/PHP/login.php?next=' .
+        'Location: /microgreens/login.php?next=' .
         urlencode($requestUri)
     );
     exit;
