@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     // batch opzoeken (alleen niet-gearchiveerd) — batch_code bestaat in grow_batches niet,
     // dus voor grow gebruiken we crop als leesbaar label (via alias batch_code).
     $code_col = $system === 'grow' ? 'crop' : 'batch_code';
-    $st = $db->prepare("SELECT id, $code_col AS batch_code FROM $table WHERE id = ? AND archived_at IS NULL");
+    $st = $db->prepare("SELECT id, status, $code_col AS batch_code FROM $table WHERE id = ? AND archived_at IS NULL");
     $st->execute([$id]);
     $batch = $st->fetch(PDO::FETCH_ASSOC);
 
@@ -29,6 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     } elseif ($action === 'unarchive') {
         $db->prepare("UPDATE $table SET archived_at = NULL WHERE id = ?")->execute([$id]);
         $flash = sprintf(__('b31_unarchived'), $batch['batch_code']); $flashType = 'ok';
+    } elseif ($action === 'quarantine') {
+        $quarStatus = $system === 'grow' ? 'quarantaine' : 'QUARANTINE';
+        $reason = trim($_POST['quarantine_reason'] ?? '');
+        $oudeStatus = $b_status ?? '';
+        $db->prepare("UPDATE $table SET status = ? WHERE id = ?")->execute([$quarStatus, $id]);
+        $db->prepare("INSERT INTO system_alerts (alert_type, severity, message, related_id, created_at)
+                      VALUES ('QUARANTINE','WARNING',?,?,datetime('now'))")
+           ->execute(['Quarantaine: ' . $batch['batch_code'] . ' — ' . $reason, $id]);
+        if (function_exists('auditLog')) {
+            auditLog($db, 'B31_BATCH_QUARANTINE', $table, $id, 'CORRECTION',
+                     'Batch in quarantaine: ' . $batch['batch_code'],
+                     ['status' => $oudeStatus],
+                     ['status' => $quarStatus, 'reason' => $reason, 'operator' => $op],
+                     'batch', $id);
+        }
+        $flash = sprintf(__('b31_batch_quarantined'), $batch['batch_code']); $flashType = 'ok';
     } elseif ($action === 'hard_delete') {
         // EXTRA CHECK: code exact overgetypt?
         $confirm = trim($_POST['confirm_code'] ?? '');
@@ -101,6 +117,15 @@ $grow = $db->query("SELECT id, crop AS batch_code, status, archived_at FROM grow
                 </span>
                 <span>
                     <?php if (!$arch): ?>
+                        <form method="post" style="display:inline"
+                              onsubmit="this.querySelector('[name=quarantine_reason]').value = prompt('<?= addslashes(__('b31_quarantine_reason')) ?>','') || ''; return confirm('<?= addslashes(__('b31_confirm_quarantine')) ?>');">
+                            <input type="hidden" name="action" value="quarantine">
+                            <input type="hidden" name="system" value="<?= $sys ?>">
+                            <input type="hidden" name="id" value="<?= (int)$b['id'] ?>">
+                            <input type="hidden" name="quarantine_reason" value="">
+                            <button type="submit" style="background:#f59e0b; color:#fff; border:none;
+                                    border-radius:8px; padding:5px 12px; cursor:pointer;"><?= __('b31_btn_quarantine') ?></button>
+                        </form>
                         <form method="post" style="display:inline">
                             <input type="hidden" name="action" value="archive">
                             <input type="hidden" name="system" value="<?= $sys ?>">

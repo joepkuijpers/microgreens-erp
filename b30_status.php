@@ -64,6 +64,7 @@ $keur_map = [
     'GERMINATING'      => 'b30_keur_germinating',
     'READY_TO_HARVEST' => 'b30_keur_ready',
     'HARVESTED'        => 'b30_keur_harvested',
+        'QUARANTINE'       => 'b30_keur_quarantine',
 ];
 
 function kortedatum(?string $dt): string {
@@ -112,8 +113,8 @@ function kortedatum(?string $dt): string {
                     <?php endif; ?>
                     <?php if ($keur): ?>
                         <span style="margin-left:8px; font-size:0.72rem; font-weight:700;
-                                     background:#0f766e; color:#fff; border-radius:10px; padding:2px 9px;">
-                            <?= __($keur) ?>
+                      background:<?= $b['status']==='QUARANTINE' ? '#b91c1c' : '#0f766e' ?>; color:#fff; border-radius:10px; padding:2px 9px;">
+                            <?= __($keur) ?>               
                         </span>
                     <?php endif; ?>
                 </span>

@@ -17,6 +17,7 @@ $rows = $db->query("
     FROM production_batches pb
     LEFT JOIN germination_records gr ON gr.production_batch_id = pb.id
     LEFT JOIN harvests h ON h.germination_record_id = gr.id
+    WHERE pb.status <> 'QUARANTINE'
     GROUP BY pb.id, pb.batch_code, pb.crop_type, pb.tray_count, pb.track_color
     ORDER BY pb.id
 ")->fetchAll(PDO::FETCH_ASSOC);
