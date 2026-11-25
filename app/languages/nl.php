@@ -6,6 +6,8 @@ return array (
   'edit_equipment' => 'Apparatuur bewerken',
   'delete_equipment' => 'Apparatuur verwijderen',
   'settings' => 'Instellingen',
+  'login' => 'Inloggen',
+  'logged_in_as' => 'Ingelogd als',
   'settings_saved' => 'Instellingen opgeslagen.',
   'light' => 'Licht',
   'minimum_lux' => 'Minimum Lux',

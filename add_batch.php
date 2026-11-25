@@ -1,9 +1,8 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/app/includes/auth.php';
 // auth_require_login(); // Uit voor test
 include 'app/includes/header.php';
 include 'app/includes/language.php';
-include 'app/includes/sidebar.php';
 include 'app/db_connect.php';
 
 $inventoryItems = $db->query("SELECT id, item_name, quantity, unit FROM inventory ORDER BY item_name ASC")->fetchAll(PDO::FETCH_ASSOC);

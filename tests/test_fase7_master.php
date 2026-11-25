@@ -1,5 +1,5 @@
 <?php
-$DB='/var/www/html/microgreens/database/MicrogreensERP_Live.sqlite';
+$DB='__DIR__ . '/database/MicrogreensERP_Live.sqlite'';
 $res=[]; $pass=0; $fail=0;
 function t($l,$ok,$d=''){global $res,$pass,$fail;$s=$ok?'PASS':'FAIL';if($ok)$pass++;else $fail++;$res[]="[$s] $l".($d?" -> $d":"");}
 $db=new PDO("sqlite:$DB",null,null,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);

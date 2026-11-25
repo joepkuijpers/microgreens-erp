@@ -92,6 +92,8 @@ return [
 'edit_equipment' => 'Editar equipo',
 'delete_equipment' => 'Eliminar equipo',
 'settings' => 'Configuración',
+  'login' => 'Iniciar sesión',
+  'logged_in_as' => 'Iniciado sesión como',
 'settings_saved' => 'Configuración guardada.',
 'light' => 'Luz',
 'minimum_lux' => 'Lux mínimo',

@@ -2,7 +2,6 @@
 require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 include 'app/includes/header.php';
-include 'app/includes/sidebar.php';
 include 'app/db_connect.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);

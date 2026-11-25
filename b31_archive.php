@@ -10,8 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $id     = (int)($_POST['id'] ?? 0);
     $op     = function_exists('auth_current_user') ? (auth_current_user()['username'] ?? 'onbekend') : 'onbekend';
 
-    // batch opzoeken (alleen niet-gearchiveerd)
-    $st = $db->prepare("SELECT id, batch_code FROM $table WHERE id = ? AND archived_at IS NULL");
+    // batch opzoeken (alleen niet-gearchiveerd) — batch_code bestaat in grow_batches niet,
+    // dus voor grow gebruiken we crop als leesbaar label (via alias batch_code).
+    $code_col = $system === 'grow' ? 'crop' : 'batch_code';
+    $st = $db->prepare("SELECT id, $code_col AS batch_code FROM $table WHERE id = ? AND archived_at IS NULL");
     $st->execute([$id]);
     $batch = $st->fetch(PDO::FETCH_ASSOC);
 
@@ -65,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // ── Data ophalen ───────────────────────────────────────────────
 $prod = $db->query("SELECT id, batch_code, status, archived_at FROM production_batches ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
-$grow = $db->query("SELECT id, batch_code, status, archived_at FROM grow_batches ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
+$grow = $db->query("SELECT id, crop AS batch_code, status, archived_at FROM grow_batches ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="card">
     <h2><?= __('b31_title') ?></h2>

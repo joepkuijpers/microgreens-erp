@@ -4,8 +4,6 @@ auth_require_login();
 include 'app/db_connect.php';
 include 'app/includes/language.php';
 include 'app/includes/header.php';
-include 'app/includes/sidebar.php';
-
 $batchId = (int)($_GET['batch_id'] ?? 0);
 
 if ($batchId <= 0) {

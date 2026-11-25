@@ -3,7 +3,6 @@ require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 include 'app/includes/header.php';
 include 'app/includes/language.php';
-include 'app/includes/sidebar.php';
 include 'app/db_connect.php';
 
 $id = (int)($_GET['id'] ?? 0);

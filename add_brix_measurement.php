@@ -444,7 +444,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 include 'app/includes/header.php';
-include 'app/includes/sidebar.php';
 ?>
 
 <div class="main">

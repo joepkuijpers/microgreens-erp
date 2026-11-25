@@ -92,6 +92,8 @@ return [
 'edit_equipment' => 'Modifica attrezzatura',
 'delete_equipment' => 'Elimina attrezzatura',
 'settings' => 'Impostazioni',
+  'login' => 'Accedi',
+  'logged_in_as' => 'Connesso come',
 'settings_saved' => 'Impostazioni salvate.',
 'light' => 'Luce',
 'minimum_lux' => 'Lux minimi',

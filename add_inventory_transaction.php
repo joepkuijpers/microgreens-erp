@@ -85,7 +85,6 @@ $items = $db->query("
 ")->fetchAll(PDO::FETCH_ASSOC);
 
 include 'app/includes/header.php';
-include 'app/includes/sidebar.php';
 ?>
 
 <div class="main">

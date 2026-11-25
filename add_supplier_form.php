@@ -4,8 +4,6 @@ auth_require_login();
 require_once __DIR__ . '/app/includes/language.php';
 
 include 'app/includes/header.php';
-include 'app/includes/sidebar.php';
-
 $error = $_GET['error'] ?? '';
 ?>
 

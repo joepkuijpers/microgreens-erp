@@ -92,6 +92,8 @@ return [
 'edit_equipment' => 'Gerät bearbeiten',
 'delete_equipment' => 'Gerät löschen',
 'settings' => 'Einstellungen',
+  'login' => 'Anmelden',
+  'logged_in_as' => 'Angemeldet als',
 'settings_saved' => 'Einstellungen gespeichert.',
 'light' => 'Licht',
 'minimum_lux' => 'Mindest-Lux',

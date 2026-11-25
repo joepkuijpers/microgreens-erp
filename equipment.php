@@ -3,7 +3,6 @@ require_once __DIR__ . '/app/includes/auth.php';
 auth_require_login();
 require_once __DIR__ . '/app/includes/language.php';
 include 'app/includes/header.php';
-include 'app/includes/sidebar.php';
 include 'app/db_connect.php';
 include 'app/includes/energy_engine.php';
 

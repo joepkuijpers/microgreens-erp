@@ -167,12 +167,26 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 <li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?><?php if(isset($wf_steps[$m["file"]])) echo ' <span style="opacity:.6;font-size:11px">'.(int)$wf_steps[$m["file"]].'/7</span>'; ?></a></li>
 <?php endforeach; ?>
 </ul></details></li><?php endforeach; ?>
-</ul></nav>
+</ul>
+<?php $cu = function_exists('auth_current_user') ? auth_current_user() : null; ?>
+<div style="padding:16px;border-top:1px solid #34495e;font-size:13px;color:#bdc3c7;">
+<?php if (!empty($cu)): ?>
+    <?= __('logged_in_as') ?><br>
+    <strong><?= htmlspecialchars((string)$cu['display_name']) ?></strong>
+    <form method="post" action="logout.php" style="margin-top:10px;">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(auth_csrf_token()) ?>">
+        <button type="submit" style="background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;"><?= __('logout') ?></button>
+    </form>
+<?php else: ?>
+    <a href="login.php" style="display:inline-block;background:#27ae60;color:#fff;text-decoration:none;border-radius:6px;padding:6px 14px;"><?= __('login') ?></a>
+<?php endif; ?>
+</div>
+</nav>
 <div class="main-content"><header class="top-header">
 <h1 class="page-title"><?php echo htmlspecialchars($pageTitle); ?></h1>
 <div style="display:flex;align-items:center">
 <?php if($wdStatus==='critical'): ?><a href="b28_watchdog.php" class="watchdog-indicator wd-critical">🔴 Kritiek</a>
 <?php elseif($wdStatus==='warning'): ?><a href="b28_watchdog.php" class="watchdog-indicator wd-warning">⚠ Waarschuwing</a>
 <?php else: ?><a href="b28_watchdog.php" class="watchdog-indicator wd-ok">✓ OK</a><?php endif; ?>
-<div class="lang-switch"><?php $talen = ['nl','en','de','fr','es','it']; foreach ($talen as $i => $t): ?><?= $i > 0 ? '|' : '' ?><a href="?lang=<?= $t ?>" class="<?= $languageCode===$t?'active':'' ?>"><?= strtoupper($t) ?></a><?php endforeach; ?></div></main>
+<div class="lang-switch"><?php $talen = ['nl','en','de','fr','es','it']; foreach ($talen as $i => $t): ?><?= $i > 0 ? '|' : '' ?><a href="?lang=<?= $t ?>" class="<?= $languageCode===$t?'active':'' ?>"><?= strtoupper($t) ?></a><?php endforeach; ?></div>
 </div></header><main class="content-area">

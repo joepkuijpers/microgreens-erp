@@ -6,6 +6,8 @@ return array (
   'edit_equipment' => 'Edit equipment',
   'delete_equipment' => 'Delete equipment',
   'settings' => 'Settings',
+  'login' => 'Login',
+  'logged_in_as' => 'Logged in as',
   'settings_saved' => 'Settings saved.',
   'light' => 'Light',
   'minimum_lux' => 'Minimum Lux',

@@ -6,6 +6,8 @@ return [
 'edit_equipment' => 'Modifier un équipement',
 'delete_equipment' => 'Supprimer un équipement',
 'settings' => 'Paramètres',
+  'login' => 'Connexion',
+  'logged_in_as' => 'Connecté en tant que',
 'settings_saved' => 'Paramètres enregistrés.',
 'light' => 'Lumière',
 'minimum_lux' => 'Lux minimum',
