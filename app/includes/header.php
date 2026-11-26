@@ -103,6 +103,10 @@ $pageTitle = $pageTitle ?? 'ERP';
 <!DOCTYPE html><html lang="<?php echo htmlspecialchars($languageCode); ?>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo htmlspecialchars($pageTitle); ?></title>
 <style>
+.phase-legend{display:flex;gap:4px;justify-content:center;margin-top:10px}
+.phase-legend a{display:block;width:10px;height:22px;border-radius:2px;opacity:.85;transition:transform .1s,opacity .1s}
+.phase-legend a:hover{opacity:1;transform:scaleY(1.15)}
+.pl-gezaaid{background:#e53e3e}.pl-gekiemd{background:#ed8936}.pl-groei{background:#ecc94b}.pl-geoogst{background:#48bb78}.pl-gevriesdroogd{background:#4299e1}.pl-verpakt{background:#9f7aea}.pl-verkoop{background:#a0aec0}
 *{box-sizing:border-box;}
 body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f9}
 .sidebar{width:250px;background:#2c3e50;color:#ecf0f1;overflow-y:auto;flex-shrink:0}
@@ -155,10 +159,11 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 .flash-warning { background: #fff4e5; color: #b45309; border-color: #b45309; }
 .flash-error   { background: #fdecec; color: #b42318; border-color: #b42318; }
 .flash-info    { background: #eaf2fb; color: #1d4ed8; border-color: #1d4ed8; }
-@media(max-width:1023px){.sidebar{position:fixed;top:0;left:0;height:100vh;width:280px;transform:translateX(-100%);transition:transform .25s ease;z-index:1000;resize:none;max-width:85vw}.nav-toggle{display:inline-flex!important}.sidebar-resize-handle{display:none}body.nav-open .sidebar{transform:translateX(0)}body.nav-open::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999}}.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:none;background:#2c3e50;color:#fff;font-size:22px;border-radius:8px;cursor:pointer;margin-right:12px}.sidebar-header{display:flex;flex-direction:column;align-items:center;gap:8px}.brand-logo{width:90%;max-width:160px;height:auto;background:#fff;border-radius:10px;padding:8px}</style>
+</style>
 </head><body>
-<nav class="sidebar"><div class="sidebar-header"><a href="dashboard.php" style="display:block;text-align:center;"><img class="brand-logo" src="assets/logo.png" alt="Microgreens ERP" style="width:90%;max-width:160px;height:auto;background:#fff;border-radius:10px;padding:8px;"></a></div><div class="sidebar-resize-handle" id="sidebarHandle" title="Sleep om breedte te wijzigen"></div><ul class="nav-links">
+<nav class="sidebar"><div class="sidebar-header"><a href="dashboard.php" style="display:block;text-align:center;"><img class="brand-logo" src="assets/logo.png" alt="Microgreens ERP" style="width:90%;max-width:160px;height:auto;background:#fff;border-radius:10px;padding:8px;"></a><div class="phase-legend"><a href="b01_batch.php" class="pl-gezaaid" title="Gezaaid → B01 Batch"></a><a href="b02_germination.php" class="pl-gekiemd" title="Gekiemd → B02 Kiem"></a><a href="b03_growth_chamber.php" class="pl-groei" title="Groei → B03 Groeifase"></a><a href="b07_harvest.php" class="pl-geoogst" title="Geoogst → B07 Oogst"></a><a href="b08_freeze_dry.php" class="pl-gevriesdroogd" title="Gevriesdroogd → B08 Vriesdrogen"></a><a href="b09_packaging.php" class="pl-verpakt" title="Verpakt → B11 Verpakking"></a><a href="b09_sale.php" class="pl-verkoop" title="Verkoop → B09 Verkoop"></a></div></div>
 <?php $cur=basename($_SERVER["PHP_SELF"]); $byGroup=[]; foreach($modules as $m){$g=$group_map[$m["file"]]??"other"; $byGroup[$g][]=$m;} ?>
+<ul class="nav-links">
 <?php if(isset($byGroup["home"])): foreach($byGroup["home"] as $m): ?>
 <li><a href="<?php echo $m["file"]; ?>" class="<?php echo $cur===$m["file"]?"active":""; ?>"><?php echo __($m["key"]); ?></a></li>
 <?php endforeach; endif; ?>
@@ -190,4 +195,4 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 <?php elseif($wdStatus==='warning'): ?><a href="b28_watchdog.php" class="watchdog-indicator wd-warning">⚠ Waarschuwing</a>
 <?php else: ?><a href="b28_watchdog.php" class="watchdog-indicator wd-ok">✓ OK</a><?php endif; ?>
 <div class="lang-switch"><?php $talen = ['nl','en','de','fr','es','it']; foreach ($talen as $i => $t): ?><?= $i > 0 ? '|' : '' ?><a href="?lang=<?= $t ?>" class="<?= $languageCode===$t?'active':'' ?>"><?= strtoupper($t) ?></a><?php endforeach; ?></div>
-</div></header><main class="content-area">
+</div></header><main class="content-area"></main>
