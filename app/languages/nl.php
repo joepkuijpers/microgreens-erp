@@ -5,7 +5,9 @@ return array (
   'add_equipment' => 'Apparatuur toevoegen',
   'edit_equipment' => 'Apparatuur bewerken',
   'delete_equipment' => 'Apparatuur verwijderen',
-  'settings' => 'Instellingen',
+  'settings' => 'Instellingen',
+
+
   'b30_keur_quarantine' => 'Afgekeurd',
   'b31_btn_quarantine' => 'Quarantaine',
   'b31_batch_quarantined' => 'Batch %s in quarantaine geplaatst',
@@ -1321,4 +1323,5 @@ return array (
 'b32_btn_save'     => 'opslaan',
 'b32_btn_reset'    => 'gewas',
 'b32_badge_lot'    => 'lot-standaard',
+'logout'           => 'Uitloggen',
 );

@@ -5,7 +5,9 @@ return array (
   'add_equipment' => 'Add equipment',
   'edit_equipment' => 'Edit equipment',
   'delete_equipment' => 'Delete equipment',
-  'settings' => 'Settings',
+  'settings' => 'Settings',
+
+
   'b30_keur_quarantine' => 'Rejected',
   'b31_btn_quarantine' => 'Quarantine',
   'b31_batch_quarantined' => 'Batch %s quarantined',
@@ -1319,4 +1321,5 @@ return array (
 'b32_btn_save'     => 'save',
 'b32_btn_reset'    => 'crop',
 'b32_badge_lot'    => 'lot standard',
-);
+'logout'           => 'Log out',
+  );

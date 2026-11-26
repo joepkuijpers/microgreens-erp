@@ -91,7 +91,9 @@ return [
 'add_equipment' => 'Gerät hinzufügen',
 'edit_equipment' => 'Gerät bearbeiten',
 'delete_equipment' => 'Gerät löschen',
-'settings' => 'Einstellungen',
+'settings' => 'Einstellungen',
+
+
   'b30_keur_quarantine' => 'Abgelehnt',
   'b31_btn_quarantine' => 'Quarantäne',
   'b31_batch_quarantined' => 'Charge %s in Quarantäne',
@@ -1319,4 +1321,5 @@ return [
 'b32_btn_save'     => 'speichern',
 'b32_btn_reset'    => 'Gewäs',
 'b32_badge_lot'    => 'Charge-Standard',
+  'logout'      => 'Abmelden',
 ];

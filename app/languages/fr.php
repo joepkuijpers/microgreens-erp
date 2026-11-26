@@ -5,7 +5,9 @@ return [
 'add_equipment' => 'Ajouter un équipement',
 'edit_equipment' => 'Modifier un équipement',
 'delete_equipment' => 'Supprimer un équipement',
-'settings' => 'Paramètres',
+'settings' => 'Paramètres',
+
+
   'b30_keur_quarantine' => 'Rejeté',
   'b31_btn_quarantine' => 'Quarantaine',
   'b31_batch_quarantined' => 'Lot %s mis en quarantaine',
@@ -1373,4 +1375,5 @@ return [
 'b32_btn_save'     => 'enregistrer',
 'b32_btn_reset'    => 'culture',
 'b32_badge_lot'    => 'standard du lot',
+'logout'           => 'Déconnexion',
 ];

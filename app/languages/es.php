@@ -91,7 +91,9 @@ return [
 'add_equipment' => 'Añadir equipo',
 'edit_equipment' => 'Editar equipo',
 'delete_equipment' => 'Eliminar equipo',
-'settings' => 'Configuración',
+'settings' => 'Configuración',
+
+
   'b30_keur_quarantine' => 'Rechazado',
   'b31_btn_quarantine' => 'Cuarentena',
   'b31_batch_quarantined' => 'Lote %s en cuarentena',
@@ -1322,4 +1324,5 @@ return [
 'b32_btn_save'     => 'guardar',
 'b32_btn_reset'    => 'cultivo',
 'b32_badge_lot'    => 'estándar del lote',
+  'logout'           => 'Cerrar sesión',
 ];

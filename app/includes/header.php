@@ -13,7 +13,8 @@ header('Expires: 0');
 // SESSIE STARTEN
 if (session_status() === PHP_SESSION_NONE) {
     require_once __DIR__ . '/no_cache.php';
-    session_start();
+    require_once __DIR__ . '/auth.php';
+    auth_start_session();
 }
 
 // TAAL WISSEL LOGICA (moet allereerst, vóór elke output)

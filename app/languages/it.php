@@ -91,7 +91,9 @@ return [
 'add_equipment' => 'Aggiungi attrezzatura',
 'edit_equipment' => 'Modifica attrezzatura',
 'delete_equipment' => 'Elimina attrezzatura',
-'settings' => 'Impostazioni',
+'settings' => 'Impostazioni',
+
+
   'b30_keur_quarantine' => 'Rifiutato',
   'b31_btn_quarantine' => 'Quarantena',
   'b31_batch_quarantined' => 'Batch %s in quarantena',
@@ -1323,4 +1325,5 @@ return [
 'b32_btn_save'     => 'salva',
 'b32_btn_reset'    => 'coltura',
 'b32_badge_lot'    => 'standard del lotto',
+  'logout'           => 'Esci',
 ];
