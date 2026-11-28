@@ -15,14 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $date = trim($_POST['work_date'] ?? '');
         $activity = trim($_POST['activity'] ?? '');
         $hours = (float)($_POST['hours'] ?? 0);
+        $workerType = $_POST['worker_type'] ?? 'medewerker';
+        if (!in_array($workerType, ['medewerker', 'stage', 'vrijwilliger'], true)) { $workerType = 'medewerker'; }
         $rate = (float)($_POST['rate'] ?? 0);
         $bid = (int)($_POST['production_batch_id'] ?? 0);
         $notes = trim($_POST['notes'] ?? '');
         if ($date === '') { $errors[] = __('b17_date_required'); }
         if ($activity === '') { $errors[] = __('b17_activity_required'); }
         if ($hours <= 0) { $errors[] = __('b17_hours_invalid'); }
+        if ($workerType === 'vrijwilliger') { $rate = 0.0; }
+        if ($workerType === 'medewerker' && $rate <= 0) { $errors[] = __('b17_rate_required'); }
         if (empty($errors)) {
-            $stmt = $db->prepare("INSERT INTO labor_entries (work_date, hours_worked, activity, batch_id, gross_hourly_rate, notes, operator_name, production_batch_id) VALUES (:d, :h, :a, NULL, :r, :n, :op, :pb)");
+            $stmt = $db->prepare("INSERT INTO labor_entries (work_date, hours_worked, activity, batch_id, gross_hourly_rate, notes, operator_name, production_batch_id, worker_type) VALUES (:d, :h, :a, NULL, :r, :n, :op, :pb, :wt)");
             $stmt->bindValue(':d', $date, PDO::PARAM_STR);
             $stmt->bindValue(':h', $hours, PDO::PARAM_STR);
             $stmt->bindValue(':a', $activity, PDO::PARAM_STR);
@@ -30,10 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindValue(':n', $notes, PDO::PARAM_STR);
             $stmt->bindValue(':op', $operator, PDO::PARAM_STR);
             $stmt->bindValue(':pb', $bid > 0 ? $bid : null, $bid > 0 ? PDO::PARAM_INT : PDO::PARAM_NULL);
+            $stmt->bindValue(':wt', $workerType, PDO::PARAM_STR);
             $stmt->execute();
             $nid = (int)$db->lastInsertId();
             $reg_ms = (int)round((microtime(true) - $t0) * 1000);
-            auditLog($db, 'B17_LABOR_CREATE', 'labor_entry', $nid, 'CREATE', 'Uren geregistreerd', null, ['date' => $date, 'hours' => $hours, 'activity' => $activity, 'operator' => $operator, 'reg_ms' => $reg_ms]);
+            auditLog($db, 'B17_LABOR_CREATE', 'labor_entry', $nid, 'CREATE', 'Uren geregistreerd', null, ['date' => $date, 'hours' => $hours, 'activity' => $activity, 'operator' => $operator, 'worker_type' => $workerType, 'reg_ms' => $reg_ms]);
             $flash = __('b17_created');
             $flashClass = 'flash-success';
         } else {
@@ -64,21 +69,23 @@ foreach ($rows as $r) { $totHours += (float)$r['hours_worked']; }
         <div style="flex:1;min-width:140px"><label><?php echo htmlspecialchars(__('b17_date')); ?></label><input type="date" name="work_date" value="<?php echo date('Y-m-d'); ?>" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
         <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b17_activity')); ?></label><input name="activity" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
         <div style="flex:1;min-width:90px"><label><?php echo htmlspecialchars(__('b17_hours')); ?></label><input type="number" step="0.1" min="0" name="hours" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
-        <div style="flex:1;min-width:110px"><label><?php echo htmlspecialchars(__('b17_rate')); ?></label><input type="number" step="0.01" min="0" name="rate" value="0" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
+        <div style="flex:1;min-width:140px"><label><?php echo htmlspecialchars(__('b17_worker_type')); ?></label><select id="wt_select" name="worker_type" onchange="b17ToggleRate()" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"><option value="medewerker"><?php echo htmlspecialchars(__('b17_type_medewerker')); ?></option><option value="stage"><?php echo htmlspecialchars(__('b17_type_stage')); ?></option><option value="vrijwilliger"><?php echo htmlspecialchars(__('b17_type_vrijwilliger')); ?></option></select></div>
+        <div style="flex:1;min-width:110px" id="rate_wrap"><label><?php echo htmlspecialchars(__('b17_rate')); ?></label><input type="number" step="0.01" min="0" name="rate" value="0" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"></div>
         <div style="flex:2;min-width:160px"><label><?php echo htmlspecialchars(__('b17_batch')); ?></label><select name="production_batch_id" style="width:100%;padding:9px;border-radius:10px;border:1px solid #d1d5db"><option value="0"><?php echo htmlspecialchars(__('b17_no_batch')); ?></option><?php foreach ($batches as $b): ?><option value="<?php echo (int)$b['id']; ?>"><?php echo htmlspecialchars($b['batch_code'] . ' · ' . $b['crop_type']); ?></option><?php endforeach; ?></select></div>
         <button type="submit" style="background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer"><?php echo htmlspecialchars(__('b17_save')); ?></button>
     </form>
     <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:8px 16px">
         <table style="width:100%;border-collapse:collapse">
-            <thead><tr style="text-align:left;color:#6b7280"><th style="padding:10px"><?php echo htmlspecialchars(__('b17_date')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_activity')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_hours')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_batch')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_person')); ?></th></tr></thead>
+            <thead><tr style="text-align:left;color:#6b7280"><th style="padding:10px"><?php echo htmlspecialchars(__('b17_date')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_activity')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_hours')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_worker_type')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_batch')); ?></th><th style="padding:10px"><?php echo htmlspecialchars(__('b17_person')); ?></th></tr></thead>
             <tbody>
             <?php if (empty($rows)): ?>
-                <tr><td colspan="5" style="padding:16px;color:#6b7280"><?php echo htmlspecialchars(__('b17_no_rows')); ?></td></tr>
+                <tr><td colspan="6" style="padding:16px;color:#6b7280"><?php echo htmlspecialchars(__('b17_no_rows')); ?></td></tr>
             <?php else: foreach ($rows as $r): ?>
                 <tr style="border-top:1px solid #e5e7eb">
                     <td style="padding:10px"><?php echo htmlspecialchars($r['work_date']); ?></td>
                     <td style="padding:10px"><?php echo htmlspecialchars($r['activity']); ?></td>
                     <td style="padding:10px;font-weight:700"><?php echo htmlspecialchars($r['hours_worked']); ?></td>
+                    <td style="padding:10px"><?php echo htmlspecialchars(__($r['worker_type'] === 'vrijwilliger' ? 'b17_type_vrijwilliger' : ($r['worker_type'] === 'stage' ? 'b17_type_stage' : 'b17_type_medewerker'))); ?></td>
                     <td style="padding:10px;color:#6b7280"><?php echo htmlspecialchars($r['batch_code'] ?? '—'); ?></td>
                     <td style="padding:10px;color:#6b7280"><?php echo htmlspecialchars($r['operator_name'] ?? '—'); ?></td>
                 </tr>
@@ -87,4 +94,13 @@ foreach ($rows as $r) { $totHours += (float)$r['hours_worked']; }
         </table>
     </div>
 </div>
+<script>
+function b17ToggleRate(){
+  var t = document.getElementById('wt_select').value;
+  var w = document.getElementById('rate_wrap');
+  if (t === 'vrijwilliger') { w.style.display = 'none'; }
+  else { w.style.display = ''; }
+}
+document.addEventListener('DOMContentLoaded', b17ToggleRate);
+</script>
 <?php require_once __DIR__ . '/app/includes/footer.php'; ?>

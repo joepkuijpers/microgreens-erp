@@ -1,23 +1,16 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-// GEEN CACHE: toon altijd de actuele pagina (belangrijk voor taalwissel)
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 
-// FOUTEN ONDERTKUIPT (productie)
-// ini_set('display_errors', 0);
-// error_reporting(0);
-
-// SESSIE STARTEN
 if (session_status() === PHP_SESSION_NONE) {
     require_once __DIR__ . '/no_cache.php';
     require_once __DIR__ . '/auth.php';
     auth_start_session();
 }
 
-// TAAL WISSEL LOGICA (moet allereerst, vóór elke output)
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['nl', 'en', 'de', 'fr', 'es', 'it'], true)) {
     $_SESSION['erp_language'] = $_GET['lang'];
     $q = $_GET;
@@ -28,19 +21,16 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['nl', 'en', 'de', 'fr', 'es
     exit;
 }
 
-// TAAL BEPALEN
 $languageCode = $_SESSION['erp_language'] ?? 'nl';
 
-// TAAL BESTAND LADEN
 if (file_exists(__DIR__ . '/language.php')) {
     require_once __DIR__ . '/language.php';
 } else {
     function __($k){ return $k; }
 }
 
-// DATABASE CONNECTIE
 require_once __DIR__ . '/config.php';
-    $dbPath = ERP_DB;
+$dbPath = ERP_DB;
 if (!file_exists($dbPath)) { die("DB niet gevonden: " . $dbPath); }
 try {
     $db = new PDO("sqlite:" . $dbPath);
@@ -48,7 +38,6 @@ try {
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) { die("DB Error: " . $e->getMessage()); }
 
-// WATCHDOG DATA
 $wdStatus = 'ok';
 $wdMsg = '';
 try {
@@ -61,7 +50,6 @@ try {
     }
 } catch (Exception $e) {}
 
-// MODULES
 $wf_steps = ['b01_batch.php'=>1,'b02_germination.php'=>2,'b07_harvest.php'=>3,'b09_packaging.php'=>4,'b09_sale.php'=>5,'b21_logistics.php'=>6,'b25_customer_feedback.php'=>7];
 $modules = [
 ['id'=>'DASH','file'=>'dashboard.php','key'=>'dashboard_home'],
@@ -108,7 +96,8 @@ $pageTitle = $pageTitle ?? 'ERP';
 .phase-legend a:hover{opacity:1;transform:scaleY(1.15)}
 .pl-gezaaid{background:#e53e3e}.pl-gekiemd{background:#ed8936}.pl-groei{background:#ecc94b}.pl-geoogst{background:#48bb78}.pl-gevriesdroogd{background:#4299e1}.pl-verpakt{background:#9f7aea}.pl-verkoop{background:#a0aec0}
 *{box-sizing:border-box;}
-body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f9}
+html,body{height:100%;}
+body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f9;overflow:hidden}
 .sidebar{width:250px;background:#2c3e50;color:#ecf0f1;overflow-y:auto;flex-shrink:0}
 .sidebar-header{padding:20px;background:#1a252f;text-align:center;font-weight:bold;border-bottom:1px solid #34495e}
 .nav-links{list-style:none;padding:0;margin:0}
@@ -116,12 +105,12 @@ body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f
 .nav-links a{display:block;padding:12px 20px;color:#bdc3c7;text-decoration:none}
 .nav-links a:hover,.nav-links a.active{background:#34495e;color:#fff;border-left:4px solid #27ae60}
 .nav-group{border-bottom:1px solid #34495e}.nav-group summary{display:block;padding:12px 20px;color:#ecf0f1;cursor:pointer;font-weight:bold;list-style:none}.nav-group summary::-webkit-details-marker{display:none}.nav-group summary:hover{background:#34495e}.grp-n{opacity:.55;font-size:11px;font-weight:normal}.nav-sub{list-style:none;padding:0;margin:0;background:#26333f}.nav-sub a{padding:9px 20px 9px 34px;font-size:13px}
-.main-content{flex-grow:1;display:flex;flex-direction:column;overflow:hidden}
-.top-header{background:#fff;padding:15px 30px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center}
+.main-content{flex-grow:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;min-width:0}
+.top-header{background:#fff;padding:15px 30px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
 .page-title{font-size:1.5rem;color:#2c3e50;margin:0}
 .watchdog-indicator{padding:8px 15px;border-radius:20px;font-weight:bold;text-decoration:none;margin-left:20px}
 .wd-ok{background:#d4edda;color:#155724}.wd-warning{background:#fff3cd;color:#856404}.wd-critical{background:#f8d7da;color:#721c24}
-.content-area{padding:30px;overflow-y:auto;flex-grow:1}
+.content-area{padding:30px;overflow-y:auto;flex-grow:1;min-height:0}
 .lang-switch a{margin:0 5px;text-decoration:none;color:#2980b9;font-weight:bold}
 .lang-switch a.active{color:#2c3e50;text-decoration:underline;}
 .next-step-bar{background:#e8f4fd;padding:15px 30px;margin-top:30px;border-top:2px solid #3498db;display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:10px;}
@@ -132,7 +121,6 @@ body{font-family:sans-serif;margin:0;display:flex;height:100vh;background:#f4f4f
 @media(max-width:480px){.content-area{padding:10px}}
 table{display:block;overflow-x:auto;max-width:100%}
 input,select,textarea,button{max-width:100%}
-
 .next-step-bar a{background:#3498db;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;}
 .next-step-bar a:hover{background:#2980b9;}
 input[type="date"]{cursor:pointer;}
@@ -195,4 +183,4 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.6;}
 <?php elseif($wdStatus==='warning'): ?><a href="b28_watchdog.php" class="watchdog-indicator wd-warning">⚠ Waarschuwing</a>
 <?php else: ?><a href="b28_watchdog.php" class="watchdog-indicator wd-ok">✓ OK</a><?php endif; ?>
 <div class="lang-switch"><?php $talen = ['nl','en','de','fr','es','it']; foreach ($talen as $i => $t): ?><?= $i > 0 ? '|' : '' ?><a href="?lang=<?= $t ?>" class="<?= $languageCode===$t?'active':'' ?>"><?= strtoupper($t) ?></a><?php endforeach; ?></div>
-</div></header><main class="content-area"></main>
+</div></header><main class="content-area">
